@@ -5,8 +5,9 @@ import androidx.room.Entity;
 import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 
-@Entity(tableName= "product")
-public class Person {
+
+@Entity(tableName = "table_product")
+public class Product {
     @PrimaryKey(autoGenerate=true)
     public int id;
     @ColumnInfo(name = "name")
@@ -14,14 +15,14 @@ public class Person {
     @ColumnInfo(name = "city")
     public String city;
 
-    public Person(int id, String name, String city) {
+    public Product(int id, String name, String city) {
         this.id = id;
         this.name = name;
         this.city = city;
     }
 
     @Ignore
-    public Person(String name, String city) {
+    public Product(String name, String city) {
         this.name = name;
         this.city = city;
     }
