@@ -16,7 +16,7 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:layout_marginBottom="10dp"
-        android:layout_marginTop="50dp">
+        android:layout_marginTop="40dp">
 
         <com.airbnb.lottie.LottieAnimationView
             android:layout_width="match_parent"
@@ -40,20 +40,20 @@
             android:layout_width="match_parent"
             android:layout_height="70dp"
             android:fontFamily="@fonts/iran_sans"
-            app:endIconMode="clear_text"
-            android:hint="نام کاربری">
+            android:hint="نام کاربری"
+            app:endIconMode="clear_text">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/text_inputpass"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:drawableStart="@drawable/custom_person"
                 android:drawablePadding="10dp"
                 android:focusable="true"
                 android:fontFamily="@font/iran_sans"
                 android:inputType="text"
                 android:textColor="#949494"
-                app:hintTextColor="#AFB1B3"/>
+                app:hintTextColor="#AFB1B3" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -70,7 +70,7 @@
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/text_input"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:drawableStart="@drawable/custom_lock"
                 android:drawablePadding="10dp"
                 android:focusable="true"
@@ -86,12 +86,11 @@
             android:layout_width="match_parent"
             android:layout_height="56dp"
             android:layout_gravity="center_vertical"
-            android:layout_marginTop="60dp"
-            android:layout_marginBottom="60dp"
+            android:layout_marginTop="50dp"
             android:background="@drawable/btn_login"
             android:fontFamily="@font/iran_sans"
-            android:text="ورود"
             android:gravity="center"
+            android:text="ورود"
             android:textColor="@color/text"
             android:textSize="18sp"
             android:textStyle="bold" />
