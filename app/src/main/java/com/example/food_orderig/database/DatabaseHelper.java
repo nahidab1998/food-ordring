@@ -9,12 +9,13 @@ import androidx.room.RoomDatabase;
 import com.example.food_orderig.database.dao.ProductDao;
 import com.example.food_orderig.model.Product;
 
-@Database(entities = Product.class, exportSchema = false,version = 3)
+@Database( entities = Product.class , exportSchema = false , version = 1)
 public abstract class DatabaseHelper extends RoomDatabase{
-    private static final String DB_NAME = "db_name_2";
+    private static final String DB_NAME = "db_name";
     private static DatabaseHelper instance;
 
     public static synchronized DatabaseHelper getInstance(Context context){
+
         if (instance==null){
             instance = Room.databaseBuilder(
                     context.getApplicationContext(),
@@ -24,6 +25,7 @@ public abstract class DatabaseHelper extends RoomDatabase{
                     .build();
 
         }
+
         return instance;
     }
 
