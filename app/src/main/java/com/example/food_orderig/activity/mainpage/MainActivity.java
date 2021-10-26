@@ -29,7 +29,9 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                Toast.makeText(MainActivity.this, "به زودی", Toast.LENGTH_SHORT).show();
+                Intent i= new Intent(MainActivity.this, ActivityProduct.class);
+                startActivity(i);
+
 
             }
         });
@@ -49,8 +51,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                Intent i= new Intent(MainActivity.this, ActivityProduct.class);
-                startActivity(i);
+                Toast.makeText(MainActivity.this, "به زودی", Toast.LENGTH_SHORT).show();
 
             }
         });
