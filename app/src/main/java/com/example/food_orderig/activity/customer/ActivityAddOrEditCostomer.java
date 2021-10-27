@@ -22,10 +22,9 @@ public class ActivityAddOrEditCostomer extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_add_or_edit_costomer);
-        overridePendingTransition(R.anim.do_not_move, R.anim.do_not_move);
 
-        background = findViewById(R.id.background);
-
+//        background = findViewById(R.id.background);
+//
 //        if (savedInstanceState == null) {
 //            background.setVisibility(View.INVISIBLE);
 //
@@ -46,7 +45,7 @@ public class ActivityAddOrEditCostomer extends AppCompatActivity {
 //        }
     }
 //    private void circularRevealActivity() {
-//        int cx = background.getRight() - getDips(44);
+//        int cx = background.getLeft() - getDips(44);
 //        int cy = background.getBottom() - getDips(44);
 //
 //        float finalRadius = Math.max(background.getWidth(), background.getHeight());
@@ -73,9 +72,11 @@ public class ActivityAddOrEditCostomer extends AppCompatActivity {
 //    }
 //
 //    @Override
-//    public void onBackPressed() {
+    public void onBackPressed() {
+
+
 //        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-//            int cx = background.getWidth() - getDips(44);
+//            int cx = background.getLeft() - getDips(44);
 //            int cy = background.getBottom() - getDips(44);
 //
 //            float finalRadius = Math.max(background.getWidth(), background.getHeight());
@@ -109,5 +110,5 @@ public class ActivityAddOrEditCostomer extends AppCompatActivity {
 //        else {
 //            super.onBackPressed();
 //        }
-//    }
+    }
 }
