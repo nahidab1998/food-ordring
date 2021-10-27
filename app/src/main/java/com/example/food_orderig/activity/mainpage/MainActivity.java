@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.Toast;
 
 import com.example.food_orderig.R;
+import com.example.food_orderig.activity.customer.ActivityCustomer;
 import com.example.food_orderig.activity.product.ActivityProduct;
 
 public class MainActivity extends AppCompatActivity {
@@ -40,9 +41,9 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                Toast.makeText(MainActivity.this, "به زودی", Toast.LENGTH_SHORT).show();
-//                Intent i= new Intent(MainActivity.this,.class);
-//                startActivity(i);
+//                Toast.makeText(MainActivity.this, "به زودی", Toast.LENGTH_SHORT).show();
+                Intent q= new Intent(MainActivity.this, ActivityCustomer.class);
+                startActivity(q);
 
             }
         });
