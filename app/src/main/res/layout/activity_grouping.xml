@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:background="@color/text"
     tools:context=".activity.grouping.ActivityGrouping">
 
     <androidx.recyclerview.widget.RecyclerView
@@ -12,10 +13,10 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="5dp"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        tools:listitem="@layout/list_grouping"/>
+        tools:listitem="@layout/list_grouping" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/fab"
+        android:id="@+id/fab_grouping"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"

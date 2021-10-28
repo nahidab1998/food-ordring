@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="@color/red"
-    android:id="@+id/background"
+    android:id="@+id/background_addCustomer"
     tools:context=".activity.customer.ActivityAddOrEditCostomer">
 
 </LinearLayout>

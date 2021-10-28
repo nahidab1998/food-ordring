@@ -14,14 +14,14 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 public class ActivityCustomer extends AppCompatActivity {
 
 
-    FloatingActionButton fab;
+    FloatingActionButton fab_customer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_customer);
-        fab=findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
+        fab_customer=findViewById(R.id.fab_customer);
+        fab_customer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
