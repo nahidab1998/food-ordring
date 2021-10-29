@@ -30,12 +30,13 @@
         <entry key="..\:/resume/^ - ^ android development/food-ordring/app/src/main/res/drawable/pluse.xml" value="0.2755208333333333" />
         <entry key="..\:/resume/^ - ^ android development/food-ordring/app/src/main/res/drawable/star_rate.xml" value="0.2712820512820513" />
         <entry key="..\:/resume/^ - ^ android development/food-ordring/app/src/main/res/layout/activity_add_or_edit_costomer.xml" value="0.264" />
-        <entry key="..\:/resume/^ - ^ android development/food-ordring/app/src/main/res/layout/activity_add_or_edit_product.xml" value="0.259375" />
+        <entry key="..\:/resume/^ - ^ android development/food-ordring/app/src/main/res/layout/activity_add_or_edit_product.xml" value="0.264" />
         <entry key="..\:/resume/^ - ^ android development/food-ordring/app/src/main/res/layout/activity_customer.xml" value="0.264" />
         <entry key="..\:/resume/^ - ^ android development/food-ordring/app/src/main/res/layout/activity_grouping.xml" value="0.2453125" />
         <entry key="..\:/resume/^ - ^ android development/food-ordring/app/src/main/res/layout/activity_login.xml" value="0.264" />
         <entry key="..\:/resume/^ - ^ android development/food-ordring/app/src/main/res/layout/activity_main.xml" value="0.264" />
         <entry key="..\:/resume/^ - ^ android development/food-ordring/app/src/main/res/layout/activity_product.xml" value="0.264" />
+        <entry key="..\:/resume/^ - ^ android development/food-ordring/app/src/main/res/layout/activiy_add_or_edit_grouping.xml" value="0.259375" />
         <entry key="..\:/resume/^ - ^ android development/food-ordring/app/src/main/res/layout/chart.xml" value="0.259375" />
         <entry key="..\:/resume/^ - ^ android development/food-ordring/app/src/main/res/layout/date_and_sale.xml" value="0.259375" />
         <entry key="..\:/resume/^ - ^ android development/food-ordring/app/src/main/res/layout/layout_triple.xml" value="0.264" />
@@ -50,7 +51,7 @@
       </map>
     </option>
   </component>
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_15" project-jdk-name="15" project-jdk-type="JavaSDK">
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_15_PREVIEW" project-jdk-name="15" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />
   </component>
   <component name="ProjectType">

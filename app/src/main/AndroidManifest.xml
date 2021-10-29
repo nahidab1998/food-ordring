@@ -10,6 +10,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Food_orderig">
         <activity
+            android:name=".activity.grouping.ActiviyAddOrEditGrouping"
+            android:exported="true" />
+        <activity
             android:name=".activity.grouping.ActivityGrouping"
             android:exported="true" />
         <activity

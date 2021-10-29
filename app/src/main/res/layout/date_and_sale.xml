@@ -182,7 +182,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="فروش کل"
-                        android:textSize="16dp"
+                        android:textSize="14dp"
                         android:textColor="@color/red"
                         android:fontFamily="@font/iran_sans"
                         android:textStyle="bold"
@@ -201,7 +201,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="700000"
-                        android:textSize="16dp"
+                        android:textSize="14dp"
                         android:fontFamily="@font/iran_sans"
                         android:textStyle="bold"
                         android:gravity="center"/>

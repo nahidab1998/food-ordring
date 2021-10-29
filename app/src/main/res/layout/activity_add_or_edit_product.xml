@@ -67,7 +67,7 @@
                 android:background="@drawable/back_edittext"
                 android:drawableRight="@drawable/custom_food_icon"
                 android:drawablePadding="5dp"
-                android:elevation="5dp"
+                android:elevation="6dp"
                 android:fontFamily="@font/iran_sans"
                 android:gravity="right"
                 android:hint="نام محصول"
@@ -87,10 +87,9 @@
                 android:layout_marginBottom="30dp"
                 android:fontFamily="@font/iran_sans"
                 android:gravity="right"
-                android:elevation="5dp"
+                android:elevation="6dp"
                 android:hint="دسته بندی"
                 android:textColor="#5e6d76"
-                android:inputType="number"
                 android:padding="10dp"
                 android:textSize="14dp" />
 
@@ -110,6 +109,7 @@
                 android:text="ذخیره"
                 android:textStyle="bold"
                 android:textSize="14dp"
+                android:elevation="10dp"
                 android:fontFamily="@font/iran_sans"
                 android:textColor="@color/red"
                 android:background="@drawable/btn_save"
