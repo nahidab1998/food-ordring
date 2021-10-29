@@ -5,8 +5,124 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="@color/red"
+    android:background="@drawable/pattern2"
+    android:backgroundTint="@color/red"
     android:id="@+id/background_addCustomer"
     tools:context=".activity.customer.ActivityAddOrEditCostomer">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/Toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/text"
+        app:title="افزودن مشتری"
+        app:titleMarginEnd="20dp"
+        app:titleMarginStart="20dp"
+        app:titleTextColor="@color/red" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="500dp"
+        android:orientation="vertical"
+        android:paddingHorizontal="10dp"
+        android:paddingVertical="10dp"
+        android:background="@drawable/background_add">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical">
+
+        <EditText
+            android:id="@+id/add_edit_name_customer"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_gravity="center"
+            android:layout_marginBottom="30dp"
+            android:layout_marginHorizontal="5dp"
+            android:background="@drawable/back_edittext"
+            android:drawableRight="@drawable/custom_person_icon"
+            android:drawablePadding="5dp"
+            android:elevation="5dp"
+            android:fontFamily="@font/iran_sans"
+            android:gravity="right"
+            android:hint="نام"
+            android:textColor="#5e6d76"
+            android:padding="10dp"
+            android:textSize="14dp" />
+
+        <EditText
+            android:id="@+id/add_edit_number_customer"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_gravity="center"
+            android:layout_marginHorizontal="5dp"
+            android:background="@drawable/back_edittext"
+            android:drawableRight="@drawable/custom_phone_icon"
+            android:drawablePadding="5dp"
+            android:layout_marginBottom="30dp"
+            android:fontFamily="@font/iran_sans"
+            android:gravity="right"
+            android:elevation="5dp"
+            android:hint="شماره تلفن"
+            android:textColor="#5e6d76"
+            android:inputType="number"
+            android:padding="10dp"
+            android:textSize="14dp" />
+
+        <EditText
+            android:id="@+id/add_edit_address_customer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginBottom="30dp"
+            android:layout_marginHorizontal="5dp"
+            android:background="@drawable/back_edittext"
+            android:drawableRight="@drawable/custom_home_icon"
+            android:elevation="5dp"
+            android:drawablePadding="5dp"
+            android:fontFamily="@font/iran_sans"
+            android:gravity="right"
+            android:hint="آدرس"
+            android:textColor="#5e6d76"
+            android:padding="10dp"
+            android:textSize="14dp" />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingRight="40dp"
+            android:paddingVertical="5dp">
+
+            <Button
+                android:id="@+id/save_customer"
+                android:layout_width="wrap_content"
+                android:layout_height="50dp"
+                android:text="ذخیره"
+                android:textStyle="bold"
+                android:textSize="18dp"
+                android:fontFamily="@font/iran_sans"
+                android:textColor="@color/red"
+                android:background="@drawable/btn_save"
+                />
+            <TextView
+                android:id="@+id/cancle_customer"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="انصراف"
+                android:textSize="18dp"
+                android:layout_gravity="center"
+                android:layout_marginRight="15dp"
+                android:fontFamily="@font/iran_sans"
+                android:textStyle="bold"
+                android:textColor="@color/text"/>
+
+        </LinearLayout>
+
+
+    </LinearLayout>
 
 </LinearLayout>

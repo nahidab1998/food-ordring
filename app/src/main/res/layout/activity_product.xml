@@ -8,12 +8,23 @@
     android:background="@color/text"
     tools:context=".activity.product.ActivityProduct">
 
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/Toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/text"
+        app:title="لیست تمام محصولات"
+        app:titleMarginEnd="10dp"
+        app:titleMarginStart="10dp"
+        app:titleTextColor="@color/red" />
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycle"
         android:layout_width="match_parent"
+        android:layout_marginTop="?attr/actionBarSize"
         android:layout_height="wrap_content"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        tools:listitem="@layout/list_product"/>
+        tools:listitem="@layout/list_product" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fab_product"
@@ -27,6 +38,7 @@
         android:layout_marginEnd="30dp"
         android:layout_marginBottom="30dp"
         android:elevation="25dp"
+        android:backgroundTint="@color/red"
         android:src="@drawable/add"
         app:maxImageSize="45dp" />
 

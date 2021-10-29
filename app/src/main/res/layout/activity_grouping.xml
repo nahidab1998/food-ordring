@@ -8,10 +8,20 @@
     android:background="@color/text"
     tools:context=".activity.grouping.ActivityGrouping">
 
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/Toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/text"
+        app:title="دسته بندی ها"
+        app:titleMarginEnd="10dp"
+        app:titleMarginStart="10dp"
+        app:titleTextColor="@color/red" />
+
     <androidx.recyclerview.widget.RecyclerView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
+        android:layout_marginTop="?attr/actionBarSize"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         tools:listitem="@layout/list_grouping" />
 
@@ -27,6 +37,7 @@
         android:layout_marginEnd="30dp"
         android:layout_marginBottom="30dp"
         android:elevation="25dp"
+        android:backgroundTint="@color/red"
         android:src="@drawable/add"
         app:maxImageSize="45dp" />
 

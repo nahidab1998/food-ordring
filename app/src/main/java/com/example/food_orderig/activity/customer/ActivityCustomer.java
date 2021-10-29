@@ -25,8 +25,8 @@ public class ActivityCustomer extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                Intent o = new Intent(ActivityCustomer.this,ActivityAddOrEditCostomer.class);
-                startActivity(o);
+                Intent add_new_customer = new Intent(ActivityCustomer.this,ActivityAddOrEditCostomer.class);
+                startActivity(add_new_customer);
             }
         });
     }

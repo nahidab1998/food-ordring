@@ -1,9 +1,124 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@drawable/pattern2"
+    android:backgroundTint="@color/red"
+    android:id="@+id/background_addProduct"
     tools:context=".activity.product.ActivityAddOrEditProduct">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/Toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/text"
+        app:title="افزودن محصول جدید"
+        app:titleMarginEnd="10dp"
+        app:titleMarginStart="10dp"
+        app:titleTextColor="@color/red" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="500dp"
+        android:orientation="vertical"
+        android:paddingHorizontal="10dp"
+        android:paddingVertical="10dp"
+        android:background="@drawable/background_add">
+
+
+
+        <ImageView
+            android:id="@+id/add_img_food"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:src="@drawable/steak"
+            android:paddingVertical="10dp"
+            />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <EditText
+                android:id="@+id/add_edit_name_product"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_gravity="center"
+                android:layout_marginHorizontal="5dp"
+                android:layout_marginBottom="30dp"
+                android:background="@drawable/back_edittext"
+                android:drawableRight="@drawable/custom_food_icon"
+                android:drawablePadding="5dp"
+                android:elevation="5dp"
+                android:fontFamily="@font/iran_sans"
+                android:gravity="right"
+                android:hint="نام محصول"
+                android:padding="10dp"
+                android:textColor="#5e6d76"
+                android:textSize="14dp" />
+
+            <EditText
+                android:id="@+id/add_edit_number_product"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_gravity="center"
+                android:layout_marginHorizontal="5dp"
+                android:background="@drawable/back_edittext"
+                android:drawableRight="@drawable/custom_group_icon"
+                android:drawablePadding="5dp"
+                android:layout_marginBottom="30dp"
+                android:fontFamily="@font/iran_sans"
+                android:gravity="right"
+                android:elevation="5dp"
+                android:hint="دسته بندی"
+                android:textColor="#5e6d76"
+                android:inputType="number"
+                android:padding="10dp"
+                android:textSize="14dp" />
+
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingRight="40dp"
+            android:paddingVertical="5dp">
+
+            <Button
+                android:id="@+id/save_product"
+                android:layout_width="wrap_content"
+                android:layout_height="50dp"
+                android:text="ذخیره"
+                android:textStyle="bold"
+                android:textSize="18dp"
+                android:fontFamily="@font/iran_sans"
+                android:textColor="@color/red"
+                android:background="@drawable/btn_save"
+                />
+            <TextView
+                android:id="@+id/cancel_product"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="انصراف"
+                android:textSize="18dp"
+                android:layout_gravity="center"
+                android:layout_marginRight="15dp"
+                android:fontFamily="@font/iran_sans"
+                android:textStyle="bold"
+                android:textColor="@color/text"/>
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+
+
+</LinearLayout>
