@@ -12,11 +12,11 @@
         android:id="@+id/Toolbar"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
-        android:background="@color/text"
+        android:background="@color/red"
         app:title="دسته بندی ها"
         app:titleMarginEnd="10dp"
         app:titleMarginStart="10dp"
-        app:titleTextColor="@color/red" />
+        app:titleTextColor="@color/text" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:layout_width="match_parent"

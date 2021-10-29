@@ -160,7 +160,7 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="1dp"
+                android:layout_height="2dp"
                 android:background="@color/red"/>
 
             <LinearLayout
@@ -168,6 +168,7 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 android:weightSum="2"
+                android:layout_marginTop="2dp"
                 android:paddingHorizontal="10dp"
                 android:paddingVertical="10dp">
 
@@ -181,7 +182,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="فروش کل"
-                        android:textSize="14dp"
+                        android:textSize="16dp"
                         android:textColor="@color/red"
                         android:fontFamily="@font/iran_sans"
                         android:textStyle="bold"
@@ -200,7 +201,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="700000"
-                        android:textSize="14dp"
+                        android:textSize="16dp"
                         android:fontFamily="@font/iran_sans"
                         android:textStyle="bold"
                         android:gravity="center"/>
