@@ -19,7 +19,7 @@
             android:id="@+id/img_grouping"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:alpha="0.3"
+            android:alpha="0.4"
             android:background="#979696"
             android:src="@drawable/fastfood_grouping"
             />

@@ -8,15 +8,7 @@
     android:id="@+id/root_layout"
     tools:context=".activity.customer.ActivityCustomer">
 
-    <androidx.appcompat.widget.Toolbar
-        android:id="@+id/Toolbar"
-        android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
-        android:background="@color/text"
-        app:title="لیست مشتریان"
-        app:titleMarginEnd="20dp"
-        app:titleMarginStart="20dp"
-        app:titleTextColor="@color/red" />
+    <include layout="@layout/toolbare_customer"/>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycle"

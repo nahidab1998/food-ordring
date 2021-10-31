@@ -30,6 +30,7 @@
         <entry key="..\:/resume/^ - ^ android development/food-ordring/app/src/main/res/drawable/pluse.xml" value="0.2755208333333333" />
         <entry key="..\:/resume/^ - ^ android development/food-ordring/app/src/main/res/drawable/star_rate.xml" value="0.2712820512820513" />
         <entry key="..\:/resume/^ - ^ android development/food-ordring/app/src/main/res/layout/activity_add_or_edit_costomer.xml" value="0.264" />
+        <entry key="..\:/resume/^ - ^ android development/food-ordring/app/src/main/res/layout/activity_add_or_edit_grouping.xml" value="0.2557291666666667" />
         <entry key="..\:/resume/^ - ^ android development/food-ordring/app/src/main/res/layout/activity_add_or_edit_product.xml" value="0.264" />
         <entry key="..\:/resume/^ - ^ android development/food-ordring/app/src/main/res/layout/activity_customer.xml" value="0.264" />
         <entry key="..\:/resume/^ - ^ android development/food-ordring/app/src/main/res/layout/activity_grouping.xml" value="0.2453125" />
@@ -45,6 +46,11 @@
         <entry key="..\:/resume/^ - ^ android development/food-ordring/app/src/main/res/layout/list_product.xml" value="0.264" />
         <entry key="..\:/resume/^ - ^ android development/food-ordring/app/src/main/res/layout/status.xml" value="0.259375" />
         <entry key="..\:/resume/^ - ^ android development/food-ordring/app/src/main/res/layout/toolbare.xml" value="0.259375" />
+        <entry key="..\:/resume/^ - ^ android development/food-ordring/app/src/main/res/layout/toolbare_addcustomer.xml" value="0.259375" />
+        <entry key="..\:/resume/^ - ^ android development/food-ordring/app/src/main/res/layout/toolbare_addgrouping.xml" value="0.259375" />
+        <entry key="..\:/resume/^ - ^ android development/food-ordring/app/src/main/res/layout/toolbare_addproduct.xml" value="0.259375" />
+        <entry key="..\:/resume/^ - ^ android development/food-ordring/app/src/main/res/layout/toolbare_customer.xml" value="0.259375" />
+        <entry key="..\:/resume/^ - ^ android development/food-ordring/app/src/main/res/layout/toolbare_grouping.xml" value="0.259375" />
         <entry key="..\:/resume/^ - ^ android development/food-ordring/app/src/main/res/layout/toolbare_product.xml" value="0.259375" />
         <entry key="..\:/resume/^ - ^ android development/food-ordring/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.13489583333333333" />
         <entry key="..\:/resume/^ - ^ android development/food-ordring/app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.13489583333333333" />

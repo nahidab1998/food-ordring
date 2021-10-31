@@ -6,14 +6,14 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="@drawable/food_pic"
-    android:id="@+id/background_addProduct"
-    tools:context=".activity.product.ActivityAddOrEditProduct">
+    tools:context=".activity.grouping.ActivityAddOrEditGrouping">
+
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <include layout="@layout/toolbare_addproduct"/>
+        <include layout="@layout/toolbare_addgrouping"/>
 
     </LinearLayout>
 
@@ -34,13 +34,14 @@
             android:layout_gravity="center"
             android:gravity="center">
 
-        <ImageView
-            android:id="@+id/add_img_food"
-            android:layout_width="match_parent"
-            android:layout_height="120dp"
-            android:src="@drawable/camera"
-            android:layout_marginBottom="2dp"
-            />
+            <ImageView
+                android:id="@+id/add_img_food_grouping"
+                android:layout_width="match_parent"
+                android:layout_height="120dp"
+                android:src="@drawable/camera"
+                android:layout_marginBottom="2dp"
+                />
+
         </LinearLayout>
 
         <LinearLayout
@@ -57,26 +58,9 @@
             android:gravity="center"
             android:orientation="vertical">
 
-            <EditText
-                android:id="@+id/add_edit_name_product"
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:layout_gravity="center"
-                android:layout_marginHorizontal="5dp"
-                android:layout_marginBottom="30dp"
-                android:background="@drawable/back_edittext"
-                android:drawableRight="@drawable/custom_food_icon"
-                android:drawablePadding="5dp"
-                android:elevation="6dp"
-                android:fontFamily="@font/iran_sans"
-                android:gravity="right"
-                android:hint="نام محصول"
-                android:padding="10dp"
-                android:textColor="#5e6d76"
-                android:textSize="14dp" />
 
             <EditText
-                android:id="@+id/add_edit_number_product"
+                android:id="@+id/add_edit_number_grouping"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:layout_gravity="center"
@@ -88,13 +72,14 @@
                 android:fontFamily="@font/iran_sans"
                 android:gravity="right"
                 android:elevation="6dp"
-                android:hint="دسته بندی"
+                android:hint=" نام دسته بندی"
                 android:textColor="#5e6d76"
                 android:padding="10dp"
                 android:textSize="14dp" />
 
 
         </LinearLayout>
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -103,7 +88,7 @@
             android:paddingVertical="5dp">
 
             <Button
-                android:id="@+id/save_product"
+                android:id="@+id/save_grouping"
                 android:layout_width="wrap_content"
                 android:layout_height="40dp"
                 android:text="ذخیره"
@@ -114,7 +99,7 @@
                 android:background="@drawable/btn_save"
                 />
             <TextView
-                android:id="@+id/cancel_product"
+                android:id="@+id/cancelgrouping"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="انصراف"
@@ -129,7 +114,5 @@
 
 
     </LinearLayout>
-
-
 
 </LinearLayout>

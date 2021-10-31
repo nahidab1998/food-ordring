@@ -6,7 +6,9 @@ import androidx.room.Database;
 import androidx.room.Room;
 import androidx.room.RoomDatabase;
 
+import com.example.food_orderig.database.dao.GroupingDao;
 import com.example.food_orderig.database.dao.ProductDao;
+import com.example.food_orderig.model.Grouping;
 import com.example.food_orderig.model.Product;
 
 @Database( entities = Product.class , exportSchema = false , version = 1)
@@ -30,4 +32,5 @@ public abstract class DatabaseHelper extends RoomDatabase{
     }
 
     public abstract ProductDao productDao();
+    public abstract GroupingDao groupingDao();
 }

@@ -18,6 +18,7 @@ import com.example.food_orderig.activity.product.mvp.ProductView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 public class ActivityProduct extends AppCompatActivity implements ProductView {
+
     ProductModel presenter;
     RecyclerView recyclerView;
     FloatingActionButton floatingActionButton_product;
@@ -31,21 +32,19 @@ public class ActivityProduct extends AppCompatActivity implements ProductView {
 
         presenter = new ProductModel(this);
         presenter.getData();
-        floatingActionButton_product = findViewById(R.id.fab_product);
 
+        floatingActionButton_product = findViewById(R.id.fab_product);
         floatingActionButton_product.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 Intent add_new_product = new Intent(ActivityProduct.this, ActivityAddOrEditProduct.class);
                 startActivity(add_new_product);
             }
         });
 
     }
-
     @Override
     public void setData(String name) {
-        Toast.makeText(this, name, Toast.LENGTH_SHORT).show();
+//        Toast.makeText(this, name, Toast.LENGTH_SHORT).show();
     }
 }

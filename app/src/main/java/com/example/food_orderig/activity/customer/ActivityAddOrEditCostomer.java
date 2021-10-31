@@ -32,8 +32,8 @@ public class ActivityAddOrEditCostomer extends AppCompatActivity {
         textViewcancle.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent cancle_customer = new Intent(ActivityAddOrEditCostomer.this,ActivityCustomer.class);
-                startActivity(cancle_customer);
+
+                finish();
             }
         });
 
