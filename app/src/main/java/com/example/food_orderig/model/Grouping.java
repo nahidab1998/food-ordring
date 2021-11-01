@@ -6,7 +6,7 @@ import androidx.room.Entity;
 import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 
-//@Entity(tableName = "table_grouping")
+@Entity(tableName = "table_grouping")
 public class Grouping {
 
     @PrimaryKey(autoGenerate=true)
@@ -16,7 +16,7 @@ public class Grouping {
 //    @ColumnInfo(name = "picture")
 //    public String picture;
 
-    public Grouping(int id, String name, String picture) {
+    public Grouping(int id, String name) {
         this.id = id;
         this.name = name;
 //        this.picture = picture;

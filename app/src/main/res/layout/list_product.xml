@@ -6,7 +6,7 @@
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
-        android:layout_height="340dp"
+        android:layout_height="250dp"
         android:layout_marginHorizontal="10dp"
         android:layout_marginVertical="10dp"
         app:cardCornerRadius="10dp"
@@ -45,6 +45,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
+                    android:layout_gravity="center_vertical"
                     android:layout_marginTop="10dp">
 
                     <TextView
@@ -63,61 +64,30 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:gravity="left"
+                    android:layout_gravity="center_vertical"
                     android:paddingVertical="5dp"
                     android:layout_marginTop="10dp">
 
-                    <androidx.cardview.widget.CardView
-                        android:layout_width="70dp"
-                        android:layout_height="30dp"
-                        app:cardCornerRadius="10dp"
-                        android:elevation="6dp"
-                        android:layout_gravity="center"
-                        android:outlineSpotShadowColor="@color/red"
-                        app:cardBackgroundColor="@color/text">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:text="قیمت :"
+                        android:textSize="16dp"
+                        android:layout_marginLeft="10dp"
+                        android:textStyle="bold"
+                        android:fontFamily="@font/iran_sans"/>
 
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:orientation="horizontal"
-                            android:weightSum="3"
-                            android:gravity="center_vertical">
+                    <TextView
+                        android:id="@+id/price_product"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:text="54000"
+                        android:textSize="16dp"
+                        android:gravity="center"
+                        android:textColor="@color/red"
+                        android:fontFamily="@font/iran_sans"/>
 
-                            <LinearLayout
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="2"
-                                android:gravity="center">
 
-                            <TextView
-                                android:id="@+id/rate_product"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="4.5"
-                                android:paddingRight="5dp"
-                                android:textColor="@color/red"
-                                android:textStyle="bold"
-                                android:textSize="16dp"
-                                />
-                            </LinearLayout>
-
-                            <LinearLayout
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1"
-                                android:gravity="center">
-
-                            <ImageView
-                                android:layout_width="20dp"
-                                android:layout_height="20dp"
-                                android:src="@drawable/star_rate"
-                                android:layout_gravity="center"
-                                android:padding="2dp"/>
-
-                            </LinearLayout>
-
-                        </LinearLayout>
-
-                    </androidx.cardview.widget.CardView>
                 </LinearLayout>
 
 
@@ -135,13 +105,7 @@
                     android:layout_height="wrap_content"
                     >
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="قیمت :"
-                        android:textSize="16dp"
-                        android:textStyle="bold"
-                        android:fontFamily="@font/iran_sans"/>
+
 
                 </LinearLayout>
 
@@ -150,92 +114,17 @@
                     android:layout_height="wrap_content"
                     android:paddingHorizontal="10dp">
 
-                    <TextView
-                        android:id="@+id/price_product"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="54000"
-                        android:textSize="16dp"
-                        android:gravity="center"
-                        android:textColor="@color/red"
-                        android:fontFamily="@font/iran_sans"/>
-
-
-                </LinearLayout>
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_weight="10"
-                    android:orientation="horizontal"
-                    android:gravity="left">
-
-                    <androidx.cardview.widget.CardView
-                        android:layout_width="30dp"
-                        android:layout_height="30dp"
-                        app:cardBackgroundColor="@color/red"
-                        android:layout_marginStart="10dp"
-                        app:cardCornerRadius="15dp"
-                        app:cardElevation="0dp"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent">
-
-                        <ImageView
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:gravity="center"
-                            android:src="@drawable/pluse"
-                            />
-                    </androidx.cardview.widget.CardView>
-
-                    <TextView
-                        android:id="@+id/number_product"
-                        android:layout_width="50dp"
-                        android:layout_height="wrap_content"
-                        android:text="1"
-                        android:textStyle="bold"
-                        android:fontFamily="@font/iran_sans"
-                        android:textSize="18dp"
-                        android:gravity="center"
-                        android:layout_gravity="center_vertical"/>
-
-                    <androidx.cardview.widget.CardView
-                        android:layout_width="30dp"
-                        android:layout_height="30dp"
-                        app:cardBackgroundColor="@color/red"
-                        app:cardCornerRadius="15dp"
-                        app:cardElevation="0dp"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent">
-
-                        <ImageView
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:gravity="center"
-                            android:src="@drawable/manfi1"
-                            />
-
-
-                    </androidx.cardview.widget.CardView>
 
 
 
                 </LinearLayout>
+
 
 
 
             </LinearLayout>
 
-            <Button
-                android:id="@+id/btn_takmil"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@drawable/btn_takmil"
-                android:text="تکمیل خرید"
-                android:textStyle="bold"
-                android:textColor="@color/text"
-                android:textSize="16dp"
-                android:fontFamily="@font/iran_sans"
-                android:layout_gravity="center"/>
+
         </LinearLayout>
 
 

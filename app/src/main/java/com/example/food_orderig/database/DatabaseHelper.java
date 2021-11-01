@@ -11,7 +11,7 @@ import com.example.food_orderig.database.dao.ProductDao;
 import com.example.food_orderig.model.Grouping;
 import com.example.food_orderig.model.Product;
 
-@Database( entities = Product.class , exportSchema = false , version = 1)
+@Database( entities = {Product.class , Grouping.class } , exportSchema = false , version = 1)
 public abstract class DatabaseHelper extends RoomDatabase{
     private static final String DB_NAME = "db_name";
     private static DatabaseHelper instance;
@@ -23,7 +23,7 @@ public abstract class DatabaseHelper extends RoomDatabase{
                     context.getApplicationContext(),
                     DatabaseHelper.class,
                     DB_NAME)
-                    .fallbackToDestructiveMigration()
+                    .allowMainThreadQueries()
                     .build();
 
         }

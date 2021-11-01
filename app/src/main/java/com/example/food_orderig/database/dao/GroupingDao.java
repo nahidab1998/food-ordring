@@ -12,15 +12,15 @@ import java.util.List;
 @Dao
 public interface GroupingDao {
 
-//    @Query("SELECT * FROM table_grouping")
-//    List<Grouping> getList();
+    @Query("SELECT * FROM table_grouping")
+    List<Grouping> getList();
 
-//    @Insert
-////    void insertGrouping(Grouping grouping);
-//
-//    @Update
-//    void updateGrouping(Grouping grouping);
-//
-//    @Delete
-//    void deleteGrouping(Grouping grouping);
+    @Insert
+    void insertGrouping(Grouping grouping);
+
+    @Update
+    void updateGrouping(Grouping grouping);
+
+    @Delete
+    void deleteGrouping(Grouping grouping);
 }
