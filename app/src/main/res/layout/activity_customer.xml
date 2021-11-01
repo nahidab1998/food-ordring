@@ -11,11 +11,12 @@
     <include layout="@layout/toolbare_customer"/>
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recycle"
+        android:id="@+id/recycle_customer"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="?attr/actionBarSize"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        tools:listitem="@layout/list_customer"/>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fab_customer"

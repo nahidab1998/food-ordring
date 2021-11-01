@@ -1,7 +1,5 @@
 package com.example.food_orderig.activity.login;
 
-import static android.content.ContentValues.TAG;
-
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -12,11 +10,8 @@ import android.widget.Button;
 
 import com.example.food_orderig.R;
 import com.example.food_orderig.activity.mainpage.MainActivity;
-import com.example.food_orderig.activity.product.ActivityProduct;
 import com.example.food_orderig.database.DatabaseHelper;
 import com.example.food_orderig.model.Product;
-
-import java.util.List;
 
 public class ActivityLogin extends AppCompatActivity {
 
@@ -44,7 +39,7 @@ public class ActivityLogin extends AppCompatActivity {
         new Thread(() -> {
             db =DatabaseHelper.getInstance(this);
             Product p = new Product("nahid","qom");
-            db.productDao().insertPerson(p);
+            db.productDao().insertProduct(p);
 
 //            List<Product> a = db.productDao().getList();
 //            for (int i = 0; i < a.size() ; i++) {

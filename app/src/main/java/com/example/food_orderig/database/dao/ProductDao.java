@@ -16,11 +16,11 @@ public interface ProductDao {
     List<Product> getList();
 
     @Insert
-    void insertPerson(Product person);
+    void insertProduct(Product product);
 
     @Update
-    void updatePerson(Product person);
+    void updateProduct(Product product);
 
     @Delete
-    void deletePerson(Product person);
+    void deleteProduct(Product product);
 }
