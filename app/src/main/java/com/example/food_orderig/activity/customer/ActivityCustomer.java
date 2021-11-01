@@ -38,6 +38,7 @@ public class ActivityCustomer extends AppCompatActivity {
         adapterCustomer = new AdapterCustomer( dao.getList() , this );
         recyclerView_customer = findViewById(R.id.recycle_customer);
         recyclerView_customer.setAdapter(adapterCustomer);
+
         recyclerView_customer.setLayoutManager(new GridLayoutManager(this,2));
 
         fab_customer.setOnClickListener(new View.OnClickListener() {
