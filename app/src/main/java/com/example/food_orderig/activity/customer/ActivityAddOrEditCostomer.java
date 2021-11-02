@@ -64,9 +64,6 @@ public class ActivityAddOrEditCostomer extends AppCompatActivity {
 
                 }else {
 
-//                    String name_customer = name_addcustomer.getText().toString();
-//                    String phone_customer = phone_addcustomer.getText().toString();
-//                    String address_customer = address_addcustomer.getText().toString();
                     Customer customer = new Customer(name , phone , address);
                     dao.insertCustomer(customer);
                     db.close();
@@ -77,9 +74,7 @@ public class ActivityAddOrEditCostomer extends AppCompatActivity {
 
         textViewcancle.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
-
-                finish();
+            public void onClick(View v) { finish();
             }
         });
 

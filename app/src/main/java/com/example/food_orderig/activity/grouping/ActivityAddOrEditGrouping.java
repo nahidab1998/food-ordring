@@ -53,7 +53,6 @@ public class ActivityAddOrEditGrouping extends AppCompatActivity {
         imageViewadd_img_grouping.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 Toast.makeText(ActivityAddOrEditGrouping.this, "به زودی", Toast.LENGTH_SHORT).show();
             }
         });
@@ -69,12 +68,10 @@ public class ActivityAddOrEditGrouping extends AppCompatActivity {
 
                 }else {
 
-                    String name_grouping=editTextnameGrouping.getText().toString();
-                    Grouping grouping = new Grouping(name_grouping);
+                    Grouping grouping = new Grouping(name);
                     dao.insertGrouping(grouping);
                     db.close();
                     finish();
-
                 }
 
             }

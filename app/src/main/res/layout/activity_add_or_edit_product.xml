@@ -34,13 +34,12 @@
             android:layout_gravity="center"
             android:gravity="center">
 
-        <ImageView
-            android:id="@+id/add_img_food"
-            android:layout_width="match_parent"
-            android:layout_height="120dp"
-            android:src="@drawable/camera"
-            android:layout_marginBottom="2dp"
-            />
+            <ImageView
+                android:id="@+id/add_img_food_product"
+                android:layout_width="match_parent"
+                android:layout_height="120dp"
+
+                android:src="@drawable/camera" />
         </LinearLayout>
 
         <LinearLayout
@@ -76,7 +75,7 @@
                 android:textSize="14dp" />
 
             <EditText
-                android:id="@+id/add_edit_number_product"
+                android:id="@+id/add_edit_category_product"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:layout_gravity="center"

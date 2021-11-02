@@ -8,7 +8,7 @@
     android:id="@+id/root_layout"
     tools:context=".activity.customer.ActivityCustomer">
 
-    <include layout="@layout/toolbare_customer"/>
+    <include layout="@layout/toolbare_customer" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycle_customer"

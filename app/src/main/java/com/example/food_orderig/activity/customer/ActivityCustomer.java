@@ -35,6 +35,7 @@ public class ActivityCustomer extends AppCompatActivity {
 
         db= DatabaseHelper.getInstance(getApplicationContext());
         dao = db.customerDao();
+
         adapterCustomer = new AdapterCustomer( dao.getList() , this );
         recyclerView_customer = findViewById(R.id.recycle_customer);
         recyclerView_customer.setAdapter(adapterCustomer);
