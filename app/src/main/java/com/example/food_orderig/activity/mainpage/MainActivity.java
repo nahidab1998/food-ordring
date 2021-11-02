@@ -32,7 +32,6 @@ public class MainActivity extends AppCompatActivity {
         cardViewprouping=findViewById(R.id.grouping);
 
         final GraphView graph = (GraphView) findViewById(R.id.graf);
-//        graph.setVisibility(View.VISIBLE);
         LineGraphSeries<DataPoint> bgseries= new LineGraphSeries<>(new DataPoint[]{
 
                 new DataPoint(0, 1000),
@@ -101,11 +100,9 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(q);
             }
         });
-
         cardViewprouping.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 Intent r= new Intent(MainActivity.this, ActivityGrouping.class);
                 startActivity(r);
             }

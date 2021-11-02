@@ -8,133 +8,135 @@
     android:background="@color/text">
 
 
-
     <androidx.cardview.widget.CardView
         android:id="@+id/constraintLayout"
         android:layout_width="match_parent"
         android:layout_height="120dp"
-        app:cardCornerRadius="10dp"
-        android:elevation="6dp"
         android:layout_marginHorizontal="10dp"
-        android:layout_marginVertical="10dp"
+        android:layout_marginVertical="5dp"
+        android:elevation="6dp"
+
         android:outlineSpotShadowColor="@color/red"
+        app:cardCornerRadius="10dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:ignore="MissingConstraints">
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:orientation="vertical"
+            android:paddingHorizontal="10dp">
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:layout_gravity="center"
-                android:paddingHorizontal="10dp">
+                android:layout_marginBottom="10dp"
+                android:orientation="horizontal">
 
-                <LinearLayout
-                    android:layout_width="match_parent"
+                <ImageView
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="10dp"
-                    android:orientation="horizontal">
+                    android:alpha="0.5"
+                    android:paddingLeft="5dp"
+                    android:src="@drawable/person_red" />
 
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:src="@drawable/person_red"
-                        android:alpha="0.5"
-                        android:paddingLeft="5dp"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    android:fontFamily="@font/iran_sans"
+                    android:gravity="center"
+                    android:paddingLeft="5dp"
+                    android:text="نام و نام خانوادگی :"
+                    android:textSize="12dp"
+                    android:textStyle="bold" />
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:text="نام و نام خانوادگی :"
-                        android:textSize="12dp"
-                        android:gravity="center"
-                        android:layout_gravity="center"
-                        android:paddingLeft="5dp"
-                        android:fontFamily="@font/iran_sans"
-                        android:textStyle="bold" />
+                <TextView
+                    android:id="@+id/name_customer"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    android:fontFamily="@font/iran_sans"
+                    android:gravity="center"
+                    android:text="......."
+                    android:textSize="12dp"
+                    android:textStyle="bold" />
 
-                    <TextView
-                        android:id="@+id/name_customer"
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:text="......."
-                        android:textSize="12dp"
-                        android:gravity="center"
-                        android:layout_gravity="center"
-                        android:fontFamily="@font/iran_sans"
-                        android:textStyle="bold" />
-
-
-                </LinearLayout>
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="10dp"
-                    android:orientation="horizontal">
-
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:src="@drawable/phone2"
-                        android:alpha="0.5"
-                        android:paddingLeft="5dp"/>
-
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="تلفن :"
-                        android:textSize="12dp"
-                        android:paddingLeft="5dp"
-                        android:fontFamily="@font/iran_sans"
-                        android:textStyle="bold" />
-
-                    <TextView
-                        android:id="@+id/phone_customer"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="....."
-                        android:textSize="12dp"
-                        android:paddingLeft="5dp"
-                        android:fontFamily="@font/iran_sans"
-                        android:textStyle="bold" />
-
-                </LinearLayout>
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal">
-
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:src="@drawable/home2"
-                        android:alpha="0.5"
-                        android:paddingLeft="5dp"/>
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="آدرس :"
-                        android:textSize="12dp"
-                        android:paddingLeft="5dp"
-                        android:fontFamily="@font/iran_sans"
-                        android:textStyle="bold" />
-
-                    <TextView
-                        android:id="@+id/address_customer"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="....."
-                        android:textSize="12dp"
-                        android:paddingLeft="5dp"
-                        android:fontFamily="@font/iran_sans"
-                        android:textStyle="bold" />
-
-                </LinearLayout>
 
             </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:alpha="0.5"
+                    android:paddingLeft="5dp"
+                    android:src="@drawable/phone2" />
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/iran_sans"
+                    android:paddingLeft="5dp"
+                    android:text="تلفن :"
+                    android:textSize="12dp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/phone_customer"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/iran_sans"
+                    android:paddingLeft="5dp"
+                    android:text="....."
+                    android:textSize="12dp"
+                    android:textStyle="bold" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:alpha="0.5"
+                    android:paddingLeft="5dp"
+                    android:src="@drawable/home2" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/iran_sans"
+                    android:paddingLeft="5dp"
+                    android:text="آدرس :"
+                    android:textSize="12dp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/address_customer"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/iran_sans"
+                    android:paddingLeft="5dp"
+                    android:text="....."
+                    android:textSize="12dp"
+                    android:textStyle="bold" />
+
+            </LinearLayout>
+
+        </LinearLayout>
 
 
     </androidx.cardview.widget.CardView>

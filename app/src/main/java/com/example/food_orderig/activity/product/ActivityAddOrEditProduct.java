@@ -1,34 +1,20 @@
 package com.example.food_orderig.activity.product;
 
-import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
-
-import android.animation.Animator;
-import android.content.Intent;
-import android.content.res.Resources;
-import android.os.Build;
 import android.os.Bundle;
 import android.text.TextUtils;
-import android.util.TypedValue;
 import android.view.View;
-import android.view.ViewAnimationUtils;
-import android.view.ViewTreeObserver;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.example.food_orderig.R;
-import com.example.food_orderig.activity.grouping.ActivityAddOrEditGrouping;
 import com.example.food_orderig.database.DatabaseHelper;
-import com.example.food_orderig.database.dao.GroupingDao;
 import com.example.food_orderig.database.dao.ProductDao;
-import com.example.food_orderig.model.Grouping;
 import com.example.food_orderig.model.Product;
 
 public class ActivityAddOrEditProduct extends AppCompatActivity {
-
 
     EditText name,category;
     TextView textViewcancle;
@@ -82,13 +68,7 @@ public class ActivityAddOrEditProduct extends AppCompatActivity {
                     db.close();
                     finish();
                 }
-
             }
         });
-
-
     }
-
-
-
 }

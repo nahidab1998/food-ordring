@@ -1,29 +1,17 @@
 package com.example.food_orderig.activity.customer;
 
-import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
-
-import android.animation.Animator;
-import android.content.Intent;
-import android.content.res.Resources;
-import android.os.Build;
 import android.os.Bundle;
 import android.text.TextUtils;
-import android.util.TypedValue;
 import android.view.View;
-import android.view.ViewAnimationUtils;
-import android.view.ViewTreeObserver;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.example.food_orderig.R;
-import com.example.food_orderig.activity.grouping.ActivityAddOrEditGrouping;
 import com.example.food_orderig.database.DatabaseHelper;
 import com.example.food_orderig.database.dao.CustomerDao;
 import com.example.food_orderig.model.Customer;
-import com.example.food_orderig.model.Grouping;
 
 public class ActivityAddOrEditCostomer extends AppCompatActivity {
 
@@ -45,7 +33,6 @@ public class ActivityAddOrEditCostomer extends AppCompatActivity {
         name_addcustomer=findViewById(R.id.add_edit_name_customer);
         phone_addcustomer=findViewById(R.id.add_edit_number_customer);
         address_addcustomer=findViewById(R.id.add_edit_address_customer);
-
 
         db = DatabaseHelper.getInstance(getApplicationContext());
         dao = db.customerDao();
@@ -71,14 +58,11 @@ public class ActivityAddOrEditCostomer extends AppCompatActivity {
                 }
             }
         });
-
         textViewcancle.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) { finish();
             }
         });
-
-
     }
 
 }

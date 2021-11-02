@@ -11,13 +11,16 @@
         android:theme="@style/Theme.Food_orderig" >
         <activity
             android:name=".activity.grouping.ActivityAddOrEditGrouping"
-            android:exported="true" />
+            android:exported="true"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".activity.grouping.ActivityGrouping"
-            android:exported="true" />
+            android:exported="true"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".activity.product.ActivityAddOrEditProduct"
-            android:exported="true" />
+            android:exported="true"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".activity.customer.ActivityAddOrEditCostomer"
             android:exported="true"
@@ -42,7 +45,9 @@
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
+
             </intent-filter>
+
         </activity>
     </application>
 

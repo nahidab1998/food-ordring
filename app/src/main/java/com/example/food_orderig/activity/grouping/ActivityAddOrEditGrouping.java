@@ -67,7 +67,6 @@ public class ActivityAddOrEditGrouping extends AppCompatActivity {
                     Toast.makeText(ActivityAddOrEditGrouping.this, "فیلد مورد نظر را پر کنید", Toast.LENGTH_SHORT).show();
 
                 }else {
-
                     Grouping grouping = new Grouping(name);
                     dao.insertGrouping(grouping);
                     db.close();

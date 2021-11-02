@@ -1,24 +1,17 @@
 package com.example.food_orderig.activity.product;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.constraintlayout.helper.widget.Carousel;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Adapter;
-import android.widget.Toast;
 
 import com.example.food_orderig.R;
-import com.example.food_orderig.activity.customer.ActivityAddOrEditCostomer;
-import com.example.food_orderig.activity.customer.ActivityCustomer;
 import com.example.food_orderig.activity.product.mvp.ProductModel;
 import com.example.food_orderig.activity.product.mvp.ProductView;
 import com.example.food_orderig.database.DatabaseHelper;
-import com.example.food_orderig.database.dao.CustomerDao;
 import com.example.food_orderig.database.dao.ProductDao;
-import com.example.food_orderig.helper.AdapterCustomer;
 import com.example.food_orderig.helper.AdapterProduct;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
@@ -27,10 +20,9 @@ public class ActivityProduct extends AppCompatActivity implements ProductView {
     ProductModel presenter;
     RecyclerView recyclerView_product;
     FloatingActionButton floatingActionButton_product;
-    ProductDao dao;
+    ProductDao dao_product;
     DatabaseHelper db;
     AdapterProduct adapterProduct;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,8 +34,8 @@ public class ActivityProduct extends AppCompatActivity implements ProductView {
         presenter.getData();
 
         db= DatabaseHelper.getInstance(getApplicationContext());
-        dao = db.productDao();
-        adapterProduct = new AdapterProduct( dao.getList() , this );
+        dao_product= db.productDao();
+        adapterProduct = new AdapterProduct( dao_product.getList() , this );
         recyclerView_product.setAdapter(adapterProduct);
 
         floatingActionButton_product = findViewById(R.id.fab_product);

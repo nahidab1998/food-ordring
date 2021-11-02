@@ -20,7 +20,7 @@ public class ActivityGrouping extends AppCompatActivity {
 
     ImageView imageView;
     FloatingActionButton fab_grouping;
-    GroupingDao dao;
+    GroupingDao dao_grouping;
     DatabaseHelper db;
     AdapterGrouping adapterGrouping;
     RecyclerView recyclerView_grouping;
@@ -34,9 +34,9 @@ public class ActivityGrouping extends AppCompatActivity {
         fab_grouping =findViewById(R.id.fab_grouping);
 
         db= DatabaseHelper.getInstance(getApplicationContext());
-        dao = db.groupingDao();
+        dao_grouping = db.groupingDao();
 
-        adapterGrouping = new AdapterGrouping( dao.getList() , this );
+        adapterGrouping = new AdapterGrouping( dao_grouping.getList() , this );
         recyclerView_grouping = findViewById(R.id.recycle_grouping);
         recyclerView_grouping.setAdapter(adapterGrouping);
 
@@ -47,8 +47,6 @@ public class ActivityGrouping extends AppCompatActivity {
                 startActivity(add_new_grouping);
             }
         });
-
-
     }
 
     @Override
