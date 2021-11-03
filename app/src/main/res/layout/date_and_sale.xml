@@ -38,7 +38,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="امروز"
+                            android:text="امروز :"
                             android:textSize="14dp"
                             android:textColor="@color/red"
                             android:fontFamily="@font/iran_sans"
@@ -83,7 +83,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="این هفته"
+                            android:text="این هفته :"
                             android:textSize="14sp"
                             android:textColor="@color/red"
                             android:fontFamily="@font/iran_sans"
@@ -128,7 +128,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="این ماه"
+                        android:text="این ماه :"
                         android:textSize="14dp"
                         android:textColor="@color/red"
                         android:fontFamily="@font/iran_sans"
@@ -180,7 +180,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="فروش کل"
+                        android:text="فروش کل :"
                         android:textSize="14dp"
                         android:textColor="@color/red"
                         android:fontFamily="@font/iran_sans"

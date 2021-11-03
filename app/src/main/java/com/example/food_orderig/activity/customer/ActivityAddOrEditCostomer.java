@@ -53,7 +53,6 @@ public class ActivityAddOrEditCostomer extends AppCompatActivity {
 
                     Customer customer = new Customer(name , phone , address);
                     dao.insertCustomer(customer);
-                    db.close();
                     finish();
                 }
             }

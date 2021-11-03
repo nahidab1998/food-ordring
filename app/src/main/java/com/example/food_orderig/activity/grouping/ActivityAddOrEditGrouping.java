@@ -69,7 +69,6 @@ public class ActivityAddOrEditGrouping extends AppCompatActivity {
                 }else {
                     Grouping grouping = new Grouping(name);
                     dao.insertGrouping(grouping);
-                    db.close();
                     finish();
                 }
 

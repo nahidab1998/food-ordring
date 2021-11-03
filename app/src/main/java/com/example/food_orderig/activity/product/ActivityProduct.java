@@ -15,6 +15,8 @@ import com.example.food_orderig.database.dao.ProductDao;
 import com.example.food_orderig.helper.AdapterProduct;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
+import java.util.ArrayList;
+
 public class ActivityProduct extends AppCompatActivity implements ProductView {
 
     ProductModel presenter;
@@ -35,7 +37,7 @@ public class ActivityProduct extends AppCompatActivity implements ProductView {
 
         db= DatabaseHelper.getInstance(getApplicationContext());
         dao_product= db.productDao();
-        adapterProduct = new AdapterProduct( dao_product.getList() , this );
+        adapterProduct = new AdapterProduct( new ArrayList<>(), this );
         recyclerView_product.setAdapter(adapterProduct);
 
         floatingActionButton_product = findViewById(R.id.fab_product);
@@ -51,6 +53,14 @@ public class ActivityProduct extends AppCompatActivity implements ProductView {
     @Override
     public void setData(String name) {
 //        Toast.makeText(this, name, Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if (adapterProduct != null){
+            adapterProduct.addList(dao_product.getList());
+        }
     }
 
     @Override

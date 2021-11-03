@@ -12,6 +12,8 @@ import com.example.food_orderig.database.dao.CustomerDao;
 import com.example.food_orderig.helper.AdapterCustomer;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
+import java.util.ArrayList;
+
 public class ActivityCustomer extends AppCompatActivity {
 
     FloatingActionButton fab_customer;
@@ -29,7 +31,7 @@ public class ActivityCustomer extends AppCompatActivity {
         db= DatabaseHelper.getInstance(getApplicationContext());
         dao_customer = db.customerDao();
 
-        adapterCustomer = new AdapterCustomer( dao_customer.getList() , this );
+        adapterCustomer = new AdapterCustomer( new ArrayList<>() , this );
         recyclerView_customer = findViewById(R.id.recycle_customer);
         recyclerView_customer.setAdapter(adapterCustomer);
 
@@ -43,6 +45,14 @@ public class ActivityCustomer extends AppCompatActivity {
                 startActivity(add_new_customer);
             }
         });
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if (adapterCustomer != null){
+            adapterCustomer.addList(dao_customer.getList());
+        }
     }
 
     @Override

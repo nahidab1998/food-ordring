@@ -65,7 +65,6 @@ public class ActivityAddOrEditProduct extends AppCompatActivity {
                 }else {
                     Product product = new Product(name_product,name_category);
                     dao.insertProduct(product);
-                    db.close();
                     finish();
                 }
             }

@@ -61,5 +61,10 @@ public class AdapterCustomer extends RecyclerView.Adapter<AdapterCustomer.Viewho
         }
     }
 
+    public void addList(List<Customer> arrayList){
+        list.clear();
+        list.addAll(arrayList);
+        notifyDataSetChanged();
+    }
 
 }

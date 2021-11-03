@@ -10,9 +10,8 @@
         android:layout_width="match_parent"
         android:layout_height="170dp"
         android:layout_marginHorizontal="10dp"
-        android:layout_marginVertical="5dp"
+        android:layout_marginVertical="2dp"
         app:cardCornerRadius="10dp"
-
         android:elevation="6dp"
         android:outlineSpotShadowColor="@color/red">
 
@@ -30,10 +29,10 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="فست فود"
-            android:textSize="30dp"
+            android:textSize="28dp"
             android:fontFamily="@font/iran_sans"
             android:textStyle="bold"
-            android:textColor="@color/text"
+            android:textColor="@color/red"
             android:gravity="center"
             android:layout_gravity="center"/>
     </androidx.cardview.widget.CardView>

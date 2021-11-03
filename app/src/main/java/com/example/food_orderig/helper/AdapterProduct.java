@@ -62,4 +62,10 @@ public class AdapterProduct extends RecyclerView.Adapter<AdapterProduct.Viewhold
             imageViewfood=itemView.findViewById(R.id.image_product);
         }
     }
+
+    public void addList(List<Product> arrayList){
+        list.clear();
+        list.addAll(arrayList);
+        notifyDataSetChanged();
+    }
 }

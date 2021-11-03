@@ -16,6 +16,8 @@ import com.example.food_orderig.database.dao.GroupingDao;
 import com.example.food_orderig.helper.AdapterGrouping;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
+import java.util.ArrayList;
+
 public class ActivityGrouping extends AppCompatActivity {
 
     ImageView imageView;
@@ -36,7 +38,7 @@ public class ActivityGrouping extends AppCompatActivity {
         db= DatabaseHelper.getInstance(getApplicationContext());
         dao_grouping = db.groupingDao();
 
-        adapterGrouping = new AdapterGrouping( dao_grouping.getList() , this );
+        adapterGrouping = new AdapterGrouping( new ArrayList<>(), this );
         recyclerView_grouping = findViewById(R.id.recycle_grouping);
         recyclerView_grouping.setAdapter(adapterGrouping);
 
@@ -47,6 +49,14 @@ public class ActivityGrouping extends AppCompatActivity {
                 startActivity(add_new_grouping);
             }
         });
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if (adapterGrouping != null){
+            adapterGrouping.addList(dao_grouping.getList());
+        }
     }
 
     @Override

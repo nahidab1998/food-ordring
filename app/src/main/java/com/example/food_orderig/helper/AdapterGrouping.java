@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.food_orderig.R;
 import com.example.food_orderig.model.Grouping;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class AdapterGrouping extends RecyclerView.Adapter<AdapterGrouping.ViewholderGrouping> {
@@ -58,5 +59,11 @@ public class AdapterGrouping extends RecyclerView.Adapter<AdapterGrouping.Viewho
             imageView_grouping=itemView.findViewById(R.id.img_grouping);
 
         }
+    }
+
+    public void addList(List<Grouping> arrayList){
+        list.clear();
+        list.addAll(arrayList);
+        notifyDataSetChanged();
     }
 }
