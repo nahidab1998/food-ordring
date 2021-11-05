@@ -7,12 +7,15 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.example.food_orderig.R;
 import com.example.food_orderig.activity.customer.ActivityCustomer;
 import com.example.food_orderig.activity.grouping.ActivityGrouping;
 import com.example.food_orderig.activity.product.ActivityProduct;
+import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.jjoe64.graphview.GraphView;
 import com.jjoe64.graphview.LegendRenderer;
 import com.jjoe64.graphview.series.DataPoint;
@@ -21,6 +24,8 @@ import com.jjoe64.graphview.series.LineGraphSeries;
 public class MainActivity extends AppCompatActivity {
 
     CardView cardViewproduct,cardViewcustomer , cardViewprouping;
+    ImageView add_shop;
+    LinearLayout copy , share , upload, download , delete;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,6 +35,7 @@ public class MainActivity extends AppCompatActivity {
         cardViewproduct=findViewById(R.id.products);
         cardViewcustomer=findViewById(R.id.customer);
         cardViewprouping=findViewById(R.id.grouping);
+        add_shop = findViewById(R.id.add_shop);
 
         final GraphView graph = (GraphView) findViewById(R.id.graf);
         LineGraphSeries<DataPoint> bgseries= new LineGraphSeries<>(new DataPoint[]{
@@ -108,5 +114,27 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        add_shop.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                showBottomSheetDialog();
+
+            }
+        });
+
+    }
+    private void showBottomSheetDialog () {
+
+        final BottomSheetDialog bottomSheetDialog = new BottomSheetDialog(this);
+        bottomSheetDialog.setContentView(R.layout.add_shop_btnsheet);
+
+         copy = bottomSheetDialog.findViewById(R.id.copyLinearLayout);
+         share = bottomSheetDialog.findViewById(R.id.shareLinearLayout);
+         upload = bottomSheetDialog.findViewById(R.id.uploadLinearLaySout);
+         download = bottomSheetDialog.findViewById(R.id.download);
+         delete = bottomSheetDialog.findViewById(R.id.delete);
+
+        bottomSheetDialog.show();
     }
 }

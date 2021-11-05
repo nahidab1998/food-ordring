@@ -4,8 +4,12 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+
 import com.example.food_orderig.R;
 import com.example.food_orderig.database.DatabaseHelper;
 import com.example.food_orderig.database.dao.CustomerDao;
@@ -21,6 +25,7 @@ public class ActivityCustomer extends AppCompatActivity {
     DatabaseHelper db;
     AdapterCustomer adapterCustomer;
     RecyclerView recyclerView_customer;
+    LinearLayout call;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,6 +35,15 @@ public class ActivityCustomer extends AppCompatActivity {
 
         db= DatabaseHelper.getInstance(getApplicationContext());
         dao_customer = db.customerDao();
+
+        call = findViewById(R.id.call);
+
+//        call.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                dialContactPhone("123123123");
+//            }
+//        });
 
         adapterCustomer = new AdapterCustomer( new ArrayList<>() , this );
         recyclerView_customer = findViewById(R.id.recycle_customer);
@@ -46,6 +60,12 @@ public class ActivityCustomer extends AppCompatActivity {
             }
         });
     }
+
+//    private void dialContactPhone(final String phoneNumber) {
+////        startActivity(new Intent(Intent.ACTION_DIAL, Uri.fromParts("tel", phoneNumber, null)));
+//    }
+
+
 
     @Override
     protected void onResume() {

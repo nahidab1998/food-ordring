@@ -27,6 +27,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical"
+            android:background="@drawable/border_ripple"
             android:paddingTop="10dp">
 
             <ImageView
@@ -40,6 +41,7 @@
                 android:layout_height="wrap_content"
                 android:text="محصولات"
                 android:layout_marginTop="10dp"
+                android:layout_marginBottom="5dp"
                 android:layout_gravity="center_horizontal"
                 android:fontFamily="@font/iran_sans"
                 android:textStyle="bold"/>
@@ -54,7 +56,6 @@
                 <androidx.cardview.widget.CardView
                     android:layout_width="match_parent"
                     android:layout_height="38dp"
-                    android:layout_marginTop="5dp"
                     app:cardBackgroundColor="@color/text"
                     >
 
@@ -97,6 +98,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical"
+            android:background="@drawable/border_ripple"
             android:paddingTop="10dp">
 
             <ImageView
@@ -111,6 +113,7 @@
                 android:layout_height="wrap_content"
                 android:text="مشتری"
                 android:layout_marginTop="10dp"
+                android:layout_marginBottom="5dp"
                 android:layout_gravity="center_horizontal"
                 android:fontFamily="@font/iran_sans"
                 android:textStyle="bold"/>
@@ -125,7 +128,6 @@
                 <androidx.cardview.widget.CardView
                     android:layout_width="match_parent"
                     android:layout_height="38dp"
-                    android:layout_marginTop="5dp"
                     app:cardBackgroundColor="@color/text"
                     >
 
@@ -175,6 +177,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="vertical"
+                android:background="@drawable/border_ripple"
                 android:paddingTop="10dp">
 
                 <ImageView
@@ -191,6 +194,7 @@
                     android:layout_marginTop="10dp"
                     android:layout_gravity="center_horizontal"
                     android:fontFamily="@font/iran_sans"
+                    android:layout_marginBottom="5dp"
                     android:textStyle="bold"/>
 
             </LinearLayout>
@@ -203,7 +207,6 @@
                 <androidx.cardview.widget.CardView
                     android:layout_width="match_parent"
                     android:layout_height="38dp"
-                    android:layout_marginTop="5dp"
                     app:cardBackgroundColor="@color/text"
                     >
 

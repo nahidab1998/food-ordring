@@ -2,6 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.food_orderig" >
 
+    <uses-permission android:name="android.permision.CALL_PHONE"></uses-permission>
 
     <application
         android:allowBackup="true"
