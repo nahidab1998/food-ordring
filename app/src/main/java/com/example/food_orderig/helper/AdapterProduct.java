@@ -42,6 +42,7 @@ public class AdapterProduct extends RecyclerView.Adapter<AdapterProduct.Viewhold
         Product product = list . get(position);
         holder.name_food.setText(product.name);
         holder.category_food.setText(product.category);
+        holder.price_food.setText(product.price);
     }
 
     @Override
@@ -51,7 +52,7 @@ public class AdapterProduct extends RecyclerView.Adapter<AdapterProduct.Viewhold
 
     public class ViewholderProduct extends RecyclerView.ViewHolder {
 
-        TextView name_food , category_food;
+        TextView name_food , category_food , price_food;
         ImageView imageViewfood;
 
         public ViewholderProduct(View itemView) {
@@ -60,6 +61,8 @@ public class AdapterProduct extends RecyclerView.Adapter<AdapterProduct.Viewhold
             name_food=itemView.findViewById(R.id.name_product);
             category_food=itemView.findViewById(R.id.category_product);
             imageViewfood=itemView.findViewById(R.id.image_product);
+            price_food = itemView.findViewById(R.id.price_product);
+
         }
     }
 

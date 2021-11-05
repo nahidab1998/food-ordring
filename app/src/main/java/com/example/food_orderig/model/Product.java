@@ -14,16 +14,21 @@ public class Product {
     public String name;
     @ColumnInfo(name = "category")
     public String category;
+    @ColumnInfo (name = "price")
+    public  String price;
 
-    public Product(int id, String name, String category) {
+    public Product(int id, String name, String category , String price) {
         this.id = id;
         this.name = name;
         this.category = category;
+        this.price = price;
     }
 
     @Ignore
-    public Product(String name, String category) {
+    public Product(String name, String category , String price) {
         this.name = name;
         this.category = category;
+        this.price = price;
+
     }
 }

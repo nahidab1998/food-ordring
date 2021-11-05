@@ -16,13 +16,13 @@ import com.example.food_orderig.model.Product;
 
 public class ActivityAddOrEditProduct extends AppCompatActivity {
 
-    EditText name,category;
+    EditText name , category , price;
     TextView textViewcancle;
     ImageView imageView_image_product;
     DatabaseHelper db;
     ProductDao dao;
     Button btn_save_product;
-    String name_product , name_category;
+    String name_product , name_category , price_product;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,6 +31,7 @@ public class ActivityAddOrEditProduct extends AppCompatActivity {
 
         name=findViewById(R.id.add_edit_name_product);
         category = findViewById(R.id.add_edit_category_product);
+        price = findViewById(R.id.add_edit_price_product);
 
         textViewcancle=findViewById(R.id.cancel_product);
         btn_save_product = findViewById(R.id.save_product);
@@ -57,13 +58,14 @@ public class ActivityAddOrEditProduct extends AppCompatActivity {
 
                 name_product = name.getText().toString();
                 name_category = category.getText().toString();
+                price_product = price.getText().toString();
 
                 if (TextUtils.isEmpty(name_product) || TextUtils.isEmpty(name_category)) {
 
                     Toast.makeText(ActivityAddOrEditProduct.this, "فیلد مورد نظر را پر کنید", Toast.LENGTH_SHORT).show();
 
                 }else {
-                    Product product = new Product(name_product,name_category);
+                    Product product = new Product(name_product , name_category , price_product);
                     dao.insertProduct(product);
                     finish();
                 }

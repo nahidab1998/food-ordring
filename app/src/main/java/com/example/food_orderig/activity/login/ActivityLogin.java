@@ -36,17 +36,17 @@ public class ActivityLogin extends AppCompatActivity {
 
 //        startActivity(new Intent(this, ActivityProduct.class));
 
-        new Thread(() -> {
-            db =DatabaseHelper.getInstance(this);
-            Product p = new Product("nahid","qom");
-            db.productDao().insertProduct(p);
-
-//            List<Product> a = db.productDao().getList();
-//            for (int i = 0; i < a.size() ; i++) {
-//                Log.e("qqqqq", "onCreate: " );
-//            }
-        });
-        Log.e("qqq", "hi");
+//        new Thread(() -> {
+//            db =DatabaseHelper.getInstance(this);
+//            Product p = new Product("nahid","qom");
+//            db.productDao().insertProduct(p);
+//
+////            List<Product> a = db.productDao().getList();
+////            for (int i = 0; i < a.size() ; i++) {
+////                Log.e("qqqqq", "onCreate: " );
+////            }
+//        });
+//        Log.e("qqq", "hi");
 
     }
 }
