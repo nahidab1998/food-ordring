@@ -44,7 +44,7 @@ public class ActivityAddOrEditGrouping extends AppCompatActivity {
 
         anim_grouping= findViewById(R.id.anim_grouping);
         anim_grouping.setTranslationY(-900f);
-        anim_grouping.animate().translationYBy(900f).setDuration(1500);
+        anim_grouping.animate().translationYBy(900f).setDuration(1000);
 
 
         Intent intent=getIntent();

@@ -48,10 +48,12 @@ public class ActivityAddOrEditCostomer extends AppCompatActivity {
 
         anim_customer=findViewById(R.id.anim_customer);
         anim_customer.setTranslationY(-900f);
-        anim_customer.animate().translationYBy(900f).setDuration(1500);
+        anim_customer.animate().translationYBy(900f).setDuration(1000);
 
 
         Intent intent=getIntent();
+        String zero = intent.getStringExtra("idcustomer");
+
         String one = intent.getStringExtra("namecustomer");
         name_addcustomer.setText(one);
 
@@ -73,9 +75,13 @@ public class ActivityAddOrEditCostomer extends AppCompatActivity {
                 phone = phone_addcustomer.getText().toString();
                 address = address_addcustomer.getText().toString();
 
-                if (TextUtils.isEmpty(name) || TextUtils.isEmpty(phone) || TextUtils.isEmpty(address)){
+                if(TextUtils.isEmpty(name) || TextUtils.isEmpty(phone) || TextUtils.isEmpty(address)){
 
-                    Toast.makeText(ActivityAddOrEditCostomer.this, "فیلد مورد نظر را پر کنید", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), "فیلد مورد نظر را پرکنید", Toast.LENGTH_SHORT).show();
+
+                }else if(phone.length() != 11) {
+
+                    Toast.makeText(getApplicationContext(), "شماره معتبر نمی باشد", Toast.LENGTH_SHORT).show();
 
                 }else {
 
@@ -85,6 +91,7 @@ public class ActivityAddOrEditCostomer extends AppCompatActivity {
                 }
             }
         });
+
         textViewcancle.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) { finish();
