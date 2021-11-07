@@ -18,6 +18,7 @@
         android:outlineSpotShadowColor="@color/red"
         app:cardCornerRadius="10dp"
         android:layout_marginBottom="2dp"
+        android:layout_marginTop="5dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -29,6 +30,7 @@
             android:orientation="vertical"
             android:gravity="center"
             android:paddingTop="8dp"
+            android:background="@drawable/border_ripple"
             android:paddingRight="10dp"
             android:paddingLeft="7dp">
 
@@ -152,6 +154,7 @@
                     android:layout_width="40dp"
                     android:layout_height="40dp"
                     android:background="@drawable/call"
+                    android:layout_gravity="bottom"
                     android:layout_marginBottom="5dp"
                     android:gravity="center">
 

@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 
 import com.example.food_orderig.R;
 import com.example.food_orderig.activity.mainpage.MainActivity;
@@ -15,7 +16,7 @@ import com.example.food_orderig.model.Product;
 
 public class ActivityLogin extends AppCompatActivity {
 
-    Button buttonlogin;
+    TextView buttonlogin;
     DatabaseHelper db;
     @Override
     protected void onCreate(Bundle savedInstanceState) {

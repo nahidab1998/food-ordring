@@ -21,7 +21,7 @@ public class ActivityAddOrEditProduct extends AppCompatActivity {
     ImageView imageView_image_product;
     DatabaseHelper db;
     ProductDao dao;
-    Button btn_save_product;
+    TextView btn_save_product;
     String name_product , name_category , price_product;
 
     @Override
@@ -60,7 +60,7 @@ public class ActivityAddOrEditProduct extends AppCompatActivity {
                 name_category = category.getText().toString();
                 price_product = price.getText().toString();
 
-                if (TextUtils.isEmpty(name_product) || TextUtils.isEmpty(name_category)) {
+                if (TextUtils.isEmpty(name_product) || TextUtils.isEmpty(name_category) || TextUtils.isEmpty(price_product)) {
 
                     Toast.makeText(ActivityAddOrEditProduct.this, "فیلد مورد نظر را پر کنید", Toast.LENGTH_SHORT).show();
 

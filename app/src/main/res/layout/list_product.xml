@@ -6,10 +6,11 @@
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
-        android:layout_height="270dp"
+        android:layout_height="260dp"
         android:layout_marginHorizontal="10dp"
-       android:layout_marginVertical="5dp"
         app:cardCornerRadius="10dp"
+        android:layout_marginBottom="5dp"
+        android:layout_marginTop="10dp"
         android:elevation="6dp"
         android:outlineSpotShadowColor="@color/red">
 
@@ -38,14 +39,15 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:paddingHorizontal="10dp"
+                android:paddingHorizontal="15dp"
+                android:layout_marginTop="3dp"
                 android:weightSum="2">
 
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:layout_marginTop="10dp">
+                    android:layout_marginTop="5dp">
 
                     <TextView
                         android:id="@+id/name_product"
@@ -54,7 +56,8 @@
                         android:text="ساندویج برگر"
                         android:fontFamily="@font/iran_sans"
                         android:textSize="18dp"
-                        android:layout_gravity="center_vertical"
+                        android:gravity="center"
+                        android:layout_gravity="center"
                         android:textStyle="bold"/>
 
 
@@ -64,29 +67,20 @@
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_gravity="center_vertical"
-                    android:layout_marginTop="10dp"
+                    android:layout_marginTop="5dp"
                     android:layout_weight="1"
                     android:gravity="left">
 
                     <TextView
+                        android:id="@+id/category_product"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
-                        android:layout_marginLeft="10dp"
-                        android:fontFamily="@font/iran_sans"
-                        android:text="قیمت :"
-                        android:textSize="16dp"
-                        android:textStyle="bold" />
-
-                    <TextView
-                        android:id="@+id/price_product"
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:fontFamily="@font/iran_sans"
-                        android:gravity="center"
-                        android:text="54000"
+                        android:text="فست فود"
+                        android:textSize="14dp"
                         android:textColor="@color/red"
-                        android:textSize="16dp" />
+                        android:fontFamily="@font/iran_sans"
 
+                        />
 
                 </LinearLayout>
 
@@ -97,19 +91,27 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:paddingHorizontal="10dp"
+                android:paddingHorizontal="15dp"
                 android:paddingVertical="5dp">
 
                 <TextView
-                    android:id="@+id/category_product"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="فست فود"
-                    android:textSize="12dp"
-                    android:textColor="@color/red"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="10dp"
                     android:fontFamily="@font/iran_sans"
+                    android:text="قیمت :"
+                    android:textSize="16dp"
+                    android:textStyle="bold" />
 
-                    />
+                <TextView
+                    android:id="@+id/price_product"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:fontFamily="@font/iran_sans"
+                    android:gravity="center"
+                    android:text="54000"
+                    android:textColor="@color/red"
+                    android:textSize="16dp" />
 
 
             </LinearLayout>

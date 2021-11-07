@@ -24,7 +24,7 @@ public class ActivityAddOrEditGrouping extends AppCompatActivity {
     EditText editTextnameGrouping;
     DatabaseHelper db;
     GroupingDao dao;
-    Button btn_save_grouping;
+    TextView btn_save_grouping;
     TextView btn_canclegrouping;
     ImageView imageViewadd_img_grouping;
     String name;

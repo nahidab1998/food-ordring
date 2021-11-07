@@ -20,29 +20,28 @@
     </LinearLayout>
 
     <LinearLayout
-        android:layout_below="@+id/toolbargrouping"
         android:layout_width="match_parent"
-        android:layout_height="600dp"
+        android:layout_height="550dp"
+        android:layout_below="@+id/toolbargrouping"
+        android:background="@drawable/background_add"
+        android:elevation="6dp"
         android:orientation="vertical"
         android:paddingHorizontal="10dp"
-        android:paddingVertical="10dp"
-        android:elevation="6dp"
-        android:background="@drawable/background_add">
+        android:paddingVertical="10dp">
 
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingVertical="10dp"
             android:layout_gravity="center"
-            android:gravity="center">
+            android:gravity="center"
+            android:paddingVertical="10dp">
 
             <ImageView
                 android:id="@+id/add_img_food_grouping"
                 android:layout_width="match_parent"
                 android:layout_height="120dp"
-                android:src="@drawable/camera"
-                />
+                android:src="@drawable/camera" />
 
         </LinearLayout>
 
@@ -50,13 +49,13 @@
             android:layout_width="match_parent"
             android:layout_height="2dp"
             android:layout_marginHorizontal="5dp"
-            android:background="@color/text"/>
+            android:background="@color/text" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
             android:layout_marginTop="2dp"
+            android:layout_weight="1"
             android:gravity="center"
             android:orientation="vertical">
 
@@ -67,16 +66,16 @@
                 android:layout_height="50dp"
                 android:layout_gravity="center"
                 android:layout_marginHorizontal="5dp"
+                android:layout_marginBottom="30dp"
                 android:background="@drawable/back_edittext"
                 android:drawableRight="@drawable/custom_group_icon"
                 android:drawablePadding="5dp"
-                android:layout_marginBottom="30dp"
+                android:elevation="6dp"
                 android:fontFamily="@font/iran_sans"
                 android:gravity="right"
-                android:elevation="6dp"
                 android:hint=" نام دسته بندی"
-                android:textColor="#5e6d76"
                 android:padding="10dp"
+                android:textColor="#5e6d76"
                 android:textSize="14dp" />
 
 
@@ -86,31 +85,32 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:paddingRight="30dp"
-            android:paddingVertical="5dp">
+            android:paddingVertical="5dp"
+            android:paddingRight="30dp">
 
-            <Button
+            <TextView
                 android:id="@+id/save_grouping"
-                android:layout_width="wrap_content"
+                android:layout_width="80dp"
                 android:layout_height="40dp"
-                android:text="ذخیره"
-                android:textStyle="bold"
-                android:textSize="14dp"
-                android:fontFamily="@font/iran_sans"
-                android:textColor="@color/red"
                 android:background="@drawable/btn_save"
-                />
+                android:fontFamily="@font/iran_sans"
+                android:gravity="center"
+                android:text="ذخیره"
+                android:textColor="@color/red"
+                android:textSize="14dp"
+                android:textStyle="bold" />
+
             <TextView
                 android:id="@+id/cancelgrouping"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="انصراف"
-                android:textSize="14dp"
                 android:layout_gravity="center"
                 android:layout_marginRight="15dp"
                 android:fontFamily="@font/iran_sans"
-                android:textStyle="bold"
-                android:textColor="@color/text"/>
+                android:text="انصراف"
+                android:textColor="@color/text"
+                android:textSize="14dp"
+                android:textStyle="bold" />
 
         </LinearLayout>
 

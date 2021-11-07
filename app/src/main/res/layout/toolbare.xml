@@ -31,7 +31,7 @@
                     android:layout_height="match_parent"
                     android:background="@drawable/border_ripple_circle"
                     android:src="@drawable/add_shop"
-                    android:padding="10dp" />
+                    android:padding="13dp" />
 
 
             </LinearLayout>
@@ -70,7 +70,7 @@
                 android:layout_height="match_parent"
                 android:background="@drawable/border_ripple_circle"
                 android:src="@drawable/setting"
-                android:padding="10dp" />
+                android:padding="13dp" />
 
 
         </LinearLayout>

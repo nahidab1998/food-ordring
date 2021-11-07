@@ -42,13 +42,6 @@
                 android:layout_height="match_parent">
 
                 <ImageView
-                    android:id="@+id/pen_grouping"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:src="@drawable/pen"
-                    android:paddingHorizontal="10dp"
-                    />
-                <ImageView
                     android:id="@+id/delete_grouping"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
