@@ -81,7 +81,7 @@ public class MainActivity extends AppCompatActivity {
 //        graph.setTitle("نمودار رشد سرمایه");
         graph.setTitleColor(getResources().getColor(android.R.color.white));
 //        bgseries.setTitle("foo");
-        bgseries.setThickness(7);
+        bgseries.setThickness(5);
         bgseries.setDrawBackground(true);
         bgseries.setColor(Color.rgb(241,92,65));
         bgseries.setBackgroundColor(Color.rgb(248,243,247));

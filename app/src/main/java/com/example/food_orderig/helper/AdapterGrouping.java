@@ -1,6 +1,8 @@
 package com.example.food_orderig.helper;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,6 +12,8 @@ import android.widget.TextView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.food_orderig.R;
+import com.example.food_orderig.activity.customer.ActivityAddOrEditCostomer;
+import com.example.food_orderig.activity.grouping.ActivityAddOrEditGrouping;
 import com.example.food_orderig.model.Grouping;
 
 import java.util.ArrayList;
@@ -36,10 +40,16 @@ public class AdapterGrouping extends RecyclerView.Adapter<AdapterGrouping.Viewho
     }
 
     @Override
-    public void onBindViewHolder(ViewholderGrouping holder, int position) {
+    public void onBindViewHolder(ViewholderGrouping holder, @SuppressLint("RecyclerView") int position) {
 
         Grouping grouping = list . get(position);
         holder.textView_showname_grouping.setText(grouping.name);
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                edit(position);
+            }
+        });
     }
 
     @Override
@@ -59,6 +69,14 @@ public class AdapterGrouping extends RecyclerView.Adapter<AdapterGrouping.Viewho
             imageView_grouping=itemView.findViewById(R.id.img_grouping);
 
         }
+    }
+
+    private void edit(int pos){
+
+        Intent intent = new Intent(context, ActivityAddOrEditGrouping.class);
+        intent.putExtra("namegrouping",list.get(pos).name);
+        context.startActivity(intent);
+
     }
 
     public void addList(List<Grouping> arrayList){

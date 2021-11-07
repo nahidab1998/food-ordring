@@ -1,6 +1,8 @@
 package com.example.food_orderig.helper;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,6 +12,8 @@ import android.widget.TextView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.food_orderig.R;
+import com.example.food_orderig.activity.grouping.ActivityAddOrEditGrouping;
+import com.example.food_orderig.activity.product.ActivityAddOrEditProduct;
 import com.example.food_orderig.model.Grouping;
 import com.example.food_orderig.model.Product;
 
@@ -37,12 +41,18 @@ public class AdapterProduct extends RecyclerView.Adapter<AdapterProduct.Viewhold
     }
 
     @Override
-    public void onBindViewHolder(AdapterProduct.ViewholderProduct holder, int position) {
+    public void onBindViewHolder(AdapterProduct.ViewholderProduct holder, @SuppressLint("RecyclerView") int position) {
 
         Product product = list . get(position);
         holder.name_food.setText(product.name);
         holder.category_food.setText(product.category);
         holder.price_food.setText(product.price);
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                edit(position);
+            }
+        });
     }
 
     @Override
@@ -64,6 +74,16 @@ public class AdapterProduct extends RecyclerView.Adapter<AdapterProduct.Viewhold
             price_food = itemView.findViewById(R.id.price_product);
 
         }
+    }
+
+    private void edit(int pos){
+
+        Intent intent = new Intent(context, ActivityAddOrEditProduct.class);
+        intent.putExtra("nameproduct",list.get(pos).name);
+        intent.putExtra("categoryproducy",list.get(pos).category);
+        intent.putExtra("priceproduct",list.get(pos).price);
+        context.startActivity(intent);
+
     }
 
     public void addList(List<Product> arrayList){

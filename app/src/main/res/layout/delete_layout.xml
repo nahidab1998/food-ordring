@@ -11,6 +11,8 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:cardCornerRadius="10dp"
+        android:elevation="10dp"
+
         >
 
         <LinearLayout
@@ -18,50 +20,81 @@
             android:layout_height="match_parent"
             android:background="@color/text"
             android:orientation="vertical">
-
-
-            <TextView
-                android:id="@+id/textView5"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="45dp"
-                android:gravity="center"
-                android:text="ایا مایلید این آیتم را حذف کنید؟"
-                android:textSize="18dp"
-                android:textStyle="bold"
-                android:fontFamily="@font/iran_sans"
-                />
+                android:paddingRight="20dp"
+                android:layout_weight="1">
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    app:cardCornerRadius="50dp"
+                    android:paddingRight="20dp"
+                    android:background="@color/white"
+                    android:layout_marginTop="20dp"
+                    >
+
+                    <ImageView
+
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:background="@color/white"
+                        android:src="@drawable/delete"
+                        android:layout_gravity="center"
+                        />
+
+                </androidx.cardview.widget.CardView>
+
+
+                <TextView
+                    android:id="@+id/textView5"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="right"
+                    android:layout_marginTop="28dp"
+                    android:paddingRight="10dp"
+                    android:text="آیا از حذف کامل این آیتم اطمینان دارید؟"
+                    android:textSize="16dp"
+                    android:textStyle="bold"
+                    android:fontFamily="@font/iran_sans"
+                    />
+            </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 android:paddingHorizontal="20dp"
-                android:layout_marginTop="30dp"
+                android:paddingBottom="20dp"
+                android:gravity="left"
+
                 >
 
 
-                <Button
-                    android:id="@+id/yes_btn"
-                    android:layout_width="80dp"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/btn_login"
-                    android:text="بله"
-                    android:layout_marginLeft="15dp"
-                    android:fontFamily="@font/iran_sans"
-                    android:textSize="14dp"
-                    android:textStyle="bold"
-                    android:textColor="@color/text"
-                    />
+
 
                 <TextView
                     android:id="@+id/enseraf_btn"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
+                    android:gravity="bottom"
                     android:text="انصراف"
                     android:textSize="14dp"
                     android:fontFamily="@font/iran_sans"
                     android:textStyle="bold"
+                    />
+                <Button
+                    android:id="@+id/yes_btn"
+                    android:layout_width="80dp"
+                    android:layout_height="40dp"
+                    android:background="@drawable/btn_login"
+                    android:text="تأیید"
+                    android:layout_marginRight="15dp"
+                    android:fontFamily="@font/iran_sans"
+                    android:textSize="14dp"
+                    android:textStyle="bold"
+                    android:textColor="@color/text"
                     />
 
             </LinearLayout>

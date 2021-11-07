@@ -3,6 +3,7 @@ package com.example.food_orderig.activity.grouping;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
@@ -38,6 +39,11 @@ public class ActivityAddOrEditGrouping extends AppCompatActivity {
         editTextnameGrouping = findViewById(R.id.add_edit_number_grouping);
         btn_save_grouping=findViewById(R.id.save_grouping);
         btn_canclegrouping =findViewById(R.id.cancelgrouping);
+
+
+        Intent intent=getIntent();
+        String one = intent.getStringExtra("namegrouping");
+        editTextnameGrouping.setText(one);
 
         btn_canclegrouping.setOnClickListener(new View.OnClickListener() {
             @Override

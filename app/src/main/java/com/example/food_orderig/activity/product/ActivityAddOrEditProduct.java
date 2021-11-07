@@ -1,6 +1,8 @@
 package com.example.food_orderig.activity.product;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
@@ -32,6 +34,16 @@ public class ActivityAddOrEditProduct extends AppCompatActivity {
         name=findViewById(R.id.add_edit_name_product);
         category = findViewById(R.id.add_edit_category_product);
         price = findViewById(R.id.add_edit_price_product);
+
+        Intent intent=getIntent();
+        String one = intent.getStringExtra("nameproduct");
+        name.setText(one);
+
+        String two = intent.getStringExtra("categoryproducy");
+        category.setText(two);
+
+        String three = intent.getStringExtra("priceproduct");
+        price.setText(three);
 
         textViewcancle=findViewById(R.id.cancel_product);
         btn_save_product = findViewById(R.id.save_product);

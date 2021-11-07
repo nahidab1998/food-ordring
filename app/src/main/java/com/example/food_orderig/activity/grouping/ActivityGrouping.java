@@ -1,5 +1,6 @@
 package com.example.food_orderig.activity.grouping;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -27,6 +28,7 @@ public class ActivityGrouping extends AppCompatActivity {
     AdapterGrouping adapterGrouping;
     RecyclerView recyclerView_grouping;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,6 +44,23 @@ public class ActivityGrouping extends AppCompatActivity {
         recyclerView_grouping = findViewById(R.id.recycle_grouping);
         recyclerView_grouping.setAdapter(adapterGrouping);
 
+        recyclerView_grouping.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
+
+                if (dy >0 ){
+
+                    fab_grouping.hide();
+
+                }else {
+
+                    fab_grouping.show();
+                }
+                super.onScrolled(recyclerView, dx, dy);
+            }
+
+        });
+
         fab_grouping.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -53,6 +72,7 @@ public class ActivityGrouping extends AppCompatActivity {
 
     @Override
     protected void onResume() {
+
         super.onResume();
         if (adapterGrouping != null){
             adapterGrouping.addList(dao_grouping.getList());

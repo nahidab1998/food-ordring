@@ -2,11 +2,13 @@ package com.example.food_orderig.activity.customer;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -45,30 +47,17 @@ public class ActivityAddOrEditCostomer extends AppCompatActivity {
         phone_addcustomer=findViewById(R.id.add_edit_number_customer);
         address_addcustomer=findViewById(R.id.add_edit_address_customer);
 
-//        Bundle bn=getIntent().getExtras();
-//        String nameedittext= bn.getString("nameCustomer");
-//        name_addcustomer.setText(Bundle.(nameedittext));
 
         Intent intent=getIntent();
-        String one = intent.getExtras().getString("key1");
+        String one = intent.getStringExtra("namecustomer");
         name_addcustomer.setText(one);
 
+        String two = intent.getStringExtra("phonecustomer");
+        phone_addcustomer.setText(two);
 
-        delete.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+        String three = intent.getStringExtra("addresscustomer");
+        address_addcustomer.setText(three);
 
-//                db = DatabaseHelper.getInstance(context.getApplicationContext());
-//                dao = db.customerDao();
-//                dao.deleteCustomer(customer);
-//                list.remove();
-////                notifyItemRemoved(pos);
-////                notifyItemRangeChanged(pos,list.size());
-////                notifyDataSetChanged();
-//                Toast.makeText(context, "با موفقیت حذف شد ", Toast.LENGTH_LONG).show();
-
-            }
-        });
 
         db = DatabaseHelper.getInstance(getApplicationContext());
         dao = db.customerDao();
@@ -99,5 +88,6 @@ public class ActivityAddOrEditCostomer extends AppCompatActivity {
             }
         });
     }
+
 
 }

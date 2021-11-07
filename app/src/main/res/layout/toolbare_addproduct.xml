@@ -37,19 +37,6 @@
 
 
             </LinearLayout>
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent">
-
-                <ImageView
-                    android:id="@+id/delete_product"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:src="@drawable/delete"
-                    android:paddingHorizontal="5dp"
-                    />
-
-            </LinearLayout>
 
 
         </LinearLayout>

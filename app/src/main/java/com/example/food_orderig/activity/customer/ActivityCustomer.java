@@ -1,5 +1,6 @@
 package com.example.food_orderig.activity.customer;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -23,7 +24,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ActivityCustomer extends AppCompatActivity implements AdapterCustomer.CustomeListener {
+public class ActivityCustomer extends AppCompatActivity {
 
     FloatingActionButton fab_customer;
     CustomerDao dao_customer;
@@ -32,8 +33,6 @@ public class ActivityCustomer extends AppCompatActivity implements AdapterCustom
     RecyclerView recyclerView_customer;
     LinearLayout call;
     TextView name,phone,address;
-
-
 
 
     @Override
@@ -50,6 +49,7 @@ public class ActivityCustomer extends AppCompatActivity implements AdapterCustom
 
         call = findViewById(R.id.call);
 
+
 //        call.setOnClickListener(new View.OnClickListener() {
 //            @Override
 //            public void onClick(View v) {
@@ -57,9 +57,25 @@ public class ActivityCustomer extends AppCompatActivity implements AdapterCustom
 //            }
 //        });
 
-        adapterCustomer = new AdapterCustomer( new ArrayList<>() , this,this);
+        adapterCustomer = new AdapterCustomer( new ArrayList<>() , this);
         recyclerView_customer = findViewById(R.id.recycle_customer);
         recyclerView_customer.setAdapter(adapterCustomer);
+
+        recyclerView_customer.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
+
+                if (dy >0 ){
+
+                    fab_customer.hide();
+
+                }else {
+
+                    fab_customer.show();
+                }
+                super.onScrolled(recyclerView, dx, dy);
+            }
+        });
 
 //        recyclerView_customer.setLayoutManager(new GridLayoutManager(this,2));
 
@@ -91,19 +107,19 @@ public class ActivityCustomer extends AppCompatActivity implements AdapterCustom
         if (db != null) db.close();
     }
 
-    @Override
-    public void OnClikeCustomer(int position) {
+//    @Override
+//    public void OnClikeCustomer(int position) {
 
-        String one = name.getText().toString();
-        String two = phone.getText().toString();
-        String three = address.getText().toString();
-
-        Intent intent=new Intent(ActivityCustomer.this,ActivityAddOrEditCostomer.class);
-
-        intent.putExtra("key1",one);
-        intent.putExtra("key2",two);
-        intent.putExtra("key3",three);
-
-        startActivity(intent);
-    }
+//        String one = name.getText().toString();
+//        String two = phone.getText().toString();
+//        String three = address.getText().toString();
+//
+//        Intent intent=new Intent(ActivityCustomer.this,ActivityAddOrEditCostomer.class);
+//
+//        intent.putExtra("key1",one);
+//        intent.putExtra("key2",two);
+//        intent.putExtra("key3",three);
+//
+//        startActivity(intent);
+//    }
 }

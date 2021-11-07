@@ -1,5 +1,6 @@
 package com.example.food_orderig.activity.product;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -39,6 +40,23 @@ public class ActivityProduct extends AppCompatActivity implements ProductView {
         dao_product= db.productDao();
         adapterProduct = new AdapterProduct( new ArrayList<>(), this );
         recyclerView_product.setAdapter(adapterProduct);
+
+        recyclerView_product.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
+
+                if (dy >0 ){
+
+                    floatingActionButton_product.hide();
+
+                }else {
+
+                    floatingActionButton_product.show();
+                }
+                super.onScrolled(recyclerView, dx, dy);
+            }
+
+        });
 
         floatingActionButton_product = findViewById(R.id.fab_product);
         floatingActionButton_product.setOnClickListener(new View.OnClickListener() {
