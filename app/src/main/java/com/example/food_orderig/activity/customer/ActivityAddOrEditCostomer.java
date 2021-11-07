@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 import com.example.food_orderig.R;
@@ -29,11 +30,9 @@ public class ActivityAddOrEditCostomer extends AppCompatActivity {
     DatabaseHelper db;
     TextView btn_save_customer;
     String name,phone,address;
-    ImageView delete;
-    Context context;
+    LinearLayout anim_customer;
 
-    List<Customer> list;
-    Customer customer;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,6 +45,10 @@ public class ActivityAddOrEditCostomer extends AppCompatActivity {
         name_addcustomer=findViewById(R.id.add_edit_name_customer);
         phone_addcustomer=findViewById(R.id.add_edit_number_customer);
         address_addcustomer=findViewById(R.id.add_edit_address_customer);
+
+        anim_customer=findViewById(R.id.anim_customer);
+        anim_customer.setTranslationY(-900f);
+        anim_customer.animate().translationYBy(900f).setDuration(1500);
 
 
         Intent intent=getIntent();

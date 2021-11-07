@@ -19,8 +19,9 @@
     </LinearLayout>
 
     <LinearLayout
+        android:id="@+id/anim_customer"
         android:layout_width="match_parent"
-        android:layout_height="600dp"
+        android:layout_height="550dp"
         android:layout_below="@+id/toolbarcustomer"
         android:background="@drawable/background_add"
         android:elevation="6dp"

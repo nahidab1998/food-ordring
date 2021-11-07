@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -29,6 +30,7 @@ public class ActivityAddOrEditGrouping extends AppCompatActivity {
     TextView btn_canclegrouping;
     ImageView imageViewadd_img_grouping;
     String name;
+    LinearLayout anim_grouping;
 
 
     @Override
@@ -39,6 +41,10 @@ public class ActivityAddOrEditGrouping extends AppCompatActivity {
         editTextnameGrouping = findViewById(R.id.add_edit_number_grouping);
         btn_save_grouping=findViewById(R.id.save_grouping);
         btn_canclegrouping =findViewById(R.id.cancelgrouping);
+
+        anim_grouping= findViewById(R.id.anim_grouping);
+        anim_grouping.setTranslationY(-900f);
+        anim_grouping.animate().translationYBy(900f).setDuration(1500);
 
 
         Intent intent=getIntent();

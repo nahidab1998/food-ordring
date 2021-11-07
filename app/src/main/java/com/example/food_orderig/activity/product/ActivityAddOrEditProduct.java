@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 import com.example.food_orderig.R;
@@ -25,6 +26,7 @@ public class ActivityAddOrEditProduct extends AppCompatActivity {
     ProductDao dao;
     TextView btn_save_product;
     String name_product , name_category , price_product;
+    LinearLayout anim_product;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,6 +36,10 @@ public class ActivityAddOrEditProduct extends AppCompatActivity {
         name=findViewById(R.id.add_edit_name_product);
         category = findViewById(R.id.add_edit_category_product);
         price = findViewById(R.id.add_edit_price_product);
+
+        anim_product = findViewById(R.id.anim_product);
+        anim_product.setTranslationY(-900f);
+        anim_product.animate().translationYBy(900f).setDuration(1500);
 
         Intent intent=getIntent();
         String one = intent.getStringExtra("nameproduct");

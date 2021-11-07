@@ -19,6 +19,7 @@
     </LinearLayout>
 
     <LinearLayout
+        android:id="@+id/anim_product"
         android:layout_width="match_parent"
         android:layout_height="550dp"
         android:layout_below="@+id/toolbatproduct"
@@ -101,7 +102,6 @@
                 android:layout_height="50dp"
                 android:layout_gravity="center"
                 android:layout_marginHorizontal="5dp"
-
                 android:background="@drawable/back_edittext"
                 android:drawableRight="@drawable/custom_price_icon"
                 android:drawablePadding="5dp"
@@ -151,7 +151,6 @@
 
 
     </LinearLayout>
-
 
 
 </RelativeLayout>
