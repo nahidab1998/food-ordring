@@ -9,6 +9,46 @@
     tools:context=".activity.product.ActivityProduct">
 
     <include layout="@layout/toolbare_product"/>
+    <androidx.appcompat.widget.Toolbar
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="#c82c15"
+        app:title=""
+        android:id="@+id/toolbardel_pro">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="left">
+
+            <ImageButton
+                android:id="@+id/btn_back"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:background="#c82c15"
+                android:layout_toLeftOf="@id/select"
+                android:layoutDirection="ltr"
+                android:src="@drawable/backbtn" />
+
+            <TextView
+                android:id="@+id/select"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="15dp"
+                android:text="0 item selected"
+                android:textColor="@color/text"
+                android:textSize="16dp"
+
+                />
+
+
+
+
+        </RelativeLayout>
+
+
+    </androidx.appcompat.widget.Toolbar>
 
 
     <androidx.recyclerview.widget.RecyclerView

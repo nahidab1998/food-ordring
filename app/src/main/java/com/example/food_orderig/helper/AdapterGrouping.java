@@ -15,6 +15,7 @@ import com.example.food_orderig.R;
 import com.example.food_orderig.activity.customer.ActivityAddOrEditCostomer;
 import com.example.food_orderig.activity.grouping.ActivityAddOrEditGrouping;
 import com.example.food_orderig.model.Grouping;
+import com.google.gson.Gson;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -74,7 +75,7 @@ public class AdapterGrouping extends RecyclerView.Adapter<AdapterGrouping.Viewho
     private void edit(int pos){
 
         Intent intent = new Intent(context, ActivityAddOrEditGrouping.class);
-        intent.putExtra("namegrouping",list.get(pos).name);
+        intent.putExtra("Grouping",new Gson().toJson(list.get(pos)));
         context.startActivity(intent);
 
     }

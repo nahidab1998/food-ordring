@@ -38,22 +38,13 @@ public class AdapterProduct extends RecyclerView.Adapter<AdapterProduct.Viewhold
 
     List<Product> list;
     Context context;
-    boolean isEnable = false;
-    boolean isSelectAll = false;
-    ArrayList<String> arrayList;
-    TextView tvEmpty;
-    Activity activity;
-    ArrayList<String> selectList = new ArrayList<>();
 
-    MainViewModel mainViewModel;
 
-    public AdapterProduct(List<Product> list , Context context , ArrayList<String> arrayList , TextView tvEmpty , Activity activity){
+    public AdapterProduct(List<Product> list , Context context){
 
         this.list = list;
         this.context = context;
-        this.arrayList = arrayList;
-        this.tvEmpty =tvEmpty;
-        this.activity = activity;
+
     }
 
     @Override
@@ -62,9 +53,6 @@ public class AdapterProduct extends RecyclerView.Adapter<AdapterProduct.Viewhold
         LayoutInflater layoutInflater =LayoutInflater.from(parent. getContext());
         View view = layoutInflater.inflate(R.layout.list_product,parent,false);
         ViewholderProduct viewholderProduct =new ViewholderProduct(view);
-
-        mainViewModel = ViewModelProviders.of((FragmentActivity) activity)
-                .get(MainViewModel.class);
         return viewholderProduct;
     }
 
@@ -75,122 +63,15 @@ public class AdapterProduct extends RecyclerView.Adapter<AdapterProduct.Viewhold
         holder.name_food.setText(product.name);
         holder.category_food.setText(product.category);
         holder.price_food.setText(product.price);
-        holder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
-            @Override
-            public boolean onLongClick(View v) {
-
-                if (!isEnable){
-
-                    ActionMode.Callback callback = new ActionMode.Callback() {
-                        @Override
-                        public boolean onCreateActionMode(ActionMode actionMode, Menu menu) {
-
-                            MenuInflater menuInflater = actionMode.getMenuInflater();
-                            menuInflater.inflate(R.menu.menu,menu);
-
-                            return true;
-                        }
-
-                        @Override
-                        public boolean onPrepareActionMode(ActionMode actionMode, Menu menu) {
-
-                            isEnable = true;
-                            ClickItem(holder);
-
-                            mainViewModel.getText1().observe((LifecycleOwner) activity, new Observer<String>() {
-                                @Override
-                                public void onChanged(String s) {
-                                    actionMode.setTitle(String.format("%s Selected" , s));
-
-                                }
-                            });
-                            return true;
-                        }
-
-                        @Override
-                        public boolean onActionItemClicked(ActionMode actionMode, MenuItem menuItem) {
-                            int id = menuItem.getItemId();
-
-                            switch (id){
-                                case R.id.menu_delete:
-                                    for (String s : selectList){
-                                        arrayList.remove(s);
-                                    }
-                                    if (arrayList.size() == 0 ){
-                                        tvEmpty.setVisibility(View.VISIBLE);
-                                    }
-                                    actionMode.finish();
-                                    break;
-                                case R.id.select_all:
-                                    if (selectList.size()==arrayList.size()){
-                                        isSelectAll = false;
-                                        selectList.clear();
-                                    }else {
-                                        isSelectAll = true;
-                                        selectList.clear();
-                                        selectList.addAll(arrayList);
-                                    }
-                                    mainViewModel.setText1(String.valueOf(selectList.size()));
-                                    notifyDataSetChanged();
-                                    break;
-                            }
-                            return true;
-                        }
-
-                        @Override
-                        public void onDestroyActionMode(ActionMode actionMode) {
-                            isEnable=false;
-                            isSelectAll = false;
-                            selectList.clear();
-                            notifyDataSetChanged();
-                        }
-                    };
-                    ((AppCompatActivity) v.getContext()).startActionMode(callback);
-                }else {
-                    ClickItem(holder);
-                }
-
-                return true;
-            }
-        });
-
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (isEnable){
-
-                    ClickItem(holder);
-
-                }else {
-
-                    edit(position);
-                }
+                edit(position);
             }
         });
-        if (isSelectAll){
-            holder.ivCheckBox.setVisibility(View.VISIBLE);
-            holder.itemView.setBackgroundColor(Color.LTGRAY);
-        }else {
-            holder.ivCheckBox.setVisibility(View.GONE);
-            holder.itemView.setBackgroundColor(Color.TRANSPARENT);
-        }
+
     }
 
-    private void ClickItem(ViewholderProduct holder) {
-
-        String s = arrayList.get(holder.getAdapterPosition());
-        if (holder.ivCheckBox.getVisibility() == View.GONE){
-            holder.ivCheckBox.setVisibility(View.VISIBLE);
-            holder.itemView.setBackgroundColor(Color.LTGRAY);
-            selectList.add(s);
-        }else {
-            holder.ivCheckBox.setVisibility(View.GONE);
-            holder.itemView.setBackgroundColor(Color.TRANSPARENT);
-            selectList.remove(s);
-        }
-        //
-        mainViewModel.setText1(String.valueOf(selectList.size()));
-    }
 
     @Override
     public int getItemCount() {

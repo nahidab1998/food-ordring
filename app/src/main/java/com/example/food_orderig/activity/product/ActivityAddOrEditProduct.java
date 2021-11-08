@@ -41,18 +41,9 @@ public class ActivityAddOrEditProduct extends AppCompatActivity {
         price = findViewById(R.id.add_edit_price_product);
 
         anim_product = findViewById(R.id.anim_product);
-        anim_product.setTranslationY(-900f);
-        anim_product.animate().translationYBy(900f).setDuration(1000);
+        anim_product.setTranslationY(-1500f);
+        anim_product.animate().translationYBy(1500f).setDuration(1500);
 
-//        Intent intent=getIntent();
-//        String one = intent.getStringExtra("nameproduct");
-//        name.setText(one);
-//
-//        String two = intent.getStringExtra("categoryproducy");
-//        category.setText(two);
-//
-//        String three = intent.getStringExtra("priceproduct");
-//        price.setText(three);
 
         if (getIntent().getExtras() != null){
             String getNameProduct = getIntent().getStringExtra("product");

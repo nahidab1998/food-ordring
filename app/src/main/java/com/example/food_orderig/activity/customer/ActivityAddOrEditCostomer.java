@@ -7,6 +7,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -19,6 +20,8 @@ import com.example.food_orderig.R;
 import com.example.food_orderig.database.DatabaseHelper;
 import com.example.food_orderig.database.dao.CustomerDao;
 import com.example.food_orderig.model.Customer;
+import com.example.food_orderig.model.Product;
+import com.google.gson.Gson;
 
 import java.util.List;
 
@@ -31,6 +34,7 @@ public class ActivityAddOrEditCostomer extends AppCompatActivity {
     TextView btn_save_customer;
     String name,phone,address;
     LinearLayout anim_customer;
+    Customer a = null;
 
 
 
@@ -47,22 +51,29 @@ public class ActivityAddOrEditCostomer extends AppCompatActivity {
         address_addcustomer=findViewById(R.id.add_edit_address_customer);
 
         anim_customer=findViewById(R.id.anim_customer);
-        anim_customer.setTranslationY(-900f);
-        anim_customer.animate().translationYBy(900f).setDuration(1000);
+        anim_customer.setTranslationY(-1500f);
+        anim_customer.animate().translationYBy(1500f).setDuration(1500);
 
 
-        Intent intent=getIntent();
-        String zero = intent.getStringExtra("idcustomer");
+//        Intent intent=getIntent();
+//        String zero = intent.getStringExtra("idcustomer");
+//
+//        String one = intent.getStringExtra("namecustomer");
+//        name_addcustomer.setText(one);
+//
+//        String two = intent.getStringExtra("phonecustomer");
+//        phone_addcustomer.setText(two);
+//
+//        String three = intent.getStringExtra("addresscustomer");
+//        address_addcustomer.setText(three);
 
-        String one = intent.getStringExtra("namecustomer");
-        name_addcustomer.setText(one);
-
-        String two = intent.getStringExtra("phonecustomer");
-        phone_addcustomer.setText(two);
-
-        String three = intent.getStringExtra("addresscustomer");
-        address_addcustomer.setText(three);
-
+        if (getIntent().getExtras() != null){
+            String getNameCustomer = getIntent().getStringExtra("Customer");
+            a = new Gson().fromJson(getNameCustomer,Customer.class);
+            name_addcustomer.setText(a.name);
+            phone_addcustomer.setText(a.phone);
+            address_addcustomer.setText(a.address);
+        }
 
         db = DatabaseHelper.getInstance(getApplicationContext());
         dao = db.customerDao();
@@ -75,20 +86,21 @@ public class ActivityAddOrEditCostomer extends AppCompatActivity {
                 phone = phone_addcustomer.getText().toString();
                 address = address_addcustomer.getText().toString();
 
-                if(TextUtils.isEmpty(name) || TextUtils.isEmpty(phone) || TextUtils.isEmpty(address)){
-
-                    Toast.makeText(getApplicationContext(), "فیلد مورد نظر را پرکنید", Toast.LENGTH_SHORT).show();
-
-                }else if(phone.length() != 11) {
-
-                    Toast.makeText(getApplicationContext(), "شماره معتبر نمی باشد", Toast.LENGTH_SHORT).show();
-
+                if (a == null){
+                    if(TextUtils.isEmpty(name) || TextUtils.isEmpty(phone) || TextUtils.isEmpty(address)){
+                        Toast.makeText(getApplicationContext(), "فیلد مورد نظر را پرکنید", Toast.LENGTH_SHORT).show();
+                    }else {
+                        dao.insertCustomer(new Customer (name, phone , address));
+                    }
                 }else {
-
-                    Customer customer = new Customer(name , phone , address);
-                    dao.insertCustomer(customer);
-                    finish();
+                    a.name = name;
+                    a.phone = phone;
+                    a.address = address;
+                    Log.e("qqqq", "onClick: update product=" + a.id );
+                    dao.updateCustomer(a);
                 }
+
+                finish();
             }
         });
 

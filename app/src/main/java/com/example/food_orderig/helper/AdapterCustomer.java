@@ -24,6 +24,7 @@ import com.example.food_orderig.database.DatabaseHelper;
 import com.example.food_orderig.database.dao.CustomerDao;
 import com.example.food_orderig.model.Customer;
 import com.example.food_orderig.model.Grouping;
+import com.google.gson.Gson;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -99,10 +100,7 @@ public class AdapterCustomer extends RecyclerView.Adapter<AdapterCustomer.Viewho
     private void edit(int pos){
 
         Intent intent = new Intent(context, ActivityAddOrEditCostomer.class);
-        intent.putExtra("idcustomer",list.get(pos).id);
-        intent.putExtra("namecustomer",list.get(pos).name);
-        intent.putExtra("phonecustomer",list.get(pos).phone);
-        intent.putExtra("addresscustomer",list.get(pos).address);
+        intent.putExtra("Customer",new Gson().toJson(list.get(pos)));
         context.startActivity(intent);
 
     }

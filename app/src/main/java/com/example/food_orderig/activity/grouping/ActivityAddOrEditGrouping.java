@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -18,8 +19,10 @@ import com.example.food_orderig.R;
 import com.example.food_orderig.database.DatabaseHelper;
 import com.example.food_orderig.database.dao.GroupingDao;
 import com.example.food_orderig.helper.AdapterGrouping;
+import com.example.food_orderig.model.Customer;
 import com.example.food_orderig.model.Grouping;
 import com.example.food_orderig.model.Product;
+import com.google.gson.Gson;
 
 public class ActivityAddOrEditGrouping extends AppCompatActivity {
 
@@ -31,6 +34,7 @@ public class ActivityAddOrEditGrouping extends AppCompatActivity {
     ImageView imageViewadd_img_grouping;
     String name;
     LinearLayout anim_grouping;
+    Grouping b = null;
 
 
     @Override
@@ -43,13 +47,14 @@ public class ActivityAddOrEditGrouping extends AppCompatActivity {
         btn_canclegrouping =findViewById(R.id.cancelgrouping);
 
         anim_grouping= findViewById(R.id.anim_grouping);
-        anim_grouping.setTranslationY(-900f);
-        anim_grouping.animate().translationYBy(900f).setDuration(1000);
+        anim_grouping.setTranslationY(-1500f);
+        anim_grouping.animate().translationYBy(1500f).setDuration(1500);
 
-
-        Intent intent=getIntent();
-        String one = intent.getStringExtra("namegrouping");
-        editTextnameGrouping.setText(one);
+        if (getIntent().getExtras() != null){
+            String getNameGrouping = getIntent().getStringExtra("Grouping");
+            b = new Gson().fromJson(getNameGrouping,Grouping.class);
+            editTextnameGrouping.setText(b.name);
+        }
 
         btn_canclegrouping.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -74,15 +79,20 @@ public class ActivityAddOrEditGrouping extends AppCompatActivity {
             public void onClick(View v) {
 
                 name = editTextnameGrouping.getText().toString();
-                if (TextUtils.isEmpty(name)) {
 
-                    Toast.makeText(ActivityAddOrEditGrouping.this, "فیلد مورد نظر را پر کنید", Toast.LENGTH_SHORT).show();
-
+                if (b == null){
+                    if(TextUtils.isEmpty(name)){
+                        Toast.makeText(getApplicationContext(), "فیلد مورد نظر را پرکنید", Toast.LENGTH_SHORT).show();
+                    }else {
+                        dao.insertGrouping(new Grouping(name));
+                    }
                 }else {
-                    Grouping grouping = new Grouping(name);
-                    dao.insertGrouping(grouping);
-                    finish();
+                    b.name = name;
+                    Log.e("qqqq", "onClick: update product=" + b.id );
+                    dao.updateGrouping(b);
                 }
+
+                finish();
 
             }
         });
