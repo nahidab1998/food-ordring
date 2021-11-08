@@ -8,6 +8,9 @@ import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -34,6 +37,7 @@ public class ActivityAddOrEditGrouping extends AppCompatActivity {
     ImageView imageViewadd_img_grouping;
     String name;
     LinearLayout anim_grouping;
+
     Grouping b = null;
 
 
@@ -49,6 +53,7 @@ public class ActivityAddOrEditGrouping extends AppCompatActivity {
         anim_grouping= findViewById(R.id.anim_grouping);
         anim_grouping.setTranslationY(-1500f);
         anim_grouping.animate().translationYBy(1500f).setDuration(1500);
+
 
         if (getIntent().getExtras() != null){
             String getNameGrouping = getIntent().getStringExtra("Grouping");

@@ -30,6 +30,8 @@ public class ActivityProduct extends AppCompatActivity implements ProductView {
     AdapterProduct adapterProduct;
     Toolbar toolbardel_pro;
     ImageButton btnback;
+    public boolean isActionMode = false;
+
 
 
     @Override

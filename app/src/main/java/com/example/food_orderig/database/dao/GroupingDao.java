@@ -17,6 +17,9 @@ public interface GroupingDao {
     @Query("SELECT * FROM table_grouping")
     List<Grouping> getList();
 
+    @Query("SELECT name FROM table_grouping")
+    List<String> getname();
+
     @Insert
     void insertGrouping(Grouping grouping);
 
