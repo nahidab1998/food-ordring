@@ -9,12 +9,16 @@
     tools:context=".activity.product.ActivityProduct">
 
     <include layout="@layout/toolbare_product"/>
+
+
     <androidx.appcompat.widget.Toolbar
+
+        android:id="@+id/toolbardel_pro"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
         android:background="#c82c15"
-        app:title=""
-        android:id="@+id/toolbardel_pro">
+        android:layoutDirection="ltr"
+        app:title="">
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -25,14 +29,14 @@
                 android:id="@+id/btn_back"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="16dp"
+
+                android:layout_toLeftOf="@id/text_toolbar"
                 android:background="#c82c15"
-                android:layout_toLeftOf="@id/select"
                 android:layoutDirection="ltr"
                 android:src="@drawable/backbtn" />
 
             <TextView
-                android:id="@+id/select"
+                android:id="@+id/text_toolbar"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="15dp"
@@ -42,11 +46,7 @@
 
                 />
 
-
-
-
         </RelativeLayout>
-
 
     </androidx.appcompat.widget.Toolbar>
 
@@ -56,7 +56,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="?attr/actionBarSize"
-
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         tools:listitem="@layout/list_product" />
 

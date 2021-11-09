@@ -8,10 +8,4 @@
         android:icon="@drawable/delete_menu"
         app:showAsAction="always"/>
 
-    <item
-        android:id="@+id/select_all"
-        android:title="انتخاب همه"
-        android:icon="@drawable/select_all_menu"
-        app:showAsAction="always"/>
-
 </menu>

@@ -13,121 +13,147 @@
         android:layout_marginTop="10dp"
         android:elevation="6dp"
         android:outlineSpotShadowColor="@color/red">
-
-
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@drawable/border_ripple"
-            android:orientation="vertical">
+            android:orientation="horizontal">
 
-            <RelativeLayout
+            <LinearLayout
+                android:id="@+id/linearlayout"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:gravity="center">
+
+                <CheckBox
+                    android:id="@+id/checkbox"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    android:layout_marginRight="9dp"
+                    android:gravity="center"/>
+
+
+
+            </LinearLayout>
+
+
+
+
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
+                android:background="@drawable/border_ripple"
                 android:orientation="vertical">
 
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/iv_check_Box"
-                    android:layout_marginTop="12dp"
-                    android:layout_marginStart="12dp"
-                    android:visibility="gone"
-                    android:src="@drawable/check_box"/>
-
-                <ImageView
-                    android:id="@+id/image_product"
+                <RelativeLayout
                     android:layout_width="match_parent"
-                    android:layout_height="180dp"
-                    android:src="@drawable/sandevige"
-                    android:scaleType="fitXY"/>
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
 
-
-            </RelativeLayout>
-
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:paddingHorizontal="15dp"
-                android:layout_marginTop="3dp"
-                android:weightSum="2">
-
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:layout_marginTop="5dp">
-
-                    <TextView
-                        android:id="@+id/name_product"
+                    <CheckBox
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="ساندویج برگر"
-                        android:fontFamily="@font/iran_sans"
-                        android:textSize="18dp"
-                        android:gravity="center"
-                        android:layout_gravity="center"
-                        android:textStyle="bold"/>
+                        android:id="@+id/iv_check_Box"
+                        android:layout_marginTop="12dp"
+                        android:layout_marginStart="12dp"
+                        android:visibility="gone"
+                        android:src="@drawable/check_box"/>
+
+                    <ImageView
+                        android:id="@+id/image_product"
+                        android:layout_width="match_parent"
+                        android:layout_height="180dp"
+                        android:src="@drawable/sandevige"
+                        android:scaleType="fitXY"/>
+
+
+                </RelativeLayout>
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:paddingHorizontal="15dp"
+                    android:layout_marginTop="3dp"
+                    android:weightSum="2">
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:layout_marginTop="5dp">
+
+                        <TextView
+                            android:id="@+id/name_product"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="ساندویج برگر"
+                            android:fontFamily="@font/iran_sans"
+                            android:textSize="18dp"
+                            android:gravity="center"
+                            android:layout_gravity="center"
+                            android:textStyle="bold"/>
+
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginTop="5dp"
+                        android:layout_weight="1"
+                        android:gravity="left">
+
+                        <TextView
+                            android:id="@+id/category_product"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:text="فست فود"
+                            android:textSize="14dp"
+                            android:textColor="@color/red"
+                            android:fontFamily="@font/iran_sans"
+
+                            />
+
+                    </LinearLayout>
 
 
                 </LinearLayout>
 
                 <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_gravity="center_vertical"
-                    android:layout_marginTop="5dp"
-                    android:layout_weight="1"
-                    android:gravity="left">
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:paddingHorizontal="15dp"
+                    android:paddingVertical="5dp">
 
                     <TextView
-                        android:id="@+id/category_product"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
-                        android:text="فست فود"
-                        android:textSize="14dp"
-                        android:textColor="@color/red"
+                        android:layout_marginLeft="10dp"
                         android:fontFamily="@font/iran_sans"
+                        android:text="قیمت :"
+                        android:textSize="16dp"
+                        android:textStyle="bold" />
 
-                        />
+                    <TextView
+                        android:id="@+id/price_product"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:fontFamily="@font/iran_sans"
+                        android:gravity="center"
+                        android:text="54000"
+                        android:textColor="@color/red"
+                        android:textSize="16dp" />
+
 
                 </LinearLayout>
 
 
             </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:paddingHorizontal="15dp"
-                android:paddingVertical="5dp">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_marginLeft="10dp"
-                    android:fontFamily="@font/iran_sans"
-                    android:text="قیمت :"
-                    android:textSize="16dp"
-                    android:textStyle="bold" />
-
-                <TextView
-                    android:id="@+id/price_product"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:fontFamily="@font/iran_sans"
-                    android:gravity="center"
-                    android:text="54000"
-                    android:textColor="@color/red"
-                    android:textSize="16dp" />
-
-
-            </LinearLayout>
-
-
         </LinearLayout>
 
 
