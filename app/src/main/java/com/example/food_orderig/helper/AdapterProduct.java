@@ -1,11 +1,16 @@
 package com.example.food_orderig.helper;
 
 import android.annotation.SuppressLint;
+import android.app.AlertDialog;
+import android.app.Dialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
 import android.view.animation.Animation;
 import android.view.animation.Transformation;
 import android.widget.CheckBox;
@@ -13,6 +18,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.Toolbar;
 
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -22,21 +28,22 @@ import com.example.food_orderig.activity.product.ActivityProduct;
 import com.example.food_orderig.database.DatabaseHelper;
 import com.example.food_orderig.database.dao.ProductDao;
 import com.example.food_orderig.model.Product;
+import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.gson.Gson;
 
 import java.util.List;
+import java.util.Objects;
 
 
 public class AdapterProduct extends RecyclerView.Adapter<AdapterProduct.ViewholderProduct> {
 
     List<Product> list;
     Context context;
-
     DatabaseHelper database;
     ProductDao dao;
     Product product;
-    private ActivityProduct activityProduct;
-    public int poooo;
+    Toolbar toolbardelete;
+    LinearLayout edite_product , delete_product;
 
 
 
@@ -44,7 +51,7 @@ public class AdapterProduct extends RecyclerView.Adapter<AdapterProduct.Viewhold
 
         this.list = list;
         this.context = context;
-        this.activityProduct = (ActivityProduct) context;
+
     }
 
     @Override
@@ -58,58 +65,20 @@ public class AdapterProduct extends RecyclerView.Adapter<AdapterProduct.Viewhold
 
     @Override
     public void onBindViewHolder(AdapterProduct.ViewholderProduct holder, @SuppressLint("RecyclerView") int position) {
-        poooo = position;
+
         product = list . get(position);
         holder.name_food.setText(product.name);
         holder.category_food.setText(product.category);
         holder.price_food.setText(product.price);
-
-        if ( activityProduct.position == position){
-            holder.checkBox.setChecked(true);
-            activityProduct.position = -1;
-        }
-
-//        holder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
-//            @Override
-//            public boolean onLongClick(View v) {
-//
-//                delete(position);
-//                return true;
-//            }
-//        });
-
-        if (activityProduct.isActionMode){
-            Anim anim = new Anim(100 , holder.linearLayout);
-            anim.setDuration(300);
-            holder.linearLayout.setAnimation(anim);
-
-        }else {
-            Anim anim = new Anim(0 , holder.linearLayout);
-            anim.setDuration(300);
-            holder.linearLayout.setAnimation(anim);
-            holder.checkBox.setChecked(false);
-        }
-
-        holder.itemView.setOnLongClickListener(v -> {
-
-            activityProduct.startSelection(position);
-            
-            return true;
-        });
-
-        holder.checkBox.setOnClickListener(v -> {
-            activityProduct.check (v , position);
-        });
-
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                edit(position);
+
+                showBottomSheetDialogclick(position);
+
             }
         });
-
     }
-
 
     @Override
     public int getItemCount() {
@@ -120,10 +89,8 @@ public class AdapterProduct extends RecyclerView.Adapter<AdapterProduct.Viewhold
 
         TextView name_food , category_food , price_food;
         ImageView imageViewfood;
-        CheckBox ivCheckBox;
-        TextView tvEmpty;
-        LinearLayout linearLayout;
-        CheckBox checkBox;
+
+
 
         public ViewholderProduct(View itemView) {
             super(itemView);
@@ -132,59 +99,65 @@ public class AdapterProduct extends RecyclerView.Adapter<AdapterProduct.Viewhold
             category_food=itemView.findViewById(R.id.category_product);
             imageViewfood=itemView.findViewById(R.id.image_product);
             price_food = itemView.findViewById(R.id.price_product);
-            tvEmpty = itemView.findViewById(R.id.tv_empty);
-            linearLayout = itemView.findViewById(R.id.linearlayout);
-            checkBox = itemView.findViewById(R.id.iv_check_Box);
 
         }
     }
 
-    class Anim extends Animation{
+    private void showBottomSheetDialogclick (int pos) {
 
-        private int width,startwidth;
-        private View view;
+        final BottomSheetDialog bottomSheetDialog = new BottomSheetDialog(context);
+        bottomSheetDialog.setContentView(R.layout.btnsheet_deleteedite);
 
-        public Anim(int width , View view){
-            this.width = width;
-            this.view = view;
-            this.startwidth = view.getWidth();
-        }
+        delete_product = bottomSheetDialog.findViewById(R.id.delerebtn);
+        delete_product.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
 
-        @Override
-        protected void applyTransformation(float interpolatedTime, Transformation t) {
-            int newwidth = startwidth + (int) ((width-startwidth) * interpolatedTime);
-            view.getLayoutParams().width = newwidth;
-            view.requestLayout();
+                new AlertDialog.Builder(context)
+                        .setTitle("حذف")
+                        .setMessage("آیا از حذف کامل این محصول اطمینان دارید؟")
+                        .setPositiveButton("تأیید", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
 
-            super.applyTransformation(interpolatedTime, t);
-        }
+                                database = DatabaseHelper.getInstance(context.getApplicationContext());
+                                dao = database.productDao();
+                                dao.deleteProduct(product);
+                                list.remove(pos);
+                                notifyItemRemoved(pos);
+                                notifyItemRangeChanged(pos,list.size());
+                                notifyDataSetChanged();
+//                                Toast.makeText(context, "با موفقیت حذف شد", Toast.LENGTH_LONG).show();
+                            }
+                        })
+                        .setNegativeButton("انصراف", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                dialog.dismiss();
+                                bottomSheetDialog.dismiss();
+                            }
+                        })
+                        .create()
+                        .show();
+                bottomSheetDialog.dismiss();
 
-        @Override
-        public boolean willChangeBounds() {
+            }
+        });
 
-            return true;
-        }
-    }
+        edite_product = bottomSheetDialog.findViewById(R.id.editbtn);
+        edite_product.setOnClickListener(new View.OnClickListener() {
 
-    private void edit(int pos){
+            @Override
+            public void onClick(View v) {
 
-        Intent intent = new Intent(context, ActivityAddOrEditProduct.class);
-        intent.putExtra("product",new Gson().toJson(list.get(pos)));
-        context.startActivity(intent);
+                Intent intent = new Intent(context, ActivityAddOrEditProduct.class);
+                intent.putExtra("product",new Gson().toJson(list.get(pos)));
+                context.startActivity(intent);
+                bottomSheetDialog.dismiss();
+            }
+        });
 
-    }
-
-    public void delete(int pos){
-
-        database = DatabaseHelper.getInstance(context.getApplicationContext());
-        dao = database.productDao();
-        dao.deleteProduct(product);
-        list.remove(pos);
-        notifyItemRemoved(pos);
-        notifyItemRangeChanged(pos,list.size());
-        notifyDataSetChanged();
-        Toast.makeText(context, "با موفقیت حذف شد", Toast.LENGTH_LONG).show();
-
+        bottomSheetDialog.show();
     }
 
     public void addList(List<Product> arrayList){
@@ -192,12 +165,6 @@ public class AdapterProduct extends RecyclerView.Adapter<AdapterProduct.Viewhold
         list.addAll(arrayList);
         notifyDataSetChanged();
     }
-
-
-
-//    public int getPos(){
-//        return list.get(poooo).id;
-//    }
 
 
 }

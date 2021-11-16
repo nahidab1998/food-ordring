@@ -17,6 +17,7 @@
         <entry key="..\:/resume/^ - ^ android development/food-ordring/app/src/main/res/drawable/back_edittext.xml" value="0.2712820512820513" />
         <entry key="..\:/resume/^ - ^ android development/food-ordring/app/src/main/res/drawable/backbtn.xml" value="0.25833333333333336" />
         <entry key="..\:/resume/^ - ^ android development/food-ordring/app/src/main/res/drawable/background_add.xml" value="0.2712820512820513" />
+        <entry key="..\:/resume/^ - ^ android development/food-ordring/app/src/main/res/drawable/background_grouping.xml" value="0.2518518518518518" />
         <entry key="..\:/resume/^ - ^ android development/food-ordring/app/src/main/res/drawable/background_listcustomer.xml" value="0.2755208333333333" />
         <entry key="..\:/resume/^ - ^ android development/food-ordring/app/src/main/res/drawable/border_ripple.xml" value="0.2712820512820513" />
         <entry key="..\:/resume/^ - ^ android development/food-ordring/app/src/main/res/drawable/border_ripple_circle.xml" value="0.25555555555555554" />
@@ -26,8 +27,10 @@
         <entry key="..\:/resume/^ - ^ android development/food-ordring/app/src/main/res/drawable/custom_food_icon.xml" value="0.2712820512820513" />
         <entry key="..\:/resume/^ - ^ android development/food-ordring/app/src/main/res/drawable/custom_group_icon.xml" value="0.2712820512820513" />
         <entry key="..\:/resume/^ - ^ android development/food-ordring/app/src/main/res/drawable/custom_home_icon.xml" value="0.2712820512820513" />
+        <entry key="..\:/resume/^ - ^ android development/food-ordring/app/src/main/res/drawable/custom_person_icon.xml" value="0.2518518518518518" />
         <entry key="..\:/resume/^ - ^ android development/food-ordring/app/src/main/res/drawable/custom_phone_icon.xml" value="0.2712820512820513" />
         <entry key="..\:/resume/^ - ^ android development/food-ordring/app/src/main/res/drawable/delete.xml" value="0.2601851851851852" />
+        <entry key="..\:/resume/^ - ^ android development/food-ordring/app/src/main/res/drawable/delete_menu.xml" value="0.25" />
         <entry key="..\:/resume/^ - ^ android development/food-ordring/app/src/main/res/drawable/food1.xml" value="0.2601851851851852" />
         <entry key="..\:/resume/^ - ^ android development/food-ordring/app/src/main/res/drawable/food2.xml" value="0.2601851851851852" />
         <entry key="..\:/resume/^ - ^ android development/food-ordring/app/src/main/res/drawable/group1.xml" value="0.2601851851851852" />
@@ -38,6 +41,7 @@
         <entry key="..\:/resume/^ - ^ android development/food-ordring/app/src/main/res/drawable/lock_red.xml" value="0.2601851851851852" />
         <entry key="..\:/resume/^ - ^ android development/food-ordring/app/src/main/res/drawable/manfi1.xml" value="0.2601851851851852" />
         <entry key="..\:/resume/^ - ^ android development/food-ordring/app/src/main/res/drawable/number_btn.xml" value="0.2712820512820513" />
+        <entry key="..\:/resume/^ - ^ android development/food-ordring/app/src/main/res/drawable/pen.xml" value="0.25" />
         <entry key="..\:/resume/^ - ^ android development/food-ordring/app/src/main/res/drawable/person1.xml" value="0.2712820512820513" />
         <entry key="..\:/resume/^ - ^ android development/food-ordring/app/src/main/res/drawable/person2.xml" value="0.2601851851851852" />
         <entry key="..\:/resume/^ - ^ android development/food-ordring/app/src/main/res/drawable/person3.xml" value="0.2601851851851852" />
@@ -52,15 +56,17 @@
         <entry key="..\:/resume/^ - ^ android development/food-ordring/app/src/main/res/layout/activity_grouping.xml" value="0.264" />
         <entry key="..\:/resume/^ - ^ android development/food-ordring/app/src/main/res/layout/activity_login.xml" value="0.264" />
         <entry key="..\:/resume/^ - ^ android development/food-ordring/app/src/main/res/layout/activity_main.xml" value="0.264" />
-        <entry key="..\:/resume/^ - ^ android development/food-ordring/app/src/main/res/layout/activity_product.xml" value="0.264" />
+        <entry key="..\:/resume/^ - ^ android development/food-ordring/app/src/main/res/layout/activity_product.xml" value="0.256701030927835" />
         <entry key="..\:/resume/^ - ^ android development/food-ordring/app/src/main/res/layout/activiy_add_or_edit_grouping.xml" value="0.259375" />
         <entry key="..\:/resume/^ - ^ android development/food-ordring/app/src/main/res/layout/add_shop_btnsheet.xml" value="0.259375" />
+        <entry key="..\:/resume/^ - ^ android development/food-ordring/app/src/main/res/layout/btnsheet_DeleteEdite.xml" value="0.259375" />
         <entry key="..\:/resume/^ - ^ android development/food-ordring/app/src/main/res/layout/chart.xml" value="0.259375" />
         <entry key="..\:/resume/^ - ^ android development/food-ordring/app/src/main/res/layout/date_and_sale.xml" value="0.259375" />
         <entry key="..\:/resume/^ - ^ android development/food-ordring/app/src/main/res/layout/delete_layout.xml" value="0.259375" />
         <entry key="..\:/resume/^ - ^ android development/food-ordring/app/src/main/res/layout/layout_triple.xml" value="0.2" />
         <entry key="..\:/resume/^ - ^ android development/food-ordring/app/src/main/res/layout/list_customer.xml" value="0.264" />
         <entry key="..\:/resume/^ - ^ android development/food-ordring/app/src/main/res/layout/list_grouping.xml" value="0.259375" />
+        <entry key="..\:/resume/^ - ^ android development/food-ordring/app/src/main/res/layout/list_item_grouping_product.xml" value="0.3651026392961877" />
         <entry key="..\:/resume/^ - ^ android development/food-ordring/app/src/main/res/layout/list_product.xml" value="0.264" />
         <entry key="..\:/resume/^ - ^ android development/food-ordring/app/src/main/res/layout/search.xml" value="0.259375" />
         <entry key="..\:/resume/^ - ^ android development/food-ordring/app/src/main/res/layout/status.xml" value="0.259375" />
@@ -77,7 +83,7 @@
       </map>
     </option>
   </component>
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_15_PREVIEW" project-jdk-name="15" project-jdk-type="JavaSDK">
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_15" project-jdk-name="15" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />
   </component>
   <component name="ProjectType">

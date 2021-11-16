@@ -33,7 +33,7 @@ public class ActivityAddOrEditProduct extends AppCompatActivity {
     ProductDao dao_product;
     GroupingDao dao_grouping;
     TextView btn_save_product;
-    String name_product , name_category , price_product;
+    String name_product , price_product , categoryProduct;
     LinearLayout anim_product;
     AutoCompleteTextView autoCompleteTextView;
     ArrayAdapter<String> adapter_autocomplete;
@@ -52,14 +52,12 @@ public class ActivityAddOrEditProduct extends AppCompatActivity {
         anim_product.animate().translationYBy(1500f).setDuration(1500);
 
 
-
-
         if (getIntent().getExtras() != null){
             String getNameProduct = getIntent().getStringExtra("product");
             p = new Gson().fromJson(getNameProduct,Product.class);
             name.setText(p.name);
+            autoCompleteTextView.setText(p.category);
             price.setText(p.price);
-//            autoCompleteTextView.setText(p.category);
         }
 
         textViewcancle=findViewById(R.id.cancel_product);
@@ -69,7 +67,6 @@ public class ActivityAddOrEditProduct extends AppCompatActivity {
         db = DatabaseHelper.getInstance(getApplicationContext());
         dao_product = db.productDao();
         dao_grouping = db.groupingDao();
-
         autoCompleteTextView = findViewById(R.id.autoComplete);
         adapter_autocomplete = new ArrayAdapter(getApplicationContext(), android.R.layout.simple_dropdown_item_1line,dao_grouping.getname());
         autoCompleteTextView.setThreshold(1);
@@ -83,6 +80,7 @@ public class ActivityAddOrEditProduct extends AppCompatActivity {
             }
         });
 
+
         textViewcancle.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) { finish();}
@@ -93,19 +91,19 @@ public class ActivityAddOrEditProduct extends AppCompatActivity {
             public void onClick(View v) {
 
                 name_product = name.getText().toString();
-                name_category = autoCompleteTextView.getText().toString();
                 price_product = price.getText().toString();
+                categoryProduct = autoCompleteTextView.getText().toString();
 
                 if (p == null){
-                    if(TextUtils.isEmpty(name_product) || TextUtils.isEmpty(price_product) || TextUtils.isEmpty(name_category)){
+                    if(TextUtils.isEmpty(name_product) || TextUtils.isEmpty(categoryProduct) || TextUtils.isEmpty(price_product)){
                         Toast.makeText(getApplicationContext(), "فیلد مورد نظر را پرکنید", Toast.LENGTH_SHORT).show();
                     }else {
-                        dao_product.insertProduct(new Product(name_product, price_product , name_category));
+                        dao_product.insertProduct(new Product(name_product,categoryProduct, price_product));
                     }
                 }else {
                     p.name = name_product;
+                    p.category = categoryProduct;
                     p.price = price_product;
-                    p.category = name_category;
                     Log.e("qqqq", "onClick: update product=" + p.id );
                     dao_product.updateProduct(p);
                 }
@@ -114,4 +112,5 @@ public class ActivityAddOrEditProduct extends AppCompatActivity {
             }
         });
     }
+
 }

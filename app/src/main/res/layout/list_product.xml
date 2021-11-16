@@ -6,39 +6,29 @@
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
-        android:layout_height="260dp"
+        android:layout_height="265dp"
         android:layout_marginHorizontal="10dp"
         app:cardCornerRadius="10dp"
         android:layout_marginBottom="5dp"
         android:layout_marginTop="10dp"
         android:elevation="6dp"
         android:outlineSpotShadowColor="@color/red">
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="horizontal">
 
-            <LinearLayout
-                android:id="@+id/linearlayout"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_gravity="center"
-                android:gravity="center">
+<!--            <LinearLayout-->
+<!--                android:id="@+id/linearlayout"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="match_parent"-->
+<!--                android:layout_gravity="center"-->
+<!--                android:gravity="center">-->
 
-                <CheckBox
-                    android:id="@+id/checkbox"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_gravity="center"
-                    android:layout_marginRight="9dp"
-                    android:gravity="center"/>
+<!--                <CheckBox-->
+<!--                    android:id="@+id/checkbox"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="match_parent"-->
+<!--                    android:layout_gravity="center"-->
+<!--                    android:gravity="center"/>-->
 
-
-
-            </LinearLayout>
-
-
-
+<!--            </LinearLayout>-->
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -51,14 +41,6 @@
                     android:layout_height="wrap_content"
                     android:orientation="vertical">
 
-                    <CheckBox
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:id="@+id/iv_check_Box"
-                        android:layout_marginTop="12dp"
-                        android:layout_marginStart="12dp"
-                        android:visibility="gone"
-                        android:src="@drawable/check_box"/>
 
                     <ImageView
                         android:id="@+id/image_product"
@@ -69,7 +51,6 @@
 
 
                 </RelativeLayout>
-
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -107,6 +88,12 @@
                         android:layout_weight="1"
                         android:gravity="left">
 
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:src="@drawable/group1"
+                            android:layout_marginLeft="7dp"/>
+
                         <TextView
                             android:id="@+id/category_product"
                             android:layout_width="wrap_content"
@@ -119,7 +106,6 @@
                             />
 
                     </LinearLayout>
-
 
                 </LinearLayout>
 
@@ -136,7 +122,7 @@
                         android:layout_marginLeft="10dp"
                         android:fontFamily="@font/iran_sans"
                         android:text="قیمت :"
-                        android:textSize="16dp"
+                        android:textSize="14dp"
                         android:textStyle="bold" />
 
                     <TextView
@@ -147,15 +133,11 @@
                         android:gravity="center"
                         android:text="54000"
                         android:textColor="@color/red"
-                        android:textSize="16dp" />
-
+                        android:textSize="14dp" />
 
                 </LinearLayout>
 
-
             </LinearLayout>
-        </LinearLayout>
-
 
     </androidx.cardview.widget.CardView>
 

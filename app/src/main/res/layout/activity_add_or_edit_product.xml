@@ -110,6 +110,7 @@
                 android:gravity="right"
                 android:hint="قیمت محصول"
                 android:inputType="number"
+                android:singleLine="true"
                 android:padding="10dp"
                 android:textColor="#5e6d76"
                 android:textSize="14dp" />

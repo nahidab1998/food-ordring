@@ -8,16 +8,18 @@
     android:background="@color/text"
     tools:context=".activity.product.ActivityProduct">
 
-    <include layout="@layout/toolbare_product"/>
+    <include
+        layout="@layout/toolbare_product"/>
 
 
     <androidx.appcompat.widget.Toolbar
 
-        android:id="@+id/toolbardel_pro"
+        android:id="@+id/toolbardelete"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
         android:background="#c82c15"
         android:layoutDirection="ltr"
+        android:visibility="gone"
         app:title="">
 
         <RelativeLayout
@@ -26,49 +28,45 @@
             android:gravity="left">
 
             <ImageButton
-                android:id="@+id/btn_back"
+                android:id="@+id/btnbackdelete"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-
-                android:layout_toLeftOf="@id/text_toolbar"
                 android:background="#c82c15"
                 android:layoutDirection="ltr"
                 android:src="@drawable/backbtn" />
 
-            <TextView
-                android:id="@+id/text_toolbar"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="15dp"
-                android:text="0 item selected"
-                android:textColor="@color/text"
-                android:textSize="16dp"
-
-                />
-
         </RelativeLayout>
 
     </androidx.appcompat.widget.Toolbar>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recycler_grouping_product"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingVertical="10dp"
+        android:layout_marginTop="?attr/actionBarSize"
+        tools:listitem="@layout/list_item_grouping_product"
+         />
+
+    <LinearLayout
+        android:id="@+id/linear_saparat"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_below="@id/recycler_grouping_product"
+        android:background="#dbdbdb"
+        android:orientation="horizontal" />
 
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycle_product"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="?attr/actionBarSize"
+        android:layout_below="@+id/linear_saparat"
+
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         tools:listitem="@layout/list_product" />
 
-    <TextView
-        android:id="@+id/tv_empty"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="آیتمی وجود ندارد"
-        android:textStyle="bold"
-        android:fontFamily="@font/iran_sans"
-        android:textSize="16dp"
-        android:gravity="center"
-        android:visibility="gone"/>
+
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fab_product"
@@ -85,5 +83,6 @@
         android:elevation="25dp"
         android:src="@drawable/add"
         app:maxImageSize="45dp" />
+
 
 </RelativeLayout>

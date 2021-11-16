@@ -51,6 +51,7 @@
                 android:gravity="right"
                 android:hint="نام"
                 android:padding="10dp"
+                android:singleLine="true"
                 android:textColor="#5e6d76"
                 android:textSize="14dp" />
 
@@ -68,6 +69,7 @@
                 android:fontFamily="@font/iran_sans"
                 android:gravity="right"
                 android:hint="شماره تلفن"
+                android:singleLine="true"
                 android:inputType="number"
                 android:padding="10dp"
                 android:textColor="#5e6d76"
