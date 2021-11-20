@@ -56,6 +56,7 @@
                     android:gravity="center"
                     android:paddingLeft="5dp"
                     android:paddingTop="5dp"
+                    android:textColor="@color/matn"
                     android:text="نام و نام خانوادگی :"
                     android:textSize="12dp"
                     android:textStyle="bold" />
@@ -68,6 +69,7 @@
                     android:fontFamily="@font/iran_sans"
                     android:gravity="center"
                     android:text="......."
+                    android:textColor="#737373"
                     android:paddingTop="5dp"
                     android:textSize="12dp"
                     android:textStyle="bold" />
@@ -95,6 +97,7 @@
                     android:fontFamily="@font/iran_sans"
                     android:paddingLeft="5dp"
                     android:text="تلفن :"
+                    android:textColor="@color/matn"
                     android:paddingTop="5dp"
                     android:textSize="12dp"
                     android:textStyle="bold" />
@@ -106,6 +109,7 @@
                     android:fontFamily="@font/iran_sans"
                     android:paddingLeft="5dp"
                     android:text="....."
+                    android:textColor="#737373"
                     android:textSize="12dp"
                     android:textStyle="bold" />
 
@@ -136,8 +140,8 @@
                         android:paddingLeft="5dp"
                         android:paddingTop="5dp"
                         android:text="آدرس :"
+                        android:textColor="@color/matn"
                         android:textSize="12dp"
-
                         android:textStyle="bold" />
 
                     <TextView
@@ -145,28 +149,31 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/iran_sans"
-                        android:paddingHorizontal="5dp"
                         android:text="....."
                         android:textSize="12dp"
+                        android:textColor="#737373"
                         android:paddingBottom="10dp"
                         android:textStyle="bold" />
                 </LinearLayout>
-                <LinearLayout
-                    android:id="@+id/call"
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:background="@drawable/call"
-                    android:layout_gravity="bottom"
-                    android:layout_marginBottom="5dp"
-                    android:gravity="center">
 
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:src="@drawable/phonecall"
-                        android:layout_gravity="center"
-                        />
-                </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/call"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:background="@drawable/call"
+                        android:layout_gravity="bottom"
+                        android:layout_marginBottom="5dp"
+                        android:gravity="center">
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:src="@drawable/phonecall"
+                            android:layout_gravity="center"
+                            />
+                    </LinearLayout>
+
 
 
             </LinearLayout>

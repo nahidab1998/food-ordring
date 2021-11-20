@@ -46,6 +46,7 @@ public class ActivityAddOrEditProduct extends AppCompatActivity {
 
         name=findViewById(R.id.add_edit_name_product);
         price = findViewById(R.id.add_edit_price_product);
+        autoCompleteTextView = findViewById(R.id.autoComplete);
 
         anim_product = findViewById(R.id.anim_product);
         anim_product.setTranslationY(-1500f);
@@ -59,6 +60,7 @@ public class ActivityAddOrEditProduct extends AppCompatActivity {
             autoCompleteTextView.setText(p.category);
             price.setText(p.price);
         }
+
 
         textViewcancle=findViewById(R.id.cancel_product);
         btn_save_product = findViewById(R.id.save_product);
@@ -91,7 +93,7 @@ public class ActivityAddOrEditProduct extends AppCompatActivity {
             public void onClick(View v) {
 
                 name_product = name.getText().toString();
-                price_product = price.getText().toString();
+                price_product = converText(price.getText().toString());
                 categoryProduct = autoCompleteTextView.getText().toString();
 
                 if (p == null){
@@ -111,6 +113,13 @@ public class ActivityAddOrEditProduct extends AppCompatActivity {
                 finish();
             }
         });
+    }
+    private String converText(String text){
+        StringBuilder stringBuilder = new StringBuilder(text);
+        for (int i = stringBuilder.length() - 3 ; i >0 ; i -= 3){
+            stringBuilder.insert( i , ",");
+        }
+        return stringBuilder.toString();
     }
 
 }

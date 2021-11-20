@@ -46,8 +46,8 @@
                         android:id="@+id/image_product"
                         android:layout_width="match_parent"
                         android:layout_height="180dp"
-                        android:src="@drawable/sandevige"
-                        android:scaleType="fitXY"/>
+                        android:scaleType="fitXY"
+                        android:src="@drawable/sandevige" />
 
 
                 </RelativeLayout>
@@ -73,6 +73,7 @@
                             android:text="ساندویج برگر"
                             android:fontFamily="@font/iran_sans"
                             android:textSize="18dp"
+                            android:textColor="@color/matn"
                             android:gravity="center"
                             android:layout_gravity="center"
                             android:textStyle="bold"/>
@@ -119,9 +120,10 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
-                        android:layout_marginLeft="10dp"
+                        android:layout_marginLeft="5dp"
                         android:fontFamily="@font/iran_sans"
                         android:text="قیمت :"
+                        android:textColor="#737373"
                         android:textSize="14dp"
                         android:textStyle="bold" />
 
@@ -134,6 +136,16 @@
                         android:text="54000"
                         android:textColor="@color/red"
                         android:textSize="14dp" />
+                    <TextView
+
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:fontFamily="@font/iran_sans"
+                        android:gravity="center"
+                        android:text="تومان"
+                        android:textColor="#737373"
+                        android:layout_marginRight="5dp"
+                        android:textSize="10dp" />
 
                 </LinearLayout>
 

@@ -2,38 +2,24 @@ package com.example.food_orderig.helper;
 
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
-import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
 import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.Window;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import androidx.recyclerview.widget.RecyclerView;
-
 import com.example.food_orderig.R;
 import com.example.food_orderig.activity.customer.ActivityAddOrEditCostomer;
-import com.example.food_orderig.activity.customer.ActivityCustomer;
-import com.example.food_orderig.activity.product.ActivityAddOrEditProduct;
 import com.example.food_orderig.database.DatabaseHelper;
 import com.example.food_orderig.database.dao.CustomerDao;
-import com.example.food_orderig.database.dao.ProductDao;
 import com.example.food_orderig.model.Customer;
-import com.example.food_orderig.model.Grouping;
-import com.example.food_orderig.model.Product;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.gson.Gson;
-
-import java.util.ArrayList;
 import java.util.List;
 
 public class AdapterCustomer extends RecyclerView.Adapter<AdapterCustomer.ViewholderCustomer> {
@@ -74,19 +60,24 @@ public class AdapterCustomer extends RecyclerView.Adapter<AdapterCustomer.Viewho
             @Override
             public void onClick(View v) {
 
-                Toast.makeText(context, "call", Toast.LENGTH_SHORT).show();
+//                Toast.makeText(context, "call", Toast.LENGTH_SHORT).show();
+                    String number_for_phone = customer.phone;
+                    Intent call = new Intent(Intent.ACTION_VIEW);
+                    call.setData(Uri.parse("tel:" + number_for_phone));
+                    context.startActivity(call);
+
+
             }
         });
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 showBottomSheetDialogclick(position);
-//            edit(position);
             }
         });
     }
+
 
     @Override
     public int getItemCount() {
@@ -97,8 +88,6 @@ public class AdapterCustomer extends RecyclerView.Adapter<AdapterCustomer.Viewho
 
         TextView name_customer,phone_customer ,address_customer;
         LinearLayout call;
-
-
 
         public ViewholderCustomer(View itemView) {
             super(itemView);
@@ -157,6 +146,7 @@ public class AdapterCustomer extends RecyclerView.Adapter<AdapterCustomer.Viewho
         edite_customer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 Intent intent = new Intent(context, ActivityAddOrEditCostomer.class);
                 intent.putExtra("Customer",new Gson().toJson(list.get(pos)));
                 context.startActivity(intent);

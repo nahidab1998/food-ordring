@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.food_orderig" >
+    package="com.example.food_orderig">
 
-    <uses-permission android:name="android.permision.CALL_PHONE"></uses-permission>
+    <uses-permission android:name="android.permission.CALL_PHONE" />
 
     <application
         android:allowBackup="true"
@@ -10,19 +10,22 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_icon"
         android:supportsRtl="true"
-        android:theme="@style/Theme.Food_orderig" >
+        android:theme="@style/Theme.Food_orderig">
+        <activity
+            android:name=".activity.ordering.ActivityOrdering"
+            android:exported="true" />
         <activity
             android:name=".activity.grouping.ActivityAddOrEditGrouping"
             android:exported="true"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait" />
         <activity
             android:name=".activity.grouping.ActivityGrouping"
             android:exported="true"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait" />
         <activity
             android:name=".activity.product.ActivityAddOrEditProduct"
             android:exported="true"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait" />
         <activity
             android:name=".activity.customer.ActivityAddOrEditCostomer"
             android:exported="true"
@@ -42,14 +45,12 @@
         <activity
             android:name=".activity.login.ActivityLogin"
             android:exported="true"
-            android:screenOrientation="portrait" >
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
-
             </intent-filter>
-
         </activity>
     </application>
 

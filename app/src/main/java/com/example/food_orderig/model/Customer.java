@@ -18,7 +18,6 @@ public class Customer {
     @ColumnInfo(name = "address")
     public String address;
 
-
     public Customer(int id, String name , String phone , String address) {
         this.id = id;
         this.name = name;
@@ -27,7 +26,7 @@ public class Customer {
     }
 
     @Ignore
-    public Customer(String name , String phone , String address ) {
+    public Customer(String name , String phone , String address) {
         this.name = name;
         this.phone = phone;
         this.address = address;

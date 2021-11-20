@@ -91,6 +91,7 @@ public class ActivityAddOrEditCostomer extends AppCompatActivity {
                         Toast.makeText(getApplicationContext(), "فیلد مورد نظر را پرکنید", Toast.LENGTH_SHORT).show();
                     }else {
                         dao.insertCustomer(new Customer (name, phone , address));
+                        finish();
                     }
                 }else {
                     a.name = name;
@@ -98,9 +99,10 @@ public class ActivityAddOrEditCostomer extends AppCompatActivity {
                     a.address = address;
                     Log.e("qqqq", "onClick: update product=" + a.id );
                     dao.updateCustomer(a);
+                    finish();
                 }
 
-                finish();
+
             }
         });
 

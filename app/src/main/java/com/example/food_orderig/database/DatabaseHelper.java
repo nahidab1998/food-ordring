@@ -5,8 +5,6 @@ import android.content.Context;
 import androidx.room.Database;
 import androidx.room.Room;
 import androidx.room.RoomDatabase;
-
-//import com.example.food_orderig.database.dao.CustomerDao;
 import com.example.food_orderig.database.dao.CustomerDao;
 import com.example.food_orderig.database.dao.GroupingDao;
 import com.example.food_orderig.database.dao.ProductDao;

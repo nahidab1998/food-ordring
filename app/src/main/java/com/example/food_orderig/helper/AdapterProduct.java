@@ -103,6 +103,14 @@ public class AdapterProduct extends RecyclerView.Adapter<AdapterProduct.Viewhold
         }
     }
 
+//    private String converText(String text){
+//        StringBuilder stringBuilder = new StringBuilder(text);
+//        for (int i = stringBuilder.length() - 3 ; i >0 ; i -= 3){
+//            stringBuilder.insert( i , ",");
+//        }
+//        return stringBuilder.toString();
+//    }
+
     private void showBottomSheetDialogclick (int pos) {
 
         final BottomSheetDialog bottomSheetDialog = new BottomSheetDialog(context);
