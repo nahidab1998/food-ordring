@@ -1,9 +1,34 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/text"
     tools:context=".activity.ordering.ActivityOrdering">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <include layout="@layout/toolbare_ordering"/>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recycler_ordering"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="?attr/actionBarSize"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        tools:listitem="@layout/item_product_ordering" />
+
+<!--    <TextView-->
+<!--        android:id="@+id/next_shoping"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="56dp"-->
+<!--        android:layout_below="@id/recycler_ordering"-->
+<!--        android:background="@drawable/btn_takmil"-->
+<!--        android:fontFamily="@font/iran_sans"-->
+<!--        android:gravity="center"-->
+<!--        android:text="ادامه"-->
+<!--        android:textColor="@color/text"-->
+<!--        android:textSize="16sp"-->
+<!--        android:textStyle="bold" />-->
+
+
+</RelativeLayout>

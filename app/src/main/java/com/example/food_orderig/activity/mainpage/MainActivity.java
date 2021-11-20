@@ -14,6 +14,7 @@ import android.widget.Toast;
 import com.example.food_orderig.R;
 import com.example.food_orderig.activity.customer.ActivityCustomer;
 import com.example.food_orderig.activity.grouping.ActivityGrouping;
+import com.example.food_orderig.activity.ordering.ActivityOrdering;
 import com.example.food_orderig.activity.product.ActivityProduct;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.jjoe64.graphview.GraphView;
@@ -118,23 +119,25 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                showBottomSheetDialog();
+//                showBottomSheetDialog();
+                Intent a= new Intent(MainActivity.this, ActivityOrdering.class);
+                startActivity(a);
 
             }
         });
 
     }
-    private void showBottomSheetDialog () {
-
-        final BottomSheetDialog bottomSheetDialog = new BottomSheetDialog(this);
-        bottomSheetDialog.setContentView(R.layout.add_shop_btnsheet);
-
-         copy = bottomSheetDialog.findViewById(R.id.copyLinearLayout);
-         share = bottomSheetDialog.findViewById(R.id.shareLinearLayout);
-         upload = bottomSheetDialog.findViewById(R.id.uploadLinearLaySout);
-         download = bottomSheetDialog.findViewById(R.id.download);
-         delete = bottomSheetDialog.findViewById(R.id.delete);
-
-        bottomSheetDialog.show();
-    }
+//    private void showBottomSheetDialog () {
+//
+//        final BottomSheetDialog bottomSheetDialog = new BottomSheetDialog(this);
+//        bottomSheetDialog.setContentView(R.layout.add_shop_btnsheet);
+//
+//         copy = bottomSheetDialog.findViewById(R.id.copyLinearLayout);
+//         share = bottomSheetDialog.findViewById(R.id.shareLinearLayout);
+//         upload = bottomSheetDialog.findViewById(R.id.uploadLinearLaySout);
+//         download = bottomSheetDialog.findViewById(R.id.download);
+//         delete = bottomSheetDialog.findViewById(R.id.delete);
+//
+//        bottomSheetDialog.show();
+//    }
 }

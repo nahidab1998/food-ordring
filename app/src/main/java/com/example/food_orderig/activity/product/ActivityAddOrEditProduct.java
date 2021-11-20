@@ -21,6 +21,7 @@ import com.example.food_orderig.activity.grouping.ActivityAddOrEditGrouping;
 import com.example.food_orderig.database.DatabaseHelper;
 import com.example.food_orderig.database.dao.GroupingDao;
 import com.example.food_orderig.database.dao.ProductDao;
+import com.example.food_orderig.design.NumberTextWatcherForThousand;
 import com.example.food_orderig.model.Product;
 import com.google.gson.Gson;
 
@@ -46,6 +47,7 @@ public class ActivityAddOrEditProduct extends AppCompatActivity {
 
         name=findViewById(R.id.add_edit_name_product);
         price = findViewById(R.id.add_edit_price_product);
+        price.addTextChangedListener(new NumberTextWatcherForThousand(price));
         autoCompleteTextView = findViewById(R.id.autoComplete);
 
         anim_product = findViewById(R.id.anim_product);
@@ -93,7 +95,7 @@ public class ActivityAddOrEditProduct extends AppCompatActivity {
             public void onClick(View v) {
 
                 name_product = name.getText().toString();
-                price_product = converText(price.getText().toString());
+                price_product = price.getText().toString();
                 categoryProduct = autoCompleteTextView.getText().toString();
 
                 if (p == null){
@@ -114,12 +116,12 @@ public class ActivityAddOrEditProduct extends AppCompatActivity {
             }
         });
     }
-    private String converText(String text){
-        StringBuilder stringBuilder = new StringBuilder(text);
-        for (int i = stringBuilder.length() - 3 ; i >0 ; i -= 3){
-            stringBuilder.insert( i , ",");
-        }
-        return stringBuilder.toString();
-    }
+//    private String converText(String text){
+//        StringBuilder stringBuilder = new StringBuilder(text);
+//        for (int i = stringBuilder.length() - 3 ; i >0 ; i -= 3){
+//            stringBuilder.insert( i , ",");
+//        }
+//        return stringBuilder.toString();
+//    }
 
 }

@@ -88,6 +88,7 @@
                 android:drawableRight="@drawable/custom_group_icon"
                 android:drawablePadding="5dp"
                 android:elevation="6dp"
+                android:textColor="#5e6d76"
                 android:layout_marginHorizontal="5dp"
                 android:fontFamily="@font/iran_sans"
                 android:gravity="right"
