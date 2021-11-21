@@ -39,5 +39,4 @@ public class ActivityOrdering extends AppCompatActivity {
         recyclerView_pruduct.setAdapter(adapterOrdering);
     }
 
-
 }

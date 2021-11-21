@@ -85,6 +85,8 @@ public class AdapterProduct extends RecyclerView.Adapter<AdapterProduct.Viewhold
         return list.size();
     }
 
+
+
     public class ViewholderProduct extends RecyclerView.ViewHolder {
 
         TextView name_food , category_food , price_food;

@@ -4,8 +4,10 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.food_orderig.R;
@@ -44,6 +46,21 @@ public class AdapterOrdering extends RecyclerView.Adapter<AdapterOrdering.ViewHo
         product = list.get(position);
         holder.txtname.setText(product.name);
         holder.txtprise.setText(product.price);
+        holder.add.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+
+            }
+        });
+
+        holder.remove.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+
+            }
+        });
 
     }
 
@@ -56,11 +73,15 @@ public class AdapterOrdering extends RecyclerView.Adapter<AdapterOrdering.ViewHo
 
         TextView txtname ;
         TextView txtprise;
+        CardView add , remove ;
+
 
         public ViewHolder(View itemView) {
             super(itemView);
             txtname =itemView.findViewById(R.id.name_product_ordering);
             txtprise = itemView.findViewById(R.id.price_product_ordering);
+            add =itemView.findViewById(R.id.add);
+            remove = itemView.findViewById(R.id.remove);
         }
     }
 }

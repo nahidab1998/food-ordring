@@ -61,7 +61,7 @@ public class AdapterCustomer extends RecyclerView.Adapter<AdapterCustomer.Viewho
             public void onClick(View v) {
 
 //                Toast.makeText(context, "call", Toast.LENGTH_SHORT).show();
-                    String number_for_phone = customer.phone;
+                    String number_for_phone = list.get(position).phone;
                     Intent call = new Intent(Intent.ACTION_VIEW);
                     call.setData(Uri.parse("tel:" + number_for_phone));
                     context.startActivity(call);

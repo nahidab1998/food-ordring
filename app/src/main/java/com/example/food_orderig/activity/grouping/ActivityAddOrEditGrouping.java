@@ -90,14 +90,16 @@ public class ActivityAddOrEditGrouping extends AppCompatActivity {
                         Toast.makeText(getApplicationContext(), "فیلد مورد نظر را پرکنید", Toast.LENGTH_SHORT).show();
                     }else {
                         dao.insertGrouping(new Grouping(name));
+                        finish();
                     }
                 }else {
                     b.name = name;
                     Log.e("qqqq", "onClick: update product=" + b.id );
                     dao.updateGrouping(b);
+                    finish();
                 }
 
-                finish();
+
 
             }
         });

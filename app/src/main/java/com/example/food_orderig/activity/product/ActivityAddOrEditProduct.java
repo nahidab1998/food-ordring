@@ -103,6 +103,7 @@ public class ActivityAddOrEditProduct extends AppCompatActivity {
                         Toast.makeText(getApplicationContext(), "فیلد مورد نظر را پرکنید", Toast.LENGTH_SHORT).show();
                     }else {
                         dao_product.insertProduct(new Product(name_product,categoryProduct, price_product));
+                        finish();
                     }
                 }else {
                     p.name = name_product;
@@ -110,9 +111,10 @@ public class ActivityAddOrEditProduct extends AppCompatActivity {
                     p.price = price_product;
                     Log.e("qqqq", "onClick: update product=" + p.id );
                     dao_product.updateProduct(p);
+                    finish();
                 }
 
-                finish();
+
             }
         });
     }
