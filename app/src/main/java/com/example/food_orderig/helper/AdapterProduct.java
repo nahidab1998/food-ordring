@@ -7,6 +7,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
+import android.os.Build;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,6 +21,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.Toolbar;
 
+import androidx.annotation.RequiresApi;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.food_orderig.R;
@@ -39,6 +41,7 @@ public class AdapterProduct extends RecyclerView.Adapter<AdapterProduct.Viewhold
 
     List<Product> list;
     Context context;
+    Listener listener;
     DatabaseHelper database;
     ProductDao dao;
     Product product;
@@ -47,11 +50,16 @@ public class AdapterProduct extends RecyclerView.Adapter<AdapterProduct.Viewhold
 
 
 
-    public AdapterProduct(List<Product> list , Context context){
+    public AdapterProduct(List<Product> list , Context context ,  Listener listener){
 
         this.list = list;
         this.context = context;
+        this.listener = listener;
 
+    }
+
+    public interface Listener{
+        void onClick(Product product);
     }
 
     @Override
@@ -63,6 +71,7 @@ public class AdapterProduct extends RecyclerView.Adapter<AdapterProduct.Viewhold
         return viewholderProduct;
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
     public void onBindViewHolder(AdapterProduct.ViewholderProduct holder, @SuppressLint("RecyclerView") int position) {
 
@@ -74,7 +83,8 @@ public class AdapterProduct extends RecyclerView.Adapter<AdapterProduct.Viewhold
             @Override
             public void onClick(View v) {
 
-                showBottomSheetDialogclick(position);
+//                showBottomSheetDialogclick(position);
+                listener.onClick(product);
 
             }
         });
@@ -118,6 +128,7 @@ public class AdapterProduct extends RecyclerView.Adapter<AdapterProduct.Viewhold
         final BottomSheetDialog bottomSheetDialog = new BottomSheetDialog(context);
         bottomSheetDialog.setContentView(R.layout.btnsheet_deleteedite);
 
+        product = list . get(pos);
         delete_product = bottomSheetDialog.findViewById(R.id.delerebtn);
         delete_product.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -137,7 +148,8 @@ public class AdapterProduct extends RecyclerView.Adapter<AdapterProduct.Viewhold
                                 notifyItemRemoved(pos);
                                 notifyItemRangeChanged(pos,list.size());
                                 notifyDataSetChanged();
-//                                Toast.makeText(context, "با موفقیت حذف شد", Toast.LENGTH_LONG).show();
+                                Toast.makeText(context, product.name + " با موفقیت حذف شد ", Toast.LENGTH_LONG).show();
+
                             }
                         })
                         .setNegativeButton("انصراف", new DialogInterface.OnClickListener() {

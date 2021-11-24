@@ -11,6 +11,7 @@ import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.food_orderig.R;
+import com.example.food_orderig.activity.ordering.ActivityOrdering;
 import com.example.food_orderig.database.DatabaseHelper;
 import com.example.food_orderig.database.dao.ProductDao;
 import com.example.food_orderig.model.Product;
@@ -24,10 +25,12 @@ public class AdapterOrdering extends RecyclerView.Adapter<AdapterOrdering.ViewHo
     DatabaseHelper database;
     ProductDao dao;
     Product product;
+    private int numberorder = 1  ;
 
     public AdapterOrdering(List<Product> list , Context context){
         this.list = list;
         this.context = context;
+
 
     }
 
@@ -46,10 +49,13 @@ public class AdapterOrdering extends RecyclerView.Adapter<AdapterOrdering.ViewHo
         product = list.get(position);
         holder.txtname.setText(product.name);
         holder.txtprise.setText(product.price);
+        holder.txtcategory.setText(product.category);
         holder.add.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
+                 numberorder = numberorder + 1;
+                 holder.title.setText(String.valueOf(numberorder));
 
             }
         });
@@ -57,8 +63,11 @@ public class AdapterOrdering extends RecyclerView.Adapter<AdapterOrdering.ViewHo
         holder.remove.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if (numberorder > 1){
+                    numberorder = numberorder - 1;
+                }
 
-
+                holder.title.setText(String.valueOf(numberorder));
             }
         });
 
@@ -73,6 +82,8 @@ public class AdapterOrdering extends RecyclerView.Adapter<AdapterOrdering.ViewHo
 
         TextView txtname ;
         TextView txtprise;
+        TextView txtcategory;
+        TextView title;
         CardView add , remove ;
 
 
@@ -80,8 +91,10 @@ public class AdapterOrdering extends RecyclerView.Adapter<AdapterOrdering.ViewHo
             super(itemView);
             txtname =itemView.findViewById(R.id.name_product_ordering);
             txtprise = itemView.findViewById(R.id.price_product_ordering);
+            txtcategory = itemView.findViewById(R.id.category_ordering);
             add =itemView.findViewById(R.id.add);
             remove = itemView.findViewById(R.id.remove);
+            title =itemView.findViewById(R.id.title_pro);
         }
     }
 }

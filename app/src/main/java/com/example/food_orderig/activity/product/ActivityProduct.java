@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.Activity;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -31,6 +32,7 @@ import com.example.food_orderig.helper.AdapterGroupingProduct;
 import com.example.food_orderig.helper.AdapterProduct;
 import com.example.food_orderig.model.Product;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.gson.Gson;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -64,13 +66,24 @@ public class ActivityProduct extends AppCompatActivity implements ProductView {
         presenter = new ProductModel(this);
         presenter.getData();
 
+
+
         db= DatabaseHelper.getInstance(getApplicationContext());
         dao_product= db.productDao();
         dao_grouping = db.groupingDao();
 
         set_recycle_grouping_product();
 
-        adapterProduct = new AdapterProduct( new ArrayList<>(), this);
+        adapterProduct = new AdapterProduct(new ArrayList<>(), this, new AdapterProduct.Listener() {
+            @Override
+            public void onClick(Product product) {
+                Intent returnIntent = new Intent();
+
+                returnIntent.putExtra("json_product",new Gson().toJson(product));
+                setResult(Activity.RESULT_OK,returnIntent);
+                finish();
+            }
+        });
 
         recyclerView_product.setAdapter(adapterProduct);
 //        recyclerView_product.setLayoutManager(new GridLayoutManager(this,2));

@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -93,6 +94,8 @@ public class AdapterGrouping extends RecyclerView.Adapter<AdapterGrouping.Viewho
         final BottomSheetDialog bottomSheetDialog = new BottomSheetDialog(context);
         bottomSheetDialog.setContentView(R.layout.btnsheet_deleteedite);
 
+        grouping = list . get(pos);
+
         delete_grouping = bottomSheetDialog.findViewById(R.id.delerebtn);
         delete_grouping.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -112,7 +115,7 @@ public class AdapterGrouping extends RecyclerView.Adapter<AdapterGrouping.Viewho
                                 notifyItemRemoved(pos);
                                 notifyItemRangeChanged(pos,list.size());
                                 notifyDataSetChanged();
-//                                Toast.makeText(context, "با موفقیت حذف شد", Toast.LENGTH_LONG).show();
+                                Toast.makeText(context, grouping.name +" با موفقیت حذف شد ", Toast.LENGTH_LONG).show();
                             }
                         })
                         .setNegativeButton("انصراف", new DialogInterface.OnClickListener() {

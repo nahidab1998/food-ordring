@@ -26,6 +26,7 @@ public class AdapterCustomer extends RecyclerView.Adapter<AdapterCustomer.Viewho
 
     List<Customer> list;
     Context context;
+    Listener listener;
     LinearLayout edite_customer , delete_customer;
     CustomerDao dao_customer;
     Customer customer;
@@ -33,10 +34,14 @@ public class AdapterCustomer extends RecyclerView.Adapter<AdapterCustomer.Viewho
 
 
 
-    public AdapterCustomer(List<Customer> list , Context context ){
+    public AdapterCustomer(List<Customer> list , Context context , Listener listener){
         this.list = list;
         this.context = context;
+        this.listener = listener;
+    }
 
+    public interface Listener{
+        void onClickListener(Customer customer);
     }
 
     @Override
@@ -73,11 +78,12 @@ public class AdapterCustomer extends RecyclerView.Adapter<AdapterCustomer.Viewho
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                showBottomSheetDialogclick(position);
+
+                listener.onClickListener(customer);
+//                showBottomSheetDialogclick(position);
             }
         });
     }
-
 
     @Override
     public int getItemCount() {
@@ -106,6 +112,7 @@ public class AdapterCustomer extends RecyclerView.Adapter<AdapterCustomer.Viewho
         final BottomSheetDialog bottomSheetDialog = new BottomSheetDialog(context);
         bottomSheetDialog.setContentView(R.layout.btnsheet_deleteedite);
 
+        customer = list.get(pos);
         delete_customer = bottomSheetDialog.findViewById(R.id.delerebtn);
 
         delete_customer.setOnClickListener(new View.OnClickListener() {
@@ -127,6 +134,8 @@ public class AdapterCustomer extends RecyclerView.Adapter<AdapterCustomer.Viewho
                                 notifyItemRangeChanged(pos,list.size());
                                 notifyDataSetChanged();
                                 bottomSheetDialog.dismiss();
+                                Toast.makeText(context, customer.name +" با موفقیت حذف شد ", Toast.LENGTH_LONG).show();
+//                                Toast.makeText(context, list.get(pos).name+" با موفقیت حذف شد ", Toast.LENGTH_LONG).show();
                             }
                         })
                         .setNegativeButton("انصراف", new DialogInterface.OnClickListener() {

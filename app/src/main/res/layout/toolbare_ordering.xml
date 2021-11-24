@@ -11,23 +11,32 @@
         android:padding="6dp"
         app:cardBackgroundColor="@color/red">
 
-        <LinearLayout
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_gravity="center_vertical"
             android:gravity="center_vertical"
-            android:paddingHorizontal="10dp">
+            android:paddingStart="10dp">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="سفارش غذا"
-            android:textColor="@color/text"
-            android:fontFamily="@font/iran_sans"
-            android:textSize="16dp"
-            android:layout_gravity="center_vertical"
-            android:gravity="center_vertical"/>
-        </LinearLayout>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_gravity="center_vertical"
+                android:fontFamily="@font/iran_sans"
+                android:gravity="center_vertical"
+                android:text="سفارش غذا"
+                android:textColor="@color/text"
+                android:textSize="16dp" />
+
+            <ImageView
+                android:id="@+id/delete_add_order"
+                android:layout_width="55dp"
+                android:layout_height="55dp"
+                android:layout_alignParentEnd="true"
+                android:paddingVertical="13dp"
+                android:paddingStart="13dp"
+                android:src="@drawable/deletee" />
+        </RelativeLayout>
 
     </androidx.cardview.widget.CardView>
 

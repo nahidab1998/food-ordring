@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
@@ -20,6 +21,7 @@ import com.example.food_orderig.database.dao.CustomerDao;
 import com.example.food_orderig.helper.AdapterCustomer;
 import com.example.food_orderig.model.Customer;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.gson.Gson;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -33,6 +35,7 @@ public class ActivityCustomer extends AppCompatActivity {
     RecyclerView recyclerView_customer;
     LinearLayout call;
     TextView name,phone,address;
+    private boolean for_order = false;
 
 
     @Override
@@ -49,15 +52,21 @@ public class ActivityCustomer extends AppCompatActivity {
 
         call = findViewById(R.id.call);
 
+//        for_order = getIntent().getExtras().getBoolean("for_order",false);
 
-//        call.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                dialContactPhone("123123123");
-//            }
-//        });
 
-        adapterCustomer = new AdapterCustomer( new ArrayList<>() , this);
+        adapterCustomer = new AdapterCustomer(new ArrayList<>(), this , new AdapterCustomer.Listener() {
+            @Override
+            public void onClickListener(Customer customer) {
+//                if (for_order){
+                    Intent returnIntent = new Intent();
+                    returnIntent.putExtra("json_customer",new Gson().toJson(customer));
+                    setResult(Activity.RESULT_OK,returnIntent);
+                    finish();
+//                }
+            }
+        });
+
         recyclerView_customer = findViewById(R.id.recycle_customer);
         recyclerView_customer.setAdapter(adapterCustomer);
 
@@ -89,10 +98,6 @@ public class ActivityCustomer extends AppCompatActivity {
         });
     }
 
-//    private void dialContactPhone(final String phoneNumber) {
-////        startActivity(new Intent(Intent.ACTION_DIAL, Uri.fromParts("tel", phoneNumber, null)));
-//    }
-
     @Override
     protected void onResume() {
         super.onResume();
@@ -107,19 +112,4 @@ public class ActivityCustomer extends AppCompatActivity {
         if (db != null) db.close();
     }
 
-//    @Override
-//    public void OnClikeCustomer(int position) {
-
-//        String one = name.getText().toString();
-//        String two = phone.getText().toString();
-//        String three = address.getText().toString();
-//
-//        Intent intent=new Intent(ActivityCustomer.this,ActivityAddOrEditCostomer.class);
-//
-//        intent.putExtra("key1",one);
-//        intent.putExtra("key2",two);
-//        intent.putExtra("key3",three);
-//
-//        startActivity(intent);
-//    }
 }
