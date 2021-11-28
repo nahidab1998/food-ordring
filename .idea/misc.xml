@@ -25,6 +25,7 @@
         <entry key="..\:/resume/^ - ^ android development/food-ordring/app/src/main/res/drawable/border_ripple.xml" value="0.2712820512820513" />
         <entry key="..\:/resume/^ - ^ android development/food-ordring/app/src/main/res/drawable/border_ripple_circle.xml" value="0.25555555555555554" />
         <entry key="..\:/resume/^ - ^ android development/food-ordring/app/src/main/res/drawable/btn_login.xml" value="0.2712820512820513" />
+        <entry key="..\:/resume/^ - ^ android development/food-ordring/app/src/main/res/drawable/btn_sabt.xml" value="0.2462962962962963" />
         <entry key="..\:/resume/^ - ^ android development/food-ordring/app/src/main/res/drawable/btn_save.xml" value="0.2712820512820513" />
         <entry key="..\:/resume/^ - ^ android development/food-ordring/app/src/main/res/drawable/call.xml" value="0.25277777777777777" />
         <entry key="..\:/resume/^ - ^ android development/food-ordring/app/src/main/res/drawable/cardview_add_product.xml" value="0.25" />
@@ -63,10 +64,11 @@
         <entry key="..\:/resume/^ - ^ android development/food-ordring/app/src/main/res/layout/activity_grouping.xml" value="0.264" />
         <entry key="..\:/resume/^ - ^ android development/food-ordring/app/src/main/res/layout/activity_login.xml" value="0.264" />
         <entry key="..\:/resume/^ - ^ android development/food-ordring/app/src/main/res/layout/activity_main.xml" value="0.264" />
-        <entry key="..\:/resume/^ - ^ android development/food-ordring/app/src/main/res/layout/activity_ordering.xml" value="0.259375" />
+        <entry key="..\:/resume/^ - ^ android development/food-ordring/app/src/main/res/layout/activity_ordering.xml" value="0.18287037037037038" />
         <entry key="..\:/resume/^ - ^ android development/food-ordring/app/src/main/res/layout/activity_product.xml" value="0.256701030927835" />
         <entry key="..\:/resume/^ - ^ android development/food-ordring/app/src/main/res/layout/activiy_add_or_edit_grouping.xml" value="0.259375" />
         <entry key="..\:/resume/^ - ^ android development/food-ordring/app/src/main/res/layout/add_shop_btnsheet.xml" value="0.259375" />
+        <entry key="..\:/resume/^ - ^ android development/food-ordring/app/src/main/res/layout/btn_sabt_order.xml" value="0.259375" />
         <entry key="..\:/resume/^ - ^ android development/food-ordring/app/src/main/res/layout/btnsheet_DeleteEdite.xml" value="0.259375" />
         <entry key="..\:/resume/^ - ^ android development/food-ordring/app/src/main/res/layout/btnsheet_deleteedite.xml" value="0.20925925925925926" />
         <entry key="..\:/resume/^ - ^ android development/food-ordring/app/src/main/res/layout/cardview_add_product.xml" value="0.259375" />

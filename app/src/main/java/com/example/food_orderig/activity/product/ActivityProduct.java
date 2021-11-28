@@ -1,26 +1,15 @@
 package com.example.food_orderig.activity.product;
 
-import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
 import androidx.cardview.widget.CardView;
-import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.Activity;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.MenuItem;
 import android.view.View;
-import android.widget.CheckBox;
-import android.widget.ImageButton;
-import android.widget.LinearLayout;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.food_orderig.R;
 import com.example.food_orderig.activity.product.mvp.ProductModel;
@@ -28,18 +17,17 @@ import com.example.food_orderig.activity.product.mvp.ProductView;
 import com.example.food_orderig.database.DatabaseHelper;
 import com.example.food_orderig.database.dao.GroupingDao;
 import com.example.food_orderig.database.dao.ProductDao;
-import com.example.food_orderig.helper.AdapterGroupingProduct;
-import com.example.food_orderig.helper.AdapterProduct;
+import com.example.food_orderig.adapter.AdapterGroupingProduct;
+import com.example.food_orderig.adapter.AdapterProduct;
 import com.example.food_orderig.model.Product;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.gson.Gson;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class ActivityProduct extends AppCompatActivity implements ProductView {
 
-    ProductModel presenter;
+//    ProductModel presenter;
     RecyclerView recyclerView_product;
     RecyclerView recyclerView_category;
     FloatingActionButton floatingActionButton_product;
@@ -48,7 +36,9 @@ public class ActivityProduct extends AppCompatActivity implements ProductView {
     DatabaseHelper db;
     AdapterProduct adapterProduct;
     AdapterGroupingProduct adapterGroupingProduct;
-    CardView toolbarmain_pro;
+//    CardView toolbarmain_pro;
+
+    private Boolean for_order = false ;
 
 
 
@@ -58,14 +48,16 @@ public class ActivityProduct extends AppCompatActivity implements ProductView {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_product);
 
-        recyclerView_product=findViewById(R.id.recycle_product);
-        recyclerView_category=findViewById(R.id.recycler_grouping_product);
-        toolbarmain_pro = findViewById(R.id.toolbarmain_product);
+        if(getIntent().getExtras() != null){
+            for_order = getIntent().getBooleanExtra("for_order",false);
+        }
+
+
+//        toolbarmain_pro = findViewById(R.id.toolbarmain_product);
         floatingActionButton_product = findViewById(R.id.fab_product);
 
-        presenter = new ProductModel(this);
-        presenter.getData();
-
+//        presenter = new ProductModel(this);
+//        presenter.getData();
 
 
         db= DatabaseHelper.getInstance(getApplicationContext());
@@ -73,20 +65,8 @@ public class ActivityProduct extends AppCompatActivity implements ProductView {
         dao_grouping = db.groupingDao();
 
         set_recycle_grouping_product();
+        set_RecyclerView_product();
 
-        adapterProduct = new AdapterProduct(new ArrayList<>(), this, new AdapterProduct.Listener() {
-            @Override
-            public void onClick(Product product) {
-                Intent returnIntent = new Intent();
-
-                returnIntent.putExtra("json_product",new Gson().toJson(product));
-                setResult(Activity.RESULT_OK,returnIntent);
-                finish();
-            }
-        });
-
-        recyclerView_product.setAdapter(adapterProduct);
-//        recyclerView_product.setLayoutManager(new GridLayoutManager(this,2));
         recyclerView_product.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
             public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
@@ -115,6 +95,38 @@ public class ActivityProduct extends AppCompatActivity implements ProductView {
 
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if(adapterProduct != null){
+            adapterProduct.addList(dao_product.getList());
+        }
+    }
+
+    public  void set_RecyclerView_product(){
+
+        recyclerView_product=findViewById(R.id.recycle_product);
+        recyclerView_product.setHasFixedSize(true);
+        adapterProduct = new AdapterProduct(new ArrayList<>(), this, new AdapterProduct.Listener() {
+            @Override
+            public void onClick(Product product , int pos) {
+
+                if(for_order){
+                    for_order = getIntent().getBooleanExtra("for_order",false);
+                    Intent returnIntent = new Intent();
+                    returnIntent.putExtra("json_product", new Gson().toJson(product));
+                    setResult(Activity.RESULT_OK, returnIntent);
+                    finish();
+                }else {
+//
+                    adapterProduct.showBottomSheetDialogclick(pos);
+                }
+            }
+        });
+        recyclerView_product.setAdapter(adapterProduct);
+        adapterProduct.notifyDataSetChanged();
+    }
+
     public void set_recycle_grouping_product(){
         recyclerView_category =findViewById(R.id.recycler_grouping_product);
         recyclerView_category.setHasFixedSize(true);
@@ -129,13 +141,6 @@ public class ActivityProduct extends AppCompatActivity implements ProductView {
 //        Toast.makeText(this, name, Toast.LENGTH_SHORT).show();
     }
 
-    @Override
-    protected void onResume() {
-        super.onResume();
-        if (adapterProduct != null){
-            adapterProduct.addList(dao_product.getList());
-        }
-    }
 
     @Override
     protected void onDestroy() {

@@ -19,6 +19,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:paddingHorizontal="10dp"
+            android:gravity="center"
             android:orientation="vertical">
 
         <androidx.cardview.widget.CardView
@@ -44,11 +45,10 @@
                 android:id="@+id/txtname"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="ناهید"
+                android:text="افزودن مشتری"
                 android:gravity="center"
                 android:paddingTop="3dp"
                 android:fontFamily="@font/iran_sans"
-                android:textColor="@color/matn"
                 android:textSize="14dp"
                 />
             <ImageView

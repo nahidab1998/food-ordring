@@ -1,19 +1,19 @@
-package com.example.food_orderig.helper;
+package com.example.food_orderig.adapter;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.food_orderig.R;
-import com.example.food_orderig.activity.ordering.ActivityOrdering;
 import com.example.food_orderig.database.DatabaseHelper;
 import com.example.food_orderig.database.dao.ProductDao;
+import com.example.food_orderig.helper.Tools;
 import com.example.food_orderig.model.Product;
 
 import java.util.List;
@@ -26,12 +26,17 @@ public class AdapterOrdering extends RecyclerView.Adapter<AdapterOrdering.ViewHo
     ProductDao dao;
     Product product;
     private int numberorder = 1  ;
+    public Listener listener;
 
-    public AdapterOrdering(List<Product> list , Context context){
+    public AdapterOrdering(List<Product> list , Context context , Listener listener){
         this.list = list;
         this.context = context;
+        this.listener = listener ;
+    }
 
-
+    public interface Listener{
+        void onAdded(int pos);
+        void onRemove(int pos);
     }
 
     @Override
@@ -50,24 +55,21 @@ public class AdapterOrdering extends RecyclerView.Adapter<AdapterOrdering.ViewHo
         holder.txtname.setText(product.name);
         holder.txtprise.setText(product.price);
         holder.txtcategory.setText(product.category);
+        holder.txt_price.setText( Tools.convertToPrice(product.price) * product.amount +"" );
+        holder.title.setText(product.amount+"");
         holder.add.setOnClickListener(new View.OnClickListener() {
+
+            @SuppressLint("SetTextI18n")
             @Override
             public void onClick(View v) {
-
-                 numberorder = numberorder + 1;
-                 holder.title.setText(String.valueOf(numberorder));
-
+                listener.onAdded(position);
             }
         });
 
         holder.remove.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (numberorder > 1){
-                    numberorder = numberorder - 1;
-                }
-
-                holder.title.setText(String.valueOf(numberorder));
+                listener.onRemove(position);
             }
         });
 
@@ -83,6 +85,7 @@ public class AdapterOrdering extends RecyclerView.Adapter<AdapterOrdering.ViewHo
         TextView txtname ;
         TextView txtprise;
         TextView txtcategory;
+        TextView txt_price;
         TextView title;
         CardView add , remove ;
 
@@ -94,7 +97,8 @@ public class AdapterOrdering extends RecyclerView.Adapter<AdapterOrdering.ViewHo
             txtcategory = itemView.findViewById(R.id.category_ordering);
             add =itemView.findViewById(R.id.add);
             remove = itemView.findViewById(R.id.remove);
-            title =itemView.findViewById(R.id.title_pro);
+            txt_price = itemView.findViewById(R.id.price_product_ordering);
+            title =itemView.findViewById(R.id.number_pro);
         }
     }
 }

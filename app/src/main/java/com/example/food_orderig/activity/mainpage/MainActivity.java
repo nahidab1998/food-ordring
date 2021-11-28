@@ -8,9 +8,7 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.food_orderig.R;
 import com.example.food_orderig.activity.customer.ActivityCustomer;
@@ -21,14 +19,11 @@ import com.example.food_orderig.database.DatabaseHelper;
 import com.example.food_orderig.database.dao.CustomerDao;
 import com.example.food_orderig.database.dao.GroupingDao;
 import com.example.food_orderig.database.dao.ProductDao;
-import com.example.food_orderig.helper.AdapterProduct;
-import com.google.android.material.bottomsheet.BottomSheetDialog;
+import com.example.food_orderig.adapter.AdapterProduct;
 import com.jjoe64.graphview.GraphView;
 import com.jjoe64.graphview.LegendRenderer;
 import com.jjoe64.graphview.series.DataPoint;
 import com.jjoe64.graphview.series.LineGraphSeries;
-
-import java.text.DecimalFormat;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -171,7 +166,6 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-
         count();
     }
 

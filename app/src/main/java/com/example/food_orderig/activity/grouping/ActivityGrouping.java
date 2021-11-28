@@ -10,11 +10,9 @@ import android.view.View;
 import android.widget.ImageView;
 
 import com.example.food_orderig.R;
-import com.example.food_orderig.activity.customer.ActivityAddOrEditCostomer;
-import com.example.food_orderig.activity.customer.ActivityCustomer;
 import com.example.food_orderig.database.DatabaseHelper;
 import com.example.food_orderig.database.dao.GroupingDao;
-import com.example.food_orderig.helper.AdapterGrouping;
+import com.example.food_orderig.adapter.AdapterGrouping;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;

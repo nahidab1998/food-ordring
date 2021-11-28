@@ -3,35 +3,49 @@ package com.example.food_orderig.activity.ordering;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.airbnb.lottie.LottieAnimationView;
 import com.example.food_orderig.R;
 import com.example.food_orderig.activity.customer.ActivityCustomer;
 import com.example.food_orderig.activity.product.ActivityProduct;
 import com.example.food_orderig.database.DatabaseHelper;
+import com.example.food_orderig.database.dao.DetailOrderDao;
 import com.example.food_orderig.database.dao.ProductDao;
-import com.example.food_orderig.helper.AdapterOrdering;
+import com.example.food_orderig.adapter.AdapterOrdering;
+import com.example.food_orderig.helper.Tools;
 import com.example.food_orderig.model.Customer;
+import com.example.food_orderig.model.DetailOrder;
 import com.example.food_orderig.model.Product;
 import com.google.gson.Gson;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class ActivityOrdering extends AppCompatActivity {
 
-    RecyclerView recyclerView_pruduct;
+    RecyclerView recyclerView;
     AdapterOrdering adapterOrdering;
     DatabaseHelper db;
     ProductDao dao_product;
     LinearLayout box_customer;
     TextView txtname;
     CardView record_order,add_order;
+//    private SlidrInterface slidr;
+    TextView name_customer;
+    LottieAnimationView lottie;
+    DetailOrder detailOrder ;
+    DetailOrderDao detailOrderDao;
+    List<Product> list1 ;
+    TextView number_order;
+    TextView total ;
+    TextView save_order ;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,18 +57,37 @@ public class ActivityOrdering extends AppCompatActivity {
 
         txtname = findViewById(R.id.txtname);
 
-        set_recycler_ordering();
+
         initID();
         initBoxCustomer();
         initBoxProduct();
+
+        list1 = new ArrayList<>();
+        adapterOrdering = new AdapterOrdering(list1, this, new AdapterOrdering.Listener() {
+            @Override
+            public void onAdded(int pos) {
+                list1.get(pos).amount = list1.get(pos).amount + 1;
+                adapterOrdering.notifyItemChanged(pos);
+                initCounter();
+            }
+
+            @Override
+            public void onRemove(int pos) {
+                if (list1.get(pos).amount > 0){
+                    list1.get(pos).amount = list1.get(pos).amount - 1;
+                    adapterOrdering.notifyItemChanged(pos);
+                }else {
+                    list1.remove(pos);
+                    adapterOrdering.notifyDataSetChanged();
+                }
+                initCounter();
+            }
+        });
+
+        recyclerView.setAdapter(adapterOrdering);
+        recyclerView.setHasFixedSize(true);
     }
 
-    public void set_recycler_ordering(){
-        recyclerView_pruduct = findViewById(R.id.recycler_ordering);
-        recyclerView_pruduct.setHasFixedSize(true);
-        adapterOrdering = new AdapterOrdering( dao_product.getList(),this );
-        recyclerView_pruduct.setAdapter(adapterOrdering);
-    }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
@@ -70,14 +103,26 @@ public class ActivityOrdering extends AppCompatActivity {
                 case 200:
                     String json_product = data.getExtras().getString("json_product");
                     Product product = new Gson().fromJson(json_product,Product.class);
-                    Toast.makeText(this, ""+product.name, Toast.LENGTH_SHORT).show();
+//                    Toast.makeText(this, ""+product.name, Toast.LENGTH_SHORT).show();
+
+                    list1.add(product);
+                    adapterOrdering.notifyDataSetChanged();
+                    initCounter();
                     break;
             }
         }
     }
+
     private void initID(){
         add_order = findViewById(R.id.add_order);
         box_customer = findViewById(R.id.box_custome);
+        name_customer=findViewById(R.id.txtname);
+        total = findViewById(R.id.total);
+        save_order = findViewById(R.id.save_order);
+        number_order = findViewById(R.id.text_number_of_order);
+        recyclerView = findViewById(R.id.recycler_ordering);
+
+
     }
 
     private void initBoxCustomer(){
@@ -94,6 +139,20 @@ public class ActivityOrdering extends AppCompatActivity {
             intent.putExtra("for_order", true);
             startActivityForResult(intent,200);
         });
+
+
+    }
+    private void initCounter(){
+        number_order.setText(list1.size()+"");
+        total.setText(getTotalPrice()+"");
+    }
+
+    private Integer getTotalPrice(){
+        int p = 0;
+        for (int i = 0; i < list1.size(); i++) {
+            p = p + (Tools.convertToPrice(list1.get(i).price) * list1.get(i).amount);
+        }
+        return p;
     }
 
 }

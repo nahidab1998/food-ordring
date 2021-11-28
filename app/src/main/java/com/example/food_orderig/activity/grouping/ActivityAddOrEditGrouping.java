@@ -1,17 +1,11 @@
 package com.example.food_orderig.activity.grouping;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.RecyclerView;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.AutoCompleteTextView;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -21,10 +15,7 @@ import android.widget.Toast;
 import com.example.food_orderig.R;
 import com.example.food_orderig.database.DatabaseHelper;
 import com.example.food_orderig.database.dao.GroupingDao;
-import com.example.food_orderig.helper.AdapterGrouping;
-import com.example.food_orderig.model.Customer;
 import com.example.food_orderig.model.Grouping;
-import com.example.food_orderig.model.Product;
 import com.google.gson.Gson;
 
 public class ActivityAddOrEditGrouping extends AppCompatActivity {

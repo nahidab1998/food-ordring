@@ -1,24 +1,23 @@
 package com.example.food_orderig.activity.customer;
 
+import static android.media.CamcorderProfile.get;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.food_orderig.R;
 import com.example.food_orderig.database.DatabaseHelper;
 import com.example.food_orderig.database.dao.CustomerDao;
-import com.example.food_orderig.helper.AdapterCustomer;
+import com.example.food_orderig.adapter.AdapterCustomer;
 import com.example.food_orderig.model.Customer;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.gson.Gson;
@@ -35,6 +34,7 @@ public class ActivityCustomer extends AppCompatActivity {
     RecyclerView recyclerView_customer;
     LinearLayout call;
     TextView name,phone,address;
+
     private boolean for_order = false;
 
 
@@ -42,7 +42,15 @@ public class ActivityCustomer extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_customer);
+
+
+        if (getIntent() != null){
+            for_order = getIntent().getBooleanExtra("for_order",false);
+        }
+
         fab_customer=findViewById(R.id.fab_customer);
+
+
 
         db= DatabaseHelper.getInstance(getApplicationContext());
         dao_customer = db.customerDao();
@@ -52,23 +60,8 @@ public class ActivityCustomer extends AppCompatActivity {
 
         call = findViewById(R.id.call);
 
-//        for_order = getIntent().getExtras().getBoolean("for_order",false);
-
-
-        adapterCustomer = new AdapterCustomer(new ArrayList<>(), this , new AdapterCustomer.Listener() {
-            @Override
-            public void onClickListener(Customer customer) {
-//                if (for_order){
-                    Intent returnIntent = new Intent();
-                    returnIntent.putExtra("json_customer",new Gson().toJson(customer));
-                    setResult(Activity.RESULT_OK,returnIntent);
-                    finish();
-//                }
-            }
-        });
-
         recyclerView_customer = findViewById(R.id.recycle_customer);
-        recyclerView_customer.setAdapter(adapterCustomer);
+        set_recyclerview();
 
         recyclerView_customer.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
@@ -96,6 +89,25 @@ public class ActivityCustomer extends AppCompatActivity {
                 startActivity(add_new_customer);
             }
         });
+    }
+
+    public void set_recyclerview(){
+        recyclerView_customer.setHasFixedSize(true);
+        recyclerView_customer.setLayoutManager(new LinearLayoutManager(this));
+        adapterCustomer = new AdapterCustomer(new ArrayList<>(), this, new AdapterCustomer.Listener() {
+            @Override
+            public void onClickListener(Customer customer, int pos) {
+                if (for_order){
+                    Intent returnIntent = new Intent();
+                    returnIntent.putExtra("json_customer", new Gson().toJson(customer));
+                    setResult(Activity.RESULT_OK, returnIntent);
+                    finish();
+                }else {
+                    adapterCustomer.showBottomSheetDialogclick(pos);
+                }
+            }
+        });
+        recyclerView_customer.setAdapter(adapterCustomer);
     }
 
     @Override

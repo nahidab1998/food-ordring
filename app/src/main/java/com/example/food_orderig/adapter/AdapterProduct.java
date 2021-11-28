@@ -1,20 +1,14 @@
-package com.example.food_orderig.helper;
+package com.example.food_orderig.adapter;
 
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
-import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Build;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.Window;
-import android.view.animation.Animation;
-import android.view.animation.Transformation;
-import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -26,7 +20,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.food_orderig.R;
 import com.example.food_orderig.activity.product.ActivityAddOrEditProduct;
-import com.example.food_orderig.activity.product.ActivityProduct;
 import com.example.food_orderig.database.DatabaseHelper;
 import com.example.food_orderig.database.dao.ProductDao;
 import com.example.food_orderig.model.Product;
@@ -34,7 +27,6 @@ import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.gson.Gson;
 
 import java.util.List;
-import java.util.Objects;
 
 
 public class AdapterProduct extends RecyclerView.Adapter<AdapterProduct.ViewholderProduct> {
@@ -44,7 +36,6 @@ public class AdapterProduct extends RecyclerView.Adapter<AdapterProduct.Viewhold
     Listener listener;
     DatabaseHelper database;
     ProductDao dao;
-    Product product;
     Toolbar toolbardelete;
     LinearLayout edite_product , delete_product;
 
@@ -59,7 +50,7 @@ public class AdapterProduct extends RecyclerView.Adapter<AdapterProduct.Viewhold
     }
 
     public interface Listener{
-        void onClick(Product product);
+        void onClick(Product product , int pos);
     }
 
     @Override
@@ -75,7 +66,7 @@ public class AdapterProduct extends RecyclerView.Adapter<AdapterProduct.Viewhold
     @Override
     public void onBindViewHolder(AdapterProduct.ViewholderProduct holder, @SuppressLint("RecyclerView") int position) {
 
-        product = list . get(position);
+        Product product = list . get(position);
         holder.name_food.setText(product.name);
         holder.category_food.setText(product.category);
         holder.price_food.setText(product.price);
@@ -84,7 +75,7 @@ public class AdapterProduct extends RecyclerView.Adapter<AdapterProduct.Viewhold
             public void onClick(View v) {
 
 //                showBottomSheetDialogclick(position);
-                listener.onClick(product);
+                listener.onClick(product , position);
 
             }
         });
@@ -123,12 +114,12 @@ public class AdapterProduct extends RecyclerView.Adapter<AdapterProduct.Viewhold
 //        return stringBuilder.toString();
 //    }
 
-    private void showBottomSheetDialogclick (int pos) {
+    public void showBottomSheetDialogclick (int pos) {
 
         final BottomSheetDialog bottomSheetDialog = new BottomSheetDialog(context);
         bottomSheetDialog.setContentView(R.layout.btnsheet_deleteedite);
 
-        product = list . get(pos);
+       Product product = list . get(pos);
         delete_product = bottomSheetDialog.findViewById(R.id.delerebtn);
         delete_product.setOnClickListener(new View.OnClickListener() {
             @Override

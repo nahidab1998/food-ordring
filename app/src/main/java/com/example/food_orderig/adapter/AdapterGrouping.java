@@ -1,4 +1,4 @@
-package com.example.food_orderig.helper;
+package com.example.food_orderig.adapter;
 
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
@@ -16,18 +16,13 @@ import android.widget.Toast;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.food_orderig.R;
-import com.example.food_orderig.activity.customer.ActivityAddOrEditCostomer;
 import com.example.food_orderig.activity.grouping.ActivityAddOrEditGrouping;
-import com.example.food_orderig.activity.product.ActivityAddOrEditProduct;
 import com.example.food_orderig.database.DatabaseHelper;
 import com.example.food_orderig.database.dao.GroupingDao;
-import com.example.food_orderig.database.dao.ProductDao;
 import com.example.food_orderig.model.Grouping;
-import com.example.food_orderig.model.Product;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.gson.Gson;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class AdapterGrouping extends RecyclerView.Adapter<AdapterGrouping.ViewholderGrouping> {

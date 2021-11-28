@@ -1,4 +1,4 @@
-package com.example.food_orderig.helper;
+package com.example.food_orderig.adapter;
 
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
@@ -29,9 +29,7 @@ public class AdapterCustomer extends RecyclerView.Adapter<AdapterCustomer.Viewho
     Listener listener;
     LinearLayout edite_customer , delete_customer;
     CustomerDao dao_customer;
-    Customer customer;
     DatabaseHelper database_customer;
-
 
 
     public AdapterCustomer(List<Customer> list , Context context , Listener listener){
@@ -41,7 +39,7 @@ public class AdapterCustomer extends RecyclerView.Adapter<AdapterCustomer.Viewho
     }
 
     public interface Listener{
-        void onClickListener(Customer customer);
+        void onClickListener(Customer customer, int pos);
     }
 
     @Override
@@ -56,7 +54,7 @@ public class AdapterCustomer extends RecyclerView.Adapter<AdapterCustomer.Viewho
 
     @Override
     public void onBindViewHolder(ViewholderCustomer holder, @SuppressLint("RecyclerView") int position) {
-        customer = list . get(position);
+        Customer customer = list . get(position);
         holder.name_customer.setText(customer.name);
         holder.phone_customer.setText(customer.phone);
         holder.address_customer.setText(customer.address);
@@ -79,7 +77,7 @@ public class AdapterCustomer extends RecyclerView.Adapter<AdapterCustomer.Viewho
             @Override
             public void onClick(View v) {
 
-                listener.onClickListener(customer);
+                listener.onClickListener(customer , position);
 //                showBottomSheetDialogclick(position);
             }
         });
@@ -107,12 +105,12 @@ public class AdapterCustomer extends RecyclerView.Adapter<AdapterCustomer.Viewho
 
     }
 
-    private void showBottomSheetDialogclick (int pos) {
+    public void showBottomSheetDialogclick (int pos) {
 
         final BottomSheetDialog bottomSheetDialog = new BottomSheetDialog(context);
         bottomSheetDialog.setContentView(R.layout.btnsheet_deleteedite);
 
-        customer = list.get(pos);
+        Customer customer = list.get(pos);
         delete_customer = bottomSheetDialog.findViewById(R.id.delerebtn);
 
         delete_customer.setOnClickListener(new View.OnClickListener() {

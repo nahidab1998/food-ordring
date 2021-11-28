@@ -199,7 +199,7 @@
 
 
                         <TextView
-                            android:id="@+id/title_pro"
+                            android:id="@+id/number_pro"
                             android:layout_width="50dp"
                             android:layout_height="wrap_content"
                             android:text="1"
