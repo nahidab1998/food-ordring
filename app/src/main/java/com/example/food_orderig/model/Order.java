@@ -26,12 +26,12 @@ public class Order {
     public  int status;
 
     @ColumnInfo (name = "total")
-    public  double total;
+    public  String total;
 
     @ColumnInfo (name = "description")
-    public Text description;
+    public String description;
 
-    public Order(int id, String name, String unit_code, int customer_id, int status, double total, Text description) {
+    public Order(int id, String name, String unit_code, int customer_id, int status, String total, String description) {
         this.id = id;
         this.name = name;
         this.unit_code = unit_code;
@@ -42,7 +42,7 @@ public class Order {
     }
 
     @Ignore
-    public Order(String name, String unit_code, int customer_id, int status, double total, Text description) {
+    public Order(String name, String unit_code, int customer_id, int status, String total, String description) {
         this.name = name;
         this.unit_code = unit_code;
         this.customer_id = customer_id;

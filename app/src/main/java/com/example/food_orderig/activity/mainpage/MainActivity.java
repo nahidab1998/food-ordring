@@ -8,6 +8,7 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.food_orderig.R;
@@ -38,6 +39,7 @@ public class MainActivity extends AppCompatActivity {
     int count_product;
     int count_customer;
     int count_grouping;
+    CardView saved;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,6 +49,8 @@ public class MainActivity extends AppCompatActivity {
         cardViewproduct=findViewById(R.id.products);
         cardViewcustomer=findViewById(R.id.customer);
         cardViewprouping=findViewById(R.id.grouping);
+        saved = findViewById(R.id.saved);
+
         add_shop = findViewById(R.id.add_shop);
 
         db = DatabaseHelper.getInstance(getApplicationContext());
@@ -134,6 +138,13 @@ public class MainActivity extends AppCompatActivity {
 
                 Intent a= new Intent(MainActivity.this, ActivityOrdering.class);
                 startActivity(a);
+
+            }
+        });
+
+        saved.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
 
             }
         });

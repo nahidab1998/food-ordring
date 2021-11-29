@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.food_orderig">
+    package="com.example.food_orderig" >
 
     <uses-permission android:name="android.permission.CALL_PHONE" />
 
@@ -10,7 +10,10 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_icon"
         android:supportsRtl="true"
-        android:theme="@style/Theme.Food_orderig">
+        android:theme="@style/Theme.Food_orderig" >
+        <activity
+            android:name=".activity.orderingdetails.OrderingDetails"
+            android:exported="true" />
         <activity
             android:name=".activity.ordering.ActivityOrdering"
             android:exported="true" />
@@ -45,7 +48,7 @@
         <activity
             android:name=".activity.login.ActivityLogin"
             android:exported="true"
-            android:screenOrientation="portrait">
+            android:screenOrientation="portrait" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
