@@ -220,7 +220,7 @@ public class ActivityOrdering extends AppCompatActivity {
 
     public String getCurrentTime(){
         Calendar c = Calendar.getInstance();
-        SimpleDateFormat dateFormat = new SimpleDateFormat("dd-mm-yyyy  |  hh:mm:ss aa");
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MMM-yyyy  |  hh:mm:ss aa");
         String datetime = dateFormat.format(c.getTime());
         return datetime;
     }
