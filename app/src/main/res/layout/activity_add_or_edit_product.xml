@@ -107,7 +107,7 @@
                 android:drawableRight="@drawable/custom_price_icon"
                 android:drawablePadding="5dp"
                 android:elevation="6dp"
-                android:fontFamily="@font/iran_sans"
+                android:fontFamily="@font/number"
                 android:gravity="right"
                 android:hint="قیمت محصول"
                 android:inputType="number"

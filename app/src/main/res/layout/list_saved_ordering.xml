@@ -16,20 +16,23 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:background="@drawable/border_ripple"
             android:orientation="vertical">
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:paddingHorizontal="10dp">
+                android:layout_height="wrap_content"
+                android:paddingStart="10dp">
 
                 <TextView
+                    android:id="@+id/name_seved"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:text="ناهید باقری"
                     android:fontFamily="@font/iran_sans"
                     android:textStyle="bold"
                     android:textSize="14dp"
+                    android:gravity="center"
                     android:textColor="@color/matn"
                     android:layout_gravity="center"
                     />
@@ -38,21 +41,31 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:gravity="left"
-
                     android:orientation="horizontal">
 
-                    <ImageView
+                    <TextView
+                        android:id="@+id/delete_ordering"
                         android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:src="@drawable/delete"/>
+                        android:layout_height="wrap_content"
+                        android:text="لغو سفارش"
+                        android:textSize="12dp"
+                        android:background="@drawable/background_cancel"
+                        android:textColor="@color/red"
+                        android:fontFamily="@font/iran_sans"
+                        android:paddingHorizontal="15dp"
+                        android:layout_marginHorizontal="10dp"
+                        android:layout_marginVertical="10dp"
+                        android:paddingVertical="7dp"
+                        android:gravity="center"
+                        android:layout_gravity="center" />
 
                 </LinearLayout>
 
             </LinearLayout>
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="#d3d3d3"/>
+                android:layout_height="3dp"
+                android:background="@color/text"/>
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -69,6 +82,7 @@
                     android:textSize="14dp"
                     android:textStyle="bold" />
                 <TextView
+                    android:id="@+id/status"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:paddingStart="10dp"
@@ -92,6 +106,7 @@
                     android:textSize="14dp"
                     android:textStyle="bold" />
                 <TextView
+                    android:id="@+id/explain"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:paddingStart="10dp"
@@ -121,13 +136,14 @@
                     android:gravity="left">
 
                     <TextView
+                        android:id="@+id/total_saved"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:paddingStart="10dp"
                         android:text="340,000"
                         android:gravity="left"
                         android:textColor="@color/red"
-                        android:fontFamily="@font/iran_sans"
+                        android:fontFamily="@font/number"
                         android:textSize="16dp" />
 
                 </LinearLayout>
@@ -137,34 +153,35 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:paddingBottom="10dp"
+                android:paddingBottom="8dp"
                 android:paddingHorizontal="10dp">
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:text="11:10"
-                    android:textSize="12dp"
-                    android:layout_gravity="center"
-                    android:textColor="#878787"
-                    android:fontFamily="@font/iran_sans"/>
+<!--                <TextView-->
+<!--                    android:id="@+id/houre"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="match_parent"-->
+<!--                    android:layout_gravity="center"-->
+<!--                    android:fontFamily="@font/number"-->
+<!--                    android:text="11:10"-->
+<!--                    android:textColor="#878787"-->
+<!--                    android:textSize="12dp" />-->
 
-                <LinearLayout
-                    android:layout_width="1dp"
-                    android:layout_height="match_parent"
-                    android:layout_marginStart="10dp"
-                    android:layout_marginVertical="3dp"
-                    android:background="#d3d3d3"/>
+<!--                <LinearLayout-->
+<!--                    android:layout_width="1dp"-->
+<!--                    android:layout_height="match_parent"-->
+<!--                    android:layout_marginStart="10dp"-->
+<!--                    android:layout_marginVertical="3dp"-->
+<!--                    android:background="#d3d3d3"/>-->
 
                 <TextView
+                    android:id="@+id/date"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:text="8 آذرماه 1400"
-                    android:textSize="12dp"
+                    android:textSize="11dp"
                     android:layout_gravity="center"
-                    android:layout_marginStart="10dp"
                     android:textColor="#878787"
-                    android:fontFamily="@font/iran_sans"/>
+                    android:fontFamily="@font/number"/>
 
 
             </LinearLayout>

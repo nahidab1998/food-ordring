@@ -38,6 +38,7 @@
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cardvie_pay"
+        android:visibility="gone"
         android:layout_width="match_parent"
         android:layout_alignParentBottom="true"
         android:layout_height="wrap_content">
@@ -80,7 +81,7 @@
                         android:layout_height="wrap_content"
                         android:text="0"
                         android:textColor="@color/red"
-                        android:fontFamily="@font/iran_sans"
+                        android:fontFamily="@font/number"
                         android:textSize="14dp"
                         android:textStyle="bold"/>
                     <TextView
@@ -122,7 +123,7 @@
                         android:text="0"
                         android:layout_marginTop="4dp"
                         android:layout_gravity="center"
-                        android:fontFamily="@font/iran_sans"
+                        android:fontFamily="@font/number"
                         android:textSize="16dp"
                         android:textColor="@color/red"
                         android:textStyle="bold"/>

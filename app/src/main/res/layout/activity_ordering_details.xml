@@ -5,17 +5,18 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activity.orderingdetails.OrderingDetails">
+    android:background="@color/text"
+    tools:context=".activity.orderingdetails.ActivityOrderingDetails">
 
     <include layout="@layout/toolbare_saved_ordering"/>
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recycle_customer"
+        android:id="@+id/recycle_saved"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginTop="?attr/actionBarSize"
-        android:paddingTop="10dp"
         android:clipToPadding="false"
+        android:paddingTop="10dp"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         tools:listitem="@layout/list_saved_ordering" />
 

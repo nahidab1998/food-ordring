@@ -8,13 +8,13 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.food_orderig.R;
 import com.example.food_orderig.activity.customer.ActivityCustomer;
 import com.example.food_orderig.activity.grouping.ActivityGrouping;
 import com.example.food_orderig.activity.ordering.ActivityOrdering;
+import com.example.food_orderig.activity.orderingdetails.ActivityOrderingDetails;
 import com.example.food_orderig.activity.product.ActivityProduct;
 import com.example.food_orderig.database.DatabaseHelper;
 import com.example.food_orderig.database.dao.CustomerDao;
@@ -146,6 +146,8 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
+                Intent intent = new Intent(MainActivity.this, ActivityOrderingDetails.class);
+                startActivity(intent);
             }
         });
 

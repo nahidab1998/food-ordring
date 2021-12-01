@@ -9,8 +9,10 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.food_orderig.R;
 import com.example.food_orderig.activity.customer.ActivityCustomer;
@@ -21,11 +23,14 @@ import com.example.food_orderig.adapter.AdapterOrdering;
 import com.example.food_orderig.database.dao.SavedOrderDao;
 import com.example.food_orderig.helper.Tools;
 import com.example.food_orderig.model.Customer;
+import com.example.food_orderig.model.DetailOrder;
 import com.example.food_orderig.model.Order;
 import com.example.food_orderig.model.Product;
 import com.google.gson.Gson;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 public class ActivityOrdering extends AppCompatActivity {
@@ -33,15 +38,16 @@ public class ActivityOrdering extends AppCompatActivity {
     RecyclerView recyclerView;
     AdapterOrdering adapterOrdering;
 
-    Customer customer;
     DatabaseHelper db;
     List<Product> orderDetailList;
 
     DetailOrderDao dao_detailorder;
     SavedOrderDao dao_savedorder;
+    Customer customer;
 
     LinearLayout box_customer;
     CardView record_order,add_order;
+    CardView cardView_pay;
 //    private SlidrInterface slidr;
     TextView txtname;
     TextView name_customer;
@@ -49,6 +55,7 @@ public class ActivityOrdering extends AppCompatActivity {
     TextView total ;
     TextView save_order ;
     CardView card_numberorder;
+    ImageView delete_ordering;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,6 +71,8 @@ public class ActivityOrdering extends AppCompatActivity {
         initID();
         initBoxCustomer();
         initBoxProduct();
+        initSaveOrdeing();
+        delete_ordering();
 
         orderDetailList = new ArrayList<>();
         adapterOrdering = new AdapterOrdering(orderDetailList, this, new AdapterOrdering.Listener() {
@@ -90,7 +99,7 @@ public class ActivityOrdering extends AppCompatActivity {
         recyclerView.setAdapter(adapterOrdering);
         recyclerView.setHasFixedSize(true);
 
-//        initSaveOrdeing();
+
     }
 
     @Override
@@ -100,16 +109,14 @@ public class ActivityOrdering extends AppCompatActivity {
             switch (requestCode){
                 case 100:
                     String json_customer = data.getExtras().getString("json_customer");
-                    Customer customer = new Gson().fromJson(json_customer,Customer.class);
+                    customer = new Gson().fromJson(json_customer,Customer.class);
                     txtname.setText(customer.name);
                     txtname.setTextColor(getResources().getColor(R.color.matn));
-//                    Toast.makeText(this, ""+customer.name, Toast.LENGTH_SHORT).show();
+
                     break;
                 case 200:
                     String json_product = data.getExtras().getString("json_product");
                     Product product = new Gson().fromJson(json_product,Product.class);
-//                    Toast.makeText(this, ""+product.name, Toast.LENGTH_SHORT).show();
-
                     insertToOrderList(product);
                     break;
             }
@@ -126,6 +133,8 @@ public class ActivityOrdering extends AppCompatActivity {
         recyclerView = findViewById(R.id.recycler_ordering);
         card_numberorder = findViewById(R.id.card_numberorder);
         txtname = findViewById(R.id.txtname);
+        delete_ordering = findViewById(R.id.delete_add_order);
+        cardView_pay = findViewById(R.id.cardvie_pay);
 
 
     }
@@ -149,9 +158,11 @@ public class ActivityOrdering extends AppCompatActivity {
     }
     private void initCounter(){
         if (orderDetailList.size() > 0){
+            cardView_pay.setVisibility(View.VISIBLE);
             card_numberorder.setVisibility(View.VISIBLE);
             number_order.setText(orderDetailList.size()+"");
         }else {
+            cardView_pay.setVisibility(View.GONE);
             card_numberorder.setVisibility(View.GONE);
         }
         total.setText(getTotalPrice()+"");
@@ -179,13 +190,39 @@ public class ActivityOrdering extends AppCompatActivity {
         return p;
     }
 
+    private void delete_ordering(){
+        delete_ordering.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                finish();
+            }
+        });
+    }
+
     private void initSaveOrdeing(){
         save_order.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                dao_savedorder.insertOrder(new Order(customer.name , "1" , customer.id , 1 , total.getText()+"" , "با تمام مخلفات" ));
+
+                dao_savedorder.insertOrder(new Order(customer.name , "1" , customer.id , 1 , total.getText()+"" , "با تمام مخلفات" , getCurrentTime()));
+                for (int i = 0; i < orderDetailList.size(); i++) {
+                    dao_detailorder.insertDetailOrder(new DetailOrder(orderDetailList.get(i).name , orderDetailList.get(i).price , orderDetailList.get(i).category ,
+                            Tools.convertToPrice(number_order.getText().toString()) , dao_savedorder.getOrderList().get(i).unit_code ));
+
+                    Toast.makeText(ActivityOrdering.this, "سفارش ذخیره شد", Toast.LENGTH_SHORT).show();
+                    finish();
+
+                }
             }
         });
+    }
+
+    public String getCurrentTime(){
+        Calendar c = Calendar.getInstance();
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd-mm-yyyy  |  hh:mm:ss aa");
+        String datetime = dateFormat.format(c.getTime());
+        return datetime;
     }
 
 }

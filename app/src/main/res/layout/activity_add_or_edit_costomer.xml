@@ -67,7 +67,7 @@
                 android:drawablePadding="5dp"
                 android:elevation="5dp"
                 android:maxLength="12"
-                android:fontFamily="@font/iran_sans"
+                android:fontFamily="@font/number"
                 android:gravity="right"
                 android:hint="شماره تلفن"
                 android:inputType="number"

@@ -158,7 +158,7 @@
                                 android:layout_gravity="center"
                                 android:layout_marginRight="5dp"
                                 android:textColor="@color/red"
-                                android:fontFamily="@font/iran_sans"/>
+                                android:fontFamily="@font/number"/>
 
                         <TextView
                             android:id="@+id/toman"
@@ -204,7 +204,7 @@
                             android:layout_height="wrap_content"
                             android:text="1"
                             android:textStyle="bold"
-                            android:fontFamily="@font/iran_sans"
+                            android:fontFamily="@font/number"
                             android:textSize="18dp"
                             android:textColor="#737373"
                             android:gravity="center"

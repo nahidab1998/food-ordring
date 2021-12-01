@@ -49,7 +49,7 @@ public class AdapterOrdering extends RecyclerView.Adapter<AdapterOrdering.ViewHo
     }
 
     @Override
-    public void onBindViewHolder(AdapterOrdering.ViewHolder holder, int position) {
+    public void onBindViewHolder(AdapterOrdering.ViewHolder holder,@SuppressLint("RecyclerView") int position) {
 
         product = list.get(position);
         holder.txtname.setText(product.name);
