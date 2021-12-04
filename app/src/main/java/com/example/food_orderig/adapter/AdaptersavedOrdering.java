@@ -4,20 +4,19 @@ import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.food_orderig.R;
+import com.example.food_orderig.activity.orderingreceipt.ActivityOrderingReceipt;
 import com.example.food_orderig.database.DatabaseHelper;
-import com.example.food_orderig.database.dao.GroupingDao;
 import com.example.food_orderig.database.dao.SavedOrderDao;
-import com.example.food_orderig.model.Grouping;
 import com.example.food_orderig.model.Order;
 
 import java.util.List;
@@ -55,8 +54,9 @@ public class AdaptersavedOrdering extends RecyclerView.Adapter<AdaptersavedOrder
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                Toast.makeText(context, "جزییات سفارش " + order.name, Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(context, ActivityOrderingReceipt.class);
+                context.startActivity(intent);
+//                Toast.makeText(context, "جزییات سفارش " + order.name, Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -66,7 +66,7 @@ public class AdaptersavedOrdering extends RecyclerView.Adapter<AdaptersavedOrder
 
                 new AlertDialog.Builder(context)
                         .setTitle("حذف")
-                        .setMessage("آیا از حذف کامل این سفارش اطمینان دارید؟")
+                        .setMessage("آیا از لغو کامل این سفارش اطمینان دارید؟")
                         .setPositiveButton("تأیید", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
