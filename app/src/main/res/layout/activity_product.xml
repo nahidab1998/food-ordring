@@ -43,10 +43,10 @@
         android:id="@+id/recycler_grouping_product"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        android:orientation="horizontal"
         android:layout_marginTop="?attr/actionBarSize"
+        android:orientation="horizontal"
         android:paddingVertical="10dp"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         tools:listitem="@layout/list_item_grouping_product" />
 
     <View
@@ -67,6 +67,36 @@
         android:paddingTop="10dp"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         tools:listitem="@layout/list_product" />
+
+    <LinearLayout
+        android:id="@+id/lottie_product"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="150dp">
+
+        <com.airbnb.lottie.LottieAnimationView
+
+            android:layout_width="match_parent"
+            android:layout_height="300dp"
+            app:lottie_autoPlay="true"
+            app:lottie_loop="true"
+            android:visibility="gone"
+            app:lottie_rawRes="@raw/list" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="سفارشی وجود ندارد"
+            android:fontFamily="@font/iran_sans"
+            android:textStyle="bold"
+            android:textColor="#d3d3d3"
+            android:textSize="16dp"
+            android:layout_gravity="center"
+            />
+
+    </LinearLayout>
+
 
 
 

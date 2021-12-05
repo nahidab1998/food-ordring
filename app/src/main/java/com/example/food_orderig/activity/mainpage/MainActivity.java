@@ -26,6 +26,10 @@ import com.jjoe64.graphview.LegendRenderer;
 import com.jjoe64.graphview.series.DataPoint;
 import com.jjoe64.graphview.series.LineGraphSeries;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+
 public class MainActivity extends AppCompatActivity {
 
     CardView cardViewproduct,cardViewcustomer , cardViewprouping;
@@ -40,6 +44,8 @@ public class MainActivity extends AppCompatActivity {
     int count_customer;
     int count_grouping;
     CardView saved;
+    TextView test;
+    private String date = String.valueOf(System.currentTimeMillis()- 604800000);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,6 +56,7 @@ public class MainActivity extends AppCompatActivity {
         cardViewcustomer=findViewById(R.id.customer);
         cardViewprouping=findViewById(R.id.grouping);
         saved = findViewById(R.id.saved);
+        test = findViewById(R.id.month_profit);
 
         add_shop = findViewById(R.id.add_shop);
 
@@ -152,6 +159,15 @@ public class MainActivity extends AppCompatActivity {
         });
 
 
+        setdate();
+    }
+
+    private void setdate(){
+        Calendar c = Calendar.getInstance() ;
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MMM-yyyy ");
+
+        String datetime = dateFormat.format(c.getTime());
+        test.setText(datetime);
     }
 
     public void count(){

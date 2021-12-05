@@ -14,7 +14,6 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.airbnb.lottie.LottieAnimationView;
 import com.example.food_orderig.R;
 import com.example.food_orderig.activity.customer.ActivityCustomer;
 import com.example.food_orderig.activity.product.ActivityProduct;
@@ -29,9 +28,11 @@ import com.example.food_orderig.model.Order;
 import com.example.food_orderig.model.Product;
 import com.google.gson.Gson;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 public class ActivityOrdering extends AppCompatActivity {
@@ -231,9 +232,11 @@ public class ActivityOrdering extends AppCompatActivity {
 
     public String getCurrentTime(){
         Calendar c = Calendar.getInstance();
-        SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MMM-yyyy  |  hh:mm:ss aa");
+        SimpleDateFormat dateFormat = new SimpleDateFormat("EEEE , dd-MMM-yyyy  |  hh:mm:ss aa");
         String datetime = dateFormat.format(c.getTime());
         return datetime;
     }
+
+
 
 }

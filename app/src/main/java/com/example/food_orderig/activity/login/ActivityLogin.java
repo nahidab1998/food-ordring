@@ -18,6 +18,7 @@ public class ActivityLogin extends AppCompatActivity {
 
     TextView buttonlogin;
     DatabaseHelper db;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

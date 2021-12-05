@@ -11,6 +11,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.LinearLayout;
 
 import com.example.food_orderig.R;
 import com.example.food_orderig.activity.product.mvp.ProductModel;
@@ -40,6 +41,7 @@ public class ActivityProduct extends AppCompatActivity implements ProductView {
     AdapterGroupingProduct adapterGroupingProduct;
     String category;
 //    CardView toolbarmain_pro;
+    LinearLayout lotieProduct;
 
 
     private Boolean for_order = false ;
@@ -56,12 +58,9 @@ public class ActivityProduct extends AppCompatActivity implements ProductView {
             for_order = getIntent().getBooleanExtra("for_order",false);
         }
 
-
-//        toolbarmain_pro = findViewById(R.id.toolbarmain_product);
         floatingActionButton_product = findViewById(R.id.fab_product);
-
-//        presenter = new ProductModel(this);
-//        presenter.getData();
+        lotieProduct = findViewById(R.id.lottie_product);
+//        lotieProduct.setVisibility(View.GONE);
 
 
         db= DatabaseHelper.getInstance(getApplicationContext());
@@ -120,7 +119,7 @@ public class ActivityProduct extends AppCompatActivity implements ProductView {
                     setResult(Activity.RESULT_OK, returnIntent);
                     finish();
                 }else {
-//
+
                     adapterProduct.showBottomSheetDialogclick(pos);
                 }
             }
@@ -143,7 +142,9 @@ public class ActivityProduct extends AppCompatActivity implements ProductView {
             @Override
             public void onClick(int pos, Grouping c) {
                 if (pos == 0){
+
                     category = null;
+
                 }else {
                     category = c.name;
 
@@ -169,7 +170,6 @@ public class ActivityProduct extends AppCompatActivity implements ProductView {
     public void setData(String name) {
 //        Toast.makeText(this, name, Toast.LENGTH_SHORT).show();
     }
-
 
     @Override
     protected void onDestroy() {
