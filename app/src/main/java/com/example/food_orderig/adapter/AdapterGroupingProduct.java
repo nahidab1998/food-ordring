@@ -1,5 +1,6 @@
 package com.example.food_orderig.adapter;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,12 +18,16 @@ public class AdapterGroupingProduct extends RecyclerView.Adapter<AdapterGrouping
 
     List<Grouping> list;
     Context context;
-    Grouping grouping;
-    AdapterProduct adapterProduct;
+    Listener listener;
 
-    public AdapterGroupingProduct(List<Grouping> list , Context context){
+    public AdapterGroupingProduct(List<Grouping> list , Context context, Listener listener){
         this.list = list;
         this.context = context;
+        this.listener = listener;
+    }
+
+    public interface Listener{
+        void onClick(int pos, Grouping category);
     }
 
     @Override
@@ -34,16 +39,14 @@ public class AdapterGroupingProduct extends RecyclerView.Adapter<AdapterGrouping
     }
 
     @Override
-    public void onBindViewHolder( AdapterGroupingProduct.ViewHolder holder, int position) {
+    public void onBindViewHolder(AdapterGroupingProduct.ViewHolder holder, @SuppressLint("RecyclerView") int position) {
 
-        grouping = list.get(position);
+        Grouping grouping = list.get(position);
         holder.textgrouping_product.setText(grouping.name);
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-
-//                Toast.makeText(context.getApplicationContext(),grouping.name + "ها ", Toast.LENGTH_SHORT).show();
+                listener.onClick(position,grouping);
             }
         });
 

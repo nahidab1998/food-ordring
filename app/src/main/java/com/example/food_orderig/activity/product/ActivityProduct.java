@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 
 import com.example.food_orderig.R;
@@ -19,6 +20,7 @@ import com.example.food_orderig.database.dao.GroupingDao;
 import com.example.food_orderig.database.dao.ProductDao;
 import com.example.food_orderig.adapter.AdapterGroupingProduct;
 import com.example.food_orderig.adapter.AdapterProduct;
+import com.example.food_orderig.model.Grouping;
 import com.example.food_orderig.model.Product;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.gson.Gson;
@@ -34,9 +36,11 @@ public class ActivityProduct extends AppCompatActivity implements ProductView {
     ProductDao dao_product;
     GroupingDao dao_grouping;
     DatabaseHelper db;
-    AdapterProduct adapterProduct;
+    AdapterProduct adapterProduct = null;
     AdapterGroupingProduct adapterGroupingProduct;
+    String category;
 //    CardView toolbarmain_pro;
+
 
     private Boolean for_order = false ;
 
@@ -98,9 +102,7 @@ public class ActivityProduct extends AppCompatActivity implements ProductView {
     @Override
     protected void onResume() {
         super.onResume();
-        if(adapterProduct != null){
-            adapterProduct.addList(dao_product.getList());
-        }
+        initListProduct();
     }
 
     public  void set_RecyclerView_product(){
@@ -128,12 +130,39 @@ public class ActivityProduct extends AppCompatActivity implements ProductView {
     }
 
     public void set_recycle_grouping_product(){
+
+        ArrayList<Grouping> groupingArrayList = new ArrayList<>();
+        groupingArrayList.add(0,new Grouping("همه محصولات"));
+        groupingArrayList.addAll(dao_grouping.getList());
+
         recyclerView_category =findViewById(R.id.recycler_grouping_product);
         recyclerView_category.setHasFixedSize(true);
         LinearLayoutManager layoutManager = new LinearLayoutManager(this ,LinearLayoutManager.HORIZONTAL , false);
         recyclerView_category.setLayoutManager(layoutManager);
-        adapterGroupingProduct = new AdapterGroupingProduct(dao_grouping.getList(),this);
+        adapterGroupingProduct = new AdapterGroupingProduct(groupingArrayList, this, new AdapterGroupingProduct.Listener() {
+            @Override
+            public void onClick(int pos, Grouping c) {
+                if (pos == 0){
+                    category = null;
+                }else {
+                    category = c.name;
+
+                }
+                initListProduct();
+            }
+        });
         recyclerView_category.setAdapter(adapterGroupingProduct);
+    }
+
+    private void initListProduct(){
+        Log.e("qqqq", "initListProduct: " + category);
+        if(adapterProduct != null){
+            if (category == null || category.isEmpty()){
+                adapterProduct.addList(dao_product.getList());
+            }else {
+                adapterProduct.addList(dao_product.getListByCategory(category));
+            }
+        }
     }
 
     @Override

@@ -43,12 +43,13 @@
         android:id="@+id/recycler_grouping_product"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingVertical="10dp"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        android:orientation="horizontal"
         android:layout_marginTop="?attr/actionBarSize"
-        tools:listitem="@layout/list_item_grouping_product"
-         />
+        android:paddingVertical="10dp"
+        tools:listitem="@layout/list_item_grouping_product" />
 
-    <LinearLayout
+    <View
         android:id="@+id/linear_saparat"
         android:layout_width="match_parent"
         android:layout_height="1dp"
@@ -61,9 +62,9 @@
         android:id="@+id/recycle_product"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:paddingTop="10dp"
-        android:clipToPadding="false"
         android:layout_below="@+id/linear_saparat"
+        android:clipToPadding="false"
+        android:paddingTop="10dp"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         tools:listitem="@layout/list_product" />
 

@@ -179,5 +179,10 @@ public class AdapterProduct extends RecyclerView.Adapter<AdapterProduct.Viewhold
         notifyDataSetChanged();
     }
 
+    public void clear(){
+        list.clear();
+        notifyDataSetChanged();
+    }
+
 
 }

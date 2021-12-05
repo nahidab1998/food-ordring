@@ -28,6 +28,8 @@ public class AdaptersavedOrdering extends RecyclerView.Adapter<AdaptersavedOrder
 
     DatabaseHelper database;
     SavedOrderDao dao;
+    DatabaseHelper db = DatabaseHelper.getInstance(context);
+
 
     public AdaptersavedOrdering(Context context , List<Order> list){
         this.context = context;
@@ -54,9 +56,16 @@ public class AdaptersavedOrdering extends RecyclerView.Adapter<AdaptersavedOrder
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(context, ActivityOrderingReceipt.class);
+
+                final Intent intent = new Intent(context, ActivityOrderingReceipt.class);
+                intent.putExtra("code" , list.get(position).unit_code);
+                intent.putExtra("customerid" , list.get(position).customer_id);
+                intent.putExtra("name" , list.get(position).name);
+                intent.putExtra("total" , list.get(position).total);
                 context.startActivity(intent);
 //                Toast.makeText(context, "جزییات سفارش " + order.name, Toast.LENGTH_SHORT).show();
+
+
             }
         });
 
@@ -116,6 +125,8 @@ public class AdaptersavedOrdering extends RecyclerView.Adapter<AdaptersavedOrder
             deleteitem = itemView.findViewById(R.id.delete_ordering);
 //            houre = itemView.findViewById(R.id.houre);
             date = itemView.findViewById(R.id.date);
+
         }
     }
+
 }

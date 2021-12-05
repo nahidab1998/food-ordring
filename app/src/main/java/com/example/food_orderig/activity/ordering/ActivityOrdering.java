@@ -14,6 +14,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.airbnb.lottie.LottieAnimationView;
 import com.example.food_orderig.R;
 import com.example.food_orderig.activity.customer.ActivityCustomer;
 import com.example.food_orderig.activity.product.ActivityProduct;
@@ -56,6 +57,8 @@ public class ActivityOrdering extends AppCompatActivity {
     TextView save_order ;
     CardView card_numberorder;
     ImageView delete_ordering;
+    LinearLayout lottieAnimationView;
+    private String CODE = String.valueOf(System.currentTimeMillis());
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -135,6 +138,7 @@ public class ActivityOrdering extends AppCompatActivity {
         txtname = findViewById(R.id.txtname);
         delete_ordering = findViewById(R.id.delete_add_order);
         cardView_pay = findViewById(R.id.cardvie_pay);
+        lottieAnimationView = findViewById(R.id.lottie_shop);
 
 
     }
@@ -158,12 +162,14 @@ public class ActivityOrdering extends AppCompatActivity {
     }
     private void initCounter(){
         if (orderDetailList.size() > 0){
+            lottieAnimationView.setVisibility(View.GONE);
             cardView_pay.setVisibility(View.VISIBLE);
             card_numberorder.setVisibility(View.VISIBLE);
             number_order.setText(orderDetailList.size()+"");
         }else {
             cardView_pay.setVisibility(View.GONE);
             card_numberorder.setVisibility(View.GONE);
+            lottieAnimationView.setVisibility(View.VISIBLE);
         }
         total.setText(getTotalPrice()+"");
     }
@@ -205,14 +211,19 @@ public class ActivityOrdering extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                dao_savedorder.insertOrder(new Order(customer.name , "1" , customer.id , 1 , total.getText()+"" , "با تمام مخلفات" , getCurrentTime()));
-                for (int i = 0; i < orderDetailList.size(); i++) {
-                    dao_detailorder.insertDetailOrder(new DetailOrder(orderDetailList.get(i).name , orderDetailList.get(i).price , orderDetailList.get(i).category ,
-                            Tools.convertToPrice(number_order.getText().toString()) , dao_savedorder.getOrderList().get(i).unit_code ));
+                if(customer == null){
 
-                    Toast.makeText(ActivityOrdering.this, "سفارش ذخیره شد", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(ActivityOrdering.this, "مشتری را انتخاب کنید", Toast.LENGTH_SHORT).show();
+                }else {
+
+                    dao_savedorder.insertOrder(new Order(customer.name , CODE , customer.id , 1 , total.getText()+"" , "با تمام مخلفات" , getCurrentTime()));
+                    for (int i = 0; i < orderDetailList.size(); i++) {
+                        dao_detailorder.insertDetailOrder(new DetailOrder(orderDetailList.get(i).name , orderDetailList.get(i).price , orderDetailList.get(i).category ,
+                                orderDetailList.get(i).amount , CODE ));
+
+                        Toast.makeText(ActivityOrdering.this, " سفارش " + customer.name + " با موفقیت ذخیره شد", Toast.LENGTH_SHORT).show();
+                    }
                     finish();
-
                 }
             }
         });

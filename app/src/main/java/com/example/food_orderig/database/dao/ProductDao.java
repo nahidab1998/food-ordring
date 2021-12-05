@@ -15,6 +15,9 @@ public interface ProductDao {
     @Query("SELECT * FROM table_product")
     List<Product> getList();
 
+    @Query("SELECT * FROM table_product WHERE category = :category")
+    List<Product> getListByCategory(String category);
+
 //    @Query("Select * from table_product where table_product_id = :id limit 1")
 //    List<Product> get(int id);
 
