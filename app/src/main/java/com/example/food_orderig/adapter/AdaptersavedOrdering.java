@@ -17,6 +17,8 @@ import com.example.food_orderig.R;
 import com.example.food_orderig.activity.orderingreceipt.ActivityOrderingReceipt;
 import com.example.food_orderig.database.DatabaseHelper;
 import com.example.food_orderig.database.dao.SavedOrderDao;
+import com.example.food_orderig.helper.App;
+import com.example.food_orderig.helper.Tools;
 import com.example.food_orderig.model.Order;
 
 import java.util.List;
@@ -28,7 +30,6 @@ public class AdaptersavedOrdering extends RecyclerView.Adapter<AdaptersavedOrder
 
     DatabaseHelper database;
     SavedOrderDao dao;
-    DatabaseHelper db = DatabaseHelper.getInstance(context);
 
 
     public AdaptersavedOrdering(Context context , List<Order> list){
@@ -53,6 +54,7 @@ public class AdaptersavedOrdering extends RecyclerView.Adapter<AdaptersavedOrder
         holder.total.setText(order.total);
         holder.explain.setText(order.description);
         holder.date.setText(order.date);
+        holder.time.setText(order.time);
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -62,6 +64,8 @@ public class AdaptersavedOrdering extends RecyclerView.Adapter<AdaptersavedOrder
                 intent.putExtra("customerid" , list.get(position).customer_id);
                 intent.putExtra("name" , list.get(position).name);
                 intent.putExtra("total" , list.get(position).total);
+                intent.putExtra("time" , list.get(position).time);
+                intent.putExtra("date" , list.get(position).date);
                 context.startActivity(intent);
 //                Toast.makeText(context, "جزییات سفارش " + order.name, Toast.LENGTH_SHORT).show();
 
@@ -80,7 +84,7 @@ public class AdaptersavedOrdering extends RecyclerView.Adapter<AdaptersavedOrder
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
 
-                                database = DatabaseHelper.getInstance(context.getApplicationContext());
+                                database = App.getDatabase();
                                 dao = database.savedOrderDao();
                                 dao.deleteOrder(order);
                                 list.remove(position);
@@ -112,7 +116,7 @@ public class AdaptersavedOrdering extends RecyclerView.Adapter<AdaptersavedOrder
         TextView name , status , total , explain ;
         TextView deleteitem;
 //        TextView houre;
-        TextView date;
+        TextView date , time;
 
         public ViewHolder(View itemView) {
             super(itemView);
@@ -124,6 +128,7 @@ public class AdaptersavedOrdering extends RecyclerView.Adapter<AdaptersavedOrder
             explain = itemView.findViewById(R.id.explain);
             deleteitem = itemView.findViewById(R.id.delete_ordering);
 //            houre = itemView.findViewById(R.id.houre);
+            time = itemView.findViewById(R.id.time);
             date = itemView.findViewById(R.id.date);
 
         }

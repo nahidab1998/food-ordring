@@ -21,6 +21,7 @@ import com.example.food_orderig.database.DatabaseHelper;
 import com.example.food_orderig.database.dao.DetailOrderDao;
 import com.example.food_orderig.adapter.AdapterOrdering;
 import com.example.food_orderig.database.dao.SavedOrderDao;
+import com.example.food_orderig.helper.App;
 import com.example.food_orderig.helper.Tools;
 import com.example.food_orderig.model.Customer;
 import com.example.food_orderig.model.DetailOrder;
@@ -28,12 +29,13 @@ import com.example.food_orderig.model.Order;
 import com.example.food_orderig.model.Product;
 import com.google.gson.Gson;
 
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
+
+import saman.zamani.persiandate.PersianDate;
+import saman.zamani.persiandate.PersianDateFormat;
 
 public class ActivityOrdering extends AppCompatActivity {
 
@@ -68,7 +70,8 @@ public class ActivityOrdering extends AppCompatActivity {
 
         Log.e("bbbbb", "onCreate: " + System.currentTimeMillis() );
 
-        db = DatabaseHelper.getInstance(getApplicationContext());
+        db = App.getDatabase();
+
         dao_savedorder = db.savedOrderDao();
         dao_detailorder = db.detailOrderDao();
 
@@ -172,7 +175,7 @@ public class ActivityOrdering extends AppCompatActivity {
             card_numberorder.setVisibility(View.GONE);
             lottieAnimationView.setVisibility(View.VISIBLE);
         }
-        total.setText(getTotalPrice()+"");
+        total.setText(Tools.getForamtPrice(getTotalPrice()+""));
     }
 
     private void insertToOrderList(Product product){
@@ -211,32 +214,46 @@ public class ActivityOrdering extends AppCompatActivity {
         save_order.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                try {
+                    if(customer == null){
 
-                if(customer == null){
+                        Toast.makeText(ActivityOrdering.this, "مشتری را انتخاب کنید", Toast.LENGTH_SHORT).show();
+                    }else {
 
-                    Toast.makeText(ActivityOrdering.this, "مشتری را انتخاب کنید", Toast.LENGTH_SHORT).show();
-                }else {
-
-                    dao_savedorder.insertOrder(new Order(customer.name , CODE , customer.id , 1 , total.getText()+"" , "با تمام مخلفات" , getCurrentTime()));
-                    for (int i = 0; i < orderDetailList.size(); i++) {
-                        dao_detailorder.insertDetailOrder(new DetailOrder(orderDetailList.get(i).name , orderDetailList.get(i).price , orderDetailList.get(i).category ,
-                                orderDetailList.get(i).amount , CODE ));
-
-                        Toast.makeText(ActivityOrdering.this, " سفارش " + customer.name + " با موفقیت ذخیره شد", Toast.LENGTH_SHORT).show();
+                        dao_savedorder.insertOrder(new Order(customer.name , CODE , customer.id , 1 , total.getText()+"" , "با تمام مخلفات" , getCurrentTime_time() , getCurrentTime_Date()));
+                        for (int i = 0; i < orderDetailList.size(); i++) {
+                            dao_detailorder.insertDetailOrder(new DetailOrder(orderDetailList.get(i).name , orderDetailList.get(i).price , orderDetailList.get(i).category ,
+                                    orderDetailList.get(i).amount , CODE ,getCurrentTime_time() , getCurrentTime_Date()));
+                        }
+                        Toast.makeText(getApplicationContext(), "test", Toast.LENGTH_SHORT).show();
+                        db.getOpenHelper().close();
+                        finish();
                     }
-                    finish();
+                }catch (Exception e){
+                    Log.e("qqq", "onClick: ",e );
                 }
             }
         });
     }
 
-    public String getCurrentTime(){
+    private String getCurrentTime_time(){
         Calendar c = Calendar.getInstance();
-        SimpleDateFormat dateFormat = new SimpleDateFormat("EEEE , dd-MMM-yyyy  |  hh:mm:ss aa");
+        SimpleDateFormat dateFormat = new SimpleDateFormat("HH:mm:ss ");
         String datetime = dateFormat.format(c.getTime());
         return datetime;
     }
 
+    private String getCurrentTime_Date(){
+        PersianDate c = new PersianDate();
+        PersianDateFormat dateFormat = new PersianDateFormat(" Y/m/d ");
 
+        String datetime = dateFormat.format(c);
+        return datetime;
+    }
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if (db != null || db.isOpen()) db.close();
+    }
 }

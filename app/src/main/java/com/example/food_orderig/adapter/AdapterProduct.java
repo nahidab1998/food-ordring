@@ -22,6 +22,7 @@ import com.example.food_orderig.R;
 import com.example.food_orderig.activity.product.ActivityAddOrEditProduct;
 import com.example.food_orderig.database.DatabaseHelper;
 import com.example.food_orderig.database.dao.ProductDao;
+import com.example.food_orderig.helper.App;
 import com.example.food_orderig.model.Product;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.gson.Gson;
@@ -132,7 +133,7 @@ public class AdapterProduct extends RecyclerView.Adapter<AdapterProduct.Viewhold
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
 
-                                database = DatabaseHelper.getInstance(context.getApplicationContext());
+                                database = App.getDatabase();
                                 dao = database.productDao();
                                 dao.deleteProduct(product);
                                 list.remove(pos);

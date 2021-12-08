@@ -21,6 +21,7 @@ import com.example.food_orderig.database.dao.GroupingDao;
 import com.example.food_orderig.database.dao.ProductDao;
 import com.example.food_orderig.adapter.AdapterGroupingProduct;
 import com.example.food_orderig.adapter.AdapterProduct;
+import com.example.food_orderig.helper.App;
 import com.example.food_orderig.model.Grouping;
 import com.example.food_orderig.model.Product;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -59,11 +60,11 @@ public class ActivityProduct extends AppCompatActivity implements ProductView {
         }
 
         floatingActionButton_product = findViewById(R.id.fab_product);
-        lotieProduct = findViewById(R.id.lottie_product);
+//        lotieProduct = findViewById(R.id.lottie_product);
 //        lotieProduct.setVisibility(View.GONE);
 
 
-        db= DatabaseHelper.getInstance(getApplicationContext());
+        db= App.getDatabase();
         dao_product= db.productDao();
         dao_grouping = db.groupingDao();
 

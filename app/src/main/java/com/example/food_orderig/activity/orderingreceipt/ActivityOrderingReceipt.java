@@ -13,6 +13,8 @@ import com.example.food_orderig.database.DatabaseHelper;
 import com.example.food_orderig.database.dao.CustomerDao;
 import com.example.food_orderig.database.dao.DetailOrderDao;
 import com.example.food_orderig.database.dao.SavedOrderDao;
+import com.example.food_orderig.helper.App;
+import com.example.food_orderig.helper.Tools;
 
 public class ActivityOrderingReceipt extends AppCompatActivity {
 
@@ -23,9 +25,9 @@ public class ActivityOrderingReceipt extends AppCompatActivity {
     DetailOrderDao dao_detailOrder;
     SavedOrderDao dao_savedOrderDao;
     CustomerDao dao_customerDao;
-    String code, customername , total_detail;
+    String code, customername , total_detail , date_receipt , time_receipt;
     private int customerID;
-    TextView name , phone , address , total;
+    TextView name , phone , address , total ,time , date;
 
 
 
@@ -40,6 +42,8 @@ public class ActivityOrderingReceipt extends AppCompatActivity {
             customerID = getIntent().getIntExtra("customerid" ,0 );
             customername = getIntent().getStringExtra("name");
             total_detail = getIntent().getStringExtra("total");
+            time_receipt = getIntent().getStringExtra("time");
+            date_receipt = getIntent().getStringExtra("date");
         }
 
         initDatabase();
@@ -51,7 +55,7 @@ public class ActivityOrderingReceipt extends AppCompatActivity {
 
     private void initDatabase(){
 
-        db = DatabaseHelper.getInstance(getApplicationContext());
+        db = App.getDatabase();
         dao_detailOrder = db.detailOrderDao();
         dao_savedOrderDao = db.savedOrderDao();
         dao_customerDao = db.customerDao();
@@ -64,6 +68,9 @@ public class ActivityOrderingReceipt extends AppCompatActivity {
         address = findViewById(R.id.address_receipt);
         total = findViewById(R.id. total_receipt);
         recyclerView = findViewById(R.id.recycle_receipt);
+        time = findViewById(R.id.time_receipt);
+        date = findViewById(R.id.date_receipt);
+
     }
 
     private void initRecycler(){
@@ -75,6 +82,8 @@ public class ActivityOrderingReceipt extends AppCompatActivity {
         name.setText(customername);
         phone.setText(dao_customerDao.getID(customerID).phone);
         address.setText(dao_customerDao.getID(customerID).address);
+        time.setText(time_receipt);
+        date.setText(date_receipt);
 
     }
     private  void initSetTotal(){

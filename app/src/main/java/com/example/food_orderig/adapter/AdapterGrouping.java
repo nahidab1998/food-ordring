@@ -19,6 +19,7 @@ import com.example.food_orderig.R;
 import com.example.food_orderig.activity.grouping.ActivityAddOrEditGrouping;
 import com.example.food_orderig.database.DatabaseHelper;
 import com.example.food_orderig.database.dao.GroupingDao;
+import com.example.food_orderig.helper.App;
 import com.example.food_orderig.model.Grouping;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.gson.Gson;
@@ -103,7 +104,7 @@ public class AdapterGrouping extends RecyclerView.Adapter<AdapterGrouping.Viewho
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
 
-                                database = DatabaseHelper.getInstance(context.getApplicationContext());
+                                database = App.getDatabase();
                                 dao = database.groupingDao();
                                 dao.deleteGrouping(grouping);
                                 list.remove(pos);

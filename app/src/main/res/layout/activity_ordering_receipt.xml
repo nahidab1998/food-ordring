@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="@color/text"
+    android:background="@color/white"
     tools:context=".activity.orderingreceipt.ActivityOrderingReceipt">
 
     <LinearLayout
@@ -23,57 +23,160 @@
             android:paddingHorizontal="10dp"
             android:paddingVertical="10dp">
 
-            <androidx.cardview.widget.CardView
-                android:layout_width="60dp"
-                android:layout_height="60dp"
-                android:backgroundTint="@color/text"
-                app:cardCornerRadius="30dp">
+<!--            <androidx.cardview.widget.CardView-->
+<!--                android:layout_width="60dp"-->
+<!--                android:layout_height="60dp"-->
+<!--                android:backgroundTint="@color/text"-->
+<!--                app:cardCornerRadius="30dp">-->
 
-                <ImageView
-                    android:layout_width="45dp"
-                    android:layout_height="45dp"
-                    android:layout_gravity="center"
-                    android:src="@drawable/profile_red" />
+<!--                <ImageView-->
+<!--                    android:layout_width="45dp"-->
+<!--                    android:layout_height="45dp"-->
+<!--                    android:layout_gravity="center"-->
+<!--                    android:src="@drawable/profile_red" />-->
 
-            </androidx.cardview.widget.CardView>
+<!--            </androidx.cardview.widget.CardView>-->
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:paddingHorizontal="15dp"
-                android:paddingVertical="10dp">
-
-
-                <TextView
-                    android:id="@+id/name_receipt"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="10dp"
-                    android:fontFamily="@font/iran_sans"
-                    android:text="باقری"
-                    android:textColor="@color/text"
-                    android:textSize="18dp"
-                    android:textStyle="bold" />
+                android:paddingBottom="10dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal">
+                    android:orientation="horizontal"
+                    >
 
-                    <ImageView
+                    <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginEnd="5dp"
-                        android:src="@drawable/phone_white" />
+                        android:paddingTop="10dp"
+                        >
+
+                        <androidx.cardview.widget.CardView
+                            android:layout_width="30dp"
+                            android:layout_height="30dp"
+                            android:layout_marginEnd="10dp"
+                            android:backgroundTint="@color/white"
+                            app:cardCornerRadius="15dp">
+
+                            <ImageView
+                                android:layout_width="20dp"
+                                android:layout_height="20dp"
+                                android:layout_gravity="center"
+                                android:src="@drawable/profile_red"/>
+
+                        </androidx.cardview.widget.CardView>
+
+                        <TextView
+                            android:id="@+id/name_receipt"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/iran_sans"
+                            android:text="باقری"
+                            android:textColor="@color/text"
+                            android:textSize="18dp"
+                            android:textStyle="bold" />
+
+                    </LinearLayout>
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        >
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentTop="true"
+                            android:layout_alignParentEnd="true"
+                            android:paddingVertical="3dp"
+                            android:paddingStart="3dp"
+                            android:background="@drawable/background_date"
+                            android:orientation="horizontal"
+                            android:paddingEnd="10dp">
+
+                            <androidx.cardview.widget.CardView
+                                android:layout_width="40dp"
+                                android:layout_height="40dp"
+                                android:layout_marginEnd="10dp"
+                                app:cardCornerRadius="10dp">
+
+                                <ImageView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center"
+                                    android:src="@drawable/calender" />
+
+                            </androidx.cardview.widget.CardView>
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent"
+                                android:orientation="horizontal">
+
+                                <TextView
+                                    android:id="@+id/time_receipt"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center"
+                                    android:fontFamily="@font/number"
+                                    android:gravity="center"
+                                    android:layout_marginEnd="10dp"
+                                    android:text="11:10"
+                                    android:textColor="@color/white"
+                                    android:textSize="12dp"
+                                    android:textStyle="bold" />
+
+                                <TextView
+                                    android:id="@+id/date_receipt"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center"
+                                    android:fontFamily="@font/number"
+                                    android:gravity="center"
+                                    android:text="15 آذر ماه 1400"
+                                    android:textColor="@color/white"
+                                    android:textSize="12dp"
+                                    android:textStyle="bold" />
+
+                            </LinearLayout>
+
+                        </LinearLayout>
+
+                    </RelativeLayout>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="5dp"
+                    android:orientation="horizontal">
+
+                    <androidx.cardview.widget.CardView
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:layout_marginEnd="10dp"
+                        android:backgroundTint="@color/white"
+                        app:cardCornerRadius="15dp">
+
+                        <ImageView
+                            android:layout_width="20dp"
+                            android:layout_height="20dp"
+                            android:layout_gravity="center"
+                            android:src="@drawable/phone2" />
+
+                    </androidx.cardview.widget.CardView>
 
                     <TextView
                         android:id="@+id/phone_receipt"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginBottom="5dp"
-                        android:fontFamily="@font/iran_sans"
+                        android:layout_height="match_parent"
+                        android:fontFamily="@font/number"
                         android:text="09190184868"
+                        android:gravity="center"
+                        android:layout_gravity="center"
                         android:textColor="@color/text"
                         android:textSize="14dp"
                         android:textStyle="bold" />
@@ -83,13 +186,23 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal">
+                    android:orientation="horizontal"
+                    android:layout_marginEnd="5dp"
+                    >
+                    <androidx.cardview.widget.CardView
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:layout_marginEnd="10dp"
+                        android:backgroundTint="@color/white"
+                        app:cardCornerRadius="15dp">
 
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginEnd="5dp"
-                        android:src="@drawable/home_white" />
+                        <ImageView
+                            android:layout_width="20dp"
+                            android:layout_height="20dp"
+                            android:layout_gravity="center"
+                            android:src="@drawable/home2" />
+
+                    </androidx.cardview.widget.CardView>
 
                     <TextView
                         android:id="@+id/address_receipt"
@@ -110,22 +223,14 @@
 
     </LinearLayout>
 
-    <LinearLayout
-        android:id="@+id/line"
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:layout_below="@id/linear_back"
-        android:background="@color/white"
-        android:layout_marginHorizontal="10dp"
-        android:orientation="horizontal" />
-
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycle_receipt"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@id/line"
+        android:layout_below="@id/linear_back"
         android:clipToPadding="false"
         android:paddingTop="10dp"
+        android:background="@color/text"
         android:paddingBottom="73dp"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         tools:listitem="@layout/list_receipt" />
@@ -136,9 +241,12 @@
         android:layout_alignParentBottom="true"
         android:layout_marginHorizontal="10dp"
         android:layout_marginVertical="10dp"
+        app:cardBackgroundColor="@color/red"
+        android:elevation="6dp"
+        android:outlineSpotShadowColor="@color/red"
         app:cardCornerRadius="10dp">
 
-        <LinearLayout
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:paddingHorizontal="20dp"
@@ -149,23 +257,42 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="قیمت کل :"
+                android:layout_alignParentStart="true"
                 android:fontFamily="@font/iran_sans"
                 android:textStyle="bold"
+                android:textColor="@color/white"
                 android:layout_gravity="center"
                 android:textSize="16dp" />
+
             <TextView
                 android:id="@+id/total_receipt"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="55,000"
-                android:fontFamily="@font/number"
-                android:textStyle="bold"
                 android:layout_gravity="center"
-                android:textSize="18dp"
+                android:layout_toRightOf="@id/toman_receipt"
+                android:fontFamily="@font/number"
                 android:gravity="left"
-                android:textColor="@color/red"/>
+                android:text="55,000"
+                android:layout_marginEnd="5dp"
+                android:textColor="@color/white"
+                android:textSize="18dp"
+                android:textStyle="bold" />
 
-        </LinearLayout>
+            <TextView
+                android:id="@+id/toman_receipt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="تومان"
+                android:fontFamily="@font/iran_sans"
+                android:textStyle="bold"
+                android:layout_alignParentEnd="true"
+                android:layout_centerInParent="true"
+                android:layout_gravity="center"
+                android:textSize="14dp"
+                android:gravity="left"
+                android:textColor="@color/white"/>
+
+        </RelativeLayout>
 
 
     </androidx.cardview.widget.CardView>

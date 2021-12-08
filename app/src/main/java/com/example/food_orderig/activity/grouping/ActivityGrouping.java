@@ -13,6 +13,7 @@ import com.example.food_orderig.R;
 import com.example.food_orderig.database.DatabaseHelper;
 import com.example.food_orderig.database.dao.GroupingDao;
 import com.example.food_orderig.adapter.AdapterGrouping;
+import com.example.food_orderig.helper.App;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
@@ -35,7 +36,7 @@ public class ActivityGrouping extends AppCompatActivity {
         imageView=findViewById(R.id.img_grouping);
         fab_grouping =findViewById(R.id.fab_grouping);
 
-        db= DatabaseHelper.getInstance(getApplicationContext());
+        db= App.getDatabase();
         dao_grouping = db.groupingDao();
 
         adapterGrouping = new AdapterGrouping( new ArrayList<>(), this );

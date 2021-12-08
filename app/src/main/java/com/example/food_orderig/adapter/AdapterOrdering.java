@@ -55,7 +55,7 @@ public class AdapterOrdering extends RecyclerView.Adapter<AdapterOrdering.ViewHo
         holder.txtname.setText(product.name);
         holder.txtprise.setText(product.price);
         holder.txtcategory.setText(product.category);
-        holder.txt_price.setText( Tools.convertToPrice(product.price) * product.amount +"" );
+        holder.txt_price.setText(Tools.getForamtPrice(Tools.convertToPrice(product.price) * product.amount +""));
         holder.title.setText(product.amount+"");
         holder.add.setOnClickListener(new View.OnClickListener() {
 

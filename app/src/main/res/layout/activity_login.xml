@@ -45,6 +45,10 @@
             android:layout_height="70dp"
             android:fontFamily="@fonts/iran_sans"
             android:hint="نام کاربری"
+            app:boxCornerRadiusBottomStart="10dp"
+            app:boxCornerRadiusTopEnd="10dp"
+            app:boxCornerRadiusBottomEnd="10dp"
+            app:boxCornerRadiusTopStart="10dp"
             app:endIconMode="clear_text">
 
             <com.google.android.material.textfield.TextInputEditText
@@ -68,6 +72,10 @@
             android:layout_marginTop="40dp"
             android:fontFamily="@fonts/iran_sans"
             android:hint="رمز عبور"
+            app:boxCornerRadiusBottomStart="10dp"
+            app:boxCornerRadiusTopEnd="10dp"
+            app:boxCornerRadiusBottomEnd="10dp"
+            app:boxCornerRadiusTopStart="10dp"
             app:endIconMode="password_toggle">
 
             <com.google.android.material.textfield.TextInputEditText
@@ -82,6 +90,33 @@
                 android:textColorHint="#AFB1B3" />
 
         </com.google.android.material.textfield.TextInputLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:weightSum="2">
+            <CheckBox
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="مرا بخاطر بسپار"
+                android:layout_weight="1"
+                android:fontFamily="@font/iran_sans"
+                android:textSize="14dp"
+                android:textColor="#AFB1B3"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="فراموشی رمز"
+                android:layout_weight="1"
+                android:layout_gravity="center"
+                android:gravity="left"
+                android:fontFamily="@font/iran_sans"
+                android:textSize="14dp"
+                android:textColor="@color/red"
+                />
+
+        </LinearLayout>
 
         <TextView
             android:id="@+id/buttonlogin"

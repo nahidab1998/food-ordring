@@ -31,10 +31,14 @@ public class Order {
     @ColumnInfo (name = "description")
     public String description;
 
+    @ColumnInfo(name = "time")
+    public String time;
+
     @ColumnInfo(name = "date")
     public String date;
 
-    public Order(int id, String name, String unit_code, int customer_id, int status, String total, String description , String date) {
+
+    public Order(int id, String name, String unit_code, int customer_id, int status, String total, String description , String time, String date ) {
         this.id = id;
         this.name = name;
         this.unit_code = unit_code;
@@ -42,17 +46,19 @@ public class Order {
         this.status = status;
         this.total = total;
         this.description = description;
+        this.time = time;
         this.date = date;
     }
 
     @Ignore
-    public Order(String name, String unit_code, int customer_id, int status, String total, String description , String date) {
+    public Order(String name, String unit_code, int customer_id, int status, String total, String description , String time, String date ) {
         this.name = name;
         this.unit_code = unit_code;
         this.customer_id = customer_id;
         this.status = status;
         this.total = total;
         this.description = description;
+        this.time = time;
         this.date = date;
     }
 }

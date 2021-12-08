@@ -10,6 +10,7 @@ import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -19,6 +20,7 @@ import android.widget.Toast;
 import com.example.food_orderig.R;
 import com.example.food_orderig.database.DatabaseHelper;
 import com.example.food_orderig.database.dao.CustomerDao;
+import com.example.food_orderig.helper.App;
 import com.example.food_orderig.model.Customer;
 import com.example.food_orderig.model.Product;
 import com.google.gson.Gson;
@@ -55,6 +57,39 @@ public class ActivityAddOrEditCostomer extends AppCompatActivity {
         anim_customer.animate().translationYBy(1500f).setDuration(1500);
 
 
+        name_addcustomer.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (!hasFocus) {
+                    InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+                    imm.hideSoftInputFromWindow(v.getWindowToken() , 0);
+                }
+
+            }
+        });
+
+        phone_addcustomer.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (!hasFocus) {
+                    InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+                    imm.hideSoftInputFromWindow(v.getWindowToken() , 0);
+                }
+
+            }
+        });
+        address_addcustomer.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (!hasFocus) {
+                    InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+                    imm.hideSoftInputFromWindow(v.getWindowToken() , 0);
+                }
+
+            }
+        });
+
+
 //        Intent intent=getIntent();
 //        String zero = intent.getStringExtra("idcustomer");
 //
@@ -75,7 +110,7 @@ public class ActivityAddOrEditCostomer extends AppCompatActivity {
             address_addcustomer.setText(a.address);
         }
 
-        db = DatabaseHelper.getInstance(getApplicationContext());
+        db = App.getDatabase();
         dao = db.customerDao();
 
         btn_save_customer.setOnClickListener(new View.OnClickListener() {

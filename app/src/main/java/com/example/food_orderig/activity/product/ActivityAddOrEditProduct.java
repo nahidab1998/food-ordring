@@ -2,11 +2,13 @@ package com.example.food_orderig.activity.product;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
@@ -22,6 +24,7 @@ import com.example.food_orderig.database.DatabaseHelper;
 import com.example.food_orderig.database.dao.GroupingDao;
 import com.example.food_orderig.database.dao.ProductDao;
 import com.example.food_orderig.design.NumberTextWatcherForThousand;
+import com.example.food_orderig.helper.App;
 import com.example.food_orderig.model.Product;
 import com.google.gson.Gson;
 
@@ -50,6 +53,17 @@ public class ActivityAddOrEditProduct extends AppCompatActivity {
         price.addTextChangedListener(new NumberTextWatcherForThousand(price));
         autoCompleteTextView = findViewById(R.id.autoComplete);
 
+        autoCompleteTextView.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (!hasFocus) {
+                    InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+                    imm.hideSoftInputFromWindow(v.getWindowToken() , 0);
+                }
+
+            }
+        });
+
         anim_product = findViewById(R.id.anim_product);
         anim_product.setTranslationY(-1500f);
         anim_product.animate().translationYBy(1500f).setDuration(1500);
@@ -63,15 +77,37 @@ public class ActivityAddOrEditProduct extends AppCompatActivity {
             price.setText(p.price);
         }
 
+        name.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (!hasFocus) {
+                    InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+                    imm.hideSoftInputFromWindow(v.getWindowToken() , 0);
+                }
+
+            }
+        });
+
+        price.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (!hasFocus) {
+                    InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+                    imm.hideSoftInputFromWindow(v.getWindowToken() , 0);
+                }
+
+            }
+        });
+
+
 
         textViewcancle=findViewById(R.id.cancel_product);
         btn_save_product = findViewById(R.id.save_product);
         imageView_image_product = findViewById(R.id.add_img_food_product);
 
-        db = DatabaseHelper.getInstance(getApplicationContext());
+        db = App.getDatabase();
         dao_product = db.productDao();
         dao_grouping = db.groupingDao();
-        autoCompleteTextView = findViewById(R.id.autoComplete);
         adapter_autocomplete = new ArrayAdapter(getApplicationContext(), android.R.layout.simple_dropdown_item_1line,dao_grouping.getname());
         autoCompleteTextView.setThreshold(1);
         autoCompleteTextView.setAdapter(adapter_autocomplete);

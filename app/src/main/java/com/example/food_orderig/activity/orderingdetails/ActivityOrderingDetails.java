@@ -9,6 +9,7 @@ import com.example.food_orderig.R;
 import com.example.food_orderig.adapter.AdaptersavedOrdering;
 import com.example.food_orderig.database.DatabaseHelper;
 import com.example.food_orderig.database.dao.SavedOrderDao;
+import com.example.food_orderig.helper.App;
 
 public class ActivityOrderingDetails extends AppCompatActivity {
 
@@ -33,7 +34,7 @@ public class ActivityOrderingDetails extends AppCompatActivity {
     }
 
     private void initDatabase(){
-        db = DatabaseHelper.getInstance(getApplicationContext());
+        db = App.getDatabase();
         dao = db.savedOrderDao();
     }
 

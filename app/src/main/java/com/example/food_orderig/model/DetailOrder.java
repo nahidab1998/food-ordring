@@ -28,21 +28,33 @@ public class DetailOrder {
     @ColumnInfo(name = "code")
     public String code;
 
-    public DetailOrder(int id, String name, String price, String category, int amant, String code) {
+    @ColumnInfo (name = "time")
+    public  String time;
+
+    @ColumnInfo (name = "date")
+    public  String date;
+
+
+
+    public DetailOrder(int id, String name, String price, String category, int amant, String code , String time, String date ) {
         this.id = id;
         this.name = name;
         this.price = price;
         this.category = category;
         this.amant = amant;
         this.code = code;
+        this.time = time;
+        this.date = date;
     }
 
     @Ignore
-    public DetailOrder(String name, String price, String category, int amant, String code) {
+    public DetailOrder(String name, String price, String category, int amant, String code , String time, String date ) {
         this.name = name;
         this.price = price;
         this.category = category;
         this.amant = amant;
         this.code = code;
+        this.time = time ;
+        this.date = date ;
     }
 }

@@ -21,6 +21,8 @@ import com.example.food_orderig.database.dao.CustomerDao;
 import com.example.food_orderig.database.dao.GroupingDao;
 import com.example.food_orderig.database.dao.ProductDao;
 import com.example.food_orderig.adapter.AdapterProduct;
+import com.example.food_orderig.database.dao.SavedOrderDao;
+import com.example.food_orderig.helper.App;
 import com.jjoe64.graphview.GraphView;
 import com.jjoe64.graphview.LegendRenderer;
 import com.jjoe64.graphview.series.DataPoint;
@@ -32,19 +34,21 @@ import java.util.Date;
 
 public class MainActivity extends AppCompatActivity {
 
-    CardView cardViewproduct,cardViewcustomer , cardViewprouping;
-    ImageView add_shop;
-    TextView number_product, number_customer , number_groping;
-    AdapterProduct adapterProduct;
-    DatabaseHelper db;
-    ProductDao dao_product;
-    GroupingDao dao_grouping;
-    CustomerDao dao_customer;
+    private CardView cardViewproduct,cardViewcustomer , cardViewprouping;
+    private ImageView add_shop;
+    private TextView number_product, number_customer , number_groping;
+    private AdapterProduct adapterProduct;
+    private DatabaseHelper db;
+    private ProductDao dao_product;
+    private GroupingDao dao_grouping;
+    private CustomerDao dao_customer;
+    private SavedOrderDao dao_savedorder;
     int count_product;
     int count_customer;
     int count_grouping;
-    CardView saved;
-    TextView test;
+    private CardView saved;
+    private GraphView graph;
+    private TextView month ,week ,day ;
     private String date = String.valueOf(System.currentTimeMillis()- 604800000);
 
     @Override
@@ -52,68 +56,11 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        cardViewproduct=findViewById(R.id.products);
-        cardViewcustomer=findViewById(R.id.customer);
-        cardViewprouping=findViewById(R.id.grouping);
-        saved = findViewById(R.id.saved);
-        test = findViewById(R.id.month_profit);
+        initDatabase();
+        initID();
+        initGraph();
 
-        add_shop = findViewById(R.id.add_shop);
-
-        db = DatabaseHelper.getInstance(getApplicationContext());
-
-        final GraphView graph = (GraphView) findViewById(R.id.graf);
-        LineGraphSeries<DataPoint> bgseries= new LineGraphSeries<>(new DataPoint[]{
-
-                new DataPoint(0, 1000),
-                new DataPoint(1, 8000),
-                new DataPoint(2, 3500),
-                new DataPoint(3, 24000),
-                new DataPoint(4, 60000),
-                new DataPoint(5, 1300),
-                new DataPoint(6, 5300),
-                new DataPoint(7, 3500),
-                new DataPoint(8, 80000),
-                new DataPoint(9, 3500),
-                new DataPoint(10, 1300),
-                new DataPoint(11, 5300),
-                new DataPoint(12, 80000),
-                new DataPoint(13, 3500),
-                new DataPoint(14, 60000),
-                new DataPoint(15, 5300),
-                new DataPoint(16, 8000),
-                new DataPoint(17, 1000),
-                new DataPoint(18, 5300),
-                new DataPoint(19, 60000),
-                new DataPoint(20, 5300),
-                new DataPoint(21, 1300),
-                new DataPoint(22, 60000),
-                new DataPoint(23, 3500),
-                new DataPoint(24, 1300),
-                new DataPoint(25, 1000),
-                new DataPoint(26, 8000),
-                new DataPoint(27, 5300),
-                new DataPoint(28, 1300),
-                new DataPoint(29, 60000),
-                new DataPoint(30, 5300),
-                new DataPoint(31, 80000),
-        });
-
-        graph.addSeries(bgseries);
-        graph.setBackgroundColor(getResources().getColor(android.R.color.background_light));
-        graph.getViewport().setScalable(true);
-        graph.getViewport().setScrollable(true);
-//        graph.setTitle("نمودار رشد سرمایه");
-        graph.setTitleColor(getResources().getColor(android.R.color.white));
-//        bgseries.setTitle("foo");
-        bgseries.setThickness(5);
-        bgseries.setDrawBackground(true);
-        bgseries.setColor(Color.rgb(241,92,65));
-        bgseries.setBackgroundColor(Color.rgb(248,243,247));
-//        graph.getLegendRenderer().setVisible(true);
-        graph.getLegendRenderer().setAlign(LegendRenderer.LegendAlign.TOP);
-
-
+        // Intents 
         cardViewproduct.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -157,45 +104,83 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-
-
         setdate();
+    }
+
+    private void initGraph() {
+        LineGraphSeries<DataPoint> bgseries= new LineGraphSeries<>(new DataPoint[]{
+
+                new DataPoint(1, 0),
+                new DataPoint(2, 8000),
+                new DataPoint(3, 7000),
+                new DataPoint(4, 10000),
+        });
+
+        graph.addSeries(bgseries);
+        graph.setBackgroundColor(getResources().getColor(android.R.color.background_light));
+        graph.getViewport().setScalable(true);
+        graph.getViewport().setScrollable(true);
+
+        graph.setTitleColor(getResources().getColor(android.R.color.white));
+        bgseries.setThickness(6);
+        bgseries.setDrawBackground(true);
+        bgseries.setColor(Color.rgb(241,92,65));
+        bgseries.setBackgroundColor(Color.rgb(248,243,247));
+//        graph.getLegendRenderer().setVisible(true);
+        graph.getLegendRenderer().setAlign(LegendRenderer.LegendAlign.TOP);
+    }
+
+
+    private void initDatabase() {
+        db = App.getDatabase();
+        dao_product = db.productDao();
+        dao_customer = db.customerDao();
+        dao_grouping = db.groupingDao();
+        dao_savedorder = db.savedOrderDao();
+    }
+
+
+
+    private void initID() {
+        cardViewproduct=findViewById(R.id.products);
+        cardViewcustomer=findViewById(R.id.customer);
+        cardViewprouping=findViewById(R.id.grouping);
+        saved = findViewById(R.id.saved);
+        month = findViewById(R.id.month_profit);
+        week = findViewById(R.id.week_profit);
+        day = findViewById(R.id.today_profit);
+        add_shop = findViewById(R.id.add_shop);
+        graph = (GraphView) findViewById(R.id.graf);
+        number_product = findViewById(R.id.number_of_product);
+        number_customer = findViewById(R.id.number_of_customer);
+        number_groping = findViewById(R.id.number_of_grouping);
     }
 
     private void setdate(){
         Calendar c = Calendar.getInstance() ;
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MMM-yyyy ");
-
         String datetime = dateFormat.format(c.getTime());
-        test.setText(datetime);
+//        test.setText(datetime);
     }
 
-    public void count(){
 
-        number_product = findViewById(R.id.number_of_product);
-        number_customer = findViewById(R.id.number_of_customer);
-        number_groping = findViewById(R.id.number_of_grouping);
+    public void countsizeRecycler(){
 
-        dao_product = db.productDao();
         count_product = dao_product.getList().size();
         number_product.setText(Integer.toString(count_product));
 
-//        db = DatabaseHelper.getInstance(getApplicationContext());
-        dao_customer = db.customerDao();
         count_customer= dao_customer.getList().size();
         number_customer.setText(Integer.toString(count_customer));
 
-//        db = DatabaseHelper.getInstance(getApplicationContext());
-        dao_grouping = db.groupingDao();
         count_grouping = dao_grouping.getList().size();
         number_groping.setText(Integer.toString(count_grouping));
-
     }
+
 
     @Override
     protected void onResume() {
         super.onResume();
-        count();
+        countsizeRecycler();
     }
 
 }

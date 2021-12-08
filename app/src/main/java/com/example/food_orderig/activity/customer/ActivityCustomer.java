@@ -18,6 +18,7 @@ import com.example.food_orderig.R;
 import com.example.food_orderig.database.DatabaseHelper;
 import com.example.food_orderig.database.dao.CustomerDao;
 import com.example.food_orderig.adapter.AdapterCustomer;
+import com.example.food_orderig.helper.App;
 import com.example.food_orderig.model.Customer;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.gson.Gson;
@@ -51,8 +52,7 @@ public class ActivityCustomer extends AppCompatActivity {
         fab_customer=findViewById(R.id.fab_customer);
 
 
-
-        db= DatabaseHelper.getInstance(getApplicationContext());
+        db = App.getDatabase();
         dao_customer = db.customerDao();
         name =findViewById(R.id.name_customer);
         phone =findViewById(R.id.phone_customer);

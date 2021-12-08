@@ -17,6 +17,7 @@ import com.example.food_orderig.R;
 import com.example.food_orderig.activity.customer.ActivityAddOrEditCostomer;
 import com.example.food_orderig.database.DatabaseHelper;
 import com.example.food_orderig.database.dao.CustomerDao;
+import com.example.food_orderig.helper.App;
 import com.example.food_orderig.model.Customer;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.gson.Gson;
@@ -124,7 +125,7 @@ public class AdapterCustomer extends RecyclerView.Adapter<AdapterCustomer.Viewho
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
 
-                                database_customer = DatabaseHelper.getInstance(context.getApplicationContext());
+                                database_customer = App.getDatabase();
                                 dao_customer = database_customer.customerDao();
                                 dao_customer.deleteCustomer(customer);
                                 list.remove(pos);

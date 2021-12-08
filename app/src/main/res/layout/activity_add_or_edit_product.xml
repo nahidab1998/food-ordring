@@ -7,6 +7,8 @@
     android:orientation="vertical"
     android:background="@drawable/food_pic"
     android:id="@+id/background_addProduct"
+    android:clickable="true"
+    android:focusableInTouchMode="true"
     tools:context=".activity.product.ActivityAddOrEditProduct">
 
     <LinearLayout

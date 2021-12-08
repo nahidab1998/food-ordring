@@ -8,6 +8,7 @@
         <entry key="..\:/resume/^ - ^ android development/Food_orderig/app/src/main/res/layout/activity_product.xml" value="0.259375" />
         <entry key="..\:/resume/^ - ^ android development/food-ordring/app/src/main/res/drawable-v24/add_red.xml" value="0.25" />
         <entry key="..\:/resume/^ - ^ android development/food-ordring/app/src/main/res/drawable-v24/amont.xml" value="0.2462962962962963" />
+        <entry key="..\:/resume/^ - ^ android development/food-ordring/app/src/main/res/drawable-v24/background_date.xml" value="0.2462962962962963" />
         <entry key="..\:/resume/^ - ^ android development/food-ordring/app/src/main/res/drawable-v24/border_ripple2.xml" value="0.25076923076923074" />
         <entry key="..\:/resume/^ - ^ android development/food-ordring/app/src/main/res/drawable-v24/btn_takmil.xml" value="0.2712820512820513" />
         <entry key="..\:/resume/^ - ^ android development/food-ordring/app/src/main/res/drawable-v24/custom_lock.xml" value="0.2712820512820513" />
@@ -91,6 +92,7 @@
         <entry key="..\:/resume/^ - ^ android development/food-ordring/app/src/main/res/layout/layout_triple.xml" value="0.2" />
         <entry key="..\:/resume/^ - ^ android development/food-ordring/app/src/main/res/layout/list_customer.xml" value="0.264" />
         <entry key="..\:/resume/^ - ^ android development/food-ordring/app/src/main/res/layout/list_grouping.xml" value="0.259375" />
+        <entry key="..\:/resume/^ - ^ android development/food-ordring/app/src/main/res/layout/list_item_autocomplate.xml" value="0.25885416666666666" />
         <entry key="..\:/resume/^ - ^ android development/food-ordring/app/src/main/res/layout/list_item_grouping_product.xml" value="0.3651026392961877" />
         <entry key="..\:/resume/^ - ^ android development/food-ordring/app/src/main/res/layout/list_product.xml" value="0.264" />
         <entry key="..\:/resume/^ - ^ android development/food-ordring/app/src/main/res/layout/list_receipt.xml" value="0.259375" />
@@ -112,7 +114,7 @@
       </map>
     </option>
   </component>
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_15" project-jdk-name="15" project-jdk-type="JavaSDK">
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_15_PREVIEW" project-jdk-name="15" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />
   </component>
   <component name="ProjectType">
