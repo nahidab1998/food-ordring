@@ -132,7 +132,7 @@ public class ActivityProduct extends AppCompatActivity implements ProductView {
     public void set_recycle_grouping_product(){
 
         ArrayList<Grouping> groupingArrayList = new ArrayList<>();
-        groupingArrayList.add(0,new Grouping("همه محصولات"));
+        groupingArrayList.add(0,new Grouping("همه محصولات",""));
         groupingArrayList.addAll(dao_grouping.getList());
 
         recyclerView_category =findViewById(R.id.recycler_grouping_product);

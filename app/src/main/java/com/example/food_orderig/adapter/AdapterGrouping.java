@@ -5,6 +5,7 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,6 +25,7 @@ import com.example.food_orderig.model.Grouping;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.gson.Gson;
 
+import java.io.File;
 import java.util.List;
 
 public class AdapterGrouping extends RecyclerView.Adapter<AdapterGrouping.ViewholderGrouping> {
@@ -56,7 +58,9 @@ public class AdapterGrouping extends RecyclerView.Adapter<AdapterGrouping.Viewho
     public void onBindViewHolder(ViewholderGrouping holder, @SuppressLint("RecyclerView") int position) {
 
         grouping = list . get(position);
+
         holder.textView_showname_grouping.setText(grouping.name);
+        holder.imageView_grouping.setImageURI(Uri.parse(grouping.picture));
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -64,6 +68,7 @@ public class AdapterGrouping extends RecyclerView.Adapter<AdapterGrouping.Viewho
                 showBottomSheetDialogclick(position);
             }
         });
+
     }
 
     @Override

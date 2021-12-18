@@ -13,6 +13,8 @@ public interface SavedOrderDao {
     @Query("Select * from table_order")
     List<Order> getOrderList();
 
+    @Query("select * from table_order where date>=datetime('now', 'now', '-7 day')")
+    List<Order> getOrderListDate();
 
     @Insert
     void insertOrder(Order order);

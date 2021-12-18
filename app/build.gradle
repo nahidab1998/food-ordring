@@ -67,4 +67,6 @@ dependencies {
     //persian date
     implementation 'com.github.samanzamani.persiandate:PersianDate:0.8'
 
+    //fix add image from gallery and camera
+
 }
