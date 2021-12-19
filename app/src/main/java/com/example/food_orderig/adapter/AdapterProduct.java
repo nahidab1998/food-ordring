@@ -5,6 +5,7 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Build;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -71,6 +72,7 @@ public class AdapterProduct extends RecyclerView.Adapter<AdapterProduct.Viewhold
         holder.name_food.setText(product.name);
         holder.category_food.setText(product.category);
         holder.price_food.setText(product.price);
+        holder.imageViewfood.setImageURI(Uri.parse(product.picture));
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -128,6 +130,7 @@ public class AdapterProduct extends RecyclerView.Adapter<AdapterProduct.Viewhold
 
                 new AlertDialog.Builder(context)
                         .setTitle("حذف")
+                        .setIcon(R.drawable.delete_image_dialog)
                         .setMessage("آیا از حذف کامل این محصول اطمینان دارید؟")
                         .setPositiveButton("تأیید", new DialogInterface.OnClickListener() {
                             @Override

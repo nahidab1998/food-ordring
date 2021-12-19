@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -79,6 +80,7 @@ public class AdaptersavedOrdering extends RecyclerView.Adapter<AdaptersavedOrder
 
                 new AlertDialog.Builder(context)
                         .setTitle("حذف")
+                        .setIcon(R.drawable.delete_image_dialog)
                         .setMessage("آیا از لغو کامل این سفارش اطمینان دارید؟")
                         .setPositiveButton("تأیید", new DialogInterface.OnClickListener() {
                             @Override

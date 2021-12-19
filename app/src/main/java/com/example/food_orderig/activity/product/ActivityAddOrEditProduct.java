@@ -1,9 +1,12 @@
 package com.example.food_orderig.activity.product;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.cardview.widget.CardView;
 
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
@@ -30,18 +33,21 @@ import com.google.gson.Gson;
 
 public class ActivityAddOrEditProduct extends AppCompatActivity {
 
-    EditText name , price;
-    TextView textViewcancle;
-    ImageView imageView_image_product;
-    DatabaseHelper db;
-    ProductDao dao_product;
-    GroupingDao dao_grouping;
-    TextView btn_save_product;
-    String name_product , price_product , categoryProduct;
-    LinearLayout anim_product;
-    AutoCompleteTextView autoCompleteTextView;
-    ArrayAdapter<String> adapter_autocomplete;
+    private EditText name , price;
+    private TextView textViewcancle;
+    private ImageView imageView_image_product;
+    private CardView camera;
+    private DatabaseHelper db;
+    private ProductDao dao_product;
+    private GroupingDao dao_grouping;
+    private TextView btn_save_product;
+    private String name_product , price_product , categoryProduct;
+    private LinearLayout anim_product;
+    private AutoCompleteTextView autoCompleteTextView;
+    private ArrayAdapter<String> adapter_autocomplete;
     Product p = null;
+    private static final int pick_image=1;
+    private Uri imageuri;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,6 +58,7 @@ public class ActivityAddOrEditProduct extends AppCompatActivity {
         price = findViewById(R.id.add_edit_price_product);
         price.addTextChangedListener(new NumberTextWatcherForThousand(price));
         autoCompleteTextView = findViewById(R.id.autoComplete);
+        camera = findViewById(R.id.camera);
 
         autoCompleteTextView.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
@@ -113,10 +120,16 @@ public class ActivityAddOrEditProduct extends AppCompatActivity {
         autoCompleteTextView.setAdapter(adapter_autocomplete);
 
 
-        imageView_image_product.setOnClickListener(new View.OnClickListener() {
+        camera.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(ActivityAddOrEditProduct.this, "به زودی", Toast.LENGTH_SHORT).show();
+
+                Intent gallery = new Intent();
+                gallery.setType("image/*");
+//                gallery.setAction(Intent.ACTION_GET_CONTENT);
+                gallery.setAction(Intent.ACTION_OPEN_DOCUMENT);
+                startActivityForResult(Intent.createChooser(gallery,"select picture"),pick_image);
+//                Toast.makeText(ActivityAddOrEditProduct.this, "به زودی", Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -135,10 +148,15 @@ public class ActivityAddOrEditProduct extends AppCompatActivity {
                 categoryProduct = autoCompleteTextView.getText().toString();
 
                 if (p == null){
-                    if(TextUtils.isEmpty(name_product) || TextUtils.isEmpty(categoryProduct) || TextUtils.isEmpty(price_product)){
+                    if(TextUtils.isEmpty(name_product) || TextUtils.isEmpty(categoryProduct) || TextUtils.isEmpty(price_product) || imageView_image_product.getDrawable() == null){
                         Toast.makeText(getApplicationContext(), "فیلد مورد نظر را پرکنید", Toast.LENGTH_SHORT).show();
+                    }else if (dao_product.getOneName(name_product) != null){
+
+                        Toast.makeText(ActivityAddOrEditProduct.this, "این محصول وجود دارد ", Toast.LENGTH_SHORT).show();
+
                     }else {
-                        dao_product.insertProduct(new Product(name_product,categoryProduct, price_product));
+
+                        dao_product.insertProduct(new Product(name_product,categoryProduct, price_product , imageuri.toString()));
                         finish();
                     }
                 }else {
@@ -154,12 +172,15 @@ public class ActivityAddOrEditProduct extends AppCompatActivity {
             }
         });
     }
-//    private String converText(String text){
-//        StringBuilder stringBuilder = new StringBuilder(text);
-//        for (int i = stringBuilder.length() - 3 ; i >0 ; i -= 3){
-//            stringBuilder.insert( i , ",");
-//        }
-//        return stringBuilder.toString();
-//    }
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == pick_image){
+            if (resultCode == RESULT_OK)
+                imageuri=data.getData();
+            imageView_image_product.setImageURI(imageuri);
+        }
+    }
 
 }

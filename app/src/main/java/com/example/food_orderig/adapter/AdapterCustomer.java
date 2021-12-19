@@ -120,6 +120,7 @@ public class AdapterCustomer extends RecyclerView.Adapter<AdapterCustomer.Viewho
 
                 new AlertDialog.Builder(context)
                         .setTitle("حذف")
+                        .setIcon(R.drawable.delete_image_dialog)
                         .setMessage("آیا از حذف کامل این مشتری اطمینان دارید؟")
                         .setPositiveButton("تأیید", new DialogInterface.OnClickListener() {
                             @Override

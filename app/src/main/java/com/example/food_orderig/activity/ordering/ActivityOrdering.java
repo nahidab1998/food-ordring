@@ -223,9 +223,10 @@ public class ActivityOrdering extends AppCompatActivity {
                         dao_savedorder.insertOrder(new Order(customer.name , CODE , customer.id , 1 , total.getText()+"" , "با تمام مخلفات" , getCurrentTime_time() , getCurrentTime_Date()));
                         for (int i = 0; i < orderDetailList.size(); i++) {
                             dao_detailorder.insertDetailOrder(new DetailOrder(orderDetailList.get(i).name , orderDetailList.get(i).price , orderDetailList.get(i).category ,
-                                    orderDetailList.get(i).amount , CODE ,getCurrentTime_time() , getCurrentTime_Date()));
+                                    orderDetailList.get(i).amount , CODE ,getCurrentTime_time() , getCurrentTime_Date() , orderDetailList.get(i).picture));
                         }
-                        Toast.makeText(getApplicationContext(), "test", Toast.LENGTH_SHORT).show();
+//                        Toast.makeText(getApplicationContext(), "test", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(ActivityOrdering.this, "سفارش "+ name_customer.getText().toString() +" با موفقیت ثبت شد  ", Toast.LENGTH_SHORT).show();
                         db.getOpenHelper().close();
                         finish();
                     }

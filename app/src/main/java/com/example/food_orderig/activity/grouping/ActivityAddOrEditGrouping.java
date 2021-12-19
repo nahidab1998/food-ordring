@@ -102,7 +102,8 @@ public class ActivityAddOrEditGrouping extends AppCompatActivity {
 
                 Intent gallery = new Intent();
                 gallery.setType("image/*");
-                gallery.setAction(Intent.ACTION_GET_CONTENT);
+//                gallery.setAction(Intent.ACTION_GET_CONTENT);
+                gallery.setAction(Intent.ACTION_OPEN_DOCUMENT);
                 startActivityForResult(Intent.createChooser(gallery,"select picture"),pick_image);
 //                Toast.makeText(ActivityAddOrEditGrouping.this, "به زودی", Toast.LENGTH_SHORT).show();
             }
@@ -113,12 +114,18 @@ public class ActivityAddOrEditGrouping extends AppCompatActivity {
             public void onClick(View v) {
 
                 name = editTextnameGrouping.getText().toString();
+//                picture_s = imageViewadd_img_grouping.getDrawable().toString();
 
                 if (b == null){
-                    if(TextUtils.isEmpty(name)){
+                    if(TextUtils.isEmpty(name) || imageViewadd_img_grouping.getDrawable() == null){
                         Toast.makeText(getApplicationContext(), "فیلد مورد نظر را پرکنید", Toast.LENGTH_SHORT).show();
+                    }else if (dao.getOneName(name) != null){
+
+                        Toast.makeText(ActivityAddOrEditGrouping.this, "این دسته بندی وجود دارد", Toast.LENGTH_SHORT).show();
+
                     }else {
-                        dao.insertGrouping(new Grouping(name , picture_s));
+
+                        dao.insertGrouping(new Grouping(name , imageuri.toString()));
                         finish();
                     }
                 }else {
@@ -137,16 +144,21 @@ public class ActivityAddOrEditGrouping extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == pick_image && resultCode == RESULT_OK){
+//        if (requestCode == pick_image && resultCode == RESULT_OK){
+//            imageuri=data.getData();
+////            file = new File(imageuri.getPath());
+////            picture_s = file.toString();
+//            try {
+//                Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(),imageuri);
+//                imageViewadd_img_grouping.setImageBitmap(bitmap);
+//            }catch (IOException e){
+//                e.printStackTrace();
+//            }
+//        }
+        if (requestCode == pick_image){
+            if (resultCode == RESULT_OK)
             imageuri=data.getData();
-            file = new File(imageuri.getPath());
-            picture_s = file.toString();
-            try {
-                Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(),imageuri);
-                imageViewadd_img_grouping.setImageBitmap(bitmap);
-            }catch (IOException e){
-                e.printStackTrace();
-            }
+            imageViewadd_img_grouping.setImageURI(imageuri);
         }
     }
 }

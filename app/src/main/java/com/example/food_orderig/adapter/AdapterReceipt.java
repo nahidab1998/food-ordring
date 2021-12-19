@@ -1,9 +1,11 @@
 package com.example.food_orderig.adapter;
 
 import android.content.Context;
+import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
@@ -47,6 +49,7 @@ public class AdapterReceipt extends RecyclerView.Adapter<AdapterReceipt.ViewHold
         holder.category.setText(detailOrder.category);
         holder.amont.setText(String.valueOf(detailOrder.amant));
         holder.price.setText(detailOrder.price);
+        holder.picture_food.setImageURI(Uri.parse(detailOrder.picture));
 
     }
 
@@ -58,6 +61,7 @@ public class AdapterReceipt extends RecyclerView.Adapter<AdapterReceipt.ViewHold
     public class ViewHolder extends RecyclerView.ViewHolder {
 
         TextView amont , name , price , category;
+        ImageView picture_food;
 
         public ViewHolder(View itemView) {
             super(itemView);
@@ -66,6 +70,7 @@ public class AdapterReceipt extends RecyclerView.Adapter<AdapterReceipt.ViewHold
             amont = itemView.findViewById(R.id.amont);
             price = itemView.findViewById(R.id.price_receipt);
             category = itemView.findViewById(R.id.category_receipt);
+            picture_food = itemView.findViewById(R.id.pic_food);
 
         }
     }

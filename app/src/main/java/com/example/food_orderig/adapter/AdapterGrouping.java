@@ -68,7 +68,6 @@ public class AdapterGrouping extends RecyclerView.Adapter<AdapterGrouping.Viewho
                 showBottomSheetDialogclick(position);
             }
         });
-
     }
 
     @Override
@@ -104,6 +103,7 @@ public class AdapterGrouping extends RecyclerView.Adapter<AdapterGrouping.Viewho
 
                 new AlertDialog.Builder(context)
                         .setTitle("حذف")
+                        .setIcon(R.drawable.delete_image_dialog)
                         .setMessage("آیا از حذف کامل این دسته بندی اطمینان دارید؟")
                         .setPositiveButton("تأیید", new DialogInterface.OnClickListener() {
                             @Override

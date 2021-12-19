@@ -6,6 +6,7 @@ import androidx.room.Insert;
 import androidx.room.Query;
 import androidx.room.Update;
 
+import com.example.food_orderig.model.Grouping;
 import com.example.food_orderig.model.Product;
 
 import java.util.List;
@@ -20,6 +21,8 @@ public interface ProductDao {
 
 //    @Query("Select * from table_product where table_product_id = :id limit 1")
 //    List<Product> get(int id);
+    @Query("Select * from table_product where name = :name limit 1")
+    Product getOneName(String name);
 
     @Insert
     void insertProduct(Product product);
