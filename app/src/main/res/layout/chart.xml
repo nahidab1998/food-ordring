@@ -14,8 +14,14 @@
     android:layout_marginBottom="5dp"
     android:layout_marginHorizontal="5dp">
 
-    <com.jjoe64.graphview.GraphView
-        android:id="@+id/graf"
+<!--    <com.jjoe64.graphview.GraphView-->
+<!--        android:id="@+id/graf"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_margin="5dp"-->
+<!--        android:layout_height="match_parent"/>-->
+
+    <com.github.mikephil.charting.charts.CombinedChart
+        android:id="@+id/chart"
         android:layout_width="match_parent"
         android:layout_margin="5dp"
         android:layout_height="match_parent"/>

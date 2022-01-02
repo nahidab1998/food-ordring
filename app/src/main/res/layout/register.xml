@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:layout_marginHorizontal="10dp"
+    android:paddingVertical="10dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <EditText
+        android:id="@+id/username_register"
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:fontFamily="@font/iran_sans"
+        android:paddingHorizontal="10dp"
+        android:gravity="right"
+        android:layout_gravity="right"
+        android:layout_marginHorizontal="10dp"
+        android:layout_marginBottom="10dp"
+        android:hint="نام کاربری" />
+
+
+
+    <EditText
+        android:id="@+id/password_register"
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:fontFamily="@font/iran_sans"
+        android:gravity="right"
+        android:layout_gravity="right"
+        android:layout_marginHorizontal="10dp"
+        android:paddingHorizontal="10dp"
+        android:hint="رمز عبور" />
+
+    <EditText
+        android:id="@+id/password_register_again"
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:fontFamily="@font/iran_sans"
+        android:paddingHorizontal="10dp"
+        android:gravity="right"
+        android:layout_gravity="right"
+        android:layout_marginHorizontal="10dp"
+        android:layout_marginBottom="10dp"
+        android:hint="تکرار رمز عبور" />
+
+<!--    <View-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="10dp"-->
+<!--        android:background="@color/text"/>-->
+
+    <RelativeLayout
+        android:id="@+id/save_register"
+        android:layout_width="match_parent"
+        android:layout_marginHorizontal="10dp"
+        android:background="@drawable/btn_login"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        android:layout_height="56dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:fontFamily="@font/iran_sans"
+            android:text="ثبت اطلاعات"
+            android:textColor="@color/text"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+    </RelativeLayout>
+
+</LinearLayout>

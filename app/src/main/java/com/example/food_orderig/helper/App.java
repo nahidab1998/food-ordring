@@ -21,6 +21,7 @@ public class App extends Application {
 
     public static DatabaseHelper getDatabase(){
         if (!db.isOpen() || db == null){
+
             db = DatabaseHelper.getInstance(context);
         }
         return db;

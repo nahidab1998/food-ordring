@@ -5,6 +5,8 @@ import androidx.cardview.widget.CardView;
 
 import android.content.Intent;
 import android.graphics.Color;
+import android.graphics.DashPathEffect;
+import android.graphics.Paint;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
@@ -23,14 +25,19 @@ import com.example.food_orderig.database.dao.ProductDao;
 import com.example.food_orderig.adapter.AdapterProduct;
 import com.example.food_orderig.database.dao.SavedOrderDao;
 import com.example.food_orderig.helper.App;
+import com.example.food_orderig.helper.Tools;
+import com.github.mikephil.charting.charts.CombinedChart;
+import com.github.mikephil.charting.data.CombinedData;
 import com.jjoe64.graphview.GraphView;
 import com.jjoe64.graphview.LegendRenderer;
 import com.jjoe64.graphview.series.DataPoint;
 import com.jjoe64.graphview.series.LineGraphSeries;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -47,7 +54,7 @@ public class MainActivity extends AppCompatActivity {
     int count_customer;
     int count_grouping;
     private CardView saved;
-    private GraphView graph;
+    private CombinedChart combinedChart;
     private TextView month ,week ,day ;
     private String date = String.valueOf(System.currentTimeMillis()- 604800000);
 
@@ -108,26 +115,50 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void initGraph() {
-        LineGraphSeries<DataPoint> bgseries= new LineGraphSeries<>(new DataPoint[]{
 
-                new DataPoint(1, 0),
-                new DataPoint(2, 8000),
-                new DataPoint(3, 7000),
-                new DataPoint(4, 10000),
-        });
+//        LineGraphSeries<DataPoint> bgseries= new LineGraphSeries<>(new DataPoint[]{
+//
+//                new DataPoint(1, 0),
+//                new DataPoint(2, 8000),
+//                new DataPoint(3, 7000),
+//                new DataPoint(4, 10000),
+//        });
 
-        graph.addSeries(bgseries);
-        graph.setBackgroundColor(getResources().getColor(android.R.color.background_light));
-        graph.getViewport().setScalable(true);
-        graph.getViewport().setScrollable(true);
+        CombinedData data = new CombinedData();
 
-        graph.setTitleColor(getResources().getColor(android.R.color.white));
-        bgseries.setThickness(6);
-        bgseries.setDrawBackground(true);
-        bgseries.setColor(Color.rgb(241,92,65));
-        bgseries.setBackgroundColor(Color.rgb(248,243,247));
-//        graph.getLegendRenderer().setVisible(true);
-        graph.getLegendRenderer().setAlign(LegendRenderer.LegendAlign.TOP);
+        data.setData(generateLineData());
+        data.setData(generateBarData());
+        data.setData(generateBubbleData());
+        data.setData(generateScatterData());
+        data.setData(generateCandleData());
+
+        combinedChart.setData(data);
+        combinedChart.invalidate();
+
+
+
+        // styling series
+//        bgseries.setTitle("Random Curve 1");
+//        bgseries.setColor(Color.GREEN);
+//        bgseries.setDrawDataPoints(false);
+//        bgseries.setDataPointsRadius(10);
+//        bgseries.setThickness(6);
+
+
+        combinedChart.setBackgroundColor(getResources().getColor(android.R.color.background_light));
+//        combinedChart.getViewport().setScalable(true);
+//        combinedChart.getViewport().setScrollable(true);
+//
+//        combinedChart.setTitleColor(getResources().getColor(android.R.color.white));
+////        bgseries.setThickness(6);
+//        bgseries.setDrawBackground(true);
+//        bgseries.setBackgroundColor(Color.rgb(248,243,247));
+////        graph.getLegendRenderer().setVisible(true);
+//        combinedChart.getLegendRenderer().setAlign(LegendRenderer.LegendAlign.TOP);
+//        combinedChart.addSeries(bgseries);
+
+
+
     }
 
 
@@ -150,7 +181,7 @@ public class MainActivity extends AppCompatActivity {
         week = findViewById(R.id.week_profit);
         day = findViewById(R.id.today_profit);
         add_shop = findViewById(R.id.add_shop);
-        graph = (GraphView) findViewById(R.id.graf);
+        combinedChart =findViewById(R.id.chart);
         number_product = findViewById(R.id.number_of_product);
         number_customer = findViewById(R.id.number_of_customer);
         number_groping = findViewById(R.id.number_of_grouping);
@@ -176,11 +207,24 @@ public class MainActivity extends AppCompatActivity {
         number_groping.setText(Integer.toString(count_grouping));
     }
 
+    public void setDailyIncome(){
+
+        List<String> dailyIncome =new ArrayList<>();
+        dailyIncome.addAll(dao_savedorder.alldate());
+        int j = 0;
+        for (int i=0 ; i< dao_savedorder.getOrderList().size() ; i++){
+            String a = dailyIncome.get(i);
+            j = j + Tools.convertToPrice(a);
+        }
+        day.setText(Tools.getForamtPrice(String.valueOf(j)));
+    }
+
 
     @Override
     protected void onResume() {
         super.onResume();
         countsizeRecycler();
+        setDailyIncome();
     }
 
 }

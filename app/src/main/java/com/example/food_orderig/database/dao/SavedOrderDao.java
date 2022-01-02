@@ -16,6 +16,9 @@ public interface SavedOrderDao {
     @Query("select * from table_order where date>=datetime('now', 'now', '-7 day')")
     List<Order> getOrderListDate();
 
+    @Query("Select total from table_order ")
+    List<String> alldate();
+
     @Insert
     void insertOrder(Order order);
 

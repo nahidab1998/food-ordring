@@ -3,6 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical">
 
     <androidx.cardview.widget.CardView
@@ -61,7 +62,7 @@
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/number"
                         android:gravity="center"
-                        android:text="7,000"
+                        tools:text="7,000"
                         android:textColor="#737373"
                         android:textSize="14dp"
                         android:textStyle="bold" />
@@ -108,7 +109,7 @@
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/number"
                         android:gravity="center"
-                        android:text="14,000"
+                        tools:text="14,000"
                         android:textColor="#737373"
                         android:textSize="14dp"
                         android:textStyle="bold" />
@@ -154,7 +155,7 @@
                         android:layout_height="match_parent"
                         android:fontFamily="@font/number"
                         android:gravity="center"
-                        android:text="90,000"
+                        tools:text="90,000"
                         android:textColor="#737373"
                         android:textSize="14dp"
                         android:textStyle="bold" />
@@ -208,7 +209,7 @@
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/number"
                         android:gravity="center"
-                        android:text="700,000"
+                        tools:text="700,000"
                         android:textColor="#737373"
                         android:textSize="14dp"
                         android:textStyle="bold" />

@@ -46,6 +46,9 @@ public class ActivityAddOrEditCostomer extends AppCompatActivity {
 
         setContentView(R.layout.activity_add_or_edit_costomer);
 
+        db = App.getDatabase();
+        dao = db.customerDao();
+
         btn_save_customer=findViewById(R.id.save_customer);
         textViewcancle=findViewById(R.id.cancle_customer);
         name_addcustomer=findViewById(R.id.add_edit_name_customer);
@@ -64,7 +67,6 @@ public class ActivityAddOrEditCostomer extends AppCompatActivity {
                     InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
                     imm.hideSoftInputFromWindow(v.getWindowToken() , 0);
                 }
-
             }
         });
 
@@ -90,18 +92,6 @@ public class ActivityAddOrEditCostomer extends AppCompatActivity {
         });
 
 
-//        Intent intent=getIntent();
-//        String zero = intent.getStringExtra("idcustomer");
-//
-//        String one = intent.getStringExtra("namecustomer");
-//        name_addcustomer.setText(one);
-//
-//        String two = intent.getStringExtra("phonecustomer");
-//        phone_addcustomer.setText(two);
-//
-//        String three = intent.getStringExtra("addresscustomer");
-//        address_addcustomer.setText(three);
-
         if (getIntent().getExtras() != null){
             String getNameCustomer = getIntent().getStringExtra("Customer");
             a = new Gson().fromJson(getNameCustomer,Customer.class);
@@ -109,9 +99,6 @@ public class ActivityAddOrEditCostomer extends AppCompatActivity {
             phone_addcustomer.setText(a.phone);
             address_addcustomer.setText(a.address);
         }
-
-        db = App.getDatabase();
-        dao = db.customerDao();
 
         btn_save_customer.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -137,7 +124,6 @@ public class ActivityAddOrEditCostomer extends AppCompatActivity {
                     finish();
                 }
 
-
             }
         });
 
@@ -147,6 +133,4 @@ public class ActivityAddOrEditCostomer extends AppCompatActivity {
             }
         });
     }
-
-
 }

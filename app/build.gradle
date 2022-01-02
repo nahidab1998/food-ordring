@@ -45,7 +45,7 @@ dependencies {
     annotationProcessor "androidx.room:room-compiler:2.3.0"
 
     //chart
-//    implementation 'com.github.PhilJay:MPAndroidChart:v3.1.0'
+    implementation 'com.github.PhilJay:MPAndroidChart:v3.1.0'
     implementation 'com.jjoe64:graphview:4.2.2'
 
     //lottie motion
