@@ -65,8 +65,15 @@ dependencies {
     implementation 'androidx.lifecycle:lifecycle-extensions:2.2.0'
 
     //persian date
-    implementation 'com.github.samanzamani.persiandate:PersianDate:0.8'
+//    implementation 'com.github.samanzamani.persiandate:PersianDate:0.8'
 
-    //fix add image from gallery and camera
+    //date picker
+    implementation 'com.github.aliab:Persian-Date-Picker-Dialog:1.7.1'
+
+    //time picker
+    implementation 'com.mohamadamin:persianmaterialdatetimepicker:1.2.1'
+
+    //fingerprint
+    implementation 'androidx.biometric:biometric:1.0.1'
 
 }

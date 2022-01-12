@@ -56,6 +56,7 @@ public class MainActivity extends AppCompatActivity {
     private CardView saved;
     private CombinedChart combinedChart;
     private TextView month ,week ,day ;
+    private TextView txt_name_restaurant ;
     private String date = String.valueOf(System.currentTimeMillis()- 604800000);
 
     @Override
@@ -66,6 +67,7 @@ public class MainActivity extends AppCompatActivity {
         initDatabase();
         initID();
         initGraph();
+        initSetName();
 
         // Intents 
         cardViewproduct.setOnClickListener(new View.OnClickListener() {
@@ -114,6 +116,13 @@ public class MainActivity extends AppCompatActivity {
         setdate();
     }
 
+    private void initSetName() {
+
+        Intent intent = getIntent();
+        String a = intent.getStringExtra("name_restaurant");
+        txt_name_restaurant.setText(a);
+    }
+
     private void initGraph() {
 
 //        LineGraphSeries<DataPoint> bgseries= new LineGraphSeries<>(new DataPoint[]{
@@ -124,16 +133,17 @@ public class MainActivity extends AppCompatActivity {
 //                new DataPoint(4, 10000),
 //        });
 
-        CombinedData data = new CombinedData();
 
-        data.setData(generateLineData());
-        data.setData(generateBarData());
-        data.setData(generateBubbleData());
-        data.setData(generateScatterData());
-        data.setData(generateCandleData());
-
-        combinedChart.setData(data);
-        combinedChart.invalidate();
+//        CombinedData data = new CombinedData();
+//
+//        data.setData(generateLineData());
+//        data.setData(generateBarData());
+//        data.setData(generateBubbleData());
+//        data.setData(generateScatterData());
+//        data.setData(generateCandleData());
+//
+//        combinedChart.setData(data);
+//        combinedChart.invalidate();
 
 
 
@@ -157,10 +167,7 @@ public class MainActivity extends AppCompatActivity {
 //        combinedChart.getLegendRenderer().setAlign(LegendRenderer.LegendAlign.TOP);
 //        combinedChart.addSeries(bgseries);
 
-
-
     }
-
 
     private void initDatabase() {
         db = App.getDatabase();
@@ -169,8 +176,6 @@ public class MainActivity extends AppCompatActivity {
         dao_grouping = db.groupingDao();
         dao_savedorder = db.savedOrderDao();
     }
-
-
 
     private void initID() {
         cardViewproduct=findViewById(R.id.products);
@@ -185,6 +190,7 @@ public class MainActivity extends AppCompatActivity {
         number_product = findViewById(R.id.number_of_product);
         number_customer = findViewById(R.id.number_of_customer);
         number_groping = findViewById(R.id.number_of_grouping);
+        txt_name_restaurant = findViewById(R.id.name_restaurant);
     }
 
     private void setdate(){

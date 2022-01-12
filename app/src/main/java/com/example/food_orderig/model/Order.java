@@ -38,7 +38,7 @@ public class Order {
     public String date;
 
 
-    public Order(int id, String name, String unit_code, int customer_id, int status, String total, String description , String time, String date ) {
+    public Order(int id, String name, String unit_code, int customer_id, int status, String total, String description , String time , String date ) {
         this.id = id;
         this.name = name;
         this.unit_code = unit_code;
@@ -51,7 +51,7 @@ public class Order {
     }
 
     @Ignore
-    public Order(String name, String unit_code, int customer_id, int status, String total, String description , String time, String date ) {
+    public Order(String name, String unit_code, int customer_id, int status, String total, String description , String time , String date) {
         this.name = name;
         this.unit_code = unit_code;
         this.customer_id = customer_id;

@@ -14,7 +14,7 @@
         android:layout_height="match_parent"
         android:layout_above="@+id/cardvie_pay"
         android:clipToPadding="false"
-        android:paddingTop="230dp"
+        android:paddingTop="297dp"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         tools:listitem="@layout/item_product_ordering" />
 
@@ -26,6 +26,8 @@
         android:orientation="vertical">
 
         <include layout="@layout/toolbare_ordering" />
+
+        <include layout="@layout/cardview_calender_time"/>
 
         <include layout="@layout/cardview_customer" />
 

@@ -23,8 +23,9 @@
     <LinearLayout
         android:id="@+id/anim_customer"
         android:layout_width="match_parent"
-        android:layout_height="550dp"
+        android:layout_height="match_parent"
         android:layout_below="@+id/toolbarcustomer"
+        android:layout_marginBottom="80dp"
         android:background="@drawable/background_add"
         android:elevation="6dp"
         android:orientation="vertical"
@@ -68,11 +69,11 @@
                 android:drawableRight="@drawable/custom_phone_icon"
                 android:drawablePadding="5dp"
                 android:elevation="5dp"
-                android:maxLength="12"
                 android:fontFamily="@font/number"
                 android:gravity="right"
                 android:hint="شماره تلفن"
                 android:inputType="number"
+                android:maxLength="12"
                 android:padding="10dp"
                 android:textColor="#5e6d76"
                 android:textSize="14dp" />

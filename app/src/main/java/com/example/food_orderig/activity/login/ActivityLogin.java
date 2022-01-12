@@ -1,14 +1,26 @@
 package com.example.food_orderig.activity.login;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.biometric.BiometricManager;
+import androidx.core.content.ContextCompat;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.graphics.Color;
+import android.hardware.biometrics.BiometricPrompt;
+import android.os.Build;
 import android.os.Bundle;
+import android.os.CancellationSignal;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -22,74 +34,163 @@ import com.example.food_orderig.model.Customer;
 import com.example.food_orderig.model.NewUser;
 import com.example.food_orderig.model.Product;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
+import com.google.android.material.textfield.TextInputEditText;
+
+import java.util.concurrent.Executor;
 
 public class ActivityLogin extends AppCompatActivity {
 
     private TextView buttonlogin;
-    DatabaseHelper db;
     private TextView new_account;
     private EditText username , password ;
-    RelativeLayout save_register;
+    private TextInputEditText username_login , password_login ;
     private NewUser a = null;
     private String user , pass ;
+    private String user_login , pass_login ;
+    private CheckBox checkBox;
+    private ImageView fingerprint;
     UserDao userDao;
+    DatabaseHelper db;
+    RelativeLayout save_register;
+    SharedPreferences shPref;
+    public static final String MyPref = "MyPrefers";
+    public static final String Name = "nameKey";
+    public static final String Pass = "passKey";
 
+    private androidx.biometric.BiometricPrompt biometricPrompt;
+    private androidx.biometric.BiometricPrompt.PromptInfo promptInfo ;
+
+
+
+    @RequiresApi(api = Build.VERSION_CODES.P)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
+        shPref = getSharedPreferences(MyPref , Context.MODE_PRIVATE);
+
         init_database();
         init_id();
+        new_acount();
+        buttonLogin();
+        setcheckBox();
+        setFingerprint();
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.P)
+    private void setFingerprint() {
+
+        BiometricManager biometricManager = androidx.biometric.BiometricManager.from(ActivityLogin.this);
+        switch (biometricManager.canAuthenticate()) {
+
+            case BiometricManager.BIOMETRIC_SUCCESS:
+
+                break;
+
+            case BiometricManager.BIOMETRIC_ERROR_NO_HARDWARE:
+
+                fingerprint.setVisibility(View.GONE);
+
+                break;
+
+            case BiometricManager.BIOMETRIC_ERROR_HW_UNAVAILABLE:
+
+                fingerprint.setVisibility(View.GONE);
+
+                break;
+
+            case BiometricManager.BIOMETRIC_ERROR_NONE_ENROLLED:
+
+                fingerprint.setVisibility(View.GONE);
+
+                break;
+        }
+
+        Executor executor = ContextCompat.getMainExecutor(ActivityLogin.this);
+
+        biometricPrompt = new androidx.biometric.BiometricPrompt(ActivityLogin.this, executor, new androidx.biometric.BiometricPrompt.AuthenticationCallback() {
+            @Override
+            public void onAuthenticationError(int errorCode, @NonNull CharSequence errString) {
+                super.onAuthenticationError(errorCode, errString);
+            }
+
+            @Override
+            public void onAuthenticationSucceeded(@NonNull androidx.biometric.BiometricPrompt.AuthenticationResult result) {
+                super.onAuthenticationSucceeded(result);
+
+                Intent a = new Intent(ActivityLogin.this, MainActivity.class);
+                startActivity(a);
+                Toast.makeText(getApplicationContext(), "ورود با موفقیت", Toast.LENGTH_SHORT).show();
+
+            }
+
+            @Override
+            public void onAuthenticationFailed() {
+                super.onAuthenticationFailed();
+            }
+        });
+
+        promptInfo = new androidx.biometric.BiometricPrompt.PromptInfo.Builder().setTitle("ورود با اثرانگشت")
+                .setDescription("لطفا انگشت خود را روی حسگر اثر انگشت قرار دهید ").setNegativeButtonText("انصراف").build();
+        fingerprint.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                biometricPrompt.authenticate(promptInfo);
+
+            }
+        });
+
+    }
+
+    private void setcheckBox() {
+
+        checkBox.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+//                    Toast.makeText(ActivityLogin.this, "hello", Toast.LENGTH_SHORT).show();
+
+                 String getUser = username_login.getText().toString();
+                 String getPass = password_login.getText().toString();
+
+                 SharedPreferences.Editor sEdit = shPref.edit();
+                 sEdit.putString(Name , getUser);
+                 sEdit.putString(Pass , getPass);
+                 sEdit.apply();
+            }
+        });
+            if(shPref.contains(Name) && shPref.contains(Pass)){
+                username_login.setText(shPref.getString(Name,null));
+                password_login.setText(shPref.getString(Pass,null));
+                checkBox.setChecked(true);
+            }
+    }
+
+    private void buttonLogin(){
 
         buttonlogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                Intent a = new Intent(ActivityLogin.this, MainActivity.class);
-                startActivity(a);
+                user_login = username_login.getText().toString();
+                pass_login = password_login.getText().toString();
+
+                if (TextUtils.isEmpty(user_login) || TextUtils.isEmpty(pass_login)){
+
+                    Toast.makeText(ActivityLogin.this, "آیتم های خالی را پر کنید", Toast.LENGTH_SHORT).show();
+
+                }else if ( userDao.getOneName(user_login ,pass_login) != null ) {
+
+                    Intent a = new Intent(ActivityLogin.this, MainActivity.class);
+                    a.putExtra("name_restaurant", user_login);
+                    startActivity(a);
+                }else {
+                    Toast.makeText(ActivityLogin.this, "همچین رستورانی وجود ندارد", Toast.LENGTH_SHORT).show();
+                }
             }
         });
 
-        new_account.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                final BottomSheetDialog bottomSheetDialog = new BottomSheetDialog(ActivityLogin.this);
-                bottomSheetDialog.setContentView(R.layout.register);
-
-                bottomSheetDialog.show();
-
-                username = findViewById(R.id.username_register);
-                password = findViewById(R.id.password_register);
-
-
-                save_register =bottomSheetDialog.findViewById(R.id.save_register);
-
-                save_register.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-
-//                        Toast.makeText(ActivityLogin.this, "hello", Toast.LENGTH_SHORT).show();
-                        user = username.getText().toString();
-                        pass = password.getText().toString();
-
-                        if (a == null){
-                            if (TextUtils.isEmpty(user) || TextUtils.isEmpty(pass)){
-
-                                Toast.makeText(ActivityLogin.this, "آیتم های خالی را پر کنید", Toast.LENGTH_SHORT).show();
-
-                            }else {
-
-                                userDao.insertNewUser(new NewUser (user, pass));
-                                bottomSheetDialog.dismiss();
-                            }
-                        }
-                    }
-                });
-
-            }
-        });
     }
 
     public void init_database(){
@@ -100,5 +201,46 @@ public class ActivityLogin extends AppCompatActivity {
     private void init_id(){
         buttonlogin=findViewById(R.id.buttonlogin);
         new_account = findViewById(R.id.new_account);
+        username_login = findViewById(R.id.text_inputuser);
+        password_login = findViewById(R.id.text_inputpass);
+        checkBox = findViewById(R.id.remember);
+        fingerprint = findViewById(R.id.fingerprint);
+    }
+
+    private void new_acount(){
+
+        new_account.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                final BottomSheetDialog bottomSheetDialog = new BottomSheetDialog(ActivityLogin.this);
+                bottomSheetDialog.setContentView(R.layout.register);
+                bottomSheetDialog.show();
+
+                username = bottomSheetDialog.findViewById(R.id.username_register);
+                password = bottomSheetDialog.findViewById(R.id.password_register);
+                save_register =bottomSheetDialog.findViewById(R.id.save_register);
+                save_register.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+
+                        user = username.getText().toString();
+                        pass = password.getText().toString();
+
+                        if (TextUtils.isEmpty(user) || TextUtils.isEmpty(pass)){
+
+                            Toast.makeText(ActivityLogin.this, "فیلد های خالی را پر کنید", Toast.LENGTH_SHORT).show();
+
+                        }else {
+                            userDao.insertNewUser(new NewUser (user, pass));
+                            Toast.makeText(ActivityLogin.this, "با موفقیت ذخیره شد ", Toast.LENGTH_SHORT).show();
+                            bottomSheetDialog.dismiss();
+                        }
+                    }
+                });
+
+            }
+        });
+
     }
 }

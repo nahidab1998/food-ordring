@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -9,21 +9,20 @@
     android:background="@color/white"
     android:orientation="vertical"
     android:paddingVertical="10dp"
+    android:weightSum="3"
     android:clickable="true"
     android:focusableInTouchMode="true"
-    android:paddingHorizontal="48dp">
+    >
 
     <LinearLayout
-        android:id="@+id/lottie"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:layout_marginBottom="10dp"
+        android:layout_height="0dp"
+        android:layout_weight="1"
         >
 
         <com.airbnb.lottie.LottieAnimationView
-            android:layout_width="match_parent"
-            android:layout_height="250dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             app:lottie_rawRes="@raw/food3"
             app:lottie_autoPlay="true"
             app:lottie_loop="false"/>
@@ -32,18 +31,19 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/lottie"
-        android:orientation="vertical">
-
+        android:layout_height="0dp"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:paddingHorizontal="48dp"
+        android:layout_weight="1.25">
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/textInputLayoutname"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
             android:layout_width="match_parent"
-            android:layout_height="70dp"
+            android:layout_height="wrap_content"
             android:fontFamily="@fonts/iran_sans"
-            android:hint="نام کاربری"
+            android:hint="نام رستوران"
             app:boxCornerRadiusBottomStart="10dp"
             app:boxCornerRadiusTopEnd="10dp"
             app:boxCornerRadiusBottomEnd="10dp"
@@ -51,9 +51,9 @@
             app:endIconMode="clear_text">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/text_inputpass"
+                android:id="@+id/text_inputuser"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:drawableStart="@drawable/custom_person"
                 android:drawablePadding="10dp"
                 android:focusable="true"
@@ -63,12 +63,13 @@
 
         </com.google.android.material.textfield.TextInputLayout>
 
+
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/textInputLayout"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
             android:layout_width="match_parent"
-            android:layout_height="70dp"
-            android:layout_marginTop="40dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
             android:fontFamily="@fonts/iran_sans"
             android:hint="رمز عبور"
             app:boxCornerRadiusBottomStart="10dp"
@@ -78,12 +79,13 @@
             app:endIconMode="password_toggle">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/text_input"
+                android:id="@+id/text_inputpass"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:drawableStart="@drawable/custom_lock"
                 android:drawablePadding="10dp"
                 android:focusable="true"
+                android:layout_gravity="right"
                 android:fontFamily="@font/iran_sans"
                 android:inputType="textPassword"
                 android:textColorHint="#AFB1B3" />
@@ -95,7 +97,9 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:weightSum="2">
+
             <CheckBox
+                android:id="@+id/remember"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="مرا بخاطر بسپار"
@@ -117,12 +121,18 @@
 
         </LinearLayout>
 
+    </LinearLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:paddingHorizontal="48dp"
+        android:layout_weight="0.75">
+
         <TextView
             android:id="@+id/buttonlogin"
             android:layout_width="match_parent"
             android:layout_height="56dp"
-            android:layout_gravity="center_vertical"
-            android:layout_marginTop="50dp"
             android:background="@drawable/btn_login"
             android:fontFamily="@font/iran_sans"
             android:gravity="center"
@@ -131,21 +141,25 @@
             android:textSize="18sp"
             android:textStyle="bold" />
 
+        <ImageView
+            android:id="@+id/fingerprint"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_below="@+id/buttonlogin"
+            android:layout_centerInParent="true"
+            android:layout_marginTop="20dp"
+            android:src="@drawable/fingerprint" />
 
-    </LinearLayout>
+        <TextView
+            android:id="@+id/new_account"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:fontFamily="@font/iran_sans"
+            android:gravity="center"
+            android:text="ایجاد یک حساب جدید"
+            android:textColor="@color/red"
+            android:textSize="12dp" />
+    </RelativeLayout>
 
-    <TextView
-        android:id="@+id/new_account"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:fontFamily="@font/iran_sans"
-        android:gravity="center"
-        android:textSize="12dp"
-        android:text="ایجاد یک حساب جدید"
-        android:textColor="@color/red" />
-
-
-
-
-</RelativeLayout>
+</LinearLayout>

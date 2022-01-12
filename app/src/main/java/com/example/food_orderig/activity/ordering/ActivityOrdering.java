@@ -1,11 +1,15 @@
 package com.example.food_orderig.activity.ordering;
 
+
+
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -28,40 +32,47 @@ import com.example.food_orderig.model.DetailOrder;
 import com.example.food_orderig.model.Order;
 import com.example.food_orderig.model.Product;
 import com.google.gson.Gson;
+import com.mohamadamin.persianmaterialdatetimepicker.time.RadialPickerLayout;
+import com.mohamadamin.persianmaterialdatetimepicker.time.TimePickerDialog;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
-import saman.zamani.persiandate.PersianDate;
-import saman.zamani.persiandate.PersianDateFormat;
+import ir.hamsaa.persiandatepicker.PersianDatePickerDialog;
+import ir.hamsaa.persiandatepicker.api.PersianPickerDate;
+import ir.hamsaa.persiandatepicker.api.PersianPickerListener;
+import ir.hamsaa.persiandatepicker.util.PersianCalendar;
+import ir.hamsaa.persiandatepicker.util.PersianCalendarUtils;
+
 
 public class ActivityOrdering extends AppCompatActivity {
 
     RecyclerView recyclerView;
     AdapterOrdering adapterOrdering;
-
     DatabaseHelper db;
     List<Product> orderDetailList;
-
     DetailOrderDao dao_detailorder;
     SavedOrderDao dao_savedorder;
     Customer customer;
-
     LinearLayout box_customer;
     CardView record_order,add_order;
     CardView cardView_pay;
-//    private SlidrInterface slidr;
     TextView txtname;
     TextView name_customer;
     TextView number_order;
     TextView total ;
     TextView save_order ;
+    TextView txt_calender , txt_time ;
+    CardView calender , houre ;
     CardView card_numberorder;
     ImageView delete_ordering;
     LinearLayout lottieAnimationView;
     private String CODE = String.valueOf(System.currentTimeMillis());
+    private PersianDatePickerDialog picker;
+
+    private static final String TAG = "MainActivity";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -80,6 +91,10 @@ public class ActivityOrdering extends AppCompatActivity {
         initBoxProduct();
         initSaveOrdeing();
         delete_ordering();
+        setCalender();
+        setTime();
+        setDefultCalender();
+        setDefultTime();
 
         orderDetailList = new ArrayList<>();
         adapterOrdering = new AdapterOrdering(orderDetailList, this, new AdapterOrdering.Listener() {
@@ -106,7 +121,72 @@ public class ActivityOrdering extends AppCompatActivity {
         recyclerView.setAdapter(adapterOrdering);
         recyclerView.setHasFixedSize(true);
 
+    }
 
+    private void setTime() {
+        houre.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                PersianCalendar now = new PersianCalendar();
+                TimePickerDialog tpd = TimePickerDialog.newInstance(new TimePickerDialog.OnTimeSetListener() {
+                    @Override
+                    public void onTimeSet(RadialPickerLayout view, int hourOfDay, int minute) {
+                        String time = hourOfDay+":"+minute;
+                        txt_time.setText(time);
+                    }
+                },
+                now.get(PersianCalendar.HOUR_OF_DAY),
+                now.get(PersianCalendar.MINUTE),
+                true);
+                tpd.show(getFragmentManager(),"tpd");
+            }
+        });
+    }
+
+    private void setDefultCalender() {
+        PersianCalendar now = new PersianCalendar();
+        String currentDate = now.getPersianShortDate();
+        txt_calender.setText(currentDate);
+    }
+
+    private void setCalender() {
+
+        calender.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                picker = new PersianDatePickerDialog(ActivityOrdering.this)
+                        .setPositiveButtonString("باشه")
+                        .setNegativeButton("بیخیال")
+                        .setTodayButton("امروز")
+                        .setTodayButtonVisible(true)
+                        .setMinYear(1300)
+                        .setMaxYear(1450)
+                        .setMaxMonth(12)
+                        .setMaxDay(31)
+                        .setInitDate(PersianDatePickerDialog.THIS_DAY, PersianDatePickerDialog.THIS_MONTH, PersianDatePickerDialog.THIS_DAY)
+                        .setActionTextColor(Color.GRAY)
+                        .setTitleType(PersianDatePickerDialog.WEEKDAY_DAY_MONTH_YEAR)
+                        .setShowInBottomSheet(true)
+                        .setListener(new PersianPickerListener() {
+                            @Override
+                            public void onDateSelected(PersianPickerDate persianPickerDate) {
+                                Log.d(TAG, "onDateSelected: " + persianPickerDate.getTimestamp());//675930448000
+                                Log.d(TAG, "onDateSelected: " + persianPickerDate.getGregorianDate());//Mon Jun 03 10:57:28 GMT+04:30 1991
+                                Log.d(TAG, "onDateSelected: " + persianPickerDate.getPersianLongDate());// دوشنبه  13  خرداد  1370
+                                Log.d(TAG, "onDateSelected: " + persianPickerDate.getPersianMonthName());//خرداد
+                                Log.d(TAG, "onDateSelected: " + PersianCalendarUtils.isPersianLeapYear(persianPickerDate.getPersianYear()));//true
+                                txt_calender.setText(persianPickerDate.getPersianYear() + "/" + persianPickerDate.getPersianMonth() + "/" + persianPickerDate.getPersianDay());
+                            }
+                            @Override
+                            public void onDismissed() {
+                            }
+                        });
+                picker.show();
+
+            }
+        });
     }
 
     @Override
@@ -143,6 +223,10 @@ public class ActivityOrdering extends AppCompatActivity {
         delete_ordering = findViewById(R.id.delete_add_order);
         cardView_pay = findViewById(R.id.cardvie_pay);
         lottieAnimationView = findViewById(R.id.lottie_shop);
+        calender = findViewById(R.id.calender);
+        houre = findViewById(R.id.houre);
+        txt_calender = findViewById(R.id.calender_txt);
+        txt_time = findViewById(R.id.time_txt);
 
 
     }
@@ -204,7 +288,6 @@ public class ActivityOrdering extends AppCompatActivity {
         delete_ordering.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 finish();
             }
         });
@@ -214,47 +297,29 @@ public class ActivityOrdering extends AppCompatActivity {
         save_order.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                try {
-                    if(customer == null){
 
-                        Toast.makeText(ActivityOrdering.this, "مشتری را انتخاب کنید", Toast.LENGTH_SHORT).show();
-                    }else {
+                if(customer == null){
+                    Toast.makeText(ActivityOrdering.this, "مشتری را انتخاب کنید", Toast.LENGTH_SHORT).show();
+                }else {
+                    dao_savedorder.insertOrder(new Order(customer.name , CODE , customer.id , 1 , total.getText()+"" , "با تمام مخلفات" , txt_time.getText().toString(), txt_calender.getText().toString()));
+                    for (int i = 0; i < orderDetailList.size(); i++) {
 
-                        dao_savedorder.insertOrder(new Order(customer.name , CODE , customer.id , 1 , total.getText()+"" , "با تمام مخلفات" , getCurrentTime_time() , getCurrentTime_Date()));
-                        for (int i = 0; i < orderDetailList.size(); i++) {
-                            dao_detailorder.insertDetailOrder(new DetailOrder(orderDetailList.get(i).name , orderDetailList.get(i).price , orderDetailList.get(i).category ,
-                                    orderDetailList.get(i).amount , CODE ,getCurrentTime_time() , getCurrentTime_Date() , orderDetailList.get(i).picture));
-                        }
-//                        Toast.makeText(getApplicationContext(), "test", Toast.LENGTH_SHORT).show();
-                        Toast.makeText(ActivityOrdering.this, "سفارش "+ name_customer.getText().toString() +" با موفقیت ثبت شد  ", Toast.LENGTH_SHORT).show();
-                        db.getOpenHelper().close();
-                        finish();
+                        dao_detailorder.insertDetailOrder(new DetailOrder(orderDetailList.get(i).name , orderDetailList.get(i).price , orderDetailList.get(i).category ,
+                                orderDetailList.get(i).amount , CODE ,txt_time.getText().toString(), txt_calender.getText().toString() , orderDetailList.get(i).picture));
                     }
-                }catch (Exception e){
-                    Log.e("qqq", "onClick: ",e );
+                    Toast.makeText(ActivityOrdering.this, "سفارش "+ name_customer.getText().toString() +" با موفقیت ثبت شد  ", Toast.LENGTH_SHORT).show();
+
+                    finish();
                 }
             }
         });
     }
 
-    private String getCurrentTime_time(){
+    private void setDefultTime(){
         Calendar c = Calendar.getInstance();
-        SimpleDateFormat dateFormat = new SimpleDateFormat("HH:mm:ss ");
+        SimpleDateFormat dateFormat = new SimpleDateFormat("HH:mm");
         String datetime = dateFormat.format(c.getTime());
-        return datetime;
-    }
+        txt_time.setText(datetime);
 
-    private String getCurrentTime_Date(){
-        PersianDate c = new PersianDate();
-        PersianDateFormat dateFormat = new PersianDateFormat(" Y/m/d ");
-
-        String datetime = dateFormat.format(c);
-        return datetime;
-    }
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        if (db != null || db.isOpen()) db.close();
     }
 }

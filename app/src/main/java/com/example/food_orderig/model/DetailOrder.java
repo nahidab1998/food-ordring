@@ -39,7 +39,7 @@ public class DetailOrder {
 
 
 
-    public DetailOrder(int id, String name, String price, String category, int amant, String code , String time, String date , String picture ) {
+    public DetailOrder(int id, String name, String price, String category, int amant, String code , String time ,String date, String picture ) {
         this.id = id;
         this.name = name;
         this.price = price;
@@ -52,7 +52,7 @@ public class DetailOrder {
     }
 
     @Ignore
-    public DetailOrder(String name, String price, String category, int amant, String code , String time, String date , String picture) {
+    public DetailOrder(String name, String price, String category, int amant, String code , String time , String date , String picture) {
         this.name = name;
         this.price = price;
         this.category = category;

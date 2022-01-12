@@ -4,57 +4,73 @@
     android:layout_height="wrap_content"
     android:orientation="vertical"
     android:layout_marginHorizontal="10dp"
-    android:paddingVertical="10dp"
+    android:paddingVertical="5dp"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <EditText
-        android:id="@+id/username_register"
+    <androidx.cardview.widget.CardView
+        android:layout_width="100dp"
+        android:layout_height="4dp"
+        android:layout_gravity="center"
+        android:backgroundTint="@color/red"
+        app:cardCornerRadius="3dp" />
+
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/textInputLayoutname"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
         android:layout_width="match_parent"
-        android:layout_height="70dp"
-        android:fontFamily="@font/iran_sans"
-        android:paddingHorizontal="10dp"
-        android:gravity="right"
-        android:layout_gravity="right"
-        android:layout_marginHorizontal="10dp"
-        android:layout_marginBottom="10dp"
-        android:hint="نام کاربری" />
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:fontFamily="@fonts/iran_sans"
+        android:hint="نام رستوران"
+        app:endIconMode="clear_text">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/username_register"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:drawableStart="@drawable/custom_person"
+            android:drawablePadding="10dp"
+            android:focusable="true"
+            android:fontFamily="@font/iran_sans"
+            android:inputType="text"
+            app:hintTextColor="#AFB1B3" />
+
+    </com.google.android.material.textfield.TextInputLayout>
 
 
-
-    <EditText
-        android:id="@+id/password_register"
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/textInputLayout"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
         android:layout_width="match_parent"
-        android:layout_height="70dp"
-        android:fontFamily="@font/iran_sans"
-        android:gravity="right"
-        android:layout_gravity="right"
-        android:layout_marginHorizontal="10dp"
-        android:paddingHorizontal="10dp"
-        android:hint="رمز عبور" />
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:fontFamily="@fonts/iran_sans"
+        android:hint="رمز عبور"
+        app:endIconMode="password_toggle">
 
-    <EditText
-        android:id="@+id/password_register_again"
-        android:layout_width="match_parent"
-        android:layout_height="70dp"
-        android:fontFamily="@font/iran_sans"
-        android:paddingHorizontal="10dp"
-        android:gravity="right"
-        android:layout_gravity="right"
-        android:layout_marginHorizontal="10dp"
-        android:layout_marginBottom="10dp"
-        android:hint="تکرار رمز عبور" />
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/password_register"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:drawableStart="@drawable/custom_lock"
+            android:drawablePadding="10dp"
+            android:focusable="true"
+            android:layout_gravity="right"
+            android:fontFamily="@font/iran_sans"
+            android:inputType="textPassword"
+            android:textColorHint="#AFB1B3" />
 
-<!--    <View-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="10dp"-->
-<!--        android:background="@color/text"/>-->
+    </com.google.android.material.textfield.TextInputLayout>
+
+
 
     <RelativeLayout
         android:id="@+id/save_register"
         android:layout_width="match_parent"
         android:layout_marginHorizontal="10dp"
         android:background="@drawable/btn_login"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="30dp"
         android:layout_marginBottom="10dp"
         android:layout_height="56dp">
 
