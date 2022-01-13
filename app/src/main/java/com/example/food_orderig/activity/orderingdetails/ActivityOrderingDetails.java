@@ -16,7 +16,6 @@ public class ActivityOrderingDetails extends AppCompatActivity {
     RecyclerView recyclerView;
     AdaptersavedOrdering adaptersavedOrdering;
 
-    DatabaseHelper db;
     SavedOrderDao dao;
 
 
@@ -34,8 +33,7 @@ public class ActivityOrderingDetails extends AppCompatActivity {
     }
 
     private void initDatabase(){
-        db = App.getDatabase();
-        dao = db.savedOrderDao();
+        dao = App.getDatabase().savedOrderDao();
     }
 
     private void initId(){
@@ -44,7 +42,7 @@ public class ActivityOrderingDetails extends AppCompatActivity {
 
     private void initRecycler(){
         recyclerView.setHasFixedSize(true);
-        adaptersavedOrdering = new AdaptersavedOrdering(this, dao.getOrderList());
+        adaptersavedOrdering = new AdaptersavedOrdering(this, dao.getOrderListDate("1400/10/21"));
         recyclerView.setAdapter(adaptersavedOrdering);
     }
 }

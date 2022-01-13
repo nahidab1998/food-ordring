@@ -204,13 +204,26 @@ public class MainActivity extends AppCompatActivity {
     public void countsizeRecycler(){
 
         count_product = dao_product.getList().size();
-        number_product.setText(Integer.toString(count_product));
+        if (count_product == 0){
+            number_product.setText("");
+        }else {
+            number_product.setText(Integer.toString(count_product));
+        }
 
         count_customer= dao_customer.getList().size();
-        number_customer.setText(Integer.toString(count_customer));
+        if (count_customer == 0) {
+            number_customer.setText("");
+        }else {
+            number_customer.setText(Integer.toString(count_customer));
+        }
 
         count_grouping = dao_grouping.getList().size();
-        number_groping.setText(Integer.toString(count_grouping));
+        if (count_grouping == 0){
+            number_groping.setText("");
+        }else {
+
+            number_groping.setText(Integer.toString(count_grouping));
+        }
     }
 
     public void setDailyIncome(){

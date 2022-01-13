@@ -5,6 +5,7 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -50,6 +51,7 @@ public class AdaptersavedOrdering extends RecyclerView.Adapter<AdaptersavedOrder
     public void onBindViewHolder(AdaptersavedOrdering.ViewHolder holder,@SuppressLint("RecyclerView") int position) {
 
         Order order = list.get(position);
+        Log.e("qqqq", "onBindViewHolder - order time is: " + order.date);
         holder.name.setText(order.name);
         holder.status.setText(String.valueOf(order.status));
         holder.total.setText(order.total);

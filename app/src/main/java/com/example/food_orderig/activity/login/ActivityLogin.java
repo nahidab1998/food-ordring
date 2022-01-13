@@ -121,8 +121,7 @@ public class ActivityLogin extends AppCompatActivity {
 
                 Intent a = new Intent(ActivityLogin.this, MainActivity.class);
                 startActivity(a);
-                Toast.makeText(getApplicationContext(), "ورود با موفقیت", Toast.LENGTH_SHORT).show();
-
+//                Toast.makeText(getApplicationContext(), "ورود با موفقیت", Toast.LENGTH_SHORT).show();
             }
 
             @Override

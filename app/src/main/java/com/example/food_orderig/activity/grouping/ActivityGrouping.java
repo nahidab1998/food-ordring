@@ -81,6 +81,6 @@ public class ActivityGrouping extends AppCompatActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        if (db != null) db.close();
+//        if (db != null) db.close();
     }
 }

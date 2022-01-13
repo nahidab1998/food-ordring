@@ -2,7 +2,10 @@ package com.example.food_orderig.adapter;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.Intent;
+import android.graphics.Bitmap;
 import android.net.Uri;
+import android.provider.MediaStore;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -57,7 +60,25 @@ public class AdapterOrdering extends RecyclerView.Adapter<AdapterOrdering.ViewHo
         holder.txtname.setText(product.name);
         holder.txtprise.setText(product.price);
         holder.txtcategory.setText(product.category);
-        holder.imageView_food.setImageURI(Uri.parse(product.picture));
+
+        try{
+            final int takeFlags =  (Intent.FLAG_GRANT_READ_URI_PERMISSION
+                    | Intent.FLAG_GRANT_WRITE_URI_PERMISSION);
+            // Check for the freshest data.
+            context.getContentResolver().takePersistableUriPermission(Uri.parse(product.picture), takeFlags);
+            // convert uri to bitmap
+            Bitmap bitmap = MediaStore.Images.Media.getBitmap(context.getContentResolver(), Uri.parse(product.picture));
+            // set bitmap to imageview
+            holder.imageView_food.setImageBitmap(bitmap);
+//            holder.imageView_food.setImageURI(Uri.parse(product.picture));
+
+        }
+        catch (Exception e){
+            //handle exception
+            e.printStackTrace();
+        }
+
+
         holder.txt_price.setText(Tools.getForamtPrice(Tools.convertToPrice(product.price) * product.amount +""));
         holder.title.setText(product.amount+"");
         holder.add.setOnClickListener(new View.OnClickListener() {

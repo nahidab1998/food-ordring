@@ -164,7 +164,6 @@
                 android:orientation="horizontal"
                 android:paddingBottom="5dp"
                 android:weightSum="2"
-                android:background="?attr/actionBarItemBackground"
                 android:paddingHorizontal="5dp">
 
 

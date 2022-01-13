@@ -60,8 +60,7 @@ public class ActivityProduct extends AppCompatActivity implements ProductView {
         }
 
         floatingActionButton_product = findViewById(R.id.fab_product);
-//        lotieProduct = findViewById(R.id.lottie_product);
-//        lotieProduct.setVisibility(View.GONE);
+        lotieProduct = findViewById(R.id.lottie_product);
 
 
         db= App.getDatabase();
@@ -103,6 +102,8 @@ public class ActivityProduct extends AppCompatActivity implements ProductView {
     protected void onResume() {
         super.onResume();
         initListProduct();
+        set_recycle_grouping_product();
+
     }
 
     public  void set_RecyclerView_product(){
@@ -131,38 +132,48 @@ public class ActivityProduct extends AppCompatActivity implements ProductView {
 
     public void set_recycle_grouping_product(){
 
-        ArrayList<Grouping> groupingArrayList = new ArrayList<>();
-        groupingArrayList.add(0,new Grouping("همه محصولات",""));
-        groupingArrayList.addAll(dao_grouping.getList());
+//        if(dao_product.getList().size() > 0 ) {
+            ArrayList<Grouping> groupingArrayList = new ArrayList<>();
+            groupingArrayList.add(0,new Grouping("همه محصولات",""));
+            groupingArrayList.addAll(dao_grouping.getList());
 
-        recyclerView_category =findViewById(R.id.recycler_grouping_product);
-        recyclerView_category.setHasFixedSize(true);
-        LinearLayoutManager layoutManager = new LinearLayoutManager(this ,LinearLayoutManager.HORIZONTAL , false);
-        recyclerView_category.setLayoutManager(layoutManager);
-        adapterGroupingProduct = new AdapterGroupingProduct(groupingArrayList, this, new AdapterGroupingProduct.Listener() {
-            @Override
-            public void onClick(int pos, Grouping c) {
-                if (pos == 0){
+            recyclerView_category =findViewById(R.id.recycler_grouping_product);
+            recyclerView_category.setHasFixedSize(true);
+            LinearLayoutManager layoutManager = new LinearLayoutManager(this ,LinearLayoutManager.HORIZONTAL , false);
+            recyclerView_category.setLayoutManager(layoutManager);
+            adapterGroupingProduct = new AdapterGroupingProduct(groupingArrayList, this, new AdapterGroupingProduct.Listener() {
+                @Override
+                public void onClick(int pos, Grouping c) {
+                    if (pos == 0){
 
-                    category = null;
+                        category = null;
 
-                }else {
-                    category = c.name;
+                    }else {
+                        category = c.name;
 
+                    }
+                    initListProduct();
                 }
-                initListProduct();
-            }
-        });
-        recyclerView_category.setAdapter(adapterGroupingProduct);
+            });
+            recyclerView_category.setAdapter(adapterGroupingProduct);
+//        }
     }
 
     private void initListProduct(){
         Log.e("qqqq", "initListProduct: " + category);
         if(adapterProduct != null){
             if (category == null || category.isEmpty()){
-                adapterProduct.addList(dao_product.getList());
+                if (dao_product.getList().size() <= 0){
+                    lotieProduct.setVisibility(View.VISIBLE);
+                }else {
+                    adapterProduct.addList(dao_product.getList());
+                }
             }else {
-                adapterProduct.addList(dao_product.getListByCategory(category));
+                if (dao_product.getListByCategory(category).size() == 0){
+                    lotieProduct.setVisibility(View.VISIBLE);
+                }else {
+                    adapterProduct.addList(dao_product.getListByCategory(category));
+                }
             }
         }
     }
@@ -175,7 +186,7 @@ public class ActivityProduct extends AppCompatActivity implements ProductView {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        if (db != null) db.close();
+//        if (db != null) db.close();
     }
 
 }

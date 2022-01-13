@@ -23,6 +23,9 @@ public interface GroupingDao {
     @Query("Select * from TABLE_GROUPING where name = :name limit 1")
     Grouping getOneName(String name);
 
+    @Query("Select * from TABLE_GROUPING where id = :id limit 1")
+    Grouping getById(int id);
+
     @Insert
     void insertGrouping(Grouping grouping);
 

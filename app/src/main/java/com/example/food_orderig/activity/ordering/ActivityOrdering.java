@@ -81,7 +81,8 @@ public class ActivityOrdering extends AppCompatActivity {
 
         Log.e("bbbbb", "onCreate: " + System.currentTimeMillis() );
 
-        db = App.getDatabase();
+//        db = App.getDatabase();
+        db = DatabaseHelper.getInstance(this);
 
         dao_savedorder = db.savedOrderDao();
         dao_detailorder = db.detailOrderDao();
@@ -165,6 +166,7 @@ public class ActivityOrdering extends AppCompatActivity {
                         .setMaxYear(1450)
                         .setMaxMonth(12)
                         .setMaxDay(31)
+//                        .setBackgroundColor(Color.RED)
                         .setInitDate(PersianDatePickerDialog.THIS_DAY, PersianDatePickerDialog.THIS_MONTH, PersianDatePickerDialog.THIS_DAY)
                         .setActionTextColor(Color.GRAY)
                         .setTitleType(PersianDatePickerDialog.WEEKDAY_DAY_MONTH_YEAR)

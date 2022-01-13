@@ -5,8 +5,11 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Build;
+import android.provider.MediaStore;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -72,7 +75,26 @@ public class AdapterProduct extends RecyclerView.Adapter<AdapterProduct.Viewhold
         holder.name_food.setText(product.name);
         holder.category_food.setText(product.category);
         holder.price_food.setText(product.price);
-        holder.imageViewfood.setImageURI(Uri.parse(product.picture));
+        Log.e("qqqq", "onBindViewHolder: " + product.picture );
+
+
+        try{
+            final int takeFlags =  (Intent.FLAG_GRANT_READ_URI_PERMISSION
+                    | Intent.FLAG_GRANT_WRITE_URI_PERMISSION);
+            // Check for the freshest data.
+            context.getContentResolver().takePersistableUriPermission(Uri.parse(product.picture), takeFlags);
+            // convert uri to bitmap
+            Bitmap bitmap = MediaStore.Images.Media.getBitmap(context.getContentResolver(), Uri.parse(product.picture));
+            // set bitmap to imageview
+            holder.imageViewfood.setImageBitmap(bitmap);
+//            holder.imageViewfood.setImageURI(Uri.parse(product.picture));
+
+        }
+        catch (Exception e){
+            //handle exception
+            e.printStackTrace();
+        }
+
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -181,6 +203,21 @@ public class AdapterProduct extends RecyclerView.Adapter<AdapterProduct.Viewhold
         list.clear();
         list.addAll(arrayList);
         notifyDataSetChanged();
+    }
+
+    public void add(Product product){
+        list.add(list.size(),product);
+        notifyItemInserted(list.size());
+    }
+
+    public void update(Product product, int pos){
+//        list.get(0) = product;
+        notifyItemChanged(pos,product);
+    }
+
+    public void remove(int pos){
+        list.remove(pos);
+        notifyItemRemoved(pos);
     }
 
     public void clear(){
