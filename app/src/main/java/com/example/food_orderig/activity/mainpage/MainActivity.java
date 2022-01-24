@@ -8,6 +8,7 @@ import android.graphics.Color;
 import android.graphics.DashPathEffect;
 import android.graphics.Paint;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -26,7 +27,14 @@ import com.example.food_orderig.adapter.AdapterProduct;
 import com.example.food_orderig.database.dao.SavedOrderDao;
 import com.example.food_orderig.helper.App;
 import com.example.food_orderig.helper.Tools;
+import com.example.food_orderig.model.ChartModel;
+import com.example.food_orderig.model.Order;
+import com.github.mikephil.charting.charts.BarChart;
 import com.github.mikephil.charting.charts.CombinedChart;
+import com.github.mikephil.charting.components.XAxis;
+import com.github.mikephil.charting.data.BarData;
+import com.github.mikephil.charting.data.BarDataSet;
+import com.github.mikephil.charting.data.BarEntry;
 import com.github.mikephil.charting.data.CombinedData;
 import com.jjoe64.graphview.GraphView;
 import com.jjoe64.graphview.LegendRenderer;
@@ -43,7 +51,7 @@ public class MainActivity extends AppCompatActivity {
 
     private CardView cardViewproduct,cardViewcustomer , cardViewprouping;
     private ImageView add_shop;
-    private TextView number_product, number_customer , number_groping;
+    private TextView number_product, number_customer , number_groping , month ,week ,day , txt_name_restaurant , dayName , monthName , totall;
     private AdapterProduct adapterProduct;
     private DatabaseHelper db;
     private ProductDao dao_product;
@@ -55,8 +63,7 @@ public class MainActivity extends AppCompatActivity {
     int count_grouping;
     private CardView saved;
     private CombinedChart combinedChart;
-    private TextView month ,week ,day ;
-    private TextView txt_name_restaurant ;
+    private ArrayList<ChartModel> chartModels;
     private String date = String.valueOf(System.currentTimeMillis()- 604800000);
 
     @Override
@@ -66,7 +73,7 @@ public class MainActivity extends AppCompatActivity {
 
         initDatabase();
         initID();
-        initGraph();
+//        initGraph();
         initSetName();
 
         // Intents 
@@ -113,7 +120,6 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-        setdate();
     }
 
     private void initSetName() {
@@ -123,51 +129,6 @@ public class MainActivity extends AppCompatActivity {
         txt_name_restaurant.setText(a);
     }
 
-    private void initGraph() {
-
-//        LineGraphSeries<DataPoint> bgseries= new LineGraphSeries<>(new DataPoint[]{
-//
-//                new DataPoint(1, 0),
-//                new DataPoint(2, 8000),
-//                new DataPoint(3, 7000),
-//                new DataPoint(4, 10000),
-//        });
-
-
-//        CombinedData data = new CombinedData();
-//
-//        data.setData(generateLineData());
-//        data.setData(generateBarData());
-//        data.setData(generateBubbleData());
-//        data.setData(generateScatterData());
-//        data.setData(generateCandleData());
-//
-//        combinedChart.setData(data);
-//        combinedChart.invalidate();
-
-
-
-        // styling series
-//        bgseries.setTitle("Random Curve 1");
-//        bgseries.setColor(Color.GREEN);
-//        bgseries.setDrawDataPoints(false);
-//        bgseries.setDataPointsRadius(10);
-//        bgseries.setThickness(6);
-
-
-        combinedChart.setBackgroundColor(getResources().getColor(android.R.color.background_light));
-//        combinedChart.getViewport().setScalable(true);
-//        combinedChart.getViewport().setScrollable(true);
-//
-//        combinedChart.setTitleColor(getResources().getColor(android.R.color.white));
-////        bgseries.setThickness(6);
-//        bgseries.setDrawBackground(true);
-//        bgseries.setBackgroundColor(Color.rgb(248,243,247));
-////        graph.getLegendRenderer().setVisible(true);
-//        combinedChart.getLegendRenderer().setAlign(LegendRenderer.LegendAlign.TOP);
-//        combinedChart.addSeries(bgseries);
-
-    }
 
     private void initDatabase() {
         db = App.getDatabase();
@@ -185,19 +146,14 @@ public class MainActivity extends AppCompatActivity {
         month = findViewById(R.id.month_profit);
         week = findViewById(R.id.week_profit);
         day = findViewById(R.id.today_profit);
+        totall = findViewById(R.id.total_profit);
         add_shop = findViewById(R.id.add_shop);
-        combinedChart =findViewById(R.id.chart);
         number_product = findViewById(R.id.number_of_product);
         number_customer = findViewById(R.id.number_of_customer);
         number_groping = findViewById(R.id.number_of_grouping);
         txt_name_restaurant = findViewById(R.id.name_restaurant);
-    }
-
-    private void setdate(){
-        Calendar c = Calendar.getInstance() ;
-        SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MMM-yyyy ");
-        String datetime = dateFormat.format(c.getTime());
-//        test.setText(datetime);
+        dayName = findViewById(R.id.day_name);
+        monthName = findViewById(R.id.month_name);
     }
 
 
@@ -238,12 +194,116 @@ public class MainActivity extends AppCompatActivity {
         day.setText(Tools.getForamtPrice(String.valueOf(j)));
     }
 
+    private void setWeeklyIncome(){
+        List<Order> weeklyIncome = new ArrayList<>();
+        weeklyIncome.addAll(dao_savedorder.getOrderListDate(Tools.dayAgo()));
+        int j = 0 ;
+        for (int i = 0 ; i<weeklyIncome.size() ; i++){
+            String a = weeklyIncome.get(i).total;
+            j = j + Tools.convertToPrice(a);
+        }
+        week.setText(Tools.getForamtPrice(String.valueOf(j)));
+    }
+
+    private void setMonthIncome(){
+        List<Order> monthIncome = new ArrayList<>();
+        monthIncome.addAll(dao_savedorder.getOrderListDate(Tools.getThirtyDaysAgo()));
+        int j = 0;
+        for (int i = 0; i < monthIncome.size(); i++) {
+            String aa = monthIncome.get(i).total;
+            j = j + Tools.convertToPrice(aa);
+        }
+        month.setText(Tools.getForamtPrice(String.valueOf(j)));
+    }
+
+    private void setNameDayMonth(){
+        dayName.setText("( " + Tools.getDayName()+ " )");
+        monthName.setText("( " + Tools.getMonthName() + " )");
+    }
+
+    private void setTotalIncome(){
+
+        List<String> totalIncome = new ArrayList<>();
+        totalIncome.addAll(dao_savedorder.alldate());
+        int t = 0;
+        for (int i = 0; i < totalIncome.size(); i++) {
+            String aaa = totalIncome.get(i);
+            t = t + Tools.convertToPrice(aaa);
+        }
+        totall.setText(Tools.getForamtPrice(String.valueOf(t)));
+    }
+
+    private void populateChart(){
+        Log.e("qqqqmain", "populateChart: started" );
+        ArrayList<Order> list = new ArrayList<>(dao_savedorder.getOrderList());
+        chartModels = new ArrayList<>();
+
+        Log.e("qqqqmain", "populateChart: "+list.size() + "-"+ chartModels.size() );
+
+        for (int i = 0; i < list.size(); i++) {
+
+
+            Log.e("qqqqmain2", "populateChart: for list is started \n"
+                    + list.get(i).date
+            );
+
+            if (chartModels.size() == 0){
+                Log.e("qqqqmain", "populateChart: chartModels.size() == 0" );
+
+                chartModels.add(new ChartModel(list.get(i).date,Tools.convertToPrice(list.get(i).total)));
+            }else {
+                Log.e("qqqqmain", "populateChart: chartModels.size() > 0" );
+
+                for (int c = 0; c < chartModels.size(); c++) {
+                    Log.e("qqqqmain2", "populateChart: for chart model is started\n"
+                            + chartModels.get(c).getDate() );
+
+                    if (list.get(i).date.equals(chartModels.get(c).getDate())){
+                        chartModels.get(c).setTotal(chartModels.get(c).getTotal() + Tools.convertToPrice(list.get(i).total));
+//                        return;
+                    }else {
+                        chartModels.add(new ChartModel(list.get(i).date,Tools.convertToPrice(list.get(i).total)));
+                    }
+                }
+            }
+        }
+    }
+
+    public void create_chart22() {
+        BarChart bar_chart = findViewById(R.id.chart_bar);
+        ArrayList<BarEntry> visitor = new ArrayList<>();
+
+        for (int i = 0; i < chartModels.size(); i++) {
+            visitor.add(new BarEntry( i, (int) chartModels.get(i).getTotal() ));
+        }
+
+        BarDataSet barDataSet = new BarDataSet(visitor, "");
+        barDataSet.setColors(Color.rgb(241, 92, 65));
+        barDataSet.setValueTextSize(0f);
+
+        BarData barData = new BarData(barDataSet);
+        bar_chart.setFitBars(true);
+        bar_chart.setData(barData);
+        bar_chart.getDescription().setText("");
+        bar_chart.animateY(1000);
+
+        XAxis xAxis = bar_chart.getXAxis();
+        xAxis.setGranularity(1f);
+        xAxis.setDrawAxisLine(true);
+        xAxis.setDrawGridLines(false);
+    }
+
 
     @Override
     protected void onResume() {
         super.onResume();
         countsizeRecycler();
         setDailyIncome();
+        setWeeklyIncome();
+        setMonthIncome();
+        setNameDayMonth();
+        populateChart();
+        create_chart22();
     }
 
 }

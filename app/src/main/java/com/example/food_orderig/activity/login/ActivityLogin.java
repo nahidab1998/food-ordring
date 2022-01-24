@@ -19,6 +19,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
@@ -30,6 +31,7 @@ import com.example.food_orderig.activity.mainpage.MainActivity;
 import com.example.food_orderig.database.DatabaseHelper;
 import com.example.food_orderig.database.dao.UserDao;
 import com.example.food_orderig.helper.App;
+import com.example.food_orderig.helper.Session;
 import com.example.food_orderig.model.Customer;
 import com.example.food_orderig.model.NewUser;
 import com.example.food_orderig.model.Product;
@@ -56,6 +58,7 @@ public class ActivityLogin extends AppCompatActivity {
     public static final String MyPref = "MyPrefers";
     public static final String Name = "nameKey";
     public static final String Pass = "passKey";
+    public static final String check = "isCheck";
 
     private androidx.biometric.BiometricPrompt biometricPrompt;
     private androidx.biometric.BiometricPrompt.PromptInfo promptInfo ;
@@ -68,8 +71,7 @@ public class ActivityLogin extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        shPref = getSharedPreferences(MyPref , Context.MODE_PRIVATE);
-
+//        checkBox.setChecked(false);
         init_database();
         init_id();
         new_acount();
@@ -143,27 +145,32 @@ public class ActivityLogin extends AppCompatActivity {
     }
 
     private void setcheckBox() {
-
-        checkBox.setOnClickListener(new View.OnClickListener() {
+        checkBox.setChecked(false);
+        checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
-            public void onClick(View v) {
-
-//                    Toast.makeText(ActivityLogin.this, "hello", Toast.LENGTH_SHORT).show();
-
-                 String getUser = username_login.getText().toString();
-                 String getPass = password_login.getText().toString();
-
-                 SharedPreferences.Editor sEdit = shPref.edit();
-                 sEdit.putString(Name , getUser);
-                 sEdit.putString(Pass , getPass);
-                 sEdit.apply();
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked){
+                    String getUser = username_login.getText().toString();
+                    String getPass = password_login.getText().toString();
+                    if (TextUtils.isEmpty(getUser)|| TextUtils.isEmpty(getPass)){
+                        checkBox.setChecked(false);
+                    }else {
+                        Boolean checkBox_state = checkBox.isChecked();
+                        Session.getInstance().putExtra(Name , getUser);
+                        Session.getInstance().putExtra(Pass , getPass);
+                        Session.getInstance().putExtra(check , checkBox_state);
+                    }
+                }else if (!isChecked){
+                    Session.getInstance().clearExtras();
+                }
             }
         });
-            if(shPref.contains(Name) && shPref.contains(Pass)){
-                username_login.setText(shPref.getString(Name,null));
-                password_login.setText(shPref.getString(Pass,null));
-                checkBox.setChecked(true);
-            }
+
+        if(Session.getInstance().getString(Name) != null || Session.getInstance().getString(Pass) != null ){
+            username_login.setText(Session.getInstance().getString(Name));
+            password_login.setText(Session.getInstance().getString(Pass));
+            checkBox.setChecked(Session.getInstance().getBoolean(check));
+        }
     }
 
     private void buttonLogin(){

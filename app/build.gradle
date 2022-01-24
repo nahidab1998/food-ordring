@@ -76,4 +76,8 @@ dependencies {
     //fingerprint
     implementation 'androidx.biometric:biometric:1.0.1'
 
+    //image croper
+    api 'com.theartofdev.edmodo:android-image-cropper:2.8.+'
+    implementation 'com.squareup.picasso:picasso:2.5.2'
+
 }

@@ -35,6 +35,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
+                    android:orientation="horizontal"
                     android:gravity="right">
 
                     <TextView
@@ -42,10 +43,24 @@
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/iran_sans"
                         android:gravity="center"
-                        android:text="امروز :"
+                        android:text="فروش امروز :"
                         android:textColor="@color/red"
                         android:textSize="14dp"
                         android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/day_name"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/iran_sans"
+                        android:gravity="center"
+                        android:text="دوشنبه"
+                        android:textColor="#737373"
+                        android:layout_marginRight="5dp"
+                        android:textSize="10dp"
+                        android:textStyle="bold" />
+
+
 
                 </LinearLayout>
 
@@ -89,7 +104,7 @@
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/iran_sans"
                         android:gravity="center"
-                        android:text="این هفته :"
+                        android:text="فروش هفته :"
                         android:textColor="@color/red"
                         android:textSize="14sp"
                         android:textStyle="bold" />
@@ -129,15 +144,27 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
+                    android:orientation="horizontal"
                     android:gravity="right">
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/iran_sans"
-                        android:text="این ماه :"
+                        android:text="فروش ماهانه :"
                         android:textColor="@color/red"
                         android:textSize="14dp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/month_name"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/iran_sans"
+                        android:text="بهمن"
+                        android:textColor="#737373"
+                        android:layout_marginRight="5dp"
+                        android:textSize="10dp"
                         android:textStyle="bold" />
 
                 </LinearLayout>

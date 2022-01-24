@@ -135,8 +135,6 @@ public class ActivityAddOrEditGrouping extends AppCompatActivity {
                     finish();
                 }
 
-
-
             }
         });
     }
