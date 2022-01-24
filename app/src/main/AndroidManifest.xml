@@ -1,21 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.example.food_orderig">
 
     <uses-permission android:name="android.permission.CALL_PHONE" />
     <uses-permission android:name="android.permission.USE_BIOMETRIC" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"
+        tools:ignore="ScopedStorage" />
     <uses-permission android:name="android.permission.CAMERA" />
 
     <application
         android:name=".helper.App"
+        android:requestLegacyExternalStorage="true"
+        android:usesCleartextTraffic="true"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher_icon"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_icon"
         android:supportsRtl="true"
-        android:theme="@style/Theme.Food_orderig">
+        android:theme="@style/Theme.Food_orderig"
+        tools:ignore="AllowBackup,UnusedAttribute">
         <activity
             android:name=".activity.file.FileActivity"
             android:exported="true" />

@@ -12,10 +12,14 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
 import android.provider.Settings;
+import android.util.Log;
 import android.widget.Toast;
 
 import com.example.food_orderig.R;
+
+import java.io.File;
 
 public class FileActivity extends AppCompatActivity {
 
@@ -28,7 +32,16 @@ public class FileActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_file);
 
+        File file = new File(getFilesDir() , "amin33");
+        file.mkdir();
+
+        if (file.exists()) Log.e("qqqq", "onCreate: exists" );
+        else Log.e("qqqq", "onCreate: not exists " );
+
+        Log.e("qqqq", "onCreate: " + file.getPath() );
+
         if (checkPermission()){
+
 
         }
     }
@@ -77,10 +90,12 @@ public class FileActivity extends AppCompatActivity {
     }
 
     public Boolean checkPermission() {
-        String permission = Manifest.permission.WRITE_EXTERNAL_STORAGE;
+        String[] permission = {Manifest.permission.WRITE_EXTERNAL_STORAGE,Manifest.permission.READ_EXTERNAL_STORAGE};
         int requestCode = STORAGE_PERMISSION_CODE;
-        if (ContextCompat.checkSelfPermission(this, permission) == PackageManager.PERMISSION_DENIED) {
-            ActivityCompat.requestPermissions(this, new String[] { permission }, requestCode);
+        if (ContextCompat.checkSelfPermission(this, permission[0]) == PackageManager.PERMISSION_DENIED) {
+            ActivityCompat.requestPermissions(this, new String[] { permission[0] }, requestCode);
+        }else if (ContextCompat.checkSelfPermission(this, permission[1]) == PackageManager.PERMISSION_DENIED) {
+            ActivityCompat.requestPermissions(this, new String[]{permission[1]}, requestCode);
         }
         else {
             return true;
