@@ -27,6 +27,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.food_orderig.R;
+import com.example.food_orderig.activity.file.FileActivity;
 import com.example.food_orderig.activity.mainpage.MainActivity;
 import com.example.food_orderig.database.DatabaseHelper;
 import com.example.food_orderig.database.dao.UserDao;
@@ -188,7 +189,8 @@ public class ActivityLogin extends AppCompatActivity {
 
                 }else if ( userDao.getOneName(user_login ,pass_login) != null ) {
 
-                    Intent a = new Intent(ActivityLogin.this, MainActivity.class);
+//                    Intent a = new Intent(ActivityLogin.this, MainActivity.class);
+                    Intent a = new Intent(ActivityLogin.this, FileActivity.class);
                     a.putExtra("name_restaurant", user_login);
                     startActivity(a);
                 }else {

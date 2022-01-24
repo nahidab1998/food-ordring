@@ -44,7 +44,7 @@ public class AdapterProduct extends RecyclerView.Adapter<AdapterProduct.Viewhold
     ProductDao dao;
     Toolbar toolbardelete;
     LinearLayout edite_product , delete_product;
-    File
+
 
 
 
