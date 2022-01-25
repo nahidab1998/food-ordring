@@ -58,9 +58,9 @@ public class MainActivity extends AppCompatActivity {
     private GroupingDao dao_grouping;
     private CustomerDao dao_customer;
     private SavedOrderDao dao_savedorder;
-    int count_product;
-    int count_customer;
-    int count_grouping;
+    private int count_product;
+    private int count_customer;
+    private int count_grouping;
     private CardView saved;
     private CombinedChart combinedChart;
     private ArrayList<ChartModel> chartModels;
@@ -146,7 +146,7 @@ public class MainActivity extends AppCompatActivity {
         month = findViewById(R.id.month_profit);
         week = findViewById(R.id.week_profit);
         day = findViewById(R.id.today_profit);
-        totall = findViewById(R.id.total_profit);
+        totall = findViewById(R.id.total_profit1);
         add_shop = findViewById(R.id.add_shop);
         number_product = findViewById(R.id.number_of_product);
         number_customer = findViewById(R.id.number_of_customer);
@@ -191,7 +191,11 @@ public class MainActivity extends AppCompatActivity {
             String a = dailyIncome.get(i);
             j = j + Tools.convertToPrice(a);
         }
-        day.setText(Tools.getForamtPrice(String.valueOf(j)));
+        if ( j == 0){
+            day.setText("_");
+        }else {
+            day.setText(Tools.getForamtPrice(String.valueOf(j)));
+        }
     }
 
     private void setWeeklyIncome(){
@@ -202,7 +206,11 @@ public class MainActivity extends AppCompatActivity {
             String a = weeklyIncome.get(i).total;
             j = j + Tools.convertToPrice(a);
         }
-        week.setText(Tools.getForamtPrice(String.valueOf(j)));
+        if (j == 0 ){
+            week.setText("_");
+        }else {
+            week.setText(Tools.getForamtPrice(String.valueOf(j)));
+        }
     }
 
     private void setMonthIncome(){
@@ -213,7 +221,11 @@ public class MainActivity extends AppCompatActivity {
             String aa = monthIncome.get(i).total;
             j = j + Tools.convertToPrice(aa);
         }
-        month.setText(Tools.getForamtPrice(String.valueOf(j)));
+        if ( j == 0){
+            month.setText("_");
+        }else {
+            month.setText(Tools.getForamtPrice(String.valueOf(j)));
+        }
     }
 
     private void setNameDayMonth(){
@@ -230,7 +242,12 @@ public class MainActivity extends AppCompatActivity {
             String aaa = totalIncome.get(i);
             t = t + Tools.convertToPrice(aaa);
         }
-        totall.setText(Tools.getForamtPrice(String.valueOf(t)));
+        if (t == 0){
+            totall.setText("_");
+        }else {
+            totall.setText(Tools.getForamtPrice(String.valueOf(t)));
+        }
+
     }
 
     private void populateChart(){
@@ -301,6 +318,7 @@ public class MainActivity extends AppCompatActivity {
         setDailyIncome();
         setWeeklyIncome();
         setMonthIncome();
+        setTotalIncome();
         setNameDayMonth();
         populateChart();
         create_chart22();

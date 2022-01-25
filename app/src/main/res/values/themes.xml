@@ -15,6 +15,10 @@
         <item name="android:direction">right_to_left</item>
         <item name="android:layoutDirection">rtl</item>
 
+        add to search
+        <item name="android:textColorSecondary">@color/text</item>
+        <item name="android:editTextColor">@color/text</item>
+
 <!--        <item name="editTextColor">@color/text</item>-->
 <!--        <item name="android:textColorSecondary">@color/text</item>-->
     </style>

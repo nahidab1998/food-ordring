@@ -230,7 +230,7 @@
                     android:gravity="left">
 
                     <TextView
-                        android:id="@+id/total_profit"
+                        android:id="@+id/total_profit1"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/number"

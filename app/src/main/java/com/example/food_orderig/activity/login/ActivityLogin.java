@@ -52,15 +52,14 @@ public class ActivityLogin extends AppCompatActivity {
     private String user_login , pass_login ;
     private CheckBox checkBox;
     private ImageView fingerprint;
-    UserDao userDao;
-    DatabaseHelper db;
-    RelativeLayout save_register;
-    SharedPreferences shPref;
+    private UserDao userDao;
+    private DatabaseHelper db;
+    private RelativeLayout save_register;
+    private SharedPreferences shPref;
     public static final String MyPref = "MyPrefers";
     public static final String Name = "nameKey";
     public static final String Pass = "passKey";
     public static final String check = "isCheck";
-
     private androidx.biometric.BiometricPrompt biometricPrompt;
     private androidx.biometric.BiometricPrompt.PromptInfo promptInfo ;
 
@@ -72,7 +71,7 @@ public class ActivityLogin extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-//        checkBox.setChecked(false);
+
         init_database();
         init_id();
         new_acount();
@@ -154,6 +153,7 @@ public class ActivityLogin extends AppCompatActivity {
                     String getUser = username_login.getText().toString();
                     String getPass = password_login.getText().toString();
                     if (TextUtils.isEmpty(getUser)|| TextUtils.isEmpty(getPass)){
+                        Toast.makeText(ActivityLogin.this, "فیلد های خالی را پر کنید", Toast.LENGTH_SHORT).show();
                         checkBox.setChecked(false);
                     }else {
                         Boolean checkBox_state = checkBox.isChecked();
@@ -189,8 +189,8 @@ public class ActivityLogin extends AppCompatActivity {
 
                 }else if ( userDao.getOneName(user_login ,pass_login) != null ) {
 
-//                    Intent a = new Intent(ActivityLogin.this, MainActivity.class);
-                    Intent a = new Intent(ActivityLogin.this, FileActivity.class);
+                    Intent a = new Intent(ActivityLogin.this, MainActivity.class);
+//                    Intent a = new Intent(ActivityLogin.this, FileActivity.class);
                     a.putExtra("name_restaurant", user_login);
                     startActivity(a);
                 }else {

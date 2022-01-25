@@ -13,6 +13,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Filter;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -32,27 +33,29 @@ import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.gson.Gson;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.List;
 
 
 public class AdapterProduct extends RecyclerView.Adapter<AdapterProduct.ViewholderProduct> {
 
-    List<Product> list;
-    Context context;
-    Listener listener;
-    DatabaseHelper database;
-    ProductDao dao;
-    Toolbar toolbardelete;
-    LinearLayout edite_product , delete_product;
+    private List<Product> list;
+    private Context context;
+    private Listener listener;
+    private DatabaseHelper database;
+    private ProductDao dao;
+    private List<Product> list_search;
+    private LinearLayout edite_product , delete_product;
 
 
 
 
     public AdapterProduct(List<Product> list , Context context ,  Listener listener){
 
-        this.list = list;
+        this.list_search = list;
         this.context = context;
         this.listener = listener;
+        this.list = new ArrayList<>(list_search);
 
     }
 
@@ -78,8 +81,6 @@ public class AdapterProduct extends RecyclerView.Adapter<AdapterProduct.Viewhold
         holder.category_food.setText(product.category);
         holder.price_food.setText(product.price);
         Log.e("qqqq", "onBindViewHolder: " + product.picture );
-
-
         try{
             final int takeFlags =  (Intent.FLAG_GRANT_READ_URI_PERMISSION
                     | Intent.FLAG_GRANT_WRITE_URI_PERMISSION);
@@ -89,14 +90,11 @@ public class AdapterProduct extends RecyclerView.Adapter<AdapterProduct.Viewhold
             Bitmap bitmap = MediaStore.Images.Media.getBitmap(context.getContentResolver(), Uri.parse(product.picture));
             // set bitmap to imageview
             holder.imageViewfood.setImageBitmap(bitmap);
-//            holder.imageViewfood.setImageURI(Uri.parse(product.picture));
-
         }
         catch (Exception e){
             //handle exception
             e.printStackTrace();
         }
-
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -114,17 +112,12 @@ public class AdapterProduct extends RecyclerView.Adapter<AdapterProduct.Viewhold
     }
 
 
-
     public class ViewholderProduct extends RecyclerView.ViewHolder {
-
         TextView name_food , category_food , price_food;
         ImageView imageViewfood;
 
-
-
         public ViewholderProduct(View itemView) {
             super(itemView);
-
             name_food=itemView.findViewById(R.id.name_product);
             category_food=itemView.findViewById(R.id.category_product);
             imageViewfood=itemView.findViewById(R.id.image_product);
@@ -133,15 +126,7 @@ public class AdapterProduct extends RecyclerView.Adapter<AdapterProduct.Viewhold
         }
     }
 
-//    private String converText(String text){
-//        StringBuilder stringBuilder = new StringBuilder(text);
-//        for (int i = stringBuilder.length() - 3 ; i >0 ; i -= 3){
-//            stringBuilder.insert( i , ",");
-//        }
-//        return stringBuilder.toString();
-//    }
-
-    public void showBottomSheetDialogclick (int pos) {
+        public void showBottomSheetDialogclick (int pos) {
 
         final BottomSheetDialog bottomSheetDialog = new BottomSheetDialog(context);
         bottomSheetDialog.setContentView(R.layout.btnsheet_deleteedite);
@@ -201,9 +186,45 @@ public class AdapterProduct extends RecyclerView.Adapter<AdapterProduct.Viewhold
         bottomSheetDialog.show();
     }
 
+
+    public Filter getFilter() {
+        return newsFilter;
+    }
+
+    private final Filter newsFilter = new Filter() {
+        @Override
+        protected FilterResults performFiltering(CharSequence constraint) {
+
+            List<Product> filterdNewList = new ArrayList<>();
+            if(constraint == null || constraint.length() == 0){
+                filterdNewList.addAll(list_search);
+            }else {
+                String filterPattern = constraint.toString().toLowerCase().trim();
+                for(Product product : list_search){
+
+                    if(product.name.toLowerCase().contains(filterPattern))
+                        filterdNewList.add(product);
+                }
+            }
+            FilterResults results = new FilterResults();
+            results.values = filterdNewList;
+            results.count = filterdNewList.size();
+            return results;
+        }
+
+        @Override
+        protected void publishResults(CharSequence constraint, FilterResults results) {
+            list.clear();
+            list.addAll((ArrayList)results.values);
+            notifyDataSetChanged();
+        }
+    };
+
     public void addList(List<Product> arrayList){
-        list.clear();
-        list.addAll(arrayList);
+        list_search.clear();
+        list_search.addAll(arrayList);
+//        list.clear();
+        list.addAll(list_search);
         notifyDataSetChanged();
     }
 
