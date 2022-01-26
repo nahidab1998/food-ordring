@@ -20,13 +20,12 @@ import java.util.List;
 
 public class AdapterReceipt extends RecyclerView.Adapter<AdapterReceipt.ViewHolder> {
 
-    List<DetailOrder> list;
-    Context context;
-    DatabaseHelper db;
-    DetailOrderDao dao;
+    private List<DetailOrder> list;
+    private Context context;
+    private DatabaseHelper db;
+    private DetailOrderDao dao;
 
     public AdapterReceipt (List<DetailOrder> list , Context context){
-
         this.list = list;
         this.context = context;
     }
@@ -44,7 +43,6 @@ public class AdapterReceipt extends RecyclerView.Adapter<AdapterReceipt.ViewHold
     public void onBindViewHolder( ViewHolder holder, int position) {
 
         DetailOrder detailOrder = list.get(position);
-
         holder.name.setText(detailOrder.name);
         holder.category.setText(detailOrder.category);
         holder.amont.setText(String.valueOf(detailOrder.amant));

@@ -25,11 +25,11 @@ import java.util.List;
 
 public class AdapterOrdering extends RecyclerView.Adapter<AdapterOrdering.ViewHolder> {
 
-    List<Product> list ;
-    Context context ;
-    DatabaseHelper database;
-    ProductDao dao;
-    Product product;
+    private List<Product> list ;
+    private Context context ;
+    private DatabaseHelper database;
+    private ProductDao dao;
+    private Product product;
     private int numberorder = 1  ;
     public Listener listener;
 

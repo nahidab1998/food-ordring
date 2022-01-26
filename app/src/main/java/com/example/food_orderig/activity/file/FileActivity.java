@@ -18,6 +18,8 @@ import android.util.Log;
 import android.widget.Toast;
 
 import com.example.food_orderig.R;
+import com.example.food_orderig.activity.login.ActivityLogin;
+import com.example.food_orderig.activity.mainpage.MainActivity;
 
 import java.io.File;
 
@@ -62,12 +64,14 @@ public class FileActivity extends AppCompatActivity {
         if (requestCode == STORAGE_PERMISSION_CODE) {
             if (grantResults.length > 0
                     && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                Toast.makeText(this, "Storage Permission Granted", Toast.LENGTH_SHORT).show();
+//                Toast.makeText(this, "Storage Permission Granted", Toast.LENGTH_SHORT).show();
+                Intent a = new Intent(FileActivity.this, MainActivity.class);
+                startActivity(a);
 
             } else {
                 AlertDialog.Builder builder = new AlertDialog.Builder(this);
-                builder.setMessage("desc_need_permission");
-                builder.setPositiveButton("ok_permission", new DialogInterface.OnClickListener() {
+                builder.setMessage("مجوز دسترسی به فایل ها و دوربین را فعال کنید");
+                builder.setPositiveButton("برو به تنظیمات", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         dialog.cancel();
@@ -77,7 +81,7 @@ public class FileActivity extends AppCompatActivity {
                         startActivityForResult(intent, STORAGE_PERMISSION_CODE);
                     }
                 });
-                builder.setNegativeButton("exit_app", new DialogInterface.OnClickListener() {
+                builder.setNegativeButton("خروج", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         dialog.cancel();

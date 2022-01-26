@@ -47,11 +47,10 @@ public class ActivityAddOrEditGrouping extends AppCompatActivity {
     private ImageView image_camera;
     private LinearLayout anim_grouping;
     private CardView camera;
-    Uri imageuri;
-    File file;
-    String picture_s;
-
-    Grouping b = null;
+    private Uri imageuri;
+    private File file;
+    private String picture_s;
+    private Grouping b = null;
 
 
     @Override
@@ -59,13 +58,23 @@ public class ActivityAddOrEditGrouping extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_or_edit_grouping);
 
-        editTextnameGrouping = findViewById(R.id.add_edit_number_grouping);
-        btn_save_grouping=findViewById(R.id.save_grouping);
-        btn_canclegrouping =findViewById(R.id.cancelgrouping);
+        initDataBase();
+        initID();
+        set_AddImage();
+        btn_save();
+        btn_close();
+        page_animation();
+        set_TapEditText();
 
-        anim_grouping= findViewById(R.id.anim_grouping);
-        anim_grouping.setTranslationY(-1500f);
-        anim_grouping.animate().translationYBy(1500f).setDuration(1500);
+        //get Gson from GroupingAdapter
+        if (getIntent().getExtras() != null){
+            String getNameGrouping = getIntent().getStringExtra("Grouping");
+            b = new Gson().fromJson(getNameGrouping,Grouping.class);
+            editTextnameGrouping.setText(b.name);
+        }
+    }
+
+    private void set_TapEditText() {
 
         editTextnameGrouping.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
@@ -74,28 +83,61 @@ public class ActivityAddOrEditGrouping extends AppCompatActivity {
                     InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
                     imm.hideSoftInputFromWindow(v.getWindowToken() , 0);
                 }
-
             }
         });
+    }
 
-        if (getIntent().getExtras() != null){
-            String getNameGrouping = getIntent().getStringExtra("Grouping");
-            b = new Gson().fromJson(getNameGrouping,Grouping.class);
-            editTextnameGrouping.setText(b.name);
-        }
+    private void page_animation() {
+        anim_grouping.setTranslationY(-1500f);
+        anim_grouping.animate().translationYBy(1500f).setDuration(1500);
+    }
 
+    private void btn_close() {
         btn_canclegrouping.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 finish();
             }
         });
+    }
 
-        db = App.getDatabase();
-        dao = db.groupingDao();
+    private void btn_save() {
 
-        camera=findViewById(R.id.camera);
-        imageViewadd_img_grouping=findViewById(R.id.add_img_food_grouping);
+        btn_save_grouping.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                name = editTextnameGrouping.getText().toString();
+//                picture_s = imageViewadd_img_grouping.getDrawable().toString();
+                if (b == null){
+                    if(imageViewadd_img_grouping.getDrawable() == null){
+                        Toast.makeText(getApplicationContext(), "لطفا یک عکس انتخاب کنید", Toast.LENGTH_SHORT).show();
+                    }
+                    else if(TextUtils.isEmpty(name) ){
+                        Toast.makeText(getApplicationContext(), "فیلد مورد نظر را پرکنید", Toast.LENGTH_SHORT).show();
+                    }else if (dao.getOneName(name) != null){
+
+                        Toast.makeText(ActivityAddOrEditGrouping.this, "این دسته بندی وجود دارد", Toast.LENGTH_SHORT).show();
+
+                    }else {
+                        dao.insertGrouping(new Grouping(name , imageuri.toString()));
+                        finish();
+                    }
+                }else {
+                    b.name = name;
+
+                    Log.e("qqqq", "onClick: update product=" + b.id );
+                    dao.updateGrouping(b);
+//                    Toast.makeText(getApplicationContext(),  " دسته بندی " + old_name + " با موفقیت به " + name + " تغییر کرد", Toast.LENGTH_LONG).show();
+                    finish();
+                }
+
+            }
+        });
+    }
+
+    private void set_AddImage() {
+
         camera.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -108,35 +150,20 @@ public class ActivityAddOrEditGrouping extends AppCompatActivity {
 //                Toast.makeText(ActivityAddOrEditGrouping.this, "به زودی", Toast.LENGTH_SHORT).show();
             }
         });
+    }
 
-        btn_save_grouping.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+    private void initID() {
+        editTextnameGrouping = findViewById(R.id.add_edit_number_grouping);
+        btn_save_grouping=findViewById(R.id.save_grouping);
+        btn_canclegrouping =findViewById(R.id.cancelgrouping);
+        anim_grouping= findViewById(R.id.anim_grouping);
+        camera=findViewById(R.id.camera);
+        imageViewadd_img_grouping=findViewById(R.id.add_img_food_grouping);
+    }
 
-                name = editTextnameGrouping.getText().toString();
-//                picture_s = imageViewadd_img_grouping.getDrawable().toString();
-
-                if (b == null){
-                    if(TextUtils.isEmpty(name) || imageViewadd_img_grouping.getDrawable() == null){
-                        Toast.makeText(getApplicationContext(), "فیلد مورد نظر را پرکنید", Toast.LENGTH_SHORT).show();
-                    }else if (dao.getOneName(name) != null){
-
-                        Toast.makeText(ActivityAddOrEditGrouping.this, "این دسته بندی وجود دارد", Toast.LENGTH_SHORT).show();
-
-                    }else {
-
-                        dao.insertGrouping(new Grouping(name , imageuri.toString()));
-                        finish();
-                    }
-                }else {
-                    b.name = name;
-                    Log.e("qqqq", "onClick: update product=" + b.id );
-                    dao.updateGrouping(b);
-                    finish();
-                }
-
-            }
-        });
+    private void initDataBase() {
+        db = App.getDatabase();
+        dao = db.groupingDao();
     }
 
     @Override

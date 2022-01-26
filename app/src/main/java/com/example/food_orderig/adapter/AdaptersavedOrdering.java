@@ -10,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
+import android.widget.Filter;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -21,22 +22,25 @@ import com.example.food_orderig.database.DatabaseHelper;
 import com.example.food_orderig.database.dao.SavedOrderDao;
 import com.example.food_orderig.helper.App;
 import com.example.food_orderig.helper.Tools;
+import com.example.food_orderig.model.Grouping;
 import com.example.food_orderig.model.Order;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class AdaptersavedOrdering extends RecyclerView.Adapter<AdaptersavedOrdering.ViewHolder> {
 
-    List<Order> list;
-    Context context;
-
-    DatabaseHelper database;
-    SavedOrderDao dao;
+    private List<Order> list;
+    private Context context;
+    private DatabaseHelper database;
+    private SavedOrderDao dao;
+    private List<Order> list_search;
 
 
     public AdaptersavedOrdering(Context context , List<Order> list){
         this.context = context;
-        this.list = list;
+        this.list_search = list;
+        this.list = new ArrayList<>(list_search);
     }
 
     @Override
@@ -136,6 +140,44 @@ public class AdaptersavedOrdering extends RecyclerView.Adapter<AdaptersavedOrder
             date = itemView.findViewById(R.id.date);
 
         }
+    }
+
+    public Filter getFilter() {
+        return newsFilter;
+    }
+
+    private final Filter newsFilter = new Filter() {
+        @Override
+        protected FilterResults performFiltering(CharSequence constraint) {
+
+            List<Order> filterdNewList = new ArrayList<>();
+            if(constraint == null || constraint.length() == 0){
+                filterdNewList.addAll(list_search);
+            }else {
+                String filterPattern = constraint.toString().toLowerCase().trim();
+                for(Order order : list_search){
+                    if(order.name.toLowerCase().contains(filterPattern))
+                        filterdNewList.add(order);
+                }
+            }
+            FilterResults results = new FilterResults();
+            results.values = filterdNewList;
+            results.count = filterdNewList.size();
+            return results;
+        }
+        @Override
+        protected void publishResults(CharSequence constraint, FilterResults results) {
+            list.clear();
+            list.addAll((ArrayList)results.values);
+            notifyDataSetChanged();
+        }
+    };
+
+    public void addList(List<Order> arrayList){
+        list_search.clear();
+        list_search.addAll(arrayList);
+        list = new ArrayList<>(list_search);
+        notifyDataSetChanged();
     }
 
 }

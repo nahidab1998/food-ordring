@@ -19,7 +19,18 @@
         <item name="android:textColorSecondary">@color/text</item>
         <item name="android:editTextColor">@color/text</item>
 
+        <item name="colorAccent">@color/red</item>
+        <item name="android:timePickerStyle">@style/MyTimePickerlight</item>
 <!--        <item name="editTextColor">@color/text</item>-->
 <!--        <item name="android:textColorSecondary">@color/text</item>-->
     </style>
+
+    <style name="MyTimePickerlight" parent="android:Widget.Material.TimePicker">
+        <item name="android:headerBackground">@color/red</item>
+<!--        <item name="android:numbersTextColor">#673AB7</item>-->
+        <item name="android:numbersSelectorColor">@color/red</item>
+<!--        <item name="android:numbersBackgroundColor">#61E761</item>-->
+<!--        <item name="android:background">#FFC107</item>-->
+    </style>
+
 </resources>

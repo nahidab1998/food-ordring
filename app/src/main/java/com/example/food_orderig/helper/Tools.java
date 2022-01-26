@@ -1,5 +1,11 @@
 package com.example.food_orderig.helper;
 
+import android.net.Uri;
+
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.text.DecimalFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -97,5 +103,39 @@ public class Tools {
         int thirtyAgo = (day - ((day * 2)-1)) ;
         String date = getDayAgo(thirtyAgo);
         return date;
+    }
+
+    public static byte[] getBytes(Uri uri)  {
+        ByteArrayOutputStream byteBuffer = new ByteArrayOutputStream();
+
+        try {
+            FileInputStream file = new FileInputStream(uri.getPath());
+            int bufferSize = 1024;
+            byte[] buffer = new byte[bufferSize];
+
+            int len = 0;
+            while ((len = file.read(buffer)) != -1) {
+                byteBuffer.write(buffer, 0, len);
+            }
+        }catch (Exception exception){
+            exception.printStackTrace();
+        }
+
+        return byteBuffer.toByteArray();
+    }
+
+    public static String saveFile(byte[] data, File DESTINY_DIR, String fileName) {
+        if (!DESTINY_DIR.exists()) DESTINY_DIR.mkdirs();
+
+        File mainPicture = new File(DESTINY_DIR, fileName);
+        try {
+            FileOutputStream fos = new FileOutputStream(mainPicture);
+            fos.write(data);
+            fos.close();
+            return mainPicture.getPath();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 }

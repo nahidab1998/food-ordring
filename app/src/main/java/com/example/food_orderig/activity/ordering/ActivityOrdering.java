@@ -49,44 +49,38 @@ import ir.hamsaa.persiandatepicker.util.PersianCalendarUtils;
 
 public class ActivityOrdering extends AppCompatActivity {
 
-    RecyclerView recyclerView;
-    AdapterOrdering adapterOrdering;
-    DatabaseHelper db;
-    List<Product> orderDetailList;
-    DetailOrderDao dao_detailorder;
-    SavedOrderDao dao_savedorder;
-    Customer customer;
-    LinearLayout box_customer;
-    CardView record_order,add_order;
-    CardView cardView_pay;
-    TextView txtname;
-    TextView name_customer;
-    TextView number_order;
-    TextView total ;
-    TextView save_order ;
-    TextView txt_calender , txt_time ;
-    CardView calender , houre ;
-    CardView card_numberorder;
-    ImageView delete_ordering;
-    LinearLayout lottieAnimationView;
+    private RecyclerView recyclerView;
+    private AdapterOrdering adapterOrdering;
+    private DatabaseHelper db;
+    private List<Product> orderDetailList;
+    private DetailOrderDao dao_detailorder;
+    private SavedOrderDao dao_savedorder;
+    private Customer customer;
+    private LinearLayout box_customer;
+    private CardView record_order,add_order;
+    private CardView cardView_pay;
+    private TextView txtname;
+    private TextView name_customer;
+    private TextView number_order;
+    private TextView total ;
+    private TextView save_order ;
+    private TextView txt_calender , txt_time ;
+    private CardView calender , houre ;
+    private CardView card_numberorder;
+    private ImageView delete_ordering;
+    private LinearLayout lottieAnimationView;
     private String CODE = String.valueOf(System.currentTimeMillis());
     private PersianDatePickerDialog picker;
-
     private static final String TAG = "MainActivity";
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ordering);
 
-        Log.e("bbbbb", "onCreate: " + System.currentTimeMillis() );
-
-//        db = App.getDatabase();
-        db = DatabaseHelper.getInstance(this);
-
-        dao_savedorder = db.savedOrderDao();
-        dao_detailorder = db.detailOrderDao();
-
+//        Log.e("bbbbb", "onCreate: " + System.currentTimeMillis() );
+        initDatabase();
         initID();
         initBoxCustomer();
         initBoxProduct();
@@ -118,10 +112,14 @@ public class ActivityOrdering extends AppCompatActivity {
                 initCounter();
             }
         });
-
         recyclerView.setAdapter(adapterOrdering);
         recyclerView.setHasFixedSize(true);
+    }
 
+    private void initDatabase() {
+        db = App.getDatabase();
+        dao_savedorder = db.savedOrderDao();
+        dao_detailorder = db.detailOrderDao();
     }
 
     private void setTime() {
@@ -152,7 +150,6 @@ public class ActivityOrdering extends AppCompatActivity {
     }
 
     private void setCalender() {
-
         calender.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -186,7 +183,6 @@ public class ActivityOrdering extends AppCompatActivity {
                             }
                         });
                 picker.show();
-
             }
         });
     }
@@ -229,8 +225,6 @@ public class ActivityOrdering extends AppCompatActivity {
         houre = findViewById(R.id.houre);
         txt_calender = findViewById(R.id.calender_txt);
         txt_time = findViewById(R.id.time_txt);
-
-
     }
 
     private void initBoxCustomer(){
@@ -250,6 +244,7 @@ public class ActivityOrdering extends AppCompatActivity {
 
 
     }
+
     private void initCounter(){
         if (orderDetailList.size() > 0){
             lottieAnimationView.setVisibility(View.GONE);
@@ -299,13 +294,11 @@ public class ActivityOrdering extends AppCompatActivity {
         save_order.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 if(customer == null){
                     Toast.makeText(ActivityOrdering.this, "مشتری را انتخاب کنید", Toast.LENGTH_SHORT).show();
                 }else {
                     dao_savedorder.insertOrder(new Order(customer.name , CODE , customer.id , 1 , total.getText()+"" , "با تمام مخلفات" , txt_time.getText().toString(), txt_calender.getText().toString()));
                     for (int i = 0; i < orderDetailList.size(); i++) {
-
                         dao_detailorder.insertDetailOrder(new DetailOrder(orderDetailList.get(i).name , orderDetailList.get(i).price , orderDetailList.get(i).category ,
                                 orderDetailList.get(i).amount , CODE ,txt_time.getText().toString(), txt_calender.getText().toString() , orderDetailList.get(i).picture));
                     }

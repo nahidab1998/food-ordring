@@ -101,7 +101,6 @@ public class AdapterProduct extends RecyclerView.Adapter<AdapterProduct.Viewhold
 
 //                showBottomSheetDialogclick(position);
                 listener.onClick(product , position);
-
             }
         });
     }

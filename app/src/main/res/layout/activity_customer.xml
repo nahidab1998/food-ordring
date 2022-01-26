@@ -9,7 +9,24 @@
     android:background="@color/text"
     tools:context=".activity.customer.ActivityCustomer">
 
-    <include layout="@layout/toolbare_customer" />
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar_customer"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/red">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="لیست مشتریان"
+            android:textColor="@color/text"
+            android:fontFamily="@font/iran_sans"
+            android:textSize="16dp"
+            android:layout_gravity="center_vertical"
+            android:gravity="center_vertical"/>
+
+    </androidx.appcompat.widget.Toolbar>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycle_customer"

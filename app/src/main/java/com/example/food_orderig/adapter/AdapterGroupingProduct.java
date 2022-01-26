@@ -16,9 +16,9 @@ import java.util.List;
 
 public class AdapterGroupingProduct extends RecyclerView.Adapter<AdapterGroupingProduct.ViewHolder> {
 
-    List<Grouping> list;
-    Context context;
-    Listener listener;
+    private List<Grouping> list;
+    private Context context;
+    private Listener listener;
 
     public AdapterGroupingProduct(List<Grouping> list , Context context, Listener listener){
         this.list = list;

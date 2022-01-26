@@ -55,13 +55,11 @@ public class ActivityAddOrEditProduct extends AppCompatActivity {
     private LinearLayout anim_product;
     private AutoCompleteTextView autoCompleteTextView;
     private ArrayAdapter<String> adapter_autocomplete;
-    Product p = null;
+    private Product p = null;
     private static final int pick_image=1;
-
     private Uri resultUri;
-    String cameraPermission[];
-    String storagePermission[];
-
+    private String cameraPermission[];
+    private String storagePermission[];
     private static final int GalleryPick = 1;
     private static final int CAMERA_REQUEST = 100;
     private static final int STORAGE_REQUEST = 200;
@@ -79,16 +77,14 @@ public class ActivityAddOrEditProduct extends AppCompatActivity {
         setCliableEdittext();
         setCancleButton();
         setSaveButton();
+        page_animation();
 
         price.addTextChangedListener(new NumberTextWatcherForThousand(price));
 
         cameraPermission = new String[]{Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE};
         storagePermission = new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE};
 
-
-        anim_product.setTranslationY(-1500f);
-        anim_product.animate().translationYBy(1500f).setDuration(1500);
-
+        //get Gson from ProductAdapter
         if (getIntent().getExtras() != null){
             String getNameProduct = getIntent().getStringExtra("product");
             p = new Gson().fromJson(getNameProduct,Product.class);
@@ -97,9 +93,15 @@ public class ActivityAddOrEditProduct extends AppCompatActivity {
             price.setText(p.price);
         }
 
+        //for autoconmplate
         adapter_autocomplete = new ArrayAdapter(getApplicationContext(), android.R.layout.simple_dropdown_item_1line,dao_grouping.getname());
         autoCompleteTextView.setThreshold(1);
         autoCompleteTextView.setAdapter(adapter_autocomplete);
+    }
+
+    private void page_animation() {
+        anim_product.setTranslationY(-1500f);
+        anim_product.animate().translationYBy(1500f).setDuration(1500);
     }
 
     private void setCancleButton() {

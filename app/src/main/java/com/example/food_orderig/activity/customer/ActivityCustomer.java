@@ -4,13 +4,19 @@ import static android.media.CamcorderProfile.get;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.SearchView;
+import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -28,14 +34,14 @@ import java.util.List;
 
 public class ActivityCustomer extends AppCompatActivity {
 
-    FloatingActionButton fab_customer;
-    CustomerDao dao_customer;
-    DatabaseHelper db;
-    AdapterCustomer adapterCustomer;
-    RecyclerView recyclerView_customer;
-    LinearLayout call;
-    TextView name,phone,address;
-
+    private FloatingActionButton fab_customer;
+    private CustomerDao dao_customer;
+    private DatabaseHelper db;
+    private AdapterCustomer adapterCustomer;
+    private RecyclerView recyclerView_customer;
+    private LinearLayout call;
+    private TextView name,phone,address;
+    private Toolbar toolbar;
     private boolean for_order = false;
 
 
@@ -44,31 +50,79 @@ public class ActivityCustomer extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_customer);
 
+        initDataBase();
+        initID();
+        set_toolBar();
+        set_recyclerview();
+        hideFloat();
+        onClickFloat();
 
         if (getIntent() != null){
             for_order = getIntent().getBooleanExtra("for_order",false);
         }
 
-        fab_customer=findViewById(R.id.fab_customer);
+//        recyclerView_customer.setLayoutManager(new GridLayoutManager(this,2));
+    }
 
+    private void set_toolBar() {
+        toolbar.setTitle("");
+        toolbar.setTitleTextColor(getResources().getColor(R.color.text));
+        setSupportActionBar(toolbar);
+    }
 
-        db = App.getDatabase();
-        dao_customer = db.customerDao();
-        name =findViewById(R.id.name_customer);
-        phone =findViewById(R.id.phone_customer);
-        address = findViewById(R.id.address_customer);
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.search_customer, menu);
+        MenuItem item = menu.findItem(R.id.searchCustomer);
+        SearchView searchView = (SearchView) item.getActionView();
+        searchView.setMaxWidth(Integer.MAX_VALUE);
+//        searchView.setBackground(getResources().getDrawable(R.drawable.ripple_all));
+        TextView searchText = (TextView) searchView.findViewById(R.id.search_src_text);
+        Typeface myCustomFont = Typeface.createFromAsset(getAssets(),"font/iran_sans.ttf");
+        searchText.setTypeface(myCustomFont);
+        searchText.setTextSize(14);
 
-        call = findViewById(R.id.call);
+        // for remove icon hint
+        EditText searchEdit = ((EditText)searchView.findViewById(androidx.appcompat.R.id.search_src_text));
+        searchEdit.setTextColor(getResources().getColor(R.color.text));
+        searchEdit.setHintTextColor(getResources().getColor(R.color.text));
+        searchEdit.setHint("");
 
-        recyclerView_customer = findViewById(R.id.recycle_customer);
-        set_recyclerview();
+        // for underline
+//        View v = searchView.findViewById(androidx.appcompat.R.id.search_plate);
+//        v.setBackgroundColor(Color.parseColor("#f15c41"));
 
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                adapterCustomer.getFilter().filter(newText);
+                return false;
+            }
+        });
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    private void onClickFloat() {
+        fab_customer.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent add_new_customer = new Intent(ActivityCustomer.this,ActivityAddOrEditCostomer.class);
+                startActivity(add_new_customer);
+            }
+        });
+    }
+
+    private void hideFloat() {
         recyclerView_customer.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
             public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
-
                 if (dy >0 ){
-
                     fab_customer.hide();
 
                 }else {
@@ -78,17 +132,21 @@ public class ActivityCustomer extends AppCompatActivity {
                 super.onScrolled(recyclerView, dx, dy);
             }
         });
+    }
 
-//        recyclerView_customer.setLayoutManager(new GridLayoutManager(this,2));
+    private void initID() {
+        name =findViewById(R.id.name_customer);
+        phone =findViewById(R.id.phone_customer);
+        address = findViewById(R.id.address_customer);
+        fab_customer=findViewById(R.id.fab_customer);
+        call = findViewById(R.id.call);
+        recyclerView_customer = findViewById(R.id.recycle_customer);
+        toolbar = findViewById(R.id.toolbar_customer);
+    }
 
-        fab_customer.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                Intent add_new_customer = new Intent(ActivityCustomer.this,ActivityAddOrEditCostomer.class);
-                startActivity(add_new_customer);
-            }
-        });
+    private void initDataBase() {
+        db = App.getDatabase();
+        dao_customer = db.customerDao();
     }
 
     public void set_recyclerview(){

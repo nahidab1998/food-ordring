@@ -18,16 +18,15 @@ import com.example.food_orderig.helper.Tools;
 
 public class ActivityOrderingReceipt extends AppCompatActivity {
 
-    RecyclerView recyclerView;
-    AdapterReceipt adapterReceipt;
-
-    DatabaseHelper db;
-    DetailOrderDao dao_detailOrder;
-    SavedOrderDao dao_savedOrderDao;
-    CustomerDao dao_customerDao;
-    String code, customername , total_detail , date_receipt , time_receipt;
+    private RecyclerView recyclerView;
+    private AdapterReceipt adapterReceipt;
+    private DatabaseHelper db;
+    private DetailOrderDao dao_detailOrder;
+    private SavedOrderDao dao_savedOrderDao;
+    private CustomerDao dao_customerDao;
+    private String code, customername , total_detail , date_receipt , time_receipt;
     private int customerID;
-    TextView name , phone , address , total ,time , date;
+    private TextView name , phone , address , total ,time , date;
 
 
 
@@ -37,6 +36,13 @@ public class ActivityOrderingReceipt extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ordering_receipt);
 
+        initDatabase();
+        initId();
+        initRecycler();
+        initSetCustomer();
+        initSetTotal();
+
+        //get intent from orderingdetails
         if(getIntent().getExtras() != null){
             code = getIntent().getStringExtra("code");
             customerID = getIntent().getIntExtra("customerid" ,0 );
@@ -45,12 +51,6 @@ public class ActivityOrderingReceipt extends AppCompatActivity {
             time_receipt = getIntent().getStringExtra("time");
             date_receipt = getIntent().getStringExtra("date");
         }
-
-        initDatabase();
-        initId();
-        initRecycler();
-        initSetCustomer();
-        initSetTotal();
     }
 
     private void initDatabase(){

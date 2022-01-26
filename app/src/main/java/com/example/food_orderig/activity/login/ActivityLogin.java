@@ -17,6 +17,7 @@ import android.os.CancellationSignal;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
@@ -71,13 +72,35 @@ public class ActivityLogin extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-
         init_database();
         init_id();
         new_acount();
         buttonLogin();
         setcheckBox();
         setFingerprint();
+        set_TapEditText();
+    }
+
+    private void set_TapEditText() {
+
+        username.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (!hasFocus) {
+                    InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+                    imm.hideSoftInputFromWindow(v.getWindowToken() , 0);
+                }
+            }
+        });
+        password.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (!hasFocus) {
+                    InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+                    imm.hideSoftInputFromWindow(v.getWindowToken() , 0);
+                }
+            }
+        });
     }
 
     @RequiresApi(api = Build.VERSION_CODES.P)
@@ -189,8 +212,8 @@ public class ActivityLogin extends AppCompatActivity {
 
                 }else if ( userDao.getOneName(user_login ,pass_login) != null ) {
 
+//                    Intent a = new Intent(ActivityLogin.this, MainActivity.class);
                     Intent a = new Intent(ActivityLogin.this, MainActivity.class);
-//                    Intent a = new Intent(ActivityLogin.this, FileActivity.class);
                     a.putExtra("name_restaurant", user_login);
                     startActivity(a);
                 }else {

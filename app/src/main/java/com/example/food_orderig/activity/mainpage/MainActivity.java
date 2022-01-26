@@ -73,14 +73,15 @@ public class MainActivity extends AppCompatActivity {
 
         initDatabase();
         initID();
-//        initGraph();
         initSetName();
+        initIntents();
 
-        // Intents 
+    }
+
+    private void initIntents() {
         cardViewproduct.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 Intent i= new Intent(MainActivity.this, ActivityProduct.class);
                 startActivity(i);
             }
@@ -89,7 +90,6 @@ public class MainActivity extends AppCompatActivity {
         cardViewcustomer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 Intent q= new Intent(MainActivity.this, ActivityCustomer.class);
                 startActivity(q);
             }
@@ -105,17 +105,14 @@ public class MainActivity extends AppCompatActivity {
         add_shop.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 Intent a= new Intent(MainActivity.this, ActivityOrdering.class);
                 startActivity(a);
-
             }
         });
 
         saved.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 Intent intent = new Intent(MainActivity.this, ActivityOrderingDetails.class);
                 startActivity(intent);
             }
@@ -128,7 +125,6 @@ public class MainActivity extends AppCompatActivity {
         String a = intent.getStringExtra("name_restaurant");
         txt_name_restaurant.setText(a);
     }
-
 
     private void initDatabase() {
         db = App.getDatabase();
@@ -155,7 +151,6 @@ public class MainActivity extends AppCompatActivity {
         dayName = findViewById(R.id.day_name);
         monthName = findViewById(R.id.month_name);
     }
-
 
     public void countsizeRecycler(){
 
@@ -309,7 +304,6 @@ public class MainActivity extends AppCompatActivity {
         xAxis.setDrawAxisLine(true);
         xAxis.setDrawGridLines(false);
     }
-
 
     @Override
     protected void onResume() {
