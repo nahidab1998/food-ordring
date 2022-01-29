@@ -6,6 +6,7 @@ import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.content.ContextCompat;
 
 import android.Manifest;
@@ -16,6 +17,8 @@ import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Environment;
+import android.provider.Settings;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
@@ -36,23 +39,29 @@ import com.example.food_orderig.database.dao.GroupingDao;
 import com.example.food_orderig.database.dao.ProductDao;
 import com.example.food_orderig.design.NumberTextWatcherForThousand;
 import com.example.food_orderig.helper.App;
+import com.example.food_orderig.helper.Tools;
+import com.example.food_orderig.model.Grouping;
 import com.example.food_orderig.model.Product;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.gson.Gson;
 import com.squareup.picasso.Picasso;
 import com.theartofdev.edmodo.cropper.CropImage;
+
+import java.io.File;
 
 public class ActivityAddOrEditProduct extends AppCompatActivity {
 
     private EditText name , price;
     private TextView textViewcancle;
-    private ImageView imageView_image_product;
-    private CardView camera;
+    private ImageView imageView_image_product , imageView_img_product_back;
+    private FloatingActionButton camera;
     private DatabaseHelper db;
     private ProductDao dao_product;
     private GroupingDao dao_grouping;
     private TextView btn_save_product;
-    private String name_product , price_product , categoryProduct;
-    private LinearLayout anim_product;
+    private String name_product , price_product , categoryProduct , save;
+    private Uri img_uri;
+    private ConstraintLayout anim_product;
     private AutoCompleteTextView autoCompleteTextView;
     private ArrayAdapter<String> adapter_autocomplete;
     private Product p = null;
@@ -65,6 +74,9 @@ public class ActivityAddOrEditProduct extends AppCompatActivity {
     private static final int STORAGE_REQUEST = 200;
     private static final int IMAGEPICK_GALLERY_REQUEST = 300;
     private static final int IMAGE_PICKCAMERA_REQUEST = 400;
+    private static final int STORAGE_PERMISSION_CODE = 101;
+    public static final int CALL_PERMISSION_CODE = 100;
+    private String Timemilisecond = String.valueOf(System.currentTimeMillis());
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -79,6 +91,8 @@ public class ActivityAddOrEditProduct extends AppCompatActivity {
         setSaveButton();
         page_animation();
 
+
+
         price.addTextChangedListener(new NumberTextWatcherForThousand(price));
 
         cameraPermission = new String[]{Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE};
@@ -90,6 +104,9 @@ public class ActivityAddOrEditProduct extends AppCompatActivity {
             p = new Gson().fromJson(getNameProduct,Product.class);
             name.setText(p.name);
             autoCompleteTextView.setText(p.category);
+            img_uri = Uri.parse(p.picture);
+            imageView_image_product.setImageURI(Uri.parse(p.picture));
+            imageView_img_product_back.setVisibility(View.GONE);
             price.setText(p.price);
         }
 
@@ -161,19 +178,15 @@ public class ActivityAddOrEditProduct extends AppCompatActivity {
         textViewcancle=findViewById(R.id.cancel_product);
         btn_save_product = findViewById(R.id.save_product);
         imageView_image_product = findViewById(R.id.add_img_food_product);
+        imageView_img_product_back = findViewById(R.id.image_back_product);
     }
 
     private void setImage(){
         camera.setOnClickListener(new View.OnClickListener() {
+            @RequiresApi(api = Build.VERSION_CODES.M)
             @Override
             public void onClick(View v) {
 
-//                Intent gallery = new Intent();
-//                gallery.setType("image/*");
-////                gallery.setAction(Intent.ACTION_GET_CONTENT);
-//                gallery.setAction(Intent.ACTION_OPEN_DOCUMENT);
-//                startActivityForResult(Intent.createChooser(gallery,"select picture"),pick_image);
-////                Toast.makeText(ActivityAddOrEditProduct.this, "به زودی", Toast.LENGTH_SHORT).show();
                 String options[] = {"دوربین", "گالری"};
                 AlertDialog.Builder builder = new AlertDialog.Builder(ActivityAddOrEditProduct.this);
                 builder.setTitle("انتخاب تصویر از");
@@ -236,7 +249,26 @@ public class ActivityAddOrEditProduct extends AppCompatActivity {
                     if (camera_accepted && writeStorageaccepted) {
                         pickFromGallery();
                     } else {
-                        Toast.makeText(ActivityAddOrEditProduct.this, "لطفاً مجوزهای دوربین و ذخیره سازی را فعال کنید", Toast.LENGTH_LONG).show();
+                        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+                        builder.setMessage("فعال سازی مجوزها");
+                        builder.setPositiveButton("تنظیمات", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                dialog.cancel();
+                                Intent intent = new Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
+                                Uri uri = Uri.fromParts("package", getPackageName(), null);
+                                intent.setData(uri);
+                                startActivityForResult(intent, STORAGE_PERMISSION_CODE);
+                            }
+                        });
+                        builder.setNegativeButton("خروچ", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                dialog.cancel();
+                            }
+                        });
+                        builder.show();
+//                        Toast.makeText(ActivityAddOrEditProduct.this, "لطفاً دسترسی به دوربین و فایل را فعال کنید", Toast.LENGTH_LONG).show();
                     }
                 }
             }
@@ -247,7 +279,26 @@ public class ActivityAddOrEditProduct extends AppCompatActivity {
                     if (writeStorageaccepted) {
                         pickFromGallery();
                     } else {
-                        Toast.makeText(ActivityAddOrEditProduct.this, "لطفاً مجوزهای ذخیره سازی را فعال کنید", Toast.LENGTH_LONG).show();
+                        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+                        builder.setMessage("فعال سازی مجوزها");
+                        builder.setPositiveButton("تنظیمات", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                dialog.cancel();
+                                Intent intent = new Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
+                                Uri uri = Uri.fromParts("package", getPackageName(), null);
+                                intent.setData(uri);
+                                startActivityForResult(intent, STORAGE_PERMISSION_CODE);
+                            }
+                        });
+                        builder.setNegativeButton("بستن", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                dialog.cancel();
+                            }
+                        });
+                        builder.show();
+//                        Toast.makeText(ActivityAddOrEditProduct.this, "لطفاً مجوزهای ذخیره سازی را فعال کنید", Toast.LENGTH_LONG).show();
                     }
                 }
             }
@@ -267,8 +318,12 @@ public class ActivityAddOrEditProduct extends AppCompatActivity {
             CropImage.ActivityResult result = CropImage.getActivityResult(data);
             if (resultCode == RESULT_OK) {
                 resultUri = result.getUri();
-//                imageView_image_product.setImageURI(resultUri);
-                Picasso.with(this).load(resultUri).into(imageView_image_product);
+                save = Tools.saveFile(Tools.getBytes(resultUri),new File( Environment.getExternalStorageDirectory() + "/DCIM/Foods") , Timemilisecond +".jpg");
+                imageView_image_product.setImageURI(resultUri);
+//                Picasso.with(this).load(resultUri).into(imageView_image_product);
+                imageView_img_product_back.setVisibility(View.GONE);
+            }else if (resultCode == CropImage.CROP_IMAGE_ACTIVITY_RESULT_ERROR_CODE) {
+                Exception error = result.getError();
             }
         }
     }
@@ -284,21 +339,36 @@ public class ActivityAddOrEditProduct extends AppCompatActivity {
                 categoryProduct = autoCompleteTextView.getText().toString();
 
                 if (p == null){
-                    if(TextUtils.isEmpty(name_product) || TextUtils.isEmpty(categoryProduct) || TextUtils.isEmpty(price_product) || imageView_image_product.getDrawable() == null){
-                        Toast.makeText(getApplicationContext(), "فیلد مورد نظر را پرکنید", Toast.LENGTH_SHORT).show();
-                    }else if (dao_product.getOneName(name_product) != null){
 
-                        Toast.makeText(ActivityAddOrEditProduct.this, "این محصول وجود دارد ", Toast.LENGTH_SHORT).show();
-
-                    }else {
-
-                        dao_product.insertProduct(new Product(name_product,categoryProduct, price_product , resultUri.toString()));
-                        finish();
+                    if (imageView_image_product.getDrawable() == null){
+                        Toast.makeText(getApplicationContext(), "لطفا یک عکس آپلود کنید", Toast.LENGTH_SHORT).show();
                     }
+                     else if(TextUtils.isEmpty(name_product) || TextUtils.isEmpty(categoryProduct) || TextUtils.isEmpty(price_product)){
+                        Toast.makeText(getApplicationContext(), "فیلد مورد نظر را پرکنید", Toast.LENGTH_SHORT).show();
+                    }else {
+                        if (dao_product.getOneName(name_product) != null){
+                            Toast.makeText(ActivityAddOrEditProduct.this, "این محصول وجود دارد ", Toast.LENGTH_SHORT).show();
+
+                        }else if(dao_grouping.getOneName(categoryProduct) == null){
+                            dao_grouping.insertGrouping(new Grouping(categoryProduct, ""));
+                            Toast.makeText(ActivityAddOrEditProduct.this, "دسته بندی نوشته شده ", Toast.LENGTH_SHORT).show();
+                        }else{
+                            dao_product.insertProduct(new Product(name_product,categoryProduct, price_product , save));
+                            finish();
+                        }
+                    }
+
                 }else {
                     p.name = name_product;
                     p.category = categoryProduct;
                     p.price = price_product;
+                    if (resultUri == null){
+                        resultUri = img_uri;
+                        p.picture = resultUri.toString();
+                    }else {
+                        p.picture = resultUri.toString();
+                    }
+                    p.picture = resultUri.toString();
                     Log.e("qqqq", "onClick: update product=" + p.id );
                     dao_product.updateProduct(p);
                     finish();

@@ -36,12 +36,6 @@ public class ActivityOrderingReceipt extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ordering_receipt);
 
-        initDatabase();
-        initId();
-        initRecycler();
-        initSetCustomer();
-        initSetTotal();
-
         //get intent from orderingdetails
         if(getIntent().getExtras() != null){
             code = getIntent().getStringExtra("code");
@@ -51,6 +45,13 @@ public class ActivityOrderingReceipt extends AppCompatActivity {
             time_receipt = getIntent().getStringExtra("time");
             date_receipt = getIntent().getStringExtra("date");
         }
+        initDatabase();
+        initId();
+        initRecycler();
+        initSetCustomer();
+        initSetTotal();
+
+
     }
 
     private void initDatabase(){

@@ -1,18 +1,29 @@
 package com.example.food_orderig.activity.mainpage;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 
+import android.Manifest;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.graphics.DashPathEffect;
 import android.graphics.Paint;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.airbnb.lottie.LottieAnimationView;
 import com.example.food_orderig.R;
 import com.example.food_orderig.activity.customer.ActivityCustomer;
 import com.example.food_orderig.activity.grouping.ActivityGrouping;
@@ -65,6 +76,10 @@ public class MainActivity extends AppCompatActivity {
     private CombinedChart combinedChart;
     private ArrayList<ChartModel> chartModels;
     private String date = String.valueOf(System.currentTimeMillis()- 604800000);
+    private LottieAnimationView lottie;
+    private BarChart barChart;
+    private static final int STORAGE_PERMISSION_CODE = 101;
+    public static final int CALL_PERMISSION_CODE = 100;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -76,7 +91,43 @@ public class MainActivity extends AppCompatActivity {
         initSetName();
         initIntents();
 
+        checkPermission();
+
+
     }
+
+
+        @Override
+        public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+            super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+
+            if (requestCode == STORAGE_PERMISSION_CODE ) {
+                if (grantResults.length > 0
+                        && grantResults[0] == PackageManager.PERMISSION_GRANTED
+                        && grantResults[1] == PackageManager.PERMISSION_GRANTED) {
+                    Toast.makeText(this, "مجوز دوربین داده شد", Toast.LENGTH_SHORT).show();
+
+                }
+            }
+        }
+
+        public Boolean checkPermission() {
+            String[] permission = {Manifest.permission.WRITE_EXTERNAL_STORAGE,Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.CALL_PHONE};
+            int requestCode = STORAGE_PERMISSION_CODE;
+            int requestCode_call = CALL_PERMISSION_CODE;
+            if (ContextCompat.checkSelfPermission(this, permission[0]) == PackageManager.PERMISSION_DENIED) {
+                ActivityCompat.requestPermissions(this, new String[] { permission[0] }, requestCode);
+            }else if (ContextCompat.checkSelfPermission(this, permission[1]) == PackageManager.PERMISSION_DENIED) {
+                ActivityCompat.requestPermissions(this, new String[]{permission[1]}, requestCode);
+            }else if (ContextCompat.checkSelfPermission(this, permission[2]) == PackageManager.PERMISSION_DENIED) {
+                ActivityCompat.requestPermissions(this, new String[]{permission[2]}, requestCode_call);
+            }
+            else {
+                return true;
+            }
+            return false;
+        }
+
 
     private void initIntents() {
         cardViewproduct.setOnClickListener(new View.OnClickListener() {
@@ -150,6 +201,8 @@ public class MainActivity extends AppCompatActivity {
         txt_name_restaurant = findViewById(R.id.name_restaurant);
         dayName = findViewById(R.id.day_name);
         monthName = findViewById(R.id.month_name);
+        lottie = findViewById(R.id.lottie_chart);
+        barChart = findViewById(R.id.chart_bar);
     }
 
     public void countsizeRecycler(){
@@ -231,7 +284,7 @@ public class MainActivity extends AppCompatActivity {
     private void setTotalIncome(){
 
         List<String> totalIncome = new ArrayList<>();
-        totalIncome.addAll(dao_savedorder.alldate());
+        totalIncome.addAll(dao_savedorder.getAllTotal());
         int t = 0;
         for (int i = 0; i < totalIncome.size(); i++) {
             String aaa = totalIncome.get(i);
@@ -254,15 +307,16 @@ public class MainActivity extends AppCompatActivity {
 
         for (int i = 0; i < list.size(); i++) {
 
-
             Log.e("qqqqmain2", "populateChart: for list is started \n"
                     + list.get(i).date
             );
 
             if (chartModels.size() == 0){
                 Log.e("qqqqmain", "populateChart: chartModels.size() == 0" );
-
                 chartModels.add(new ChartModel(list.get(i).date,Tools.convertToPrice(list.get(i).total)));
+//                lottie.setVisibility(View.GONE);
+//                barChart.setVisibility(View.VISIBLE);
+
             }else {
                 Log.e("qqqqmain", "populateChart: chartModels.size() > 0" );
 
@@ -286,7 +340,7 @@ public class MainActivity extends AppCompatActivity {
         ArrayList<BarEntry> visitor = new ArrayList<>();
 
         for (int i = 0; i < chartModels.size(); i++) {
-            visitor.add(new BarEntry( i, (int) chartModels.get(i).getTotal() ));
+            visitor.add(new BarEntry( i+1, (int) chartModels.get(i).getTotal() ));
         }
 
         BarDataSet barDataSet = new BarDataSet(visitor, "");
@@ -305,6 +359,17 @@ public class MainActivity extends AppCompatActivity {
         xAxis.setDrawGridLines(false);
     }
 
+    private void sessionchart(){
+        if (dao_savedorder.getOrderList().size() >= 1){
+            int count = dao_savedorder.getOrderList().size();
+            lottie.setVisibility(View.GONE);
+            barChart.setVisibility(View.VISIBLE);
+        }else {
+            lottie.setVisibility(View.VISIBLE);
+            barChart.setVisibility(View.GONE);
+        }
+    }
+
     @Override
     protected void onResume() {
         super.onResume();
@@ -316,6 +381,7 @@ public class MainActivity extends AppCompatActivity {
         setNameDayMonth();
         populateChart();
         create_chart22();
+        sessionchart();
     }
 
 }

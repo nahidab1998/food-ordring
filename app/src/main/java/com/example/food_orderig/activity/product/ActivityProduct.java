@@ -67,6 +67,7 @@ public class ActivityProduct extends AppCompatActivity implements ProductView {
         hideFloat();
         onClickFloat();
 
+
         if(getIntent().getExtras() != null){
             for_order = getIntent().getBooleanExtra("for_order",false);
         }
@@ -81,7 +82,7 @@ public class ActivityProduct extends AppCompatActivity implements ProductView {
 
     private void initID() {
         floatingActionButton_product = findViewById(R.id.fab_product);
-        lotieProduct = findViewById(R.id.lottie_product);
+//        lotieProduct = findViewById(R.id.lottie_product);
         recyclerView_product=findViewById(R.id.recycle_product);
         recyclerView_category =findViewById(R.id.recycler_grouping_product);
         toolbar = findViewById(R.id.toolbar_product);
@@ -132,11 +133,12 @@ public class ActivityProduct extends AppCompatActivity implements ProductView {
         searchText.setTypeface(myCustomFont);
         searchText.setTextSize(14);
 
+
         // for remove icon hint
         EditText searchEdit = ((EditText)searchView.findViewById(androidx.appcompat.R.id.search_src_text));
         searchEdit.setTextColor(getResources().getColor(R.color.text));
         searchEdit.setHintTextColor(getResources().getColor(R.color.text));
-        searchEdit.setHint("");
+        searchEdit.setHint("نام محصول را وارد کنید...");
 
         // for underline
 //        View v = searchView.findViewById(androidx.appcompat.R.id.search_plate);
@@ -178,7 +180,6 @@ public class ActivityProduct extends AppCompatActivity implements ProductView {
                     setResult(Activity.RESULT_OK, returnIntent);
                     finish();
                 }else {
-
                     adapterProduct.showBottomSheetDialogclick(pos);
                 }
             }
@@ -201,12 +202,9 @@ public class ActivityProduct extends AppCompatActivity implements ProductView {
                 @Override
                 public void onClick(int pos, Grouping c) {
                     if (pos == 0){
-
                         category = null;
-
                     }else {
                         category = c.name;
-
                     }
                     initListProduct();
                 }
@@ -215,21 +213,13 @@ public class ActivityProduct extends AppCompatActivity implements ProductView {
 //        }
     }
 
-    private void initListProduct(){
+    private void initListProduct() {
         Log.e("qqqq", "initListProduct: " + category);
-        if(adapterProduct != null){
-            if (category == null || category.isEmpty()){
-                if (dao_product.getList().size() <= 0){
-                    lotieProduct.setVisibility(View.VISIBLE);
-                }else {
-                    adapterProduct.addList(dao_product.getList());
-                }
+        if (adapterProduct != null) {
+            if (category == null || category.isEmpty()) {
+                adapterProduct.addList(dao_product.getList());
             }else {
-                if (dao_product.getListByCategory(category).size() == 0){
-                    lotieProduct.setVisibility(View.VISIBLE);
-                }else {
                     adapterProduct.addList(dao_product.getListByCategory(category));
-                }
             }
         }
     }

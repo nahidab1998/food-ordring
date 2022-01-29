@@ -2,6 +2,7 @@ package com.example.food_orderig.adapter;
 
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
+import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -18,8 +19,11 @@ import com.example.food_orderig.R;
 import com.example.food_orderig.activity.customer.ActivityAddOrEditCostomer;
 import com.example.food_orderig.database.DatabaseHelper;
 import com.example.food_orderig.database.dao.CustomerDao;
+import com.example.food_orderig.database.dao.DetailOrderDao;
+import com.example.food_orderig.database.dao.SavedOrderDao;
 import com.example.food_orderig.helper.App;
 import com.example.food_orderig.model.Customer;
+import com.example.food_orderig.model.Order;
 import com.example.food_orderig.model.Product;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.gson.Gson;
@@ -34,8 +38,11 @@ public class AdapterCustomer extends RecyclerView.Adapter<AdapterCustomer.Viewho
     private Listener listener;
     private LinearLayout edite_customer , delete_customer;
     private CustomerDao dao_customer;
+    private SavedOrderDao savedOrderDao;
     private DatabaseHelper database_customer;
+    private DetailOrderDao detailOrderDao ;
     private List<Customer> list_search;
+    private String text;
 
 
     public AdapterCustomer(List<Customer> list , Context context , Listener listener){
@@ -46,7 +53,7 @@ public class AdapterCustomer extends RecyclerView.Adapter<AdapterCustomer.Viewho
     }
 
     public interface Listener{
-        void onClickListener(Customer customer, int pos);
+        void onClickListener(Customer customer, int pos , String name);
     }
 
     @Override
@@ -84,7 +91,7 @@ public class AdapterCustomer extends RecyclerView.Adapter<AdapterCustomer.Viewho
             @Override
             public void onClick(View v) {
 
-                listener.onClickListener(customer , position);
+                listener.onClickListener(customer , position , list.get(position).name);
 //                showBottomSheetDialogclick(position);
             }
         });
@@ -112,49 +119,18 @@ public class AdapterCustomer extends RecyclerView.Adapter<AdapterCustomer.Viewho
 
     }
 
-    public void showBottomSheetDialogclick (int pos) {
+    public void showBottomSheetDialogclick (int pos , String name , int id) {
 
         final BottomSheetDialog bottomSheetDialog = new BottomSheetDialog(context);
         bottomSheetDialog.setContentView(R.layout.btnsheet_deleteedite);
 
-        Customer customer = list.get(pos);
         delete_customer = bottomSheetDialog.findViewById(R.id.delerebtn);
-
         delete_customer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                new AlertDialog.Builder(context)
-                        .setTitle("حذف")
-                        .setIcon(R.drawable.delete_image_dialog)
-                        .setMessage("آیا از حذف کامل این مشتری اطمینان دارید؟")
-                        .setPositiveButton("تأیید", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-
-                                database_customer = App.getDatabase();
-                                dao_customer = database_customer.customerDao();
-                                dao_customer.deleteCustomer(customer);
-                                list.remove(pos);
-                                notifyItemRemoved(pos);
-                                notifyItemRangeChanged(pos,list.size());
-                                notifyDataSetChanged();
-                                bottomSheetDialog.dismiss();
-                                Toast.makeText(context, customer.name +" با موفقیت حذف شد ", Toast.LENGTH_LONG).show();
-//                                Toast.makeText(context, list.get(pos).name+" با موفقیت حذف شد ", Toast.LENGTH_LONG).show();
-                            }
-                        })
-                        .setNegativeButton("انصراف", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                dialog.dismiss();
-                                bottomSheetDialog.dismiss();
-                            }
-                        })
-                        .create()
-                        .show();
-                bottomSheetDialog.dismiss();
-
+                initDatabase();
+                setTextDialog(id);
+                showAlertDialog(id , bottomSheetDialog , pos , name);
             }
         });
         edite_customer = bottomSheetDialog.findViewById(R.id.editbtn);
@@ -170,6 +146,67 @@ public class AdapterCustomer extends RecyclerView.Adapter<AdapterCustomer.Viewho
         });
 
         bottomSheetDialog.show();
+    }
+
+    private void initDatabase(){
+        database_customer = App.getDatabase();
+        dao_customer = database_customer.customerDao();
+        savedOrderDao = database_customer.savedOrderDao();
+        detailOrderDao = database_customer.detailOrderDao();
+        List<Order> listOrder = new ArrayList<>();
+        listOrder.addAll(savedOrderDao.getOrderList()) ;
+    }
+
+    public void showAlertDialog(int id , Dialog bottomSheetDialog , int pos , String name){
+
+        new AlertDialog.Builder(context)
+                .setTitle("حذف")
+                .setIcon(R.drawable.delete_image_dialog)
+                .setMessage(text)
+                .setPositiveButton("تأیید", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+//
+                        if (savedOrderDao.getid(id) != null){
+                            detailOrderDao.deleteOneOrderDetail(savedOrderDao.getid(id).unit_code);
+                            savedOrderDao.deteteID(id);
+                            deleteOneItem(bottomSheetDialog , pos , name);
+
+                        }else {
+                            deleteOneItem(bottomSheetDialog , pos , name);
+                        }
+
+                    }
+                })
+                .setNegativeButton("انصراف", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                        bottomSheetDialog.dismiss();
+                    }
+                })
+                .create()
+                .show();
+        bottomSheetDialog.dismiss();
+
+    }
+
+    public void deleteOneItem(Dialog bottomSheetDialog , int pos , String name){
+        dao_customer.deleteCustomer(list.get(pos));
+        list.remove(pos);
+        notifyItemRemoved(pos);
+        notifyItemRangeChanged(pos,list.size());
+        notifyDataSetChanged();
+        bottomSheetDialog.dismiss();
+        Toast.makeText(context, name +" با موفقیت حذف شد ", Toast.LENGTH_LONG).show();
+    }
+
+    private void setTextDialog(int id){
+        if(savedOrderDao.getid(id) != null){
+            text = " این کاربر دارای سفارش هست ، ایا مایلید این مورد را حذف کنید؟ ";
+        }else {
+            text = " ایا مایلید این مورد را حذف کنید؟";
+        }
     }
 
     public Filter getFilter() {

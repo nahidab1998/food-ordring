@@ -32,6 +32,8 @@
             android:drawableStart="@drawable/custom_person"
             android:drawablePadding="10dp"
             android:focusable="true"
+            android:singleLine="true"
+            android:textColor="#696A6A"
             android:fontFamily="@font/iran_sans"
             android:inputType="text"
             app:hintTextColor="#AFB1B3" />
@@ -56,6 +58,8 @@
             android:drawableStart="@drawable/custom_lock"
             android:drawablePadding="10dp"
             android:focusable="true"
+            android:singleLine="true"
+            android:textColor="#696A6A"
             android:layout_gravity="right"
             android:fontFamily="@font/iran_sans"
             android:inputType="textPassword"

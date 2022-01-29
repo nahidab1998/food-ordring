@@ -19,6 +19,15 @@ public interface SavedOrderDao {
     @Query("Select total from table_order ")
     List<String> alldate();
 
+    @Query("Select * from table_order where customer_id = :id limit 1 " )
+    Order getid( int id);
+
+    @Query("DELETE from table_order where customer_id = :id " )
+    void deteteID(int id);
+
+    @Query("Select total from table_order")
+    List<String> getAllTotal();
+
     @Insert
     void insertOrder(Order order);
 

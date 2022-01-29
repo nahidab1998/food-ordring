@@ -1,7 +1,10 @@
 package com.example.food_orderig.adapter;
 
 import android.content.Context;
+import android.content.Intent;
+import android.graphics.Bitmap;
 import android.net.Uri;
+import android.provider.MediaStore;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,7 +18,9 @@ import com.example.food_orderig.database.DatabaseHelper;
 import com.example.food_orderig.database.dao.DetailOrderDao;
 import com.example.food_orderig.model.DetailOrder;
 import com.example.food_orderig.model.Order;
+import com.squareup.picasso.Picasso;
 
+import java.io.File;
 import java.util.List;
 
 public class AdapterReceipt extends RecyclerView.Adapter<AdapterReceipt.ViewHolder> {
@@ -47,7 +52,29 @@ public class AdapterReceipt extends RecyclerView.Adapter<AdapterReceipt.ViewHold
         holder.category.setText(detailOrder.category);
         holder.amont.setText(String.valueOf(detailOrder.amant));
         holder.price.setText(detailOrder.price);
-        holder.picture_food.setImageURI(Uri.parse(detailOrder.picture));
+//        holder.picture_food.setImageURI(Uri.parse(detailOrder.picture));
+//        try{
+//            final int takeFlags =  (Intent.FLAG_GRANT_READ_URI_PERMISSION
+//                    | Intent.FLAG_GRANT_WRITE_URI_PERMISSION);
+//            // Check for the freshest data.
+//            context.getContentResolver().takePersistableUriPermission(Uri.parse(detailOrder.picture), takeFlags);
+//            // convert uri to bitmap
+//            Bitmap bitmap = MediaStore.Images.Media.getBitmap(context.getContentResolver(), Uri.parse(detailOrder.picture));
+//            // set bitmap to imageview
+//            holder.picture_food.setImageBitmap(bitmap);
+//        }
+//        catch (Exception e){
+//            //handle exception
+//            e.printStackTrace();
+//        }
+        try {
+            if (new File(detailOrder.picture).exists() && !detailOrder.picture.isEmpty()){
+                Picasso.with(context).load(new File(detailOrder.picture)).into(holder.picture_food);
+            }
+
+        }catch (Exception e){
+            e.printStackTrace();
+        }
 
     }
 

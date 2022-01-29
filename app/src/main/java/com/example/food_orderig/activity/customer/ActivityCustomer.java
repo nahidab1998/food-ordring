@@ -86,7 +86,7 @@ public class ActivityCustomer extends AppCompatActivity {
         EditText searchEdit = ((EditText)searchView.findViewById(androidx.appcompat.R.id.search_src_text));
         searchEdit.setTextColor(getResources().getColor(R.color.text));
         searchEdit.setHintTextColor(getResources().getColor(R.color.text));
-        searchEdit.setHint("");
+        searchEdit.setHint("نام مشتری را وارد کنید...");
 
         // for underline
 //        View v = searchView.findViewById(androidx.appcompat.R.id.search_plate);
@@ -154,14 +154,14 @@ public class ActivityCustomer extends AppCompatActivity {
         recyclerView_customer.setLayoutManager(new LinearLayoutManager(this));
         adapterCustomer = new AdapterCustomer(new ArrayList<>(), this, new AdapterCustomer.Listener() {
             @Override
-            public void onClickListener(Customer customer, int pos) {
+            public void onClickListener(Customer customer, int pos , String name) {
                 if (for_order){
                     Intent returnIntent = new Intent();
                     returnIntent.putExtra("json_customer", new Gson().toJson(customer));
                     setResult(Activity.RESULT_OK, returnIntent);
                     finish();
                 }else {
-                    adapterCustomer.showBottomSheetDialogclick(pos);
+                    adapterCustomer.showBottomSheetDialogclick(pos , name , customer.id);
                 }
             }
         });

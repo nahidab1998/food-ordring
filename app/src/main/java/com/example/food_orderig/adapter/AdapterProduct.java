@@ -27,10 +27,12 @@ import com.example.food_orderig.R;
 import com.example.food_orderig.activity.product.ActivityAddOrEditProduct;
 import com.example.food_orderig.database.DatabaseHelper;
 import com.example.food_orderig.database.dao.ProductDao;
+import com.example.food_orderig.database.dao.SavedOrderDao;
 import com.example.food_orderig.helper.App;
 import com.example.food_orderig.model.Product;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.gson.Gson;
+import com.squareup.picasso.Picasso;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -80,19 +82,29 @@ public class AdapterProduct extends RecyclerView.Adapter<AdapterProduct.Viewhold
         holder.name_food.setText(product.name);
         holder.category_food.setText(product.category);
         holder.price_food.setText(product.price);
+        
         Log.e("qqqq", "onBindViewHolder: " + product.picture );
-        try{
-            final int takeFlags =  (Intent.FLAG_GRANT_READ_URI_PERMISSION
-                    | Intent.FLAG_GRANT_WRITE_URI_PERMISSION);
-            // Check for the freshest data.
-            context.getContentResolver().takePersistableUriPermission(Uri.parse(product.picture), takeFlags);
-            // convert uri to bitmap
-            Bitmap bitmap = MediaStore.Images.Media.getBitmap(context.getContentResolver(), Uri.parse(product.picture));
-            // set bitmap to imageview
-            holder.imageViewfood.setImageBitmap(bitmap);
-        }
-        catch (Exception e){
-            //handle exception
+//        try{
+//            final int takeFlags =  (Intent.FLAG_GRANT_READ_URI_PERMISSION
+//                    | Intent.FLAG_GRANT_WRITE_URI_PERMISSION);
+//            // Check for the freshest data.
+//            context.getContentResolver().takePersistableUriPermission(Uri.parse(product.picture), takeFlags);
+//            // convert uri to bitmap
+//            Bitmap bitmap = MediaStore.Images.Media.getBitmap(context.getContentResolver(), Uri.parse(product.picture));
+//            // set bitmap to imageview
+//            holder.imageViewfood.setImageBitmap(bitmap);
+//        }
+//        catch (Exception e){
+//            //handle exception
+//            e.printStackTrace();
+//        }
+
+        try {
+            if (new File(product.picture).exists() && !product.picture.isEmpty()){
+                Picasso.with(context).load(new File(product.picture)).into(holder.imageViewfood);
+            }
+
+        }catch (Exception e){
             e.printStackTrace();
         }
         holder.itemView.setOnClickListener(new View.OnClickListener() {
@@ -184,6 +196,7 @@ public class AdapterProduct extends RecyclerView.Adapter<AdapterProduct.Viewhold
 
         bottomSheetDialog.show();
     }
+
 
 
     public Filter getFilter() {

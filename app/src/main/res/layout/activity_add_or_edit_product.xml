@@ -14,77 +14,91 @@
     <LinearLayout
         android:id="@+id/toolbatproduct"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="?attr/actionBarSize">
 
         <include layout="@layout/toolbare_addproduct"/>
 
     </LinearLayout>
 
-    <LinearLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/anim_product"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginBottom="80dp"
         android:layout_below="@+id/toolbatproduct"
+        android:layout_marginBottom="90dp"
         android:background="@drawable/background_add"
         android:elevation="6dp"
         android:orientation="vertical"
-        android:paddingHorizontal="10dp"
-        android:paddingVertical="10dp">
+        android:paddingBottom="10dp">
 
 
         <RelativeLayout
+            android:id="@+id/relativeLayout2"
             android:layout_width="match_parent"
-            android:layout_height="150dp"
+            android:layout_height="165dp"
             android:layout_gravity="center"
+            android:background="@color/text"
             android:gravity="center"
-            android:paddingVertical="10dp">
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
             <ImageView
                 android:id="@+id/add_img_food_product"
                 android:layout_width="match_parent"
-                android:layout_height="150dp"
+                android:layout_height="match_parent"
                 android:scaleType="centerCrop" />
-            <!--            <ImageView-->
-            <!--                android:id="@+id/image_camera"-->
-            <!--                android:layout_width="match_parent"-->
-            <!--                android:background="?attr/selectableItemBackground"-->
-            <!--                android:layout_height="120dp"-->
-            <!--                android:src="@drawable/camera" />-->
-            <androidx.cardview.widget.CardView
-                android:id="@+id/camera"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:layout_alignParentBottom="true"
-                android:layout_marginStart="10dp"
-                android:layout_marginBottom="10dp"
-                app:cardBackgroundColor="@color/text"
-                app:cardCornerRadius="20dp">
 
-                <ImageView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:gravity="center"
-                    android:padding="5dp"
-                    android:src="@drawable/ic_camera" />
-            </androidx.cardview.widget.CardView>
+            <ImageView
+                android:id="@+id/image_back_product"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:alpha="0.5"
+                android:padding="12dp"
+                android:src="@drawable/back_food"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
         </RelativeLayout>
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_marginHorizontal="5dp"
-            android:background="@color/text" />
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/camera"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:elevation="10dp"
+            android:src="@drawable/ic_round_add_a_photo_24"
+            app:backgroundTint="@color/text"
+            app:borderWidth="0dp"
+            app:layout_constraintBottom_toBottomOf="@+id/relativeLayout2"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/relativeLayout2"
+            app:maxImageSize="30dp"
+            app:tint="@color/red" />
+
+        <!--        <View-->
+        <!--            android:layout_width="match_parent"-->
+        <!--            android:layout_height="1dp"-->
+        <!--            android:background="@color/text"-->
+        <!--            app:layout_constraintBottom_toBottomOf="@+id/camera"-->
+        <!--            app:layout_constraintTop_toTopOf="@+id/camera" />-->
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
             android:layout_gravity="center"
-            android:layout_marginTop="2dp"
             android:layout_weight="1"
             android:gravity="center"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:paddingHorizontal="10dp"
+            app:layout_constraintBottom_toTopOf="@+id/linearLayout"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/camera"
+            app:layout_constraintVertical_bias="0.0">
 
             <EditText
                 android:id="@+id/add_edit_name_product"
@@ -92,7 +106,7 @@
                 android:layout_height="50dp"
                 android:layout_gravity="center"
                 android:layout_marginHorizontal="5dp"
-                android:layout_marginBottom="30dp"
+                android:layout_marginBottom="20dp"
                 android:background="@drawable/back_edittext"
                 android:drawableRight="@drawable/custom_food_icon"
                 android:drawablePadding="5dp"
@@ -110,7 +124,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:layout_marginHorizontal="5dp"
-                android:layout_marginBottom="30dp"
+                android:layout_marginBottom="20dp"
                 android:background="@drawable/back_edittext"
                 android:drawableRight="@drawable/custom_group_icon"
                 android:drawablePadding="5dp"
@@ -146,11 +160,14 @@
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/linearLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:paddingVertical="5dp"
-            android:paddingRight="30dp">
+            android:paddingRight="30dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/guideline7">
 
             <TextView
                 android:id="@+id/save_product"
@@ -178,8 +195,21 @@
 
         </LinearLayout>
 
+<!--        <androidx.constraintlayout.widget.Guideline-->
+<!--            android:id="@+id/guideline2"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:orientation="horizontal"-->
+<!--            app:layout_constraintGuide_percent="0.44" />-->
 
-    </LinearLayout>
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline7"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.91" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 
 </RelativeLayout>

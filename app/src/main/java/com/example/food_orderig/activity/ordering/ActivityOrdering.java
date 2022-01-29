@@ -302,9 +302,8 @@ public class ActivityOrdering extends AppCompatActivity {
                         dao_detailorder.insertDetailOrder(new DetailOrder(orderDetailList.get(i).name , orderDetailList.get(i).price , orderDetailList.get(i).category ,
                                 orderDetailList.get(i).amount , CODE ,txt_time.getText().toString(), txt_calender.getText().toString() , orderDetailList.get(i).picture));
                     }
-                    Toast.makeText(ActivityOrdering.this, "سفارش "+ name_customer.getText().toString() +" با موفقیت ثبت شد  ", Toast.LENGTH_SHORT).show();
-
                     finish();
+                    Toast.makeText(ActivityOrdering.this, "سفارش "+ name_customer.getText().toString() +" با موفقیت ثبت شد  ", Toast.LENGTH_SHORT).show();
                 }
             }
         });

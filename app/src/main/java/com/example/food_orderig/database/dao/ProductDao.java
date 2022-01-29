@@ -24,6 +24,12 @@ public interface ProductDao {
     @Query("Select * from table_product where name = :name limit 1")
     Product getOneName(String name);
 
+    @Query("Select * from table_product where category = :category" )
+    List<Product> get_product_by_category(String category);
+
+    @Query("DELETE from table_product where category = :category")
+    void deleteProductByCategory(String category);
+
     @Insert
     void insertProduct(Product product);
 

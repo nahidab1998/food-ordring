@@ -40,6 +40,7 @@ import com.example.food_orderig.model.Product;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.android.material.textfield.TextInputEditText;
 
+import java.io.File;
 import java.util.concurrent.Executor;
 
 public class ActivityLogin extends AppCompatActivity {
@@ -78,30 +79,31 @@ public class ActivityLogin extends AppCompatActivity {
         buttonLogin();
         setcheckBox();
         setFingerprint();
-        set_TapEditText();
+//        set_TapEditText();
+
     }
 
-    private void set_TapEditText() {
-
-        username.setOnFocusChangeListener(new View.OnFocusChangeListener() {
-            @Override
-            public void onFocusChange(View v, boolean hasFocus) {
-                if (!hasFocus) {
-                    InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-                    imm.hideSoftInputFromWindow(v.getWindowToken() , 0);
-                }
-            }
-        });
-        password.setOnFocusChangeListener(new View.OnFocusChangeListener() {
-            @Override
-            public void onFocusChange(View v, boolean hasFocus) {
-                if (!hasFocus) {
-                    InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-                    imm.hideSoftInputFromWindow(v.getWindowToken() , 0);
-                }
-            }
-        });
-    }
+//    private void set_TapEditText() {
+//
+//        username.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+//            @Override
+//            public void onFocusChange(View v, boolean hasFocus) {
+//                if (!hasFocus) {
+//                    InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+//                    imm.hideSoftInputFromWindow(v.getWindowToken() , 0);
+//                }
+//            }
+//        });
+//        password.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+//            @Override
+//            public void onFocusChange(View v, boolean hasFocus) {
+//                if (!hasFocus) {
+//                    InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+//                    imm.hideSoftInputFromWindow(v.getWindowToken() , 0);
+//                }
+//            }
+//        });
+//    }
 
     @RequiresApi(api = Build.VERSION_CODES.P)
     private void setFingerprint() {

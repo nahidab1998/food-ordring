@@ -2,6 +2,7 @@ package com.example.food_orderig.adapter;
 
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
+import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -23,11 +24,13 @@ import com.example.food_orderig.R;
 import com.example.food_orderig.activity.grouping.ActivityAddOrEditGrouping;
 import com.example.food_orderig.database.DatabaseHelper;
 import com.example.food_orderig.database.dao.GroupingDao;
+import com.example.food_orderig.database.dao.ProductDao;
 import com.example.food_orderig.helper.App;
 import com.example.food_orderig.model.Grouping;
 import com.example.food_orderig.model.Product;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.gson.Gson;
+import com.squareup.picasso.Picasso;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -39,7 +42,8 @@ public class AdapterGrouping extends RecyclerView.Adapter<AdapterGrouping.Viewho
     private Context context;
     private LinearLayout edite_grouping , delete_grouping;
     private DatabaseHelper database;
-    private GroupingDao dao;
+    private GroupingDao groupingDao;
+    private ProductDao productDao;
     private List<Grouping> list_search;
     private int count;
     private String text;
@@ -67,24 +71,33 @@ public class AdapterGrouping extends RecyclerView.Adapter<AdapterGrouping.Viewho
         Grouping grouping = list . get(position);
         holder.textView_showname_grouping.setText(grouping.name);
 //        holder.imageView_grouping.setImageURI(Uri.parse(grouping.picture));
-        try{
-            final int takeFlags =  (Intent.FLAG_GRANT_READ_URI_PERMISSION
-                    | Intent.FLAG_GRANT_WRITE_URI_PERMISSION);
-            // Check for the freshest data.
-            context.getContentResolver().takePersistableUriPermission(Uri.parse(grouping.picture), takeFlags);
-            // convert uri to bitmap
-            Bitmap bitmap = MediaStore.Images.Media.getBitmap(context.getContentResolver(), Uri.parse(grouping.picture));
-            // set bitmap to imageview
-            holder.imageView_grouping.setImageBitmap(bitmap);
-        }
-        catch (Exception e){
-            //handle exception
+//        try{
+//            final int takeFlags =  (Intent.FLAG_GRANT_READ_URI_PERMISSION
+//                    | Intent.FLAG_GRANT_WRITE_URI_PERMISSION);
+//            // Check for the freshest data.
+//            context.getContentResolver().takePersistableUriPermission(Uri.parse(grouping.picture), takeFlags);
+//            // convert uri to bitmap
+//            Bitmap bitmap = MediaStore.Images.Media.getBitmap(context.getContentResolver(), Uri.parse(grouping.picture));
+//            // set bitmap to imageview
+//            holder.imageView_grouping.setImageBitmap(bitmap);
+//        }
+//        catch (Exception e){
+//            //handle exception
+//            e.printStackTrace();
+//        }
+        try {
+            if (new File(grouping.picture).exists() && !grouping.picture.isEmpty()){
+                Picasso.with(context).load(new File(grouping.picture)).into(holder.imageView_grouping);
+            }
+        }catch (Exception e){
             e.printStackTrace();
         }
+
+
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                showBottomSheetDialogclick(position);
+                showBottomSheetDialogclick(position , list.get(position).name);
             }
         });
     }
@@ -106,7 +119,7 @@ public class AdapterGrouping extends RecyclerView.Adapter<AdapterGrouping.Viewho
         }
     }
 
-    private void showBottomSheetDialogclick (int pos) {
+    private void showBottomSheetDialogclick (int pos , String name) {
         final BottomSheetDialog bottomSheetDialog = new BottomSheetDialog(context);
         bottomSheetDialog.setContentView(R.layout.btnsheet_deleteedite);
 
@@ -115,33 +128,9 @@ public class AdapterGrouping extends RecyclerView.Adapter<AdapterGrouping.Viewho
         delete_grouping.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                new AlertDialog.Builder(context)
-                        .setTitle("حذف")
-                        .setIcon(R.drawable.delete_image_dialog)
-                        .setMessage("آیا از حذف کامل این دسته بندی اطمینان دارید؟")
-                        .setPositiveButton("تأیید", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                database = App.getDatabase();
-                                dao = database.groupingDao();
-                                dao.deleteGrouping(grouping);
-                                list.remove(pos);
-                                notifyItemRemoved(pos);
-                                notifyItemRangeChanged(pos,list.size());
-                                notifyDataSetChanged();
-                                Toast.makeText(context, grouping.name +" با موفقیت حذف شد ", Toast.LENGTH_LONG).show();
-                            }
-                        })
-                        .setNegativeButton("انصراف", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                dialog.dismiss();
-                                bottomSheetDialog.dismiss();
-                            }
-                        })
-                        .create()
-                        .show();
-                bottomSheetDialog.dismiss();
+                initDataBase(name);
+                setTextAlertDialog();
+                showAlertDialog(name , pos , bottomSheetDialog);
 
             }
         });
@@ -157,6 +146,59 @@ public class AdapterGrouping extends RecyclerView.Adapter<AdapterGrouping.Viewho
             }
         });
         bottomSheetDialog.show();
+    }
+
+    private void initDataBase(String name){
+
+        database = App.getDatabase();
+        groupingDao = database.groupingDao();
+        productDao = database.productDao();
+        count = productDao.get_product_by_category(name).size();
+    }
+
+    private void setTextAlertDialog(){
+        if(count >= 1 ){
+            text =  " این دسته بندی "+ " ( "+ count + " ) "+ " محصول دارد ؛ ایا مایلید این مورد را حذف کنید؟ ";
+        }else {
+            text = " ایا مایلید این مورد را حذف کنید؟";
+        }
+    }
+
+    private void showAlertDialog(String name , int pos , Dialog bottomSheetDialog){
+        new AlertDialog.Builder(context)
+                .setTitle("حذف")
+                .setIcon(R.drawable.delete_image_dialog)
+                .setMessage(text)
+                .setPositiveButton("تأیید", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        if(count >=1){
+                            productDao.deleteProductByCategory(name);
+                            deletOneItem(pos, bottomSheetDialog,name);
+                        }else {
+                            deletOneItem(pos, bottomSheetDialog,name);
+                        }
+                    }
+                })
+                .setNegativeButton("انصراف", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                        bottomSheetDialog.dismiss();
+                    }
+                })
+                .create()
+                .show();
+        bottomSheetDialog.dismiss();
+    }
+
+    private void deletOneItem(int pos , Dialog bottomSheetDialog , String name){
+        groupingDao.deleteGrouping(list.get(pos));
+        list.remove(pos);
+        notifyItemRemoved(pos);
+        notifyItemRangeChanged(pos,list.size());
+        notifyDataSetChanged();
+        Toast.makeText(context, name +" با موفقیت حذف شد ", Toast.LENGTH_LONG).show();
     }
 
 

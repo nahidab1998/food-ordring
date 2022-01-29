@@ -57,6 +57,7 @@
                 android:drawableStart="@drawable/custom_person"
                 android:drawablePadding="10dp"
                 android:focusable="true"
+                android:singleLine="true"
                 android:textColor="#696A6A"
                 android:fontFamily="@font/iran_sans"
                 android:inputType="text"
@@ -87,6 +88,7 @@
                 android:drawablePadding="10dp"
                 android:focusable="true"
                 android:layout_gravity="right"
+                android:singleLine="true"
                 android:textColor="#696A6A"
                 android:fontFamily="@font/iran_sans"
                 android:inputType="textPassword"
@@ -108,7 +110,7 @@
                 android:layout_weight="1"
                 android:fontFamily="@font/iran_sans"
                 android:textSize="14dp"
-                android:textColor="#AFB1B3"/>
+                android:textColor="#696A6A"/>
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

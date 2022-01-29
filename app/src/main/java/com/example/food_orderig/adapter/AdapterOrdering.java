@@ -20,7 +20,9 @@ import com.example.food_orderig.database.DatabaseHelper;
 import com.example.food_orderig.database.dao.ProductDao;
 import com.example.food_orderig.helper.Tools;
 import com.example.food_orderig.model.Product;
+import com.squareup.picasso.Picasso;
 
+import java.io.File;
 import java.util.List;
 
 public class AdapterOrdering extends RecyclerView.Adapter<AdapterOrdering.ViewHolder> {
@@ -61,20 +63,28 @@ public class AdapterOrdering extends RecyclerView.Adapter<AdapterOrdering.ViewHo
         holder.txtprise.setText(product.price);
         holder.txtcategory.setText(product.category);
 
-        try{
-            final int takeFlags =  (Intent.FLAG_GRANT_READ_URI_PERMISSION
-                    | Intent.FLAG_GRANT_WRITE_URI_PERMISSION);
-            // Check for the freshest data.
-            context.getContentResolver().takePersistableUriPermission(Uri.parse(product.picture), takeFlags);
-            // convert uri to bitmap
-            Bitmap bitmap = MediaStore.Images.Media.getBitmap(context.getContentResolver(), Uri.parse(product.picture));
-            // set bitmap to imageview
-            holder.imageView_food.setImageBitmap(bitmap);
-//            holder.imageView_food.setImageURI(Uri.parse(product.picture));
+//        try{
+//            final int takeFlags =  (Intent.FLAG_GRANT_READ_URI_PERMISSION
+//                    | Intent.FLAG_GRANT_WRITE_URI_PERMISSION);
+//            // Check for the freshest data.
+//            context.getContentResolver().takePersistableUriPermission(Uri.parse(product.picture), takeFlags);
+//            // convert uri to bitmap
+//            Bitmap bitmap = MediaStore.Images.Media.getBitmap(context.getContentResolver(), Uri.parse(product.picture));
+//            // set bitmap to imageview
+//            holder.imageView_food.setImageBitmap(bitmap);
+////            holder.imageView_food.setImageURI(Uri.parse(product.picture));
+//
+//        }
+//        catch (Exception e){
+//            //handle exception
+//            e.printStackTrace();
+//        }
+        try {
+            if (new File(product.picture).exists() && !product.picture.isEmpty()){
+                Picasso.with(context).load(new File(product.picture)).into(holder.imageView_food);
+            }
 
-        }
-        catch (Exception e){
-            //handle exception
+        }catch (Exception e){
             e.printStackTrace();
         }
 
