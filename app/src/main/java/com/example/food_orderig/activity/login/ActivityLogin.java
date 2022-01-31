@@ -158,7 +158,7 @@ public class ActivityLogin extends AppCompatActivity {
         });
 
         promptInfo = new androidx.biometric.BiometricPrompt.PromptInfo.Builder().setTitle("ورود با اثرانگشت")
-                .setDescription("لطفا انگشت خود را روی حسگر اثر انگشت قرار دهید ").setNegativeButtonText("انصراف").build();
+                .setDescription("لطفا انگشت خود را روی حسگر اثر انگشت قرار دهید ").setNegativeButtonText("بستن").build();
         fingerprint.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

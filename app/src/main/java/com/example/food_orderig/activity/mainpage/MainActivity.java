@@ -104,7 +104,56 @@ public class MainActivity extends AppCompatActivity {
         setNavigationDrawer();
         checkPermission();
         setLinear_setting();
+        setLinear_about();
+        setLinear_guid();
+        setLinear_signup();
+    }
 
+    private void setLinear_signup() {
+        linearLayout_signup.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                moveTaskToBack(true);
+                android.os.Process.killProcess(android.os.Process.myPid());
+                System.exit(1);
+            }
+        });
+    }
+
+    private void setLinear_guid() {
+
+        linearLayout_guid.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                final Dialog dialog_guid = new Dialog(MainActivity.this);
+                dialog_guid.requestWindowFeature(Window.FEATURE_NO_TITLE);
+                dialog_guid.setContentView(R.layout.dialog_guid);
+
+                TextView close = dialog_guid.findViewById(R.id.close_dialog_guid);
+                mydrawer.closeDrawer(GravityCompat.END);
+                dialog_guid.show();
+                dialog_guid.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+                dialog_guid.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+
+                close.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        dialog_guid.dismiss();
+                    }
+                });
+
+            }
+        });
+
+    }
+
+    private void setLinear_about() {
+
+    }
+
+    private void setLinear_setting() {
     }
 
     private void setNavigationDrawer() {
