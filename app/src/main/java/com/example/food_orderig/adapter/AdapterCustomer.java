@@ -247,6 +247,7 @@ public class AdapterCustomer extends RecyclerView.Adapter<AdapterCustomer.Viewho
 
     public void addList(List<Customer> arrayList){
         list_search.clear();
+        list.clear();
         list_search.addAll(arrayList);
         list.addAll(list_search);
         notifyDataSetChanged();

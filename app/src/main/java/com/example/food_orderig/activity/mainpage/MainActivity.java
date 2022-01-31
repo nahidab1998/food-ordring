@@ -6,20 +6,28 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
+import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
 
 import android.Manifest;
+import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.graphics.DashPathEffect;
 import android.graphics.Paint;
+import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.Settings;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.View;
+import android.view.ViewGroup;
+import android.view.Window;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -39,6 +47,7 @@ import com.example.food_orderig.database.dao.SavedOrderDao;
 import com.example.food_orderig.helper.App;
 import com.example.food_orderig.helper.Tools;
 import com.example.food_orderig.model.ChartModel;
+import com.example.food_orderig.model.Grouping;
 import com.example.food_orderig.model.Order;
 import com.github.mikephil.charting.charts.BarChart;
 import com.github.mikephil.charting.charts.CombinedChart;
@@ -61,7 +70,7 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity {
 
     private CardView cardViewproduct,cardViewcustomer , cardViewprouping;
-    private ImageView add_shop;
+    private ImageView add_shop , munu;
     private TextView number_product, number_customer , number_groping , month ,week ,day , txt_name_restaurant , dayName , monthName , totall;
     private AdapterProduct adapterProduct;
     private DatabaseHelper db;
@@ -80,6 +89,8 @@ public class MainActivity extends AppCompatActivity {
     private BarChart barChart;
     private static final int STORAGE_PERMISSION_CODE = 101;
     public static final int CALL_PERMISSION_CODE = 100;
+    private DrawerLayout mydrawer;
+    private LinearLayout linearLayout_setting , linearLayout_about , linearLayout_guid , linearLayout_signup ;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -90,14 +101,26 @@ public class MainActivity extends AppCompatActivity {
         initID();
         initSetName();
         initIntents();
-
+        setNavigationDrawer();
         checkPermission();
+        setLinear_setting();
 
+    }
+
+    private void setNavigationDrawer() {
+
+        munu.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                mydrawer.openDrawer((int) GravityCompat.END);
+            }
+        });
 
     }
 
 
-        @Override
+    @Override
         public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
             super.onRequestPermissionsResult(requestCode, permissions, grantResults);
 
@@ -203,6 +226,14 @@ public class MainActivity extends AppCompatActivity {
         monthName = findViewById(R.id.month_name);
         lottie = findViewById(R.id.lottie_chart);
         barChart = findViewById(R.id.chart_bar);
+        munu = findViewById(R.id.munu);
+        mydrawer = findViewById(R.id.mydrawer);
+        linearLayout_setting = findViewById(R.id.setting_nav);
+        linearLayout_about = findViewById(R.id.about_nav);
+        linearLayout_guid = findViewById(R.id.guid_nav);
+        linearLayout_signup = findViewById(R.id.signup_nav);
+
+
     }
 
     public void countsizeRecycler(){

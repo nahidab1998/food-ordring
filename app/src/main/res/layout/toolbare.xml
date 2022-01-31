@@ -81,12 +81,13 @@
             android:gravity="center">
 
             <ImageView
+                android:id="@+id/munu"
                 android:layout_width="50dp"
                 android:layout_gravity="center_vertical"
                 android:layout_height="50dp"
                 android:background="@drawable/border_ripple_circle"
-                android:src="@drawable/setting"
-                android:padding="11dp" />
+                android:src="@drawable/menu"
+                android:padding="9dp" />
 
 
         </LinearLayout>

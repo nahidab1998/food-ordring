@@ -143,6 +143,7 @@ public class ActivityOrdering extends AppCompatActivity {
         });
     }
 
+
     private void setDefultCalender() {
         PersianCalendar now = new PersianCalendar();
         String currentDate = now.getPersianShortDate();

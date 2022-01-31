@@ -235,7 +235,7 @@ public class AdapterProduct extends RecyclerView.Adapter<AdapterProduct.Viewhold
     public void addList(List<Product> arrayList){
         list_search.clear();
         list_search.addAll(arrayList);
-//        list.clear();
+        list.clear();
         list.addAll(list_search);
         notifyDataSetChanged();
     }

@@ -20,7 +20,6 @@
         <item name="android:editTextColor">@color/text</item>
 
         <item name="colorAccent">@color/red</item>
-        <item name="android:timePickerStyle">@style/MyTimePickerlight</item>
 <!--        <item name="editTextColor">@color/text</item>-->
 <!--        <item name="android:textColorSecondary">@color/text</item>-->
     </style>
