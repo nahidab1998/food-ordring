@@ -351,7 +351,7 @@ public class ActivityAddOrEditProduct extends AppCompatActivity {
 
                         }else if(dao_grouping.getOneName(categoryProduct) == null){
                             dao_grouping.insertGrouping(new Grouping(categoryProduct, ""));
-                            Toast.makeText(ActivityAddOrEditProduct.this, "دسته بندی نوشته شده ", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(ActivityAddOrEditProduct.this, "دسته بندی جدید ذخیره شد ", Toast.LENGTH_SHORT).show();
                         }else{
                             dao_product.insertProduct(new Product(name_product,categoryProduct, price_product , save));
                             finish();

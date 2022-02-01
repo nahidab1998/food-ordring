@@ -24,6 +24,7 @@ import com.example.food_orderig.R;
 import com.example.food_orderig.database.DatabaseHelper;
 import com.example.food_orderig.database.dao.CustomerDao;
 import com.example.food_orderig.adapter.AdapterCustomer;
+import com.example.food_orderig.database.dao.ProductDao;
 import com.example.food_orderig.helper.App;
 import com.example.food_orderig.model.Customer;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -43,6 +44,7 @@ public class ActivityCustomer extends AppCompatActivity {
     private TextView name,phone,address;
     private Toolbar toolbar;
     private boolean for_order = false;
+    private TextView textView_customer;
 
 
     @Override
@@ -142,6 +144,7 @@ public class ActivityCustomer extends AppCompatActivity {
         call = findViewById(R.id.call);
         recyclerView_customer = findViewById(R.id.recycle_customer);
         toolbar = findViewById(R.id.toolbar_customer);
+//        textView_customer =findViewById(R.id.txt_customer);
     }
 
     private void initDataBase() {
@@ -174,6 +177,7 @@ public class ActivityCustomer extends AppCompatActivity {
         if (adapterCustomer != null){
             adapterCustomer.addList(dao_customer.getList());
         }
+
     }
 
     @Override
@@ -181,5 +185,17 @@ public class ActivityCustomer extends AppCompatActivity {
         super.onDestroy();
 //        if (db != null) db.close();
     }
+
+//    private void setCont(){
+//        if (adapterCustomer != null) {
+//            if(dao_customer.getList().size() < 0 ) {
+//                textView_customer.setVisibility(View.VISIBLE);
+//            }else {
+//                textView_customer.setVisibility(View.GONE);
+//                adapterCustomer.addList(dao_customer.getList());
+//            }
+//        }
+//    }
+
 
 }

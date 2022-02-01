@@ -152,6 +152,7 @@
             android:layout_below="@+id/buttonlogin"
             android:layout_centerInParent="true"
             android:layout_marginTop="20dp"
+            android:visibility="gone"
             android:src="@drawable/fingerprint" />
 
         <TextView

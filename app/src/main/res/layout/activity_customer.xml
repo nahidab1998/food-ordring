@@ -55,4 +55,14 @@
         android:src="@drawable/add"
         app:maxImageSize="45dp" />
 
+<!--    <TextView-->
+<!--        android:id="@+id/txt_customer"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_centerInParent="true"-->
+<!--        android:fontFamily="@font/iran_sans"-->
+<!--        android:text="موردی برای نمایش وجود ندارد"-->
+<!--        android:textSize="14dp"-->
+<!--        android:textColor="#AFB1B3"/>-->
+
 </RelativeLayout>

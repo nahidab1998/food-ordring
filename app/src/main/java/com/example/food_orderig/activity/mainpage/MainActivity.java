@@ -92,7 +92,8 @@ public class MainActivity extends AppCompatActivity {
     public static final int CALL_PERMISSION_CODE = 100;
     private DrawerLayout mydrawer;
     private LinearLayout linearLayout_setting , linearLayout_about , linearLayout_guid , linearLayout_signup ;
-    TextView close_about , close_guid;
+    private TextView close_about , close_guid;
+    private long backPressedTime = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -483,6 +484,19 @@ public class MainActivity extends AppCompatActivity {
         }else {
             lottie.setVisibility(View.VISIBLE);
             barChart.setVisibility(View.GONE);
+        }
+    }
+
+    @Override
+    public void onBackPressed() {        // to prevent irritating accidental logouts
+        long t = System.currentTimeMillis();
+        if (t - backPressedTime > 2000) {    // 2 secs
+            backPressedTime = t;
+            Toast.makeText(this, "برای خروج دکمه بازگشت را دوباره بزنید", Toast.LENGTH_SHORT).show();
+            mydrawer.closeDrawer(GravityCompat.END);
+        } else {    // this guy is serious
+            // clean up
+            super.onBackPressed();       // bye
         }
     }
 

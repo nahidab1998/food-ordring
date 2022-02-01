@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 import android.view.View;
+import android.widget.CompoundButton;
 import android.widget.Switch;
 import android.widget.Toast;
 
@@ -23,27 +24,44 @@ public class ActivitySettings extends AppCompatActivity {
         setContentView(R.layout.activity_settings);
 
         initID();
-        setSwitch();
     }
 
     private void setSwitch() {
         Boolean switchState = aSwitch.isChecked();
-        aSwitch.setOnClickListener(new View.OnClickListener() {
+        aSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
-            public void onClick(View v) {
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if(isChecked){
+                    Session.getInstance().putExtra(switch1 , switchState);
+                    fingerprint.setVisibility(View.VISIBLE);
+                   aSwitch.setChecked(true);
+                    Toast.makeText(ActivitySettings.this, "true", Toast.LENGTH_SHORT).show();
 
-                if (switchState == false){
-                    Toast.makeText(ActivitySettings.this, "test", Toast.LENGTH_SHORT).show();
+                }else if(!isChecked){
+                    Session.getInstance().clearExtras();
+                    fingerprint.setVisibility(View.GONE);
                     aSwitch.setChecked(false);
-                }else {
-                    Session.getInstance().putExtra(swich1 , getUser);
+                    Toast.makeText(ActivitySettings.this, "false", Toast.LENGTH_SHORT).show();
                 }
-
             }
         });
+
+            aSwitch.setChecked(Session.getInstance().getBoolean(switch1));
+//            fingerprint.setVisibility(View.GONE);
+        if (switchState == true){
+            fingerprint.setVisibility(View.VISIBLE);
+        }else{
+            fingerprint.setVisibility(View.GONE);
+        }
     }
 
     private void initID() {
         aSwitch = findViewById(R.id.switch_login);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        setSwitch();
     }
 }

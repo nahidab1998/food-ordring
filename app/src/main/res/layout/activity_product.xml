@@ -59,7 +59,7 @@
         android:id="@+id/recycler_grouping_product"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginHorizontal="10dp"
+        android:paddingRight="10dp"
         android:layout_marginTop="?attr/actionBarSize"
         android:clipToPadding="false"
         android:orientation="horizontal"

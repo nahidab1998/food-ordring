@@ -39,7 +39,6 @@ public class ActivityAddOrEditCostomer extends AppCompatActivity {
     private Customer a = null;
 
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

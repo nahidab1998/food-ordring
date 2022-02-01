@@ -2,11 +2,14 @@ package com.example.food_orderig.adapter;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.food_orderig.R;
@@ -19,6 +22,8 @@ public class AdapterGroupingProduct extends RecyclerView.Adapter<AdapterGrouping
     private List<Grouping> list;
     private Context context;
     private Listener listener;
+    private int row_index = 0;
+    private String categoryIsChosen = "";
 
     public AdapterGroupingProduct(List<Grouping> list , Context context, Listener listener){
         this.list = list;
@@ -47,8 +52,20 @@ public class AdapterGroupingProduct extends RecyclerView.Adapter<AdapterGrouping
             @Override
             public void onClick(View v) {
                 listener.onClick(position,grouping);
+                row_index = position ;
+                categoryIsChosen = "";
+                notifyDataSetChanged();
             }
         });
+
+        if(row_index == position || grouping.name.equals(categoryIsChosen)){
+            holder.cardView_back.setCardBackgroundColor(Color.parseColor("#595959"));
+            holder.textgrouping_product.setTextColor(Color.parseColor("#ffffff"));
+        } else {
+            holder.cardView_back.setCardBackgroundColor(Color.parseColor("#ffffff"));
+            holder.textgrouping_product.setTextColor(Color.parseColor("#595959"));
+
+        }
 
     }
 
@@ -60,11 +77,14 @@ public class AdapterGroupingProduct extends RecyclerView.Adapter<AdapterGrouping
     public class ViewHolder extends RecyclerView.ViewHolder {
 
         TextView textgrouping_product;
+        CardView cardView_back;
 
         public ViewHolder(View itemView) {
             super(itemView);
 
             textgrouping_product = itemView.findViewById(R.id.textgrouping_product);
+            cardView_back = itemView.findViewById(R.id.cardView_back_grouping);
         }
+
     }
 }
