@@ -6,28 +6,31 @@
     <uses-permission android:name="android.permission.CALL_PHONE" />
     <uses-permission android:name="android.permission.USE_BIOMETRIC" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"
+    <uses-permission
+        android:name="android.permission.WRITE_EXTERNAL_STORAGE"
         tools:ignore="ScopedStorage" />
     <uses-permission android:name="android.permission.CAMERA" />
 
     <application
         android:name=".helper.App"
-        android:requestLegacyExternalStorage="true"
-        android:usesCleartextTraffic="true"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher_icon"
         android:label="@string/app_name"
+        android:requestLegacyExternalStorage="true"
         android:roundIcon="@mipmap/ic_launcher_icon"
         android:supportsRtl="true"
         android:theme="@style/Theme.Food_orderig"
+        android:usesCleartextTraffic="true"
         tools:ignore="AllowBackup,UnusedAttribute">
+        <activity
+            android:name=".activity.settings.ActivitySettings"
+            android:exported="true" />
         <activity
             android:name=".activity.file.FileActivity"
             android:exported="true" />
-
-        <activity android:name="com.theartofdev.edmodo.cropper.CropImageActivity"
-            android:theme="@style/Base.Theme.AppCompat"/> <!-- optional (needed if default theme has no action bar) -->
-
+        <activity
+            android:name="com.theartofdev.edmodo.cropper.CropImageActivity"
+            android:theme="@style/Base.Theme.AppCompat" /> <!-- optional (needed if default theme has no action bar) -->
         <activity
             android:name=".activity.orderingreceipt.ActivityOrderingReceipt"
             android:exported="true" />
@@ -44,8 +47,8 @@
         <activity
             android:name=".activity.grouping.ActivityGrouping"
             android:exported="true"
-            android:windowSoftInputMode="adjustPan"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan" />
         <activity
             android:name=".activity.product.ActivityAddOrEditProduct"
             android:exported="true"
@@ -57,8 +60,8 @@
         <activity
             android:name=".activity.customer.ActivityCustomer"
             android:exported="true"
-            android:windowSoftInputMode="adjustPan"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan" />
         <activity
             android:name=".activity.mainpage.MainActivity"
             android:exported="true"
@@ -66,8 +69,8 @@
         <activity
             android:name=".activity.product.ActivityProduct"
             android:exported="true"
-            android:windowSoftInputMode="adjustPan"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan" />
         <activity
             android:name=".activity.login.ActivityLogin"
             android:exported="true"

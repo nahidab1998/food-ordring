@@ -53,7 +53,7 @@ public class ActivityLogin extends AppCompatActivity {
     private String user , pass ;
     private String user_login , pass_login ;
     private CheckBox checkBox;
-    private ImageView fingerprint;
+    public static ImageView fingerprint;
     private UserDao userDao;
     private DatabaseHelper db;
     private RelativeLayout save_register;

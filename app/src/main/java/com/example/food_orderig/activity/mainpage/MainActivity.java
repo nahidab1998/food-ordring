@@ -38,6 +38,7 @@ import com.example.food_orderig.activity.grouping.ActivityGrouping;
 import com.example.food_orderig.activity.ordering.ActivityOrdering;
 import com.example.food_orderig.activity.orderingdetails.ActivityOrderingDetails;
 import com.example.food_orderig.activity.product.ActivityProduct;
+import com.example.food_orderig.activity.settings.ActivitySettings;
 import com.example.food_orderig.database.DatabaseHelper;
 import com.example.food_orderig.database.dao.CustomerDao;
 import com.example.food_orderig.database.dao.GroupingDao;
@@ -91,6 +92,7 @@ public class MainActivity extends AppCompatActivity {
     public static final int CALL_PERMISSION_CODE = 100;
     private DrawerLayout mydrawer;
     private LinearLayout linearLayout_setting , linearLayout_about , linearLayout_guid , linearLayout_signup ;
+    TextView close_about , close_guid;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -131,13 +133,13 @@ public class MainActivity extends AppCompatActivity {
                 dialog_guid.requestWindowFeature(Window.FEATURE_NO_TITLE);
                 dialog_guid.setContentView(R.layout.dialog_guid);
 
-                TextView close = dialog_guid.findViewById(R.id.close_dialog_guid);
+                close_guid = dialog_guid.findViewById(R.id.close_dialog_guid);
                 mydrawer.closeDrawer(GravityCompat.END);
                 dialog_guid.show();
                 dialog_guid.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
                 dialog_guid.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
 
-                close.setOnClickListener(new View.OnClickListener() {
+                close_guid.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         dialog_guid.dismiss();
@@ -151,9 +153,42 @@ public class MainActivity extends AppCompatActivity {
 
     private void setLinear_about() {
 
+        linearLayout_about.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                final Dialog dialog_about = new Dialog(MainActivity.this);
+                dialog_about.requestWindowFeature(Window.FEATURE_NO_TITLE);
+                dialog_about.setContentView(R.layout.dialog_about);
+
+                close_about = dialog_about.findViewById(R.id.close_dialog_about);
+                mydrawer.closeDrawer(GravityCompat.END);
+                dialog_about.show();
+                dialog_about.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+                dialog_about.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+
+                close_about.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        dialog_about.dismiss();
+                    }
+                });
+
+            }
+        });
+
     }
 
     private void setLinear_setting() {
+
+        linearLayout_setting.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this , ActivitySettings.class);
+                startActivity(intent);
+                mydrawer.closeDrawer(GravityCompat.END);
+            }
+        });
     }
 
     private void setNavigationDrawer() {
@@ -281,6 +316,7 @@ public class MainActivity extends AppCompatActivity {
         linearLayout_about = findViewById(R.id.about_nav);
         linearLayout_guid = findViewById(R.id.guid_nav);
         linearLayout_signup = findViewById(R.id.signup_nav);
+
 
 
     }
