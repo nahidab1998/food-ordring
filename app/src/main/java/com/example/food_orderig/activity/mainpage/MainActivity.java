@@ -492,7 +492,7 @@ public class MainActivity extends AppCompatActivity {
         long t = System.currentTimeMillis();
         if (t - backPressedTime > 2000) {    // 2 secs
             backPressedTime = t;
-            Toast.makeText(this, "برای خروج دکمه بازگشت را دوباره بزنید", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "برای خروج ، دکمه بازگشت را دوباره بزنید", Toast.LENGTH_SHORT).show();
             mydrawer.closeDrawer(GravityCompat.END);
         } else {    // this guy is serious
             // clean up

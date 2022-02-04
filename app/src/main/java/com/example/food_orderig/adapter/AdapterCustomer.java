@@ -50,6 +50,7 @@ public class AdapterCustomer extends RecyclerView.Adapter<AdapterCustomer.Viewho
         this.context = context;
         this.listener = listener;
         this.list = new ArrayList<>(list_search);
+
     }
 
     public interface Listener{

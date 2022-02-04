@@ -31,6 +31,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.gson.Gson;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class ActivityCustomer extends AppCompatActivity {
@@ -165,10 +166,16 @@ public class ActivityCustomer extends AppCompatActivity {
                     finish();
                 }else {
                     adapterCustomer.showBottomSheetDialogclick(pos , name , customer.id);
+
                 }
             }
         });
         recyclerView_customer.setAdapter(adapterCustomer);
+//        Collections.reverse(arrayList);
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
+        linearLayoutManager.setReverseLayout(true);
+        linearLayoutManager.setStackFromEnd(true);
+        recyclerView_customer.setLayoutManager(linearLayoutManager);
     }
 
     @Override

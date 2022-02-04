@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SearchView;
 import androidx.appcompat.widget.Toolbar;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
@@ -51,6 +52,10 @@ public class ActivityGrouping extends AppCompatActivity {
 
         adapterGrouping = new AdapterGrouping( new ArrayList<>(), this );
         recyclerView_grouping.setAdapter(adapterGrouping);
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
+        linearLayoutManager.setReverseLayout(true);
+        linearLayoutManager.setStackFromEnd(true);
+        recyclerView_grouping.setLayoutManager(linearLayoutManager);
 
     }
 

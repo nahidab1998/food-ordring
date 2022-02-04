@@ -186,6 +186,10 @@ public class ActivityProduct extends AppCompatActivity implements ProductView {
         });
         recyclerView_product.setAdapter(adapterProduct);
         adapterProduct.notifyDataSetChanged();
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
+        linearLayoutManager.setReverseLayout(true);
+        linearLayoutManager.setStackFromEnd(true);
+        recyclerView_product.setLayoutManager(linearLayoutManager);
     }
 
     public void set_recycle_grouping_product(){
@@ -210,7 +214,6 @@ public class ActivityProduct extends AppCompatActivity implements ProductView {
                 }
             });
             recyclerView_category.setAdapter(adapterGroupingProduct);
-//        }
     }
 
     private void initListProduct() {
