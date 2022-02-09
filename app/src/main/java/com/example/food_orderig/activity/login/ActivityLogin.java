@@ -28,7 +28,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.food_orderig.R;
-import com.example.food_orderig.activity.file.FileActivity;
 import com.example.food_orderig.activity.mainpage.MainActivity;
 import com.example.food_orderig.database.DatabaseHelper;
 import com.example.food_orderig.database.dao.UserDao;
@@ -218,6 +217,7 @@ public class ActivityLogin extends AppCompatActivity {
                     Intent a = new Intent(ActivityLogin.this, MainActivity.class);
                     a.putExtra("name_restaurant", user_login);
                     startActivity(a);
+                    finish();
                 }else {
                     Toast.makeText(ActivityLogin.this, "همچین رستورانی وجود ندارد", Toast.LENGTH_SHORT).show();
                 }

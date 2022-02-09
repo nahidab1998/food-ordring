@@ -39,6 +39,7 @@ import com.example.food_orderig.activity.product.ActivityAddOrEditProduct;
 import com.example.food_orderig.database.DatabaseHelper;
 import com.example.food_orderig.database.dao.GroupingDao;
 import com.example.food_orderig.helper.App;
+import com.example.food_orderig.helper.Permition;
 import com.example.food_orderig.helper.Tools;
 import com.example.food_orderig.model.Grouping;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -174,129 +175,60 @@ public class ActivityAddOrEditGrouping extends AppCompatActivity {
         camera.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                String options[] = {"دوربین", "گالری"};
-                AlertDialog.Builder builder = new AlertDialog.Builder(ActivityAddOrEditGrouping.this);
-                builder.setTitle("انتخاب تصویر از");
-                builder.setItems(options, new DialogInterface.OnClickListener() {
-                    @RequiresApi(api = Build.VERSION_CODES.M)
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        if (which == 0) {
-                            if (!checkCameraPermission()) {
-                                requestCameraPermission();
-                            } else {
-                                pickFromGallery();
-                            }
-                        } else if (which == 1) {
-                            if (!checkStoragePermission()) {
-                                requestStoragePermission();
-                            } else {
-                                pickFromGallery();
-                            }
-                        }
-                    }
-                });
-                builder.create().show();
+//                Permition permition;
+//                permition = new Permition(100,getApplicationContext(), ActivityAddOrEditGrouping.this);
+//                if(permition.checkPermission()) {
+//                    CropImage.activity()
+//                            .setGuidelines(CropImageView.Guidelines.ON)
+//                            .start(ActivityAddOrEditGrouping.this);
+//                }
+                if (checkStoregPermition()) {
+                    CropImage.activity()
+                            .setGuidelines(CropImageView.Guidelines.ON)
+                            .start(ActivityAddOrEditGrouping.this);
+                    overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
+                }
             }
         });
     }
 
-    private Boolean checkStoragePermission() {
-        boolean result = ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) == (PackageManager.PERMISSION_GRANTED);
-        return result;
-    }
-
-    // Requesting  gallery permission
-    @RequiresApi(api = Build.VERSION_CODES.M)
-    private void requestStoragePermission() {
-        requestPermissions(storagePermission, STORAGE_REQUEST);
-    }
-
-    // checking camera permissions
-    private Boolean checkCameraPermission() {
-        boolean result = ContextCompat.checkSelfPermission(ActivityAddOrEditGrouping.this, Manifest.permission.CAMERA) == (PackageManager.PERMISSION_GRANTED);
-        boolean result1 = ContextCompat.checkSelfPermission(ActivityAddOrEditGrouping.this, Manifest.permission.WRITE_EXTERNAL_STORAGE) == (PackageManager.PERMISSION_GRANTED);
-        return result && result1;
-    }
-
-    // Requesting camera permission
-    @RequiresApi(api = Build.VERSION_CODES.M)
-    private void requestCameraPermission() {
-        requestPermissions(cameraPermission, CAMERA_REQUEST);
+    public Boolean checkStoregPermition() {
+        String[] permission = {Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE};
+        if (ContextCompat.checkSelfPermission(this, permission[0]) == PackageManager.PERMISSION_DENIED) {
+            ActivityCompat.requestPermissions(ActivityAddOrEditGrouping.this, new String[]{permission[0]}, 200);
+        } else if (ContextCompat.checkSelfPermission(this, permission[1]) == PackageManager.PERMISSION_DENIED) {
+            ActivityCompat.requestPermissions(ActivityAddOrEditGrouping.this, new String[]{permission[1]}, 200);
+        } else {
+            return true;
+        }
+        return false;
     }
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        switch (requestCode) {
-            case CAMERA_REQUEST: {
-                if (grantResults.length > 0) {
-                    boolean camera_accepted = grantResults[0] == PackageManager.PERMISSION_GRANTED;
-                    boolean writeStorageaccepted = grantResults[1] == PackageManager.PERMISSION_GRANTED;
-                    if (camera_accepted && writeStorageaccepted) {
-                        pickFromGallery();
-                    } else {
-                        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-                        builder.setMessage("فعال سازی مجوزها");
-                        builder.setPositiveButton("تنظیمات", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                dialog.cancel();
-                                Intent intent = new Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
-                                Uri uri = Uri.fromParts("package", getPackageName(), null);
-                                intent.setData(uri);
-                                startActivityForResult(intent, STORAGE_PERMISSION_CODE);
-                            }
-                        });
-                        builder.setNegativeButton("خروچ", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                dialog.cancel();
-                            }
-                        });
-                        builder.show();
-//                        Toast.makeText(ActivityAddOrEditProduct.this, "لطفاً دسترسی به دوربین و فایل را فعال کنید", Toast.LENGTH_LONG).show();
-                    }
-                }
-            }
-            break;
-            case STORAGE_REQUEST: {
-                if (grantResults.length > 0) {
-                    boolean writeStorageaccepted = grantResults[0] == PackageManager.PERMISSION_GRANTED;
-                    if (writeStorageaccepted) {
-                        pickFromGallery();
-                    } else {
-                        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-                        builder.setMessage("فعال سازی مجوزها");
-                        builder.setPositiveButton("تنظیمات", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                dialog.cancel();
-                                Intent intent = new Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
-                                Uri uri = Uri.fromParts("package", getPackageName(), null);
-                                intent.setData(uri);
-                                startActivityForResult(intent, STORAGE_PERMISSION_CODE);
-                            }
-                        });
-                        builder.setNegativeButton("بستن", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                dialog.cancel();
-                            }
-                        });
-                        builder.show();
-//                        Toast.makeText(ActivityAddOrEditProduct.this, "لطفاً مجوزهای ذخیره سازی را فعال کنید", Toast.LENGTH_LONG).show();
-                    }
-                }
-            }
-            break;
-        }
-    }
 
-    // Here we will pick image from gallery or camera
-    private void pickFromGallery() {
-        CropImage.activity().setGuidelines(CropImageView.Guidelines.ON).start(ActivityAddOrEditGrouping.this);
+        if (requestCode == 200) {
+            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+//                Toast.makeText(this, "Storage Permission Granted", Toast.LENGTH_SHORT).show();
+
+            } else {
+                AlertDialog.Builder builder = new AlertDialog.Builder(this);
+                builder.setMessage(" دسترسی به مجوزها ");
+                builder.setPositiveButton("برو به تنظیمات", (dialog, which) -> {
+                    dialog.cancel();
+                    Intent intent = new Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
+                    Uri uri = Uri.fromParts("package", getPackageName(), null);
+                    intent.setData(uri);
+                    startActivityForResult(intent, 200);
+                });
+                builder.setNegativeButton("بستن", (dialog, which) -> {
+                    dialog.cancel();
+//                        finish();
+                });
+                builder.show();
+            }
+        }
     }
 
 

@@ -19,6 +19,9 @@ public interface SavedOrderDao {
     @Query("Select total from table_order ")
     List<String> alldate();
 
+    @Query("Select total from table_order where date = :datee ")
+    List<String> dailyTotal( String datee);
+
     @Query("Select * from table_order where customer_id = :id limit 1 " )
     Order getid( int id);
 

@@ -24,12 +24,28 @@
 <!--        <item name="android:textColorSecondary">@color/text</item>-->
     </style>
 
+<!--    <style name="MyTimePickerlight" parent="android:Widget.Material.TimePicker">-->
+<!--        <item name="android:headerBackground">@color/red</item>-->
+<!--&lt;!&ndash;        <item name="android:numbersTextColor">#673AB7</item>&ndash;&gt;-->
+<!--        <item name="android:numbersSelectorColor">@color/red</item>-->
+<!--&lt;!&ndash;        <item name="android:numbersBackgroundColor">#61E761</item>&ndash;&gt;-->
+<!--&lt;!&ndash;        <item name="android:background">#FFC107</item>&ndash;&gt;-->
+<!--    </style>-->
+
     <style name="MyTimePickerlight" parent="android:Widget.Material.TimePicker">
+<!--        <item name="android:background">@color/whitediff</item>-->
         <item name="android:headerBackground">@color/red</item>
-<!--        <item name="android:numbersTextColor">#673AB7</item>-->
+        <item name="android:headerTimeTextAppearance">@color/red</item>
+        <item name="colorOnBackground">@color/red</item>
+        <item name="colorOnPrimary">@color/red</item>
+        <item name="colorOnSecondary">@color/red</item>
+        <item name="android:headerAmPmTextAppearance">@color/red</item>
+        <item name="android:numbersTextColor">#B7703A</item>
         <item name="android:numbersSelectorColor">@color/red</item>
-<!--        <item name="android:numbersBackgroundColor">#61E761</item>-->
-<!--        <item name="android:background">#FFC107</item>-->
+        <item name="android:numbersBackgroundColor">#E79061</item>
+        <item name="colorAccent">@color/red</item>
+        <item name="colorControlNormal">@color/red</item>
+<!--        <item name="android:backgroundTint">@color/browwndiff</item>-->
     </style>
 
 

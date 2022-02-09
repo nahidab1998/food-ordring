@@ -11,16 +11,19 @@ import androidx.drawerlayout.widget.DrawerLayout;
 
 import android.Manifest;
 import android.app.Dialog;
+import android.content.ActivityNotFoundException;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.graphics.DashPathEffect;
 import android.graphics.Paint;
+import android.graphics.Typeface;
 import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.Settings;
+import android.text.method.LinkMovementMethod;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
@@ -61,6 +64,7 @@ import com.jjoe64.graphview.GraphView;
 import com.jjoe64.graphview.LegendRenderer;
 import com.jjoe64.graphview.series.DataPoint;
 import com.jjoe64.graphview.series.LineGraphSeries;
+import com.uncopt.android.widget.text.justify.JustifiedTextView;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -94,6 +98,8 @@ public class MainActivity extends AppCompatActivity {
     private LinearLayout linearLayout_setting , linearLayout_about , linearLayout_guid , linearLayout_signup ;
     private TextView close_about , close_guid;
     private long backPressedTime = 0;
+    private JustifiedTextView textView1 , textView2 , textView3 , textView4 , textView5 , textView6 , textView7 , textView8;
+    private ImageView email , telegram , instagram ;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -105,7 +111,6 @@ public class MainActivity extends AppCompatActivity {
         initSetName();
         initIntents();
         setNavigationDrawer();
-        checkPermission();
         setLinear_setting();
         setLinear_about();
         setLinear_guid();
@@ -135,10 +140,27 @@ public class MainActivity extends AppCompatActivity {
                 dialog_guid.setContentView(R.layout.dialog_guid);
 
                 close_guid = dialog_guid.findViewById(R.id.close_dialog_guid);
+                textView5 = dialog_guid.findViewById(R.id.txt5);
+                textView6 = dialog_guid.findViewById(R.id.txt6);
+                textView7 = dialog_guid.findViewById(R.id.txt7);
+                textView8 = dialog_guid.findViewById(R.id.txt8);
+
                 mydrawer.closeDrawer(GravityCompat.END);
                 dialog_guid.show();
                 dialog_guid.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
                 dialog_guid.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+
+                TextView vv = (TextView)textView5.findViewById(R.id.search_src_text);
+                TextView mm = (TextView)textView6.findViewById(R.id.search_src_text);
+                TextView oo = (TextView)textView7.findViewById(R.id.search_src_text);
+                TextView pp = (TextView)textView8.findViewById(R.id.search_src_text);
+
+                Typeface myCustomFont = Typeface.createFromAsset(getAssets(), "font/iran_sans.ttf");
+
+                textView5.setTypeface(myCustomFont);
+                textView6.setTypeface(myCustomFont);
+                textView7.setTypeface(myCustomFont);
+                textView8.setTypeface(myCustomFont);
 
                 close_guid.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -163,10 +185,74 @@ public class MainActivity extends AppCompatActivity {
                 dialog_about.setContentView(R.layout.dialog_about);
 
                 close_about = dialog_about.findViewById(R.id.close_dialog_about);
+                textView1 =dialog_about.findViewById(R.id.txt1);
+                textView2 = dialog_about.findViewById(R.id.txt2);
+                textView3 = dialog_about.findViewById(R.id.txt3);
+                textView4 = dialog_about.findViewById(R.id.txt4);
+                email = dialog_about.findViewById(R.id.textlink);
+                telegram = dialog_about.findViewById(R.id.telegram);
+                instagram = dialog_about.findViewById(R.id.instagram);
+
                 mydrawer.closeDrawer(GravityCompat.END);
                 dialog_about.show();
                 dialog_about.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
                 dialog_about.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+
+                TextView tt = (TextView)textView1.findViewById(R.id.search_src_text);
+                TextView aa = (TextView)textView2.findViewById(R.id.search_src_text);
+                TextView bb = (TextView)textView3.findViewById(R.id.search_src_text);
+                TextView cc = (TextView)textView4.findViewById(R.id.search_src_text);
+                Typeface myCustomFont = Typeface.createFromAsset(getAssets(), "font/iran_sans.ttf");
+
+                textView1.setTypeface(myCustomFont);
+                textView2.setTypeface(myCustomFont);
+                textView3.setTypeface(myCustomFont);
+                textView4.setTypeface(myCustomFont);
+
+                email.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+
+                        String[] TO = {"n.alibagheri1998@gmail.com"};
+                        Intent intent = new Intent(Intent.ACTION_SEND);
+                        intent.setData(Uri.parse("n.alibagheri1998@gmail.com"));
+                        intent.putExtra(Intent.EXTRA_EMAIL, TO);
+//                        intent.putExtra(Intent.EXTRA_CC, new String[]{"n.alibagheri1998@gmail.com"});
+//                        intent.putExtra(Intent.EXTRA_BCC, new String[]{"n.alibagheri1998@gmail.com"});
+
+//                        intent.putExtra(Intent.EXTRA_SUBJECT, "hi");
+//                        intent.putExtra(Intent.EXTRA_TEXT, message);
+
+                        intent.setType("message/rfc822");
+                        startActivity(Intent.createChooser(intent, "Select email"));
+
+                    }
+                });
+
+                telegram.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://t.me/Semicolon_Developers"));
+                        startActivity(intent);
+                    }
+                });
+
+                instagram.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Uri uri = Uri.parse("http://instagram.com/_u/semicolon_developers");
+                        Intent likeIng = new Intent(Intent.ACTION_VIEW, uri);
+
+                        likeIng.setPackage("com.instagram.android");
+
+                        try {
+                            startActivity(likeIng);
+                        } catch (ActivityNotFoundException e) {
+//                            startActivity(new Intent(Intent.ACTION_VIEW,
+//                                    Uri.parse("http://instagram.com/xxx")));
+                        }
+                    }
+                });
 
                 close_about.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -203,38 +289,6 @@ public class MainActivity extends AppCompatActivity {
         });
 
     }
-
-
-    @Override
-        public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-            super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-
-            if (requestCode == STORAGE_PERMISSION_CODE ) {
-                if (grantResults.length > 0
-                        && grantResults[0] == PackageManager.PERMISSION_GRANTED
-                        && grantResults[1] == PackageManager.PERMISSION_GRANTED) {
-                    Toast.makeText(this, "مجوز دوربین داده شد", Toast.LENGTH_SHORT).show();
-
-                }
-            }
-        }
-
-        public Boolean checkPermission() {
-            String[] permission = {Manifest.permission.WRITE_EXTERNAL_STORAGE,Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.CALL_PHONE};
-            int requestCode = STORAGE_PERMISSION_CODE;
-            int requestCode_call = CALL_PERMISSION_CODE;
-            if (ContextCompat.checkSelfPermission(this, permission[0]) == PackageManager.PERMISSION_DENIED) {
-                ActivityCompat.requestPermissions(this, new String[] { permission[0] }, requestCode);
-            }else if (ContextCompat.checkSelfPermission(this, permission[1]) == PackageManager.PERMISSION_DENIED) {
-                ActivityCompat.requestPermissions(this, new String[]{permission[1]}, requestCode);
-            }else if (ContextCompat.checkSelfPermission(this, permission[2]) == PackageManager.PERMISSION_DENIED) {
-                ActivityCompat.requestPermissions(this, new String[]{permission[2]}, requestCode_call);
-            }
-            else {
-                return true;
-            }
-            return false;
-        }
 
 
     private void initIntents() {
@@ -318,8 +372,6 @@ public class MainActivity extends AppCompatActivity {
         linearLayout_guid = findViewById(R.id.guid_nav);
         linearLayout_signup = findViewById(R.id.signup_nav);
 
-
-
     }
 
     public void countsizeRecycler(){
@@ -350,17 +402,23 @@ public class MainActivity extends AppCompatActivity {
     public void setDailyIncome(){
 
         List<String> dailyIncome =new ArrayList<>();
-        dailyIncome.addAll(dao_savedorder.alldate());
+        dailyIncome.addAll(dao_savedorder.dailyTotal(Tools.getCurrentDate()));
         int j = 0;
-        for (int i=0 ; i< dao_savedorder.getOrderList().size() ; i++){
-            String a = dailyIncome.get(i);
-            j = j + Tools.convertToPrice(a);
+        try {
+            for (int i=0 ; i< dao_savedorder.getOrderList().size() ; i++){
+                String a = dailyIncome.get(i);
+                j = j + Tools.convertToPrice(a);
+            }
+
+        }catch (Exception e){
+            e.printStackTrace();
         }
         if ( j == 0){
             day.setText("_");
         }else {
             day.setText(Tools.getForamtPrice(String.valueOf(j)));
         }
+
     }
 
     private void setWeeklyIncome(){

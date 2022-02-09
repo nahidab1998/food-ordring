@@ -16,8 +16,8 @@
         android:clipToPadding="false"
         android:paddingTop="297dp"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        tools:listitem="@layout/item_product_ordering" />
-
+        tools:listitem="@layout/item_product_ordering"
+/>
 
     <LinearLayout
         android:id="@+id/linear"
@@ -31,7 +31,8 @@
 
         <include layout="@layout/cardview_customer" />
 
-        <include layout="@layout/cardview_add_product" />
+        <include
+            layout="@layout/cardview_add_product" />
 
     </LinearLayout>
 
@@ -157,13 +158,12 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:layout_alignParentBottom="true"
-        android:layout_marginBottom="130dp">
+        android:layout_below="@+id/linear">
 
         <com.airbnb.lottie.LottieAnimationView
 
             android:layout_width="match_parent"
-            android:layout_height="300dp"
+            android:layout_height="250dp"
             app:lottie_autoPlay="true"
             app:lottie_loop="true"
             app:lottie_rawRes="@raw/list" />

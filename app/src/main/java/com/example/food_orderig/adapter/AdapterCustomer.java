@@ -1,6 +1,7 @@
 package com.example.food_orderig.adapter;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
@@ -14,14 +15,18 @@ import android.widget.Filter;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 import com.example.food_orderig.R;
 import com.example.food_orderig.activity.customer.ActivityAddOrEditCostomer;
+import com.example.food_orderig.activity.customer.ActivityCustomer;
 import com.example.food_orderig.database.DatabaseHelper;
 import com.example.food_orderig.database.dao.CustomerDao;
 import com.example.food_orderig.database.dao.DetailOrderDao;
 import com.example.food_orderig.database.dao.SavedOrderDao;
 import com.example.food_orderig.helper.App;
+import com.example.food_orderig.helper.Permition;
 import com.example.food_orderig.model.Customer;
 import com.example.food_orderig.model.Order;
 import com.example.food_orderig.model.Product;
@@ -43,13 +48,16 @@ public class AdapterCustomer extends RecyclerView.Adapter<AdapterCustomer.Viewho
     private DetailOrderDao detailOrderDao ;
     private List<Customer> list_search;
     private String text;
+    private Activity activity;
 
 
-    public AdapterCustomer(List<Customer> list , Context context , Listener listener){
+    public AdapterCustomer(List<Customer> list , Context context , Listener listener , Activity activity){
         this.list_search = list;
         this.context = context;
         this.listener = listener;
         this.list = new ArrayList<>(list_search);
+        this.activity = activity;
+
 
     }
 
@@ -78,13 +86,22 @@ public class AdapterCustomer extends RecyclerView.Adapter<AdapterCustomer.Viewho
             @Override
             public void onClick(View v) {
 
-//                Toast.makeText(context, "call", Toast.LENGTH_SHORT).show();
+                Permition permition;
+                permition = new Permition(200,context , activity) {
+                    
+                    @Override
+                    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+                        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+                    }
+                };
+                if (permition.checkPermission()){
+//                    Toast.makeText(context, "call", Toast.LENGTH_SHORT).show();
                     String number_for_phone = list.get(position).phone;
                     Intent call = new Intent(Intent.ACTION_VIEW);
                     call.setData(Uri.parse("tel:" + number_for_phone));
                     context.startActivity(call);
 
-
+                }
             }
         });
 

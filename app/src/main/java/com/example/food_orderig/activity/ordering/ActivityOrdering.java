@@ -7,15 +7,18 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.TimePickerDialog;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.TimePicker;
 import android.widget.Toast;
 
 import com.example.food_orderig.R;
@@ -33,7 +36,6 @@ import com.example.food_orderig.model.Order;
 import com.example.food_orderig.model.Product;
 import com.google.gson.Gson;
 import com.mohamadamin.persianmaterialdatetimepicker.time.RadialPickerLayout;
-import com.mohamadamin.persianmaterialdatetimepicker.time.TimePickerDialog;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -126,19 +128,35 @@ public class ActivityOrdering extends AppCompatActivity {
         houre.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+//
+//                PersianCalendar now = new PersianCalendar();
+//                TimePickerDialog tpd = TimePickerDialog.newInstance(new TimePickerDialog.OnTimeSetListener() {
+//                    @Override
+//                    public void onTimeSet(RadialPickerLayout view, int hourOfDay, int minute) {
+//                        String time = hourOfDay+":"+minute;
+//                        txt_time.setText(time);
+//                    }
+//                },
+//                now.get(PersianCalendar.HOUR_OF_DAY),
+//                now.get(PersianCalendar.MINUTE),
+//                true);
+//                tpd.show(getFragmentManager(),"tpd");
+
+
 
                 PersianCalendar now = new PersianCalendar();
-                TimePickerDialog tpd = TimePickerDialog.newInstance(new TimePickerDialog.OnTimeSetListener() {
+                TimePickerDialog tpd = new TimePickerDialog(ActivityOrdering.this, R.style.MyTimePickerlight, new TimePickerDialog.OnTimeSetListener() {
                     @Override
-                    public void onTimeSet(RadialPickerLayout view, int hourOfDay, int minute) {
+                    public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
                         String time = hourOfDay+":"+minute;
                         txt_time.setText(time);
                     }
                 },
-                now.get(PersianCalendar.HOUR_OF_DAY),
-                now.get(PersianCalendar.MINUTE),
-                true);
-                tpd.show(getFragmentManager(),"tpd");
+                        now.get(PersianCalendar.HOUR_OF_DAY),
+                        now.get(PersianCalendar.MINUTE),
+                        true);
+                tpd.getWindow().setLayout(ViewGroup.LayoutParams.WRAP_CONTENT,ViewGroup.LayoutParams.WRAP_CONTENT);
+                tpd.show();
             }
         });
     }

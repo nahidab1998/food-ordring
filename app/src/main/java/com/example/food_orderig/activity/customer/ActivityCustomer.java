@@ -156,7 +156,7 @@ public class ActivityCustomer extends AppCompatActivity {
     public void set_recyclerview(){
         recyclerView_customer.setHasFixedSize(true);
         recyclerView_customer.setLayoutManager(new LinearLayoutManager(this));
-        adapterCustomer = new AdapterCustomer(new ArrayList<>(), this, new AdapterCustomer.Listener() {
+        adapterCustomer = new AdapterCustomer(new ArrayList<>(), this, new AdapterCustomer.Listener(){
             @Override
             public void onClickListener(Customer customer, int pos , String name) {
                 if (for_order){
@@ -169,7 +169,7 @@ public class ActivityCustomer extends AppCompatActivity {
 
                 }
             }
-        });
+        } , ActivityCustomer.this);
         recyclerView_customer.setAdapter(adapterCustomer);
 //        Collections.reverse(arrayList);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);

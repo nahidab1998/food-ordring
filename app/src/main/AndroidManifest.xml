@@ -25,9 +25,7 @@
         <activity
             android:name=".activity.settings.ActivitySettings"
             android:exported="true" />
-        <activity
-            android:name=".activity.file.FileActivity"
-            android:exported="true" />
+
         <activity
             android:name="com.theartofdev.edmodo.cropper.CropImageActivity"
             android:theme="@style/Base.Theme.AppCompat" /> <!-- optional (needed if default theme has no action bar) -->
@@ -78,7 +76,6 @@
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
